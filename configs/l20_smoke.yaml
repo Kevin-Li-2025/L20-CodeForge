@@ -1,0 +1,27 @@
+run:
+  name: l20-smoke
+  seed: 42
+  artifact_dir: artifacts/smoke
+
+gpu:
+  target: NVIDIA L20
+  total_vram_gib: 45
+  torch_dtype: bfloat16
+  gradient_checkpointing: true
+  tf32: true
+
+model:
+  id: HuggingFaceTB/SmolLM2-135M
+  purpose: smoke-test-only
+  max_seq_length: 1024
+
+agent:
+  max_steps: 20
+  action_timeout_seconds: 30
+  history_policy: linear
+
+reward:
+  tests_weight: 1.0
+  patch_quality_weight: 0.15
+  anti_hack_weight: 0.25
+

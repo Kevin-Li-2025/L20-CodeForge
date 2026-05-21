@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "l20-codeforge"
+version = "0.1.0"
+description = "Single-L20 coding-agent RL and post-training scaffold"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+  "rich>=13.7",
+  "typer>=0.12",
+  "packaging>=24.0",
+]
+
+[project.optional-dependencies]
+train = [
+  "accelerate>=1.0",
+  "bitsandbytes>=0.43",
+  "datasets>=2.20",
+  "huggingface-hub>=0.24",
+  "peft>=0.12",
+  "safetensors>=0.4",
+  "transformers>=4.45",
+  "trl>=0.17",
+]
+agent = [
+  "mini-swe-agent>=2.0",
+]
+dev = [
+  "pytest>=8.2",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+l20-codeforge = "l20_codeforge.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+

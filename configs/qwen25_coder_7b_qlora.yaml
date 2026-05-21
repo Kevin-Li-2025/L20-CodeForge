@@ -1,0 +1,39 @@
+run:
+  name: qwen25-coder-7b-qlora-sft
+  seed: 42
+  artifact_dir: artifacts/qwen25-coder-7b-qlora-sft
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  max_seq_length: 8192
+  load_in_4bit: true
+  torch_dtype: bfloat16
+
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  method: soft_verified_sft
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 16
+  learning_rate: 0.00002
+  max_steps: 500
+  save_steps: 100
+  warmup_ratio: 0.03
+  gradient_checkpointing: true
+  max_grad_norm: 1.0
+
+data:
+  train_jsonl: data/processed/soft_verified_trajectories.jsonl
+  eval_jsonl: data/processed/eval_trajectories.jsonl
+

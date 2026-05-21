@@ -1,0 +1,32 @@
+run:
+  name: qwen25-coder-7b-guided-grpo
+  seed: 43
+  artifact_dir: artifacts/qwen25-coder-7b-guided-grpo
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  adapter_path: artifacts/qwen25-coder-7b-qlora-sft/final
+  max_prompt_length: 6144
+  max_completion_length: 1024
+
+grpo:
+  num_generations: 4
+  beta: 0.0
+  learning_rate: 0.000001
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  max_steps: 200
+  use_vllm: false
+
+reward:
+  reward_funcs:
+    - tests_passed
+    - patch_quality
+    - anti_hack
+    - self_verification
+  weights:
+    tests_passed: 1.0
+    patch_quality: 0.15
+    anti_hack: 0.35
+    self_verification: 0.25
+
