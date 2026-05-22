@@ -149,6 +149,33 @@ pass@1 is below greedy pass@1. The next algorithmic target is therefore a
 selection model or verifier trained without using EvalPlus hidden tests, not
 more temperature alone.
 
+## Base-Test Selector Result
+
+The first successful algorithmic improvement uses the 10 sampled candidates and
+selects the first candidate that passes EvalPlus base tests. It does not inspect
+EvalPlus extra tests for selection; extra tests are only used for final scoring.
+
+```bash
+python -m l20_codeforge select-evalplus \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples_eval_results.json \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.base-selected.samples.jsonl
+```
+
+Result:
+
+```text
+selected tasks: 164
+selected base-pass candidates: 156
+fallback tasks: 8
+HumanEval base tests pass@1: 0.951
+HumanEval+ extra-test pass@1: 0.902
+```
+
+Compared with greedy HumanEval+ `pass@1=0.848`, this is a +5.4 point absolute
+gain from execution-guided selection. It should be described as a coding system
+result, not as a pure model-weight result.
+
 ## Research Anchors
 
 - EvalPlus adds stronger generated tests to HumanEval and MBPP and exposes

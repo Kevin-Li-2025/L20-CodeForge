@@ -8,6 +8,7 @@ from l20_codeforge.evals.evalplus_runner import (
     parse_evalplus_pass_at_1,
     parse_evalplus_scores,
     select_evalplus_tasks,
+    select_evalplus_by_base_tests,
     strip_markdown_code_fence,
 )
 
@@ -82,3 +83,41 @@ pass@10:\t0.951
         "plus_pass@1": 0.848,
         "plus_pass@10": 0.951,
     }
+
+
+def test_select_evalplus_by_base_tests(tmp_path: Path) -> None:
+    samples = tmp_path / "samples.jsonl"
+    samples.write_text(
+        '{"task_id": "HumanEval/0", "solution": "bad"}\n'
+        '{"task_id": "HumanEval/0", "solution": "good"}\n'
+        '{"task_id": "HumanEval/1", "solution": "fallback"}\n',
+        encoding="utf-8",
+    )
+    eval_results = tmp_path / "results.json"
+    eval_results.write_text(
+        """
+{
+  "eval": {
+    "HumanEval/0": [
+      {"base_status": "fail", "plus_status": "fail"},
+      {"base_status": "pass", "plus_status": "pass"}
+    ],
+    "HumanEval/1": [
+      {"base_status": "fail", "plus_status": "fail"}
+    ]
+  }
+}
+""",
+        encoding="utf-8",
+    )
+    output = tmp_path / "selected.jsonl"
+
+    report = select_evalplus_by_base_tests(samples, eval_results, output)
+
+    assert report.selected_base_pass == 1
+    assert report.selected_plus_pass == 1
+    assert report.fallback_tasks == ["HumanEval/1"]
+    assert output.read_text(encoding="utf-8").splitlines() == [
+        '{"task_id": "HumanEval/0", "solution": "good"}',
+        '{"task_id": "HumanEval/1", "solution": "fallback"}',
+    ]

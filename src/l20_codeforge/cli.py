@@ -16,7 +16,11 @@ from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
-from l20_codeforge.evals.evalplus_runner import generate_evalplus_samples, run_evalplus_official
+from l20_codeforge.evals.evalplus_runner import (
+    generate_evalplus_samples,
+    run_evalplus_official,
+    select_evalplus_by_base_tests,
+)
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
@@ -377,6 +381,21 @@ def eval_evalplus_command(
     console.print_json(data=report.model_dump())
     if report.exit_code != 0:
         raise typer.Exit(report.exit_code)
+
+
+@app.command("select-evalplus")
+def select_evalplus_command(
+    samples: Path,
+    eval_results: Path,
+    output: Path = Path("artifacts/evalplus/selected.samples.jsonl"),
+) -> None:
+    """Select one sample per EvalPlus task using only base-test pass/fail results."""
+    report = select_evalplus_by_base_tests(
+        samples=samples,
+        eval_results=eval_results,
+        output=output,
+    )
+    console.print_json(data=report.model_dump())
 
 
 @app.command("build-sft")

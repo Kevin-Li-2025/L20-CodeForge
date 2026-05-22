@@ -41,6 +41,16 @@ class EvalPlusOfficialReport(BaseModel):
     result_files: list[str] = Field(default_factory=list)
 
 
+class EvalPlusSelectionReport(BaseModel):
+    samples: str
+    eval_results: str
+    output: str
+    tasks: int
+    selected_base_pass: int
+    selected_plus_pass: int | None = None
+    fallback_tasks: list[str] = Field(default_factory=list)
+
+
 def generate_evalplus_samples(
     model_name_or_path: str,
     dataset: str,
@@ -231,6 +241,61 @@ def run_evalplus_official(
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(report.model_dump_json(indent=2) + "\n", encoding="utf-8")
     return report
+
+
+def select_evalplus_by_base_tests(
+    samples: Path,
+    eval_results: Path,
+    output: Path,
+) -> EvalPlusSelectionReport:
+    grouped_samples = load_evalplus_samples_by_task(samples)
+    results = json.loads(eval_results.read_text(encoding="utf-8"))["eval"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    selected_base_pass = 0
+    selected_plus_pass = 0
+    fallback_tasks: list[str] = []
+    with output.open("w", encoding="utf-8") as handle:
+        for task_id, candidates in grouped_samples.items():
+            task_results = results.get(task_id, [])
+            selected_index = 0
+            for index, result in enumerate(task_results):
+                if result.get("base_status") == "pass":
+                    selected_index = index
+                    break
+            else:
+                fallback_tasks.append(task_id)
+
+            chosen = candidates[min(selected_index, len(candidates) - 1)]
+            handle.write(json.dumps(chosen) + "\n")
+            if selected_index < len(task_results):
+                selected_result = task_results[selected_index]
+                if selected_result.get("base_status") == "pass":
+                    selected_base_pass += 1
+                if selected_result.get("plus_status") == "pass":
+                    selected_plus_pass += 1
+
+    return EvalPlusSelectionReport(
+        samples=str(samples),
+        eval_results=str(eval_results),
+        output=str(output),
+        tasks=len(grouped_samples),
+        selected_base_pass=selected_base_pass,
+        selected_plus_pass=selected_plus_pass,
+        fallback_tasks=fallback_tasks,
+    )
+
+
+def load_evalplus_samples_by_task(samples: Path) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    with samples.open(encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            payload = json.loads(line)
+            task_id = payload["task_id"]
+            grouped.setdefault(task_id, []).append(payload)
+    return grouped
 
 
 def parse_evalplus_pass_at_1(stdout: str) -> dict[str, float]:
