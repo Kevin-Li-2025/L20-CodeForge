@@ -21,6 +21,7 @@ from l20_codeforge.evals.evalplus_runner import (
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
+    select_evalplus_by_public_consensus,
     select_evalplus_by_prompt_doctests,
 )
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
@@ -469,6 +470,29 @@ def select_evalplus_prompt_command(
         output=output,
         dataset=dataset,
         timeout_seconds=timeout_seconds,
+    )
+    console.print_json(data=report.model_dump())
+
+
+@app.command("select-evalplus-consensus")
+def select_evalplus_consensus_command(
+    samples: Path,
+    eval_results: Path,
+    output: Path = Path("artifacts/evalplus/consensus-selected.samples.jsonl"),
+    dataset: str = "humaneval",
+    max_synthetic_inputs: int = 32,
+    timeout_seconds: float = 2.0,
+    tie_breaker: str = "longest",
+) -> None:
+    """Select with base-test filtering plus public-input consensus reranking."""
+    report = select_evalplus_by_public_consensus(
+        samples=samples,
+        eval_results=eval_results,
+        output=output,
+        dataset=dataset,
+        max_synthetic_inputs=max_synthetic_inputs,
+        timeout_seconds=timeout_seconds,
+        tie_breaker=tie_breaker,
     )
     console.print_json(data=report.model_dump())
 

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import base64
+import copy
 import json
+import pickle
 import subprocess
 import sys
 import time
@@ -474,6 +477,96 @@ def select_evalplus_by_base_tests(
     )
 
 
+def select_evalplus_by_public_consensus(
+    samples: Path,
+    eval_results: Path,
+    output: Path,
+    dataset: str = "humaneval",
+    max_synthetic_inputs: int = 32,
+    timeout_seconds: float = 2.0,
+    tie_breaker: str = "longest",
+) -> EvalPlusSelectionReport:
+    return select_evalplus_by_public_consensus_from_tasks(
+        samples=samples,
+        eval_results=eval_results,
+        tasks=load_evalplus_tasks(dataset),
+        output=output,
+        max_synthetic_inputs=max_synthetic_inputs,
+        timeout_seconds=timeout_seconds,
+        tie_breaker=tie_breaker,
+    )
+
+
+def select_evalplus_by_public_consensus_from_tasks(
+    samples: Path,
+    eval_results: Path,
+    tasks: dict[str, dict[str, Any]],
+    output: Path,
+    max_synthetic_inputs: int = 32,
+    timeout_seconds: float = 2.0,
+    tie_breaker: str = "longest",
+) -> EvalPlusSelectionReport:
+    grouped_samples = load_evalplus_samples_by_task(samples)
+    results = json.loads(eval_results.read_text(encoding="utf-8"))["eval"]
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    selected_base_pass = 0
+    selected_plus_pass = 0
+    fallback_tasks: list[str] = []
+    with output.open("w", encoding="utf-8") as handle:
+        for task_id, candidates in grouped_samples.items():
+            task_results = results.get(task_id, [])
+            base_pass_indices = [
+                index
+                for index, result in enumerate(task_results)
+                if result.get("base_status") == "pass"
+            ]
+            if not base_pass_indices:
+                selected_index = 0
+                fallback_tasks.append(task_id)
+            elif len(base_pass_indices) == 1:
+                selected_index = base_pass_indices[0]
+            else:
+                public_inputs = build_public_synthetic_inputs(
+                    tasks.get(task_id, {}).get("base_input", []),
+                    limit=max_synthetic_inputs,
+                )
+                if public_inputs:
+                    selected_index = choose_evalplus_consensus_candidate_index(
+                        candidates=candidates,
+                        indices=base_pass_indices,
+                        entry_point=str(tasks.get(task_id, {}).get("entry_point", "")),
+                        public_inputs=public_inputs,
+                        timeout_seconds=timeout_seconds,
+                        tie_breaker=tie_breaker,
+                    )
+                else:
+                    selected_index = choose_evalplus_candidate_index(
+                        candidates=candidates,
+                        indices=base_pass_indices,
+                        tie_breaker=tie_breaker,
+                    )
+
+            chosen = candidates[min(selected_index, len(candidates) - 1)]
+            handle.write(json.dumps(chosen) + "\n")
+            if selected_index < len(task_results):
+                selected_result = task_results[selected_index]
+                if selected_result.get("base_status") == "pass":
+                    selected_base_pass += 1
+                if selected_result.get("plus_status") == "pass":
+                    selected_plus_pass += 1
+
+    return EvalPlusSelectionReport(
+        samples=str(samples),
+        eval_results=str(eval_results),
+        output=str(output),
+        tasks=len(grouped_samples),
+        selected_base_pass=selected_base_pass,
+        selected_plus_pass=selected_plus_pass,
+        fallback_tasks=fallback_tasks,
+    )
+
+
 def choose_evalplus_candidate_index(
     candidates: list[dict[str, Any]],
     indices: list[int],
@@ -490,6 +583,177 @@ def choose_evalplus_candidate_index(
     if tie_breaker == "longest":
         return max(indices, key=lambda index: len(str(candidates[index].get("solution", ""))))
     raise ValueError("tie_breaker must be one of: first, last, shortest, longest")
+
+
+def choose_evalplus_consensus_candidate_index(
+    candidates: list[dict[str, Any]],
+    indices: list[int],
+    entry_point: str,
+    public_inputs: list[Any],
+    timeout_seconds: float = 2.0,
+    tie_breaker: str = "longest",
+) -> int:
+    if not indices:
+        return 0
+    if not entry_point or not public_inputs:
+        return choose_evalplus_candidate_index(candidates, indices, tie_breaker=tie_breaker)
+
+    candidate_outputs = {
+        index: run_candidate_on_inputs(
+            solution=str(candidates[index].get("solution", "")),
+            entry_point=entry_point,
+            inputs=public_inputs,
+            timeout_seconds=timeout_seconds,
+        )
+        for index in indices
+    }
+    majorities: list[str | None] = []
+    for input_index in range(len(public_inputs)):
+        counts: dict[str, int] = {}
+        for outputs in candidate_outputs.values():
+            if input_index >= len(outputs):
+                continue
+            result = outputs[input_index]
+            if result.get("status") != "ok":
+                continue
+            key = str(result.get("repr", ""))
+            counts[key] = counts.get(key, 0) + 1
+        if not counts:
+            majorities.append(None)
+            continue
+        best_key, best_count = max(counts.items(), key=lambda item: item[1])
+        tied = sum(1 for count in counts.values() if count == best_count)
+        majorities.append(best_key if best_count >= 2 and tied == 1 else None)
+
+    def score(index: int) -> tuple[int, int, int]:
+        outputs = candidate_outputs[index]
+        consensus_matches = 0
+        successful_outputs = 0
+        for input_index, majority in enumerate(majorities):
+            if input_index >= len(outputs):
+                continue
+            result = outputs[input_index]
+            if result.get("status") == "ok":
+                successful_outputs += 1
+                if majority is not None and str(result.get("repr", "")) == majority:
+                    consensus_matches += 1
+        length_score = len(str(candidates[index].get("solution", "")))
+        if tie_breaker == "shortest":
+            length_score = -length_score
+        elif tie_breaker not in {"first", "last", "longest"}:
+            raise ValueError("tie_breaker must be one of: first, last, shortest, longest")
+        order_score = -indices.index(index) if tie_breaker != "last" else indices.index(index)
+        final_tie_score = (
+            length_score if tie_breaker in {"shortest", "longest"} else order_score
+        )
+        return (consensus_matches, successful_outputs, final_tie_score)
+
+    return max(indices, key=score)
+
+
+def run_candidate_on_inputs(
+    solution: str,
+    entry_point: str,
+    inputs: list[Any],
+    timeout_seconds: float = 2.0,
+) -> list[dict[str, Any]]:
+    payload = json.dumps(
+        {
+            "solution": solution,
+            "entry_point": entry_point,
+            "inputs_b64": base64.b64encode(pickle.dumps(inputs)).decode("ascii"),
+        }
+    )
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-c", _CANDIDATE_INPUT_RUNNER],
+            input=payload,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired:
+        return [{"status": "timeout"} for _ in inputs]
+
+    try:
+        parsed = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        return [
+            {"status": "error", "error": (completed.stderr or completed.stdout)[-500:]}
+            for _ in inputs
+        ]
+    results = parsed.get("results", [])
+    if not isinstance(results, list):
+        return [{"status": "error", "error": "malformed runner output"} for _ in inputs]
+    if len(results) < len(inputs):
+        results.extend(
+            {"status": "error", "error": "missing result"}
+            for _ in range(len(inputs) - len(results))
+        )
+    return results[: len(inputs)]
+
+
+def build_public_synthetic_inputs(base_inputs: list[Any], limit: int = 32) -> list[Any]:
+    seen: set[bytes] = set()
+    generated: list[Any] = []
+
+    def add(value: Any) -> None:
+        if len(generated) >= limit:
+            return
+        try:
+            key = pickle.dumps(value)
+        except Exception:
+            key = repr(value).encode("utf-8", errors="replace")
+        if key in seen:
+            return
+        seen.add(key)
+        generated.append(value)
+
+    for args in base_inputs:
+        add(copy.deepcopy(args))
+    for args in base_inputs:
+        for mutated in mutate_public_args(args):
+            add(mutated)
+            if len(generated) >= limit:
+                return generated
+    return generated
+
+
+def mutate_public_args(args: Any) -> list[Any]:
+    if not isinstance(args, (list, tuple)):
+        args = [args]
+    variants: list[Any] = []
+    args_list = list(args)
+    for position, value in enumerate(args_list):
+        for mutated_value in mutate_public_value(value):
+            mutated_args = copy.deepcopy(args_list)
+            mutated_args[position] = mutated_value
+            variants.append(tuple(mutated_args) if isinstance(args, tuple) else mutated_args)
+    if len(args_list) > 1:
+        variants.append(list(reversed(args_list)))
+    return variants
+
+
+def mutate_public_value(value: Any) -> list[Any]:
+    if isinstance(value, bool):
+        return [not value]
+    if isinstance(value, int):
+        return [0, 1, -1, value + 1, value - 1, -value]
+    if isinstance(value, float):
+        return [0.0, 1.0, -1.0, value * 2.0, value / 2.0, -value]
+    if isinstance(value, str):
+        return ["", value[:1], value + value, value[::-1]]
+    if isinstance(value, tuple):
+        return [(), value[:1], value[:-1], value + value[:1], tuple(reversed(value))]
+    if isinstance(value, list):
+        return [[], value[:1], value[:-1], value + value[:1], list(reversed(value))]
+    if isinstance(value, dict):
+        keys = list(value.keys())
+        return [{}, {keys[0]: value[keys[0]]} if keys else {}]
+    if isinstance(value, set):
+        return [set(), set(list(value)[:1])]
+    return []
 
 
 def select_evalplus_by_prompt_doctests(
@@ -808,4 +1072,42 @@ try:
     print(json.dumps({"attempted": result.attempted, "failures": result.failed}))
 except BaseException as exc:
     print(json.dumps({"attempted": 0, "failures": 1, "error": repr(exc)}))
+"""
+
+
+_CANDIDATE_INPUT_RUNNER = r"""
+import base64
+import contextlib
+import io
+import json
+import pickle
+import sys
+
+payload = json.loads(sys.stdin.read())
+inputs = pickle.loads(base64.b64decode(payload["inputs_b64"]))
+namespace = {}
+results = []
+quiet = io.StringIO()
+try:
+    with contextlib.redirect_stdout(quiet), contextlib.redirect_stderr(quiet):
+        exec(payload["solution"], namespace)
+    candidate = namespace[payload["entry_point"]]
+    for args in inputs:
+        if not isinstance(args, (list, tuple)):
+            args = [args]
+        try:
+            with contextlib.redirect_stdout(quiet), contextlib.redirect_stderr(quiet):
+                value = candidate(*args)
+            results.append(
+                {
+                    "status": "ok",
+                    "repr": repr(value),
+                    "type": type(value).__name__,
+                }
+            )
+        except BaseException as exc:
+            results.append({"status": "error", "error": type(exc).__name__})
+except BaseException as exc:
+    results = [{"status": "error", "error": type(exc).__name__} for _ in inputs]
+print(json.dumps({"results": results}))
 """

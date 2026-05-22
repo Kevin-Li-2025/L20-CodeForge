@@ -6,13 +6,17 @@ from pathlib import Path
 from l20_codeforge.evals.evalplus_runner import (
     build_evalplus_prompt,
     build_evalplus_repair_prompt,
+    build_public_synthetic_inputs,
     choose_evalplus_candidate_index,
+    choose_evalplus_consensus_candidate_index,
     count_existing_samples,
     parse_evalplus_pass_at_1,
     parse_evalplus_scores,
+    run_candidate_on_inputs,
     run_prompt_doctests,
     select_evalplus_tasks,
     select_evalplus_by_base_tests,
+    select_evalplus_by_public_consensus_from_tasks,
     select_evalplus_by_prompt_doctests_from_tasks,
     strip_markdown_code_fence,
 )
@@ -207,6 +211,109 @@ def test_choose_evalplus_candidate_index_rejects_unknown_tie_breaker() -> None:
         raise AssertionError("expected ValueError")
 
 
+def test_build_public_synthetic_inputs_mutates_base_inputs() -> None:
+    inputs = build_public_synthetic_inputs([[(1, 2), "ab"]], limit=8)
+
+    assert [(1, 2), "ab"] in inputs
+    assert any(item[0] == () for item in inputs)
+    assert any(item[1] == "" for item in inputs)
+
+
+def test_run_candidate_on_inputs_preserves_tuple_arguments() -> None:
+    solution = "def size(values):\n    return isinstance(values, tuple), len(values)\n"
+
+    results = run_candidate_on_inputs(
+        solution=solution,
+        entry_point="size",
+        inputs=[[(1, 2)]],
+    )
+
+    assert results == [{"status": "ok", "repr": "(True, 2)", "type": "tuple"}]
+
+
+def test_choose_evalplus_consensus_candidate_index_prefers_majority_behavior() -> None:
+    candidates = [
+        {"solution": "def add_one(x):\n    return x + 2\n"},
+        {"solution": "def add_one(x):\n    return x + 1\n"},
+        {"solution": "def add_one(x):\n    y = x + 1\n    return y\n"},
+    ]
+
+    selected = choose_evalplus_consensus_candidate_index(
+        candidates=candidates,
+        indices=[0, 1, 2],
+        entry_point="add_one",
+        public_inputs=[[0], [2], [-1]],
+    )
+
+    assert selected == 2
+
+
+def test_select_evalplus_by_public_consensus(tmp_path: Path) -> None:
+    samples = tmp_path / "samples.jsonl"
+    samples.write_text(
+        "\n".join(
+            [
+                json.dumps(
+                    {
+                        "task_id": "HumanEval/0",
+                        "solution": "def add_one(x):\n    return x + 2\n",
+                    }
+                ),
+                json.dumps(
+                    {
+                        "task_id": "HumanEval/0",
+                        "solution": "def add_one(x):\n    return x + 1\n",
+                    }
+                ),
+                json.dumps(
+                    {
+                        "task_id": "HumanEval/0",
+                        "solution": "def add_one(x):\n    y = x + 1\n    return y\n",
+                    }
+                ),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    eval_results = tmp_path / "results.json"
+    eval_results.write_text(
+        """
+{
+  "eval": {
+    "HumanEval/0": [
+      {"base_status": "pass", "plus_status": "fail"},
+      {"base_status": "pass", "plus_status": "pass"},
+      {"base_status": "pass", "plus_status": "pass"}
+    ]
+  }
+}
+""",
+        encoding="utf-8",
+    )
+    tasks = {
+        "HumanEval/0": {
+            "entry_point": "add_one",
+            "base_input": [[1], [3]],
+        }
+    }
+    output = tmp_path / "selected.jsonl"
+
+    report = select_evalplus_by_public_consensus_from_tasks(
+        samples=samples,
+        eval_results=eval_results,
+        tasks=tasks,
+        output=output,
+        max_synthetic_inputs=8,
+    )
+
+    assert report.selected_base_pass == 1
+    assert report.selected_plus_pass == 1
+    assert output.read_text(encoding="utf-8").strip() == json.dumps(
+        {"task_id": "HumanEval/0", "solution": "def add_one(x):\n    y = x + 1\n    return y\n"}
+    )
+
+
 def test_run_prompt_doctests() -> None:
     prompt = '''def add_one(x):
     """
@@ -226,7 +333,9 @@ def test_select_evalplus_by_prompt_doctests(tmp_path: Path) -> None:
     samples.write_text(
         "\n".join(
             [
-                json.dumps({"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x\n"}),
+                json.dumps(
+                    {"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x\n"}
+                ),
                 json.dumps(
                     {"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x + 1\n"}
                 ),
