@@ -104,6 +104,13 @@ This keeps agent behavior and reference patches comparable:
 mini .traj.json -> L20 Trajectory -> report / SFT / DPO
 ```
 
+### Real Data Registry
+
+The real data layer keeps external SWE datasets separate from local executable
+tasks. Hugging Face rows from SWE-bench, SWE-Gym, and SWE-rebench-V2 normalize to
+`RealTaskRecord`; local execution requires a later materialization step that
+checks out repositories and applies test patches.
+
 ## Current Executable Loop
 
 ```bash

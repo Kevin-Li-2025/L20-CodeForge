@@ -9,6 +9,7 @@ from rich.console import Console
 from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_mini_task_records
 from l20_codeforge.context.compiler import ContextCompiler
 from l20_codeforge.data.preferences import build_preference_pairs
+from l20_codeforge.data.real_datasets import fetch_hf_real_dataset, list_real_dataset_specs
 from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
@@ -33,6 +34,35 @@ def init_dirs(root: Path = Path(".")) -> None:
     created = ensure_project_dirs(root)
     for path in created:
         console.print(str(path))
+
+
+@app.command("list-real-sources")
+def list_real_sources() -> None:
+    """List real-world coding repair datasets supported by the registry."""
+    console.print_json(data=[spec.model_dump() for spec in list_real_dataset_specs()])
+
+
+@app.command("fetch-real-tasks")
+def fetch_real_tasks(
+    dataset: str,
+    output: Path = Path("data/raw/real_tasks.jsonl"),
+    split: str | None = None,
+    limit: int | None = 100,
+    streaming: bool = False,
+) -> None:
+    """Fetch real GitHub issue/PR repair records from a Hugging Face dataset."""
+    try:
+        report = fetch_hf_real_dataset(
+            key=dataset,
+            output_path=output,
+            split=split,
+            limit=limit,
+            streaming=streaming,
+        )
+    except Exception as exc:
+        console.print(f"[red]failed to fetch real dataset:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print_json(data=report.model_dump())
 
 
 @app.command("pack-context")

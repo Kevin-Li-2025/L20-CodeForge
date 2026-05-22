@@ -124,3 +124,22 @@ weak patches for the same task:
 ```bash
 python -m l20_codeforge build-dpo artifacts/trajectories/mini_swe_converted.jsonl
 ```
+
+## Real Data
+
+List supported real datasets:
+
+```bash
+python -m l20_codeforge list-real-sources
+```
+
+Fetch a small real sample first:
+
+```bash
+python -m l20_codeforge fetch-real-tasks \
+  swe-bench-lite \
+  --output data/raw/real/swe_bench_lite_sample.jsonl \
+  --limit 25
+```
+
+Keep these JSONL files out of git. They are generated data.

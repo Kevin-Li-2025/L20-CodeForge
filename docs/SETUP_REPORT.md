@@ -57,6 +57,7 @@ mini --help
 python -m l20_codeforge eval-card remote-smoke pass
 python -m l20_codeforge smoke-loop
 python -m l20_codeforge export-mini-tasks
+python -m l20_codeforge list-real-sources
 ```
 
 Results:
@@ -69,6 +70,7 @@ mini CLI: available
 eval card: artifacts/eval_cards/remote-smoke.json
 smoke loop: generates executable repair trajectories, report JSON, and SFT JSONL
 mini export: writes mini-SWE-agent task prompts and suggested commands
+real source registry: lists SWE-bench, SWE-Gym, SWE-rebench-V2, and bug benchmarks
 ```
 
 ## Research Basis

@@ -9,6 +9,7 @@ PROJECT_DIRS = [
     "artifacts/mini_swe",
     "artifacts/reports",
     "artifacts/trajectories",
+    "data/raw/real",
     "data/raw",
     "data/processed",
     "logs",

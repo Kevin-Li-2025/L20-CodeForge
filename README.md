@@ -112,6 +112,7 @@ Milestone notes:
 - `docs/MILESTONE_1_DATA_FACTORY.md`: first executable data loop.
 - `docs/MILESTONE_2_REPAIR_SUITE.md`: 36-task visible/hidden repair suite.
 - `docs/MILESTONE_3_MINI_SWE_ADAPTER.md`: mini-SWE-agent trajectory adapter and DPO pairs.
+- `docs/MILESTONE_4_REAL_DATA.md`: real SWE dataset registry and fetch path.
 
 Agent trajectory bridge:
 
@@ -119,4 +120,11 @@ Agent trajectory bridge:
 python -m l20_codeforge export-mini-tasks
 python -m l20_codeforge convert-mini data/raw/smoke_tasks/<task>/task.json artifacts/mini_swe/trajectories/<task>.traj.json
 python -m l20_codeforge build-dpo artifacts/trajectories/mini_swe_converted.jsonl
+```
+
+Real data entry:
+
+```bash
+python -m l20_codeforge list-real-sources
+python -m l20_codeforge fetch-real-tasks swe-bench-lite --output data/raw/real/swe_bench_lite_sample.jsonl --limit 25
 ```
