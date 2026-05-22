@@ -8,6 +8,7 @@ from rich.console import Console
 
 from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_mini_task_records
 from l20_codeforge.context.compiler import ContextCompiler
+from l20_codeforge.data.code_bench_sft import build_mbpp_sft_jsonl
 from l20_codeforge.data.preferences import build_preference_pairs
 from l20_codeforge.data.real_datasets import fetch_hf_real_dataset, list_real_dataset_specs
 from l20_codeforge.data.real_sft import build_real_sft_jsonl
@@ -15,6 +16,7 @@ from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
+from l20_codeforge.evals.evalplus_runner import generate_evalplus_samples, run_evalplus_official
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
@@ -84,6 +86,34 @@ def build_real_sft(
         min_patch_chars=min_patch_chars,
     )
     console.print_json(data={"records": count, "output": str(output)})
+
+
+@app.command("build-mbpp-sft")
+def build_mbpp_sft(
+    output: Path = Path("data/processed/code_bench/mbpp_train_sft.jsonl"),
+    split: str = "train",
+    limit: int | None = None,
+    exclude_evalplus_mbpp: bool = True,
+) -> None:
+    """Build non-EvalPlus MBPP split SFT data for public benchmark post-training."""
+    try:
+        count = build_mbpp_sft_jsonl(
+            output_path=output,
+            split=split,
+            limit=limit,
+            exclude_evalplus_mbpp=exclude_evalplus_mbpp,
+        )
+    except Exception as exc:
+        console.print(f"[red]failed to build MBPP SFT data:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print_json(
+        data={
+            "records": count,
+            "split": split,
+            "output": str(output),
+            "exclude_evalplus_mbpp": exclude_evalplus_mbpp,
+        }
+    )
 
 
 @app.command("train-real-sft")
@@ -275,6 +305,76 @@ def eval_real_patch_command(
             "worktree": report.worktree,
         }
     )
+
+
+@app.command("generate-evalplus")
+def generate_evalplus_command(
+    model: str,
+    dataset: str = "humaneval",
+    output: Path = Path("artifacts/evalplus/samples.jsonl"),
+    adapter_path: str | None = None,
+    n_samples: int = 1,
+    limit: int | None = None,
+    id_start: int | None = None,
+    id_end: int | None = None,
+    temperature: float = 0.0,
+    top_p: float = 0.95,
+    max_new_tokens: int = 512,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    overwrite: bool = False,
+) -> None:
+    """Generate official EvalPlus-compatible JSONL samples with 4-bit model loading."""
+    try:
+        report = generate_evalplus_samples(
+            model_name_or_path=model,
+            dataset=dataset,
+            output=output,
+            adapter_path=adapter_path,
+            n_samples=n_samples,
+            limit=limit,
+            id_start=id_start,
+            id_end=id_end,
+            temperature=temperature,
+            top_p=top_p,
+            max_new_tokens=max_new_tokens,
+            load_in_4bit=load_in_4bit,
+            bf16=bf16,
+            seed=seed,
+            overwrite=overwrite,
+        )
+    except Exception as exc:
+        console.print(f"[red]failed to generate EvalPlus samples:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print_json(data=report.model_dump())
+
+
+@app.command("eval-evalplus")
+def eval_evalplus_command(
+    dataset: str,
+    samples: Path,
+    output: Path = Path("artifacts/evalplus/evalplus_report.json"),
+    base_only: bool = False,
+    parallel: int | None = None,
+    test_details: bool = True,
+    mini: bool = False,
+    i_just_wanna_run: bool = False,
+) -> None:
+    """Run official evalplus.evaluate on generated samples and save stdout/stderr."""
+    report = run_evalplus_official(
+        dataset=dataset,
+        samples=samples,
+        output=output,
+        base_only=base_only,
+        parallel=parallel,
+        test_details=test_details,
+        mini=mini,
+        i_just_wanna_run=i_just_wanna_run,
+    )
+    console.print_json(data=report.model_dump())
+    if report.exit_code != 0:
+        raise typer.Exit(report.exit_code)
 
 
 @app.command("build-sft")
