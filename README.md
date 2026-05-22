@@ -116,6 +116,9 @@ Milestone notes:
 - `benchmarks/evalplus_l20_codeforge_2026_05_22/`: reproducibility package
   for the EvalPlus HumanEval+/MBPP+ benchmark sprint, including selected
   samples, official reports, rechecks, hashes, and a summary table.
+- `benchmarks/livecodebench_full_release_v6_2026_05_22/`: full 1,055-task
+  LiveCodeBench `release_v6` greedy baseline with saved generations, hidden-test
+  evaluator outputs, hashes, and breakdowns.
 
 Agent trajectory bridge:
 

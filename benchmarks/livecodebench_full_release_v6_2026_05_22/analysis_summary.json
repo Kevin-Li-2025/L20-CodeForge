@@ -1,0 +1,192 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "scope": "full release_v6 evaluation from saved generations",
+  "run": {
+    "model": "Qwen2.5-Coder-7B-Instruct",
+    "adapter_path": null,
+    "decode": "greedy",
+    "temperature": 0.0,
+    "top_p": 0.95,
+    "n_samples": 1,
+    "max_new_tokens": 2048,
+    "load_in_4bit": true,
+    "bf16": true
+  },
+  "scores": {
+    "pass_at_1": 0.281517,
+    "passed": 297,
+    "total": 1055
+  },
+  "timing_seconds": {
+    "generation": 6795.36,
+    "evaluation": 467.664
+  },
+  "artifacts": {
+    "lcb_repo_commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+    "full_jsonl_sha256": "4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd",
+    "prompt_public_parquet_sha256": "6a067f9b0762a2df9cad3e269872e189ce2d4f6ece7d8356a6f5d63cacdb5a96",
+    "generations_sha256": "9d70473c14b20e6d3c514ff64d6f3525f870e5f25d18b55bd0ac83722912d3c5"
+  },
+  "by_difficulty": {
+    "easy": {
+      "passed": 206,
+      "total": 322,
+      "pass_at_1": 0.639752
+    },
+    "hard": {
+      "passed": 9,
+      "total": 350,
+      "pass_at_1": 0.025714
+    },
+    "medium": {
+      "passed": 82,
+      "total": 383,
+      "pass_at_1": 0.214099
+    }
+  },
+  "by_platform": {
+    "atcoder": {
+      "passed": 146,
+      "total": 602,
+      "pass_at_1": 0.242525
+    },
+    "codeforces": {
+      "passed": 2,
+      "total": 9,
+      "pass_at_1": 0.222222
+    },
+    "leetcode": {
+      "passed": 149,
+      "total": 444,
+      "pass_at_1": 0.335586
+    }
+  },
+  "by_month": {
+    "2023-05": {
+      "passed": 12,
+      "total": 34,
+      "pass_at_1": 0.352941
+    },
+    "2023-06": {
+      "passed": 21,
+      "total": 39,
+      "pass_at_1": 0.538462
+    },
+    "2023-07": {
+      "passed": 21,
+      "total": 54,
+      "pass_at_1": 0.388889
+    },
+    "2023-08": {
+      "passed": 9,
+      "total": 36,
+      "pass_at_1": 0.25
+    },
+    "2023-09": {
+      "passed": 20,
+      "total": 44,
+      "pass_at_1": 0.454545
+    },
+    "2023-10": {
+      "passed": 17,
+      "total": 44,
+      "pass_at_1": 0.386364
+    },
+    "2023-11": {
+      "passed": 15,
+      "total": 35,
+      "pass_at_1": 0.428571
+    },
+    "2023-12": {
+      "passed": 20,
+      "total": 40,
+      "pass_at_1": 0.5
+    },
+    "2024-01": {
+      "passed": 15,
+      "total": 36,
+      "pass_at_1": 0.416667
+    },
+    "2024-02": {
+      "passed": 9,
+      "total": 32,
+      "pass_at_1": 0.28125
+    },
+    "2024-03": {
+      "passed": 20,
+      "total": 45,
+      "pass_at_1": 0.444444
+    },
+    "2024-04": {
+      "passed": 8,
+      "total": 37,
+      "pass_at_1": 0.216216
+    },
+    "2024-05": {
+      "passed": 11,
+      "total": 36,
+      "pass_at_1": 0.305556
+    },
+    "2024-06": {
+      "passed": 13,
+      "total": 46,
+      "pass_at_1": 0.282609
+    },
+    "2024-07": {
+      "passed": 8,
+      "total": 43,
+      "pass_at_1": 0.186047
+    },
+    "2024-08": {
+      "passed": 11,
+      "total": 66,
+      "pass_at_1": 0.166667
+    },
+    "2024-09": {
+      "passed": 8,
+      "total": 47,
+      "pass_at_1": 0.170213
+    },
+    "2024-10": {
+      "passed": 6,
+      "total": 53,
+      "pass_at_1": 0.113208
+    },
+    "2024-11": {
+      "passed": 15,
+      "total": 57,
+      "pass_at_1": 0.263158
+    },
+    "2024-12": {
+      "passed": 8,
+      "total": 49,
+      "pass_at_1": 0.163265
+    },
+    "2025-01": {
+      "passed": 8,
+      "total": 51,
+      "pass_at_1": 0.156863
+    },
+    "2025-02": {
+      "passed": 12,
+      "total": 51,
+      "pass_at_1": 0.235294
+    },
+    "2025-03": {
+      "passed": 9,
+      "total": 68,
+      "pass_at_1": 0.132353
+    },
+    "2025-04": {
+      "passed": 1,
+      "total": 12,
+      "pass_at_1": 0.083333
+    }
+  },
+  "failures_by_error_code": {
+    "wrong_answer": 605,
+    "time_limit_exceeded": 68,
+    "runtime_error": 85,
+    "pass": 297
+  }
+}

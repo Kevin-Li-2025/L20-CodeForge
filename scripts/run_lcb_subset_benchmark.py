@@ -419,6 +419,43 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         )
 
     generation_seconds = round(time.monotonic() - generation_started, 3)
+    if args.generate_only:
+        report = {
+            "benchmark": "LiveCodeBench code_generation_lite",
+            "benchmark_scope": "generation only; evaluation skipped",
+            "lcb_repo": str(lcb_repo),
+            "lcb_repo_commit": args.lcb_commit,
+            "parquet": str(parquet_path),
+            "parquet_sha256": sha256_file(parquet_path),
+            "parquet_rows_selected": len(problems),
+            "model": args.model,
+            "adapter_path": args.adapter_path,
+            "n_samples": args.n_samples,
+            "selection": "none",
+            "temperature": args.temperature,
+            "top_p": args.top_p,
+            "max_new_tokens": args.max_new_tokens,
+            "max_input_tokens": args.max_input_tokens,
+            "seed": args.seed,
+            "start_date": args.start_date,
+            "end_date": args.end_date,
+            "difficulty": args.difficulty,
+            "limit": args.limit,
+            "load_in_4bit": not args.no_4bit,
+            "bf16": not args.no_bf16,
+            "generation_seconds": generation_seconds,
+            "evaluation_seconds": 0.0,
+            "metrics": None,
+            "passed_at_1_count": None,
+            "total": len(problems),
+        }
+        (output_dir / "report.json").write_text(
+            json.dumps(report, indent=2, ensure_ascii=True) + "\n",
+            encoding="utf-8",
+        )
+        print(json.dumps(report, indent=2, ensure_ascii=True))
+        return report
+
     public_selection_seconds = 0.0
     public_selection_records: list[dict[str, Any]] = []
     public_selection_metrics: dict[str, Any] | None = None
@@ -591,6 +628,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--no-4bit", action="store_true")
     parser.add_argument("--no-bf16", action="store_true")
+    parser.add_argument("--generate-only", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--debug", action="store_true")
     return parser
