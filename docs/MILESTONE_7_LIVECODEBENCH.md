@@ -95,12 +95,34 @@ On the full run, failures are mostly wrong answers:
 That points to repair, verifier-guided selection, and curriculum targeted at
 medium/hard algorithmic reasoning before spending GPU time on broader SFT.
 
+## `n=4` Selection Probe
+
+The first follow-up test used a 60-task stratified slice from the full
+`release_v6` set: 20 easy, 20 medium, and 20 hard tasks, sampled evenly by
+contest date within each difficulty.
+
+- Greedy full-run baseline on the same 60 task IDs: `13/60`, pass@1 `0.2167`.
+- `temperature=0.8`, `n=4`, public-test selection: `21/60`, score `0.3500`.
+- Hidden oracle over the same four candidates: `23/60`, score `0.3833`.
+- Public selector captured `21/23` tasks that had a hidden-passing candidate.
+
+By difficulty:
+
+- Easy: greedy `12/20`, selected `14/20`, oracle `14/20`.
+- Medium: greedy `1/20`, selected `5/20`, oracle `7/20`.
+- Hard: greedy `0/20`, selected `2/20`, oracle `2/20`.
+
+This is a good sign for the L20 strategy. Sampling plus public-test selection
+found real hidden-test improvements, and most remaining misses came from not
+having a correct candidate rather than selecting the wrong candidate. The next
+high-value benchmark is full `n=4` public selection over all 1,055 tasks.
+
 ## Next Experiments
 
 1. Add lightweight repair prompts for candidates that fail public tests.
 2. Add a second selector signal, such as shortest-public-pass plus diversity or
    multi-candidate consensus on public tests.
-3. Scale the same `n=4` and `n=8` protocol to the full 1,055-problem LCB set.
+3. Scale the same `n=4` protocol to the full 1,055-problem LCB set.
 4. Record pass@1, public-pass rate, hidden-pass rate, wall time, and tokens so
    improvements are attributable to algorithmic test-time compute, not hidden
    leakage.

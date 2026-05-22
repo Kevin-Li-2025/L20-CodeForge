@@ -110,9 +110,37 @@ where the L20-constrained strategy should focus next.
    next full-suite experiment should run `n=4` or `n=8` generation with
    public-test selection and compare hidden pass@1 against this 0.2815 floor.
 
+## Stratified `n=4` Public-Selection Probe
+
+After the full greedy baseline, we ran a 60-task probe to test whether
+test-time sampling and public-test selection still help on a harder slice of
+the full distribution. The slice contains 20 easy, 20 medium, and 20 hard tasks,
+chosen evenly by contest date within each difficulty.
+
+| Run | Passed | Total | Score |
+| --- | ---: | ---: | ---: |
+| Full greedy baseline on same task IDs | 13 | 60 | 0.2167 |
+| `temperature=0.8`, `n=4`, public-test selection | 21 | 60 | 0.3500 |
+| `temperature=0.8`, `n=4`, hidden oracle | 23 | 60 | 0.3833 |
+
+Breakdown for the selected run:
+
+| Difficulty | Greedy | Public-selected `n=4` | Hidden oracle `n=4` |
+| --- | ---: | ---: | ---: |
+| Easy | 12/20 | 14/20 | 14/20 |
+| Medium | 1/20 | 5/20 | 7/20 |
+| Hard | 0/20 | 2/20 | 2/20 |
+
+The selector recovered 21 of the 23 tasks that had at least one hidden-passing
+candidate. This is the strongest current evidence that the next full run should
+scale `n=4` public-test selection to all 1,055 tasks before spending time on
+weight updates.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.
+- `stratified60_n4_public_select_summary.json`: `n=4` public-selection probe.
+- `stratified60_selection_manifest.json`: sampled task IDs and data hash.
 - `qwen25_coder_7b_greedy_generate_only/generations.json`: saved generated code.
 - `qwen25_coder_7b_greedy_generate_only/report.json`: generation configuration.
 - `qwen25_coder_7b_greedy_full_eval/report.json`: full hidden-test score.

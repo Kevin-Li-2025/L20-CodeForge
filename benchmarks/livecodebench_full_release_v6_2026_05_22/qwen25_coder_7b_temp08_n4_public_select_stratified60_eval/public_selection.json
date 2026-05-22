@@ -1,0 +1,1959 @@
+{
+  "metrics": {
+    "pass@1": 0.37916666666666665,
+    "detail": {
+      "pass@1": {
+        "0": 1.0,
+        "1": 1.0,
+        "2": 0.25,
+        "3": 0.75,
+        "4": 1.0,
+        "5": 0.25,
+        "6": 0.5,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 1.0,
+        "11": 1.0,
+        "12": 1.0,
+        "13": 0.75,
+        "14": 0.25,
+        "15": 0.75,
+        "16": 0.5,
+        "17": 1.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 1.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 1.0,
+        "24": 0.75,
+        "25": 0.0,
+        "26": 0.0,
+        "27": 1.0,
+        "28": 0.0,
+        "29": 0.0,
+        "30": 0.0,
+        "31": 1.0,
+        "32": 0.0,
+        "33": 0.75,
+        "34": 1.0,
+        "35": 0.0,
+        "36": 0.0,
+        "37": 0.0,
+        "38": 1.0,
+        "39": 0.0,
+        "40": 0.0,
+        "41": 0.0,
+        "42": 0.0,
+        "43": 0.0,
+        "44": 1.0,
+        "45": 0.0,
+        "46": 1.0,
+        "47": 0.0,
+        "48": 0.0,
+        "49": 0.0,
+        "50": 0.25,
+        "51": 0.0,
+        "52": 1.0,
+        "53": 1.0,
+        "54": 0.0,
+        "55": 0.0,
+        "56": 0.0,
+        "57": 0.0,
+        "58": 0.0,
+        "59": 0.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "2777",
+      "question_title": "find-the-distinct-difference-array",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2779",
+      "question_title": "number-of-adjacent-elements-with-the-same-color",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2784",
+      "question_title": "power-of-heroes",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        1
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        0.5,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2855",
+      "question_title": "maximum-number-of-jumps-to-reach-the-last-index",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2879",
+      "question_title": "minimum-changes-to-make-k-semi-palindromes",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.5,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        1
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2916",
+      "question_title": "check-if-it-is-possible-to-split-array",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.0,
+        0.5
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3024",
+      "question_title": "string-transformation",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.5
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.5,
+        0.5,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3240",
+      "question_title": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.5,
+        0.5,
+        0.5,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3242",
+      "question_title": "count-elements-with-maximum-frequency",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3324",
+      "question_title": "split-the-array",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3329",
+      "question_title": "find-the-length-of-the-longest-common-prefix",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3374",
+      "question_title": "count-alternating-subarrays",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3381",
+      "question_title": "shortest-subarray-with-or-at-least-k-i",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.6666666666666666,
+        0.6666666666666666,
+        1.0,
+        0.6666666666666666
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3396",
+      "question_title": "valid-word",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.5
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3416",
+      "question_title": "sum-of-digit-differences-of-all-pairs",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3450",
+      "question_title": "find-the-child-who-has-the-ball-after-k-seconds",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3475",
+      "question_title": "minimum-operations-to-make-binary-array-elements-equal-to-one-i",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3527",
+      "question_title": "alternating-groups-iii",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3543",
+      "question_title": "count-substrings-that-satisfy-k-constraint-i",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3552",
+      "question_title": "find-the-largest-palindrome-divisible-by-k",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3600",
+      "question_title": "find-the-k-th-character-in-string-game-i",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.5,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3626",
+      "question_title": "smallest-divisible-digit-product-i",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3632",
+      "question_title": "button-with-longest-push-time",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.5,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3639",
+      "question_title": "zero-array-transformation-i",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3657",
+      "question_title": "check-if-grid-can-be-cut-into-sections",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3731",
+      "question_title": "sum-of-variable-length-subarrays",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3751",
+      "question_title": "maximum-frequency-after-subarray-operation",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3773",
+      "question_title": "minimum-pair-removal-to-sort-array-i",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3786",
+      "question_title": "longest-palindromic-subsequence-after-at-most-k-operations",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc305_a",
+      "question_title": "Water Station",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc309_e",
+      "question_title": "Family and Insurance",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc310_b",
+      "question_title": "Strictly Superior",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.5,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc315_b",
+      "question_title": "The Middle Day",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc320_c",
+      "question_title": "Slot Strategy 2 (Easy)",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc321_b",
+      "question_title": "Cutoff",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc326_a",
+      "question_title": "2UP3DOWN",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.5,
+        0.5,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc331_a",
+      "question_title": "Tomorrow",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc331_c",
+      "question_title": "Sum of Numbers Greater Than Me",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc333_e",
+      "question_title": "Takahashi Quest",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc344_e",
+      "question_title": "Insert or Erase",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc351_d",
+      "question_title": "Grid and Magnet",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc359_d",
+      "question_title": "Avoid K Palindrome",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc362_a",
+      "question_title": "Buy a Pen",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc364_c",
+      "question_title": "Minimum Glutton",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.6666666666666666,
+        0.6666666666666666,
+        0.6666666666666666,
+        0.0
+      ],
+      "selected_public_score": 0.6666666666666666,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc370_d",
+      "question_title": "Cross Explosion",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc371_f",
+      "question_title": "Takahashi in Narrow Road",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc375_c",
+      "question_title": "Spiral Rotation",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc375_e",
+      "question_title": "3 Team Division",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc381_d",
+      "question_title": "1122 Substring",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc384_g",
+      "question_title": "Abs Sum",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc392_f",
+      "question_title": "Insert",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc395_a",
+      "question_title": "Strictly Increasing?",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "abc398_d",
+      "question_title": "Bonfire",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc400_d",
+      "question_title": "Takahashi the Wall Breaker",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "arc186_b",
+      "question_title": "Typical Permutation Descriptor",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "arc190_c",
+      "question_title": "Basic Grid Problem with Updates",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "arc193_d",
+      "question_title": "Magnets",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "arc196_d",
+      "question_title": "Roadway",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.5
+      ],
+      "selected_public_score": 0.5,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {},
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      },
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 6 != 4"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      },
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -1 != 6"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -1 != 6"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -1 != 6"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 81 != 70"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 0"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 0"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 0"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 11 7 6 2 0 != 10 0 10 0 8"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 11 7 6 2 0 != 10 0 10 0 8"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 11 -3 4 2 8 != 10 0 10 0 8"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 11 0 11 0 10 != 10 0 10 0 8"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 3"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 6 != 3"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 6 != 3"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 4 3 5 1 != 4 5 1 3"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 9"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 9"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 9"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 9"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 9 != 1"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 4 != 1"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 1"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 5 != 6"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 5 != 6"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 5 != 6"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 1 != 2"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 239"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -115 != 239"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 239"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 100 != 239"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: .......# != ........"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: .......# != ........"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=1: ......## != #######."
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 3 != 2"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -1 != 2"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 4"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 6 != 4"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 4"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -4 != 1"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 1"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer: mismatched output length"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0000001000 != 0001101011"
+      },
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 000000 != 001010"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 2 != 1"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: -1 != 1"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 3"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 3"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 12 != 3"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 1 != 3"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 468 != 456"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer: mismatched output length"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 28 != 456"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: multiple starred expressions in assignment (<string>, line 44)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=1: 2 != -1"
+      },
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: module 'tmp_sol' has no attribute 'Solution'"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      }
+    ]
+  ]
+}
