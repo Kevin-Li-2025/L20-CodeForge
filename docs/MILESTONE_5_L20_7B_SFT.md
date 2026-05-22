@@ -151,3 +151,62 @@ use a larger microbatch or longer examples.
 
 The final adapter was loaded with the base model in 4-bit mode and produced a
 valid Python `two_sum` implementation from a short coding prompt.
+
+## Held-Out Evaluation
+
+This is not yet a SWE-bench executable test harness. It is a likelihood and
+generation-format evaluation on real gold-patch SFT records that were excluded
+from the 7B Verified training run.
+
+SWE-bench Lite and SWE-bench Verified overlap, so the evaluation excludes every
+Lite `instance_id` that appears in the Verified training file:
+
+```text
+SWE-bench Lite records: 300
+SWE-bench Verified records: 500
+overlap: 93
+Lite not in Verified: 207
+scored after 4096-token truncation: 192
+```
+
+Base model evaluation:
+
+```bash
+python -m l20_codeforge eval-real-sft \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  data/processed/real_sft/swe_bench_lite_sft.jsonl \
+  --output artifacts/evals/qwen25-coder-7b-base-lite-not-verified-207.json \
+  --exclude-jsonl data/processed/real_sft/swe_bench_verified_sft.jsonl \
+  --limit 207 \
+  --max-length 4096 \
+  --generate-samples 0
+```
+
+Adapter evaluation:
+
+```bash
+python -m l20_codeforge eval-real-sft \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  data/processed/real_sft/swe_bench_lite_sft.jsonl \
+  --adapter-path artifacts/checkpoints/qwen25-coder-7b-verified-sft-4096-epoch1/final \
+  --output artifacts/evals/qwen25-coder-7b-adapter-lite-not-verified-207.json \
+  --exclude-jsonl data/processed/real_sft/swe_bench_verified_sft.jsonl \
+  --limit 207 \
+  --max-length 4096 \
+  --generate-samples 0
+```
+
+Result:
+
+```text
+base mean assistant NLL:    0.9010
+adapter mean assistant NLL: 0.7666
+base perplexity:            2.4621
+adapter perplexity:         2.1525
+```
+
+A smaller 20-record generation run produced unified-diff-like outputs for 3/3
+base samples and 3/3 adapter samples. The adapter outputs were syntactically
+patch-like, but this is still only a format check. The next milestone must
+materialize real SWE-bench tasks, apply generated patches, and run the
+task-specific tests.

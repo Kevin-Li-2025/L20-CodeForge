@@ -16,6 +16,7 @@ from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
+from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
 from l20_codeforge.gpu.profile import L20Profile
 from l20_codeforge.training.sft import train_real_sft
 from l20_codeforge.utils.paths import ensure_project_dirs
@@ -119,6 +120,37 @@ def train_real_sft_command(
         bf16=bf16,
     )
     console.print_json(data=report)
+
+
+@app.command("eval-real-sft")
+def eval_real_sft_command(
+    model: str,
+    eval_jsonl: Path,
+    output: Path = Path("artifacts/evals/real_sft_eval.json"),
+    adapter_path: str | None = None,
+    exclude_jsonl: Path | None = None,
+    limit: int | None = 50,
+    max_length: int = 4096,
+    max_new_tokens: int = 384,
+    generate_samples: int = 3,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+) -> None:
+    """Evaluate assistant-token NLL and sample generations on real SFT data."""
+    report = evaluate_real_sft_model(
+        model_name_or_path=model,
+        eval_jsonl=eval_jsonl,
+        output=output,
+        adapter_path=adapter_path,
+        exclude_jsonl=exclude_jsonl,
+        limit=limit,
+        max_length=max_length,
+        max_new_tokens=max_new_tokens,
+        generate_samples=generate_samples,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+    )
+    console.print_json(data={key: value for key, value in report.items() if key != "per_record"})
 
 
 @app.command("pack-context")
