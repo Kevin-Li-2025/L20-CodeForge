@@ -209,3 +209,39 @@ Observed on the L20: 64 steps over 500 SWE-bench Verified SFT records completed
 in 1011.2 seconds with train loss 0.9147. Peak memory was about 29.6 GiB. A
 4096-token batch size of 4 OOMed near 41.9 GiB, so use batch size 2 unless the
 loss path is changed to avoid full-logit materialization.
+
+## Real Executable Patch Eval
+
+Likelihood eval is not enough for SWE-style coding. Use `eval-real-patch` to
+validate the harness on every candidate patch:
+
+For this Django task, install the historical repo's minimal runtime dependencies
+in the active evaluation venv:
+
+```bash
+python -m pip install pytz sqlparse
+```
+
+```bash
+python -m l20_codeforge eval-real-patch \
+  data/raw/real/swe_bench_lite_test.jsonl \
+  django__django-10924 \
+  artifacts/real_eval/patches/django-10924-adapter-generated-2048.patch \
+  --output artifacts/real_eval/reports/django-10924-adapter-eval.json \
+  --repos-dir artifacts/real_eval/repos \
+  --test-command 'PYTHONPATH=. python tests/runtests.py model_fields.test_filepathfield.FilePathFieldTests.test_callable_path --verbosity=2 --noinput' \
+  --candidate-name adapter-2048 \
+  --timeout-seconds 120
+```
+
+The command checks three states from the same base commit:
+
+```text
+base + test_patch: expected fail
+gold + test_patch: expected pass
+candidate + test_patch: target pass
+```
+
+Treat `base=failed` and `gold=passed` as the minimum harness sanity check. If
+the candidate fails while SFT likelihood improved, the signal is not "training
+worked"; it is "the model learned patch distribution but not executable repair."

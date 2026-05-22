@@ -16,6 +16,7 @@ from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
+from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
 from l20_codeforge.gpu.profile import L20Profile
 from l20_codeforge.training.sft import train_real_sft
@@ -223,6 +224,55 @@ def eval_patch(
             "reward": result.trajectory.reward.model_dump(),
             "trajectory_output": str(output),
             "worktree": result.worktree if keep_worktree else None,
+        }
+    )
+
+
+@app.command("eval-real-patch")
+def eval_real_patch_command(
+    real_tasks: Path,
+    instance_id: str,
+    patch_file: Path,
+    output: Path = Path("artifacts/real_eval/reports/real_patch_eval.json"),
+    repos_dir: Path = Path("artifacts/real_eval/repos"),
+    repo_dir: Path | None = None,
+    test_command: str | None = None,
+    candidate_name: str = "candidate",
+    timeout_seconds: int = 120,
+    skip_fetch: bool = False,
+    max_output_chars: int = 20000,
+    keep_worktree_state: bool = False,
+) -> None:
+    """Apply a candidate patch to a real SWE task and run base/gold/candidate tests."""
+    try:
+        report = evaluate_real_patch(
+            real_tasks_path=real_tasks,
+            instance_id=instance_id,
+            patch_file=patch_file,
+            output=output,
+            repos_dir=repos_dir,
+            repo_dir=repo_dir,
+            test_command=test_command,
+            candidate_name=candidate_name,
+            timeout_seconds=timeout_seconds,
+            fetch_existing=not skip_fetch,
+            max_output_chars=max_output_chars,
+            keep_worktree_state=keep_worktree_state,
+        )
+    except Exception as exc:
+        console.print(f"[red]failed to evaluate real patch:[/red] {exc}")
+        raise typer.Exit(1) from exc
+
+    console.print_json(
+        data={
+            "instance_id": report.instance_id,
+            "verdict": report.verdict,
+            "base_status": report.base_result.status,
+            "gold_status": report.gold_result.status,
+            "candidate_status": report.candidate_result.status,
+            "notes": report.notes,
+            "output": str(output),
+            "worktree": report.worktree,
         }
     )
 

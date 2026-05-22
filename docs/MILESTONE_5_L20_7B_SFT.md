@@ -269,3 +269,27 @@ performance. The current SFT run improves gold-patch likelihood while still
 failing a real apply-and-test loop. The next milestone should optimize for
 executable reward: valid unified diffs, correct file localization, test feedback,
 and pass/fail trajectory training.
+
+The manual spot check is now captured by the reusable `eval-real-patch` command.
+Use it for every generated candidate before counting a model improvement:
+
+For this Django base commit, the evaluation venv needs `pytz` and `sqlparse`.
+
+```bash
+python -m l20_codeforge eval-real-patch \
+  data/raw/real/swe_bench_lite_test.jsonl \
+  django__django-10924 \
+  artifacts/real_eval/patches/django-10924-adapter-generated-2048.patch \
+  --output artifacts/real_eval/reports/django-10924-adapter-eval.json \
+  --repos-dir artifacts/real_eval/repos \
+  --test-command 'PYTHONPATH=. python tests/runtests.py model_fields.test_filepathfield.FilePathFieldTests.test_callable_path --verbosity=2 --noinput' \
+  --candidate-name adapter-2048
+```
+
+Expected interpretation:
+
+```text
+base status:      failed
+gold status:      passed
+candidate status: passed only if the generated patch solved the issue
+```

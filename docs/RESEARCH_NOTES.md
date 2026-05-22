@@ -73,3 +73,80 @@ This can produce useful, publishable artifacts:
 - reward-hacking diagnostics for patch generation,
 - a small but reliable local SWE-style benchmark.
 
+## 2026 Research Update: What The Regression Means
+
+The current L20 run improved held-out assistant-token NLL/perplexity, but failed
+the first executable SWE task. That is a weak or negative capability signal, not
+a success metric. It means the adapter became better at matching the gold-patch
+distribution under teacher forcing, while the free-running patch policy still
+fails at file localization, diff validity, or test-passing repair.
+
+Recent SWE-agent research points in the same direction:
+
+- SWE-bench Verified emphasizes executable `FAIL_TO_PASS` tests and human
+  verification because ordinary issue/patch datasets can be underspecified or
+  unfair. Source:
+  https://openai.com/index/introducing-swe-bench-verified/
+- SWE-Gym reports large gains from training agents and verifiers on executable
+  real-world task environments, not only next-token patch imitation. Source:
+  https://arxiv.org/abs/2412.21139
+- SWE-RL reports that RL on software-evolution data can improve SWE-bench
+  Verified solve rate, while an SFT baseline degraded on average across
+  out-of-domain reasoning tasks. Source:
+  https://arxiv.org/abs/2502.18449
+- DeepSeek-R1 uses rule-based rewards for coding/math/logical reasoning and
+  explicitly relies on compiler/test-style feedback where correctness is
+  objectively checkable. Source:
+  https://www.nature.com/articles/s41586-025-09422-z
+- 2026 code-RL work warns that softer pass-rate rewards can reduce sparsity but
+  may not reliably beat binary rewards in controlled experiments. Source:
+  https://arxiv.org/abs/2605.02944
+- 2026 reward-hacking work argues that visible tests alone are insufficient for
+  long-horizon coding agents; held-out composition tests are needed to measure
+  whether the agent built the intended system. Source:
+  https://arxiv.org/abs/2605.21384
+
+Practical conclusion for this repo:
+
+```text
+NLL down + executable pass rate flat/down = stop scaling SFT, improve eval and reward.
+```
+
+The next high-quality architecture should be:
+
+1. Real executable eval first: base fail, gold pass, candidate pass/fail.
+2. Patch-format reward: valid unified diff, applies cleanly, touches plausible
+   files, avoids test edits unless requested.
+3. Execution reward: run `FAIL_TO_PASS`; then add `PASS_TO_PASS` or held-out
+   smoke tests to catch regressions.
+4. Verifier-guided sampling: generate several candidates, filter by apply/test,
+   then train preference pairs from pass/fail attempts.
+5. Only then run GRPO/DPO-style post-training, with the L20 reserved for compact
+   QLoRA adapters and CPU/disk reserved for repo materialization.
+
+## Hiring Signal Fit
+
+The public role signal is strongly aligned with this direction:
+
+- OpenAI's agentic post-training roles call out LLM/RL/post-training/evals,
+  graders, reward models, data pipelines, coding agents, tool use, and
+  end-to-end ownership. Source:
+  https://openai.com/careers/researcher-agentic-post-training-san-francisco/
+- Anthropic's production post-training role emphasizes the full post-training
+  stack, RLHF/alignment methods, distributed systems, complex ML systems, and
+  debugging model training. Source:
+  https://www.anthropic.com/careers/jobs/4613592008
+- Jane Street ML roles emphasize empirical ML, noisy nonstationary data,
+  training/inference infrastructure, hyperparameter work, distributed training
+  performance, RL/LLMs, and GPU clusters. Source:
+  https://www.janestreet.com/join-jane-street/machine-learning/
+- Citadel/Citadel Securities roles emphasize rigorous ML research, high-quality
+  code, large/unstructured datasets, backtesting, AI infrastructure, and
+  accelerated compute. Sources:
+  https://www.citadel.com/careers/details/machine-learning-researcher-phd-graduate-us/
+  and https://www.citadelsecurities.com/careers/details/research-engineer/
+
+Therefore the portfolio target should not be a leaderboard-only fine-tune. It
+should be a compact research system that demonstrates judgment: real data,
+execution-grounded evals, reproducible negative results, GPU-aware training, and
+clear next experiments.
