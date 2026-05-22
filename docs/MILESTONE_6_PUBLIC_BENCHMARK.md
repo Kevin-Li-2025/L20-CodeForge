@@ -250,6 +250,43 @@ is still a coding-system score, but it is a cleaner algorithmic improvement:
 the extra-test gain comes from a public-input behavioral prior rather than
 hidden-test feedback or task-specific symbolic patches.
 
+### MBPP+ Consensus Tie-Break Ablation
+
+The consensus score is the main behavioral signal, but the final tie-breaker
+still matters when several candidates agree equally often on public synthetic
+inputs. A second MBPP+ run keeps the same public-input consensus reranker and
+changes only the final tie-breaker from longest solution to shortest solution:
+
+```bash
+python -m l20_codeforge select-evalplus-consensus \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples_eval_results.json \
+  --dataset mbpp \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-shortest-selected.samples.jsonl \
+  --max-synthetic-inputs 32 \
+  --timeout-seconds 1.0 \
+  --tie-breaker shortest
+```
+
+Official EvalPlus result:
+
+```text
+selected MBPP base tests pass@1: 0.918
+selected MBPP+ base + extra tests pass@1: 0.791
+changed selections vs. consensus-longest: 279 tasks
+plus-test wins/losses vs. consensus-longest: 8 / 3
+net plus-test gain vs. consensus-longest: +5 tasks
+plus-test wins/losses vs. base-longest selector: 19 / 6
+net plus-test gain vs. base-longest selector: +13 tasks
+```
+
+Interpretation: MBPP+ benefits from a brevity prior after consensus filtering.
+This moves the MBPP+ system result from greedy `0.722` to `0.791`, a +6.9 point
+absolute gain, and from the first base-test selector `0.757` to `0.791`, a +3.4
+point absolute gain. It should not become the universal default without a
+dataset check: on HumanEval n=10, the same shortest tie-breaker scores
+`0.909`, below consensus-longest and length tie-break at `0.915`.
+
 ## MBPP SFT Negative Result
 
 The first MBPP-train transfer adapter was intentionally small and fast:
