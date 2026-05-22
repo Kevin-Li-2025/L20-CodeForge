@@ -457,6 +457,55 @@ Compared with greedy (`0.848`), the current coding-system gain is +7.9 points
 absolute. Remaining base-fail tasks are `HumanEval/32`, `HumanEval/132`, and
 `HumanEval/145`.
 
+### HumanEval+ Public-Input Consensus Ablation
+
+The MBPP+ consensus reranker was then tested on the HumanEval+ pools to check
+whether the public-input majority prior generalizes. It uses the same selector
+implementation as the MBPP+ run: base-test filtering first, then synthetic
+inputs derived from public `base_input`, without reading `plus_input` or the
+canonical solution.
+
+```bash
+python -m l20_codeforge select-evalplus-consensus \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples_eval_results.json \
+  --dataset humaneval \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.public-consensus-selected.samples.jsonl \
+  --max-synthetic-inputs 32 \
+  --timeout-seconds 1.0 \
+  --tie-breaker longest
+```
+
+Result across the main HumanEval+ pools:
+
+```text
+n=10 pool:
+  length tie-break base / plus: 0.951 / 0.915
+  consensus base / plus:        0.951 / 0.915
+  changed selections: 12
+  plus-test wins/losses: 1 / 1
+
+targeted-hard combined pool:
+  length tie-break base / plus: 0.963 / 0.921
+  consensus base / plus:        0.963 / 0.921
+  changed selections: 14
+  plus-test wins/losses: 1 / 1
+
+literal combined pool:
+  length tie-break base / plus: 0.982 / 0.927
+  consensus base / plus:        0.982 / 0.927
+  changed selections: 14
+  plus-test wins/losses: 1 / 1
+```
+
+Interpretation: the consensus reranker is a positive MBPP+ algorithmic result
+and a neutral HumanEval+ ablation. It does not harm the stronger HumanEval+
+pools, but it also does not improve them because the remaining HumanEval+
+failures are concentrated in spec traps where public-input majority voting
+swaps `HumanEval/77` into pass and `HumanEval/154` out of pass. The next
+verifier should therefore add task-level semantic features instead of relying
+only on candidate-output consensus.
+
 ### Failure-Feedback Repair Negative Result
 
 The next ablation adds an explicit repair loop: take the currently selected
