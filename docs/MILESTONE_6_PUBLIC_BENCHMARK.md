@@ -207,6 +207,49 @@ EvalPlus hidden extra tests. The next high-leverage step is not more blind SFT;
 it is a stronger public-test-only verifier or reranker that penalizes brittle,
 over-specialized candidates before final EvalPlus scoring.
 
+### MBPP+ Public-Input Consensus Reranker
+
+The first stronger reranker keeps the same n=5 candidate pool and the same
+public base-test filter, then reranks only among base-passing candidates using
+synthetic inputs derived from `base_input`. It does not read `plus_input` or the
+canonical solution. For each task, the reranker mutates public arguments
+structurally, executes candidates on those inputs, and chooses the candidate
+whose outputs agree most often with the candidate majority. Length remains only
+the final tie-breaker.
+
+```bash
+python -m l20_codeforge select-evalplus-consensus \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples_eval_results.json \
+  --dataset mbpp \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-selected.samples.jsonl \
+  --max-synthetic-inputs 32 \
+  --timeout-seconds 1.0 \
+  --tie-breaker longest
+
+python -m l20_codeforge eval-evalplus \
+  mbpp \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-selected.samples.jsonl \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-selected.evalplus_report.json \
+  --parallel 8
+```
+
+Official EvalPlus result:
+
+```text
+selected MBPP base tests pass@1: 0.918
+selected MBPP+ base + extra tests pass@1: 0.778
+changed selections vs. length tie-break: 50 tasks
+plus-test wins/losses vs. length tie-break: 11 / 3
+net plus-test gain: +8 tasks
+```
+
+Interpretation: this is a +2.1 point absolute improvement over the length
+tie-breaker and a +5.6 point absolute improvement over greedy MBPP+. The result
+is still a coding-system score, but it is a cleaner algorithmic improvement:
+the extra-test gain comes from a public-input behavioral prior rather than
+hidden-test feedback or task-specific symbolic patches.
+
 ## MBPP SFT Negative Result
 
 The first MBPP-train transfer adapter was intentionally small and fast:
