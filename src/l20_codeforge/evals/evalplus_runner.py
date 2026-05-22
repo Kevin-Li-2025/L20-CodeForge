@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -49,6 +50,14 @@ class EvalPlusSelectionReport(BaseModel):
     selected_base_pass: int
     selected_plus_pass: int | None = None
     fallback_tasks: list[str] = Field(default_factory=list)
+
+
+class PromptDoctestResult(BaseModel):
+    attempted: int = 0
+    failures: int = 0
+    exit_code: int = 0
+    timed_out: bool = False
+    error: str = ""
 
 
 def generate_evalplus_samples(
@@ -286,6 +295,89 @@ def select_evalplus_by_base_tests(
     )
 
 
+def select_evalplus_by_prompt_doctests(
+    samples: Path,
+    output: Path,
+    dataset: str = "humaneval",
+    timeout_seconds: float = 2.0,
+) -> EvalPlusSelectionReport:
+    return select_evalplus_by_prompt_doctests_from_tasks(
+        samples=samples,
+        tasks=load_evalplus_tasks(dataset),
+        output=output,
+        timeout_seconds=timeout_seconds,
+    )
+
+
+def select_evalplus_by_prompt_doctests_from_tasks(
+    samples: Path,
+    tasks: dict[str, dict[str, Any]],
+    output: Path,
+    timeout_seconds: float = 2.0,
+) -> EvalPlusSelectionReport:
+    grouped_samples = load_evalplus_samples_by_task(samples)
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    selected_prompt_pass = 0
+    fallback_tasks: list[str] = []
+    with output.open("w", encoding="utf-8") as handle:
+        for task_id, candidates in grouped_samples.items():
+            prompt = tasks.get(task_id, {}).get("prompt", "")
+            selected_index = 0
+            for index, candidate in enumerate(candidates):
+                result = run_prompt_doctests(
+                    solution=str(candidate.get("solution", "")),
+                    prompt=prompt,
+                    timeout_seconds=timeout_seconds,
+                )
+                if result.attempted > 0 and result.failures == 0 and not result.error:
+                    selected_index = index
+                    selected_prompt_pass += 1
+                    break
+            else:
+                fallback_tasks.append(task_id)
+
+            handle.write(json.dumps(candidates[selected_index]) + "\n")
+
+    return EvalPlusSelectionReport(
+        samples=str(samples),
+        eval_results="prompt_doctests",
+        output=str(output),
+        tasks=len(grouped_samples),
+        selected_base_pass=selected_prompt_pass,
+        selected_plus_pass=None,
+        fallback_tasks=fallback_tasks,
+    )
+
+
+def run_prompt_doctests(
+    solution: str,
+    prompt: str,
+    timeout_seconds: float = 2.0,
+) -> PromptDoctestResult:
+    payload = json.dumps({"solution": solution, "prompt": prompt})
+    try:
+        completed = subprocess.run(
+            [sys.executable, "-c", _PROMPT_DOCTEST_RUNNER],
+            input=payload,
+            text=True,
+            capture_output=True,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired:
+        return PromptDoctestResult(exit_code=124, timed_out=True, error="timeout")
+
+    try:
+        parsed = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        return PromptDoctestResult(
+            exit_code=completed.returncode,
+            error=(completed.stderr or completed.stdout)[-1000:],
+        )
+    return PromptDoctestResult.model_validate({**parsed, "exit_code": completed.returncode})
+
+
 def load_evalplus_samples_by_task(samples: Path) -> dict[str, list[dict[str, Any]]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     with samples.open(encoding="utf-8") as handle:
@@ -433,3 +525,47 @@ def strip_markdown_code_fence(text: str) -> str:
         if candidate.startswith("python"):
             return candidate[len("python") :].strip()
     return parts[1].strip() if len(parts) > 1 else stripped
+
+
+_PROMPT_DOCTEST_RUNNER = r"""
+import ast
+import doctest
+import json
+import sys
+
+payload = json.loads(sys.stdin.read())
+namespace = {}
+try:
+    exec(payload["solution"], namespace)
+    prompt = payload["prompt"]
+    try:
+        tree = ast.parse(prompt)
+    except SyntaxError:
+        doctest_text = prompt
+    else:
+        docs = []
+        module_doc = ast.get_docstring(tree)
+        if module_doc:
+            docs.append(module_doc)
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                doc = ast.get_docstring(node)
+                if doc:
+                    docs.append(doc)
+        doctest_text = "\n\n".join(docs) if docs else prompt
+    test = doctest.DocTestParser().get_doctest(
+        doctest_text,
+        namespace,
+        "prompt",
+        "<prompt>",
+        0,
+    )
+    runner = doctest.DocTestRunner(
+        verbose=False,
+        optionflags=doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE,
+    )
+    result = runner.run(test, out=lambda _: None)
+    print(json.dumps({"attempted": result.attempted, "failures": result.failed}))
+except BaseException as exc:
+    print(json.dumps({"attempted": 0, "failures": 1, "error": repr(exc)}))
+"""

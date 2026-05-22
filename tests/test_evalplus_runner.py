@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from l20_codeforge.evals.evalplus_runner import (
@@ -7,8 +8,10 @@ from l20_codeforge.evals.evalplus_runner import (
     count_existing_samples,
     parse_evalplus_pass_at_1,
     parse_evalplus_scores,
+    run_prompt_doctests,
     select_evalplus_tasks,
     select_evalplus_by_base_tests,
+    select_evalplus_by_prompt_doctests_from_tasks,
     strip_markdown_code_fence,
 )
 
@@ -120,4 +123,55 @@ def test_select_evalplus_by_base_tests(tmp_path: Path) -> None:
     assert output.read_text(encoding="utf-8").splitlines() == [
         '{"task_id": "HumanEval/0", "solution": "good"}',
         '{"task_id": "HumanEval/1", "solution": "fallback"}',
+    ]
+
+
+def test_run_prompt_doctests() -> None:
+    prompt = '''def add_one(x):
+    """
+    >>> add_one(1)
+    2
+    """
+'''
+    good = "def add_one(x):\n    return x + 1\n"
+    bad = "def add_one(x):\n    return x\n"
+
+    assert run_prompt_doctests(good, prompt).failures == 0
+    assert run_prompt_doctests(bad, prompt).failures == 1
+
+
+def test_select_evalplus_by_prompt_doctests(tmp_path: Path) -> None:
+    samples = tmp_path / "samples.jsonl"
+    samples.write_text(
+        "\n".join(
+            [
+                json.dumps({"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x\n"}),
+                json.dumps(
+                    {"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x + 1\n"}
+                ),
+                json.dumps(
+                    {"task_id": "HumanEval/1", "solution": "def no_examples(x):\n    return x\n"}
+                ),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    tasks = {
+        "HumanEval/0": {
+            "prompt": 'def add_one(x):\n    """\n    >>> add_one(1)\n    2\n    """\n',
+        },
+        "HumanEval/1": {
+            "prompt": "def no_examples(x):\n    pass\n",
+        },
+    }
+    output = tmp_path / "selected.jsonl"
+
+    report = select_evalplus_by_prompt_doctests_from_tasks(samples, tasks, output)
+
+    assert report.selected_base_pass == 1
+    assert report.fallback_tasks == ["HumanEval/1"]
+    assert output.read_text(encoding="utf-8").splitlines() == [
+        json.dumps({"task_id": "HumanEval/0", "solution": "def add_one(x):\n    return x + 1\n"}),
+        json.dumps({"task_id": "HumanEval/1", "solution": "def no_examples(x):\n    return x\n"}),
     ]

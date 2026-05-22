@@ -20,6 +20,7 @@ from l20_codeforge.evals.evalplus_runner import (
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
+    select_evalplus_by_prompt_doctests,
 )
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
@@ -394,6 +395,23 @@ def select_evalplus_command(
         samples=samples,
         eval_results=eval_results,
         output=output,
+    )
+    console.print_json(data=report.model_dump())
+
+
+@app.command("select-evalplus-prompt")
+def select_evalplus_prompt_command(
+    samples: Path,
+    output: Path = Path("artifacts/evalplus/prompt-selected.samples.jsonl"),
+    dataset: str = "humaneval",
+    timeout_seconds: float = 2.0,
+) -> None:
+    """Select one sample per EvalPlus task using only prompt doctest examples."""
+    report = select_evalplus_by_prompt_doctests(
+        samples=samples,
+        output=output,
+        dataset=dataset,
+        timeout_seconds=timeout_seconds,
     )
     console.print_json(data=report.model_dump())
 

@@ -176,6 +176,37 @@ Compared with greedy HumanEval+ `pass@1=0.848`, this is a +5.4 point absolute
 gain from execution-guided selection. It should be described as a coding system
 result, not as a pure model-weight result.
 
+## Prompt-Doctest Selector Result
+
+To separate "public prompt signal" from EvalPlus test-signal selection, the
+project also runs a selector that only executes doctest-style examples embedded
+in the task prompt. It does not read EvalPlus base tests or extra tests during
+selection.
+
+```bash
+python -m l20_codeforge select-evalplus-prompt \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl \
+  --dataset humaneval \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.prompt-selected.samples.jsonl
+```
+
+Result:
+
+```text
+selected tasks: 164
+selected prompt-doctest-pass candidates: 65
+fallback tasks: 99
+HumanEval base tests pass@1: 0.884
+HumanEval+ extra-test pass@1: 0.841
+```
+
+Interpretation: prompt doctests are a clean public-only signal, but they are too
+sparse to beat the greedy baseline (`0.848`) or the base-test selector (`0.902`).
+Keep the implementation as a leakage-free ablation and as future verifier
+training data, but do not spend the next sprint simply expanding this heuristic.
+The stronger direction is a learned selector/verifier trained on public
+execution feedback and evaluated once on held-out EvalPlus scoring.
+
 ## Research Anchors
 
 - EvalPlus adds stronger generated tests to HumanEval and MBPP and exposes
