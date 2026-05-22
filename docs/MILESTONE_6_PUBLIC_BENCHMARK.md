@@ -103,6 +103,31 @@ HumanEval+ base + extra tests pass@1: 0.848
 This is the score to beat. The next adapter or verifier step must improve the
 official HumanEval+ `pass@1`, not only training loss.
 
+## MBPP SFT Negative Result
+
+The first MBPP-train transfer adapter was intentionally small and fast:
+
+```text
+records: 120
+steps: 80
+max_length: 2048
+learning_rate: 1e-4
+train_runtime: 137.5 seconds
+train_loss: 0.579
+```
+
+It failed as a HumanEval+ transfer method:
+
+```text
+base model HumanEval+ pass@1: 0.848
+MBPP SFT HumanEval+ pass@1: 0.409
+```
+
+This is a useful negative result. The adapter learned the MBPP solution style
+too aggressively and degraded a strong instruction-code base model. Do not scale
+this SFT recipe. The next attempt should use either much lower LR/shorter
+adapter training or a fixed public pass@k sampling protocol.
+
 ## Research Anchors
 
 - EvalPlus adds stronger generated tests to HumanEval and MBPP and exposes

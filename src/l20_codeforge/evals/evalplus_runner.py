@@ -24,6 +24,7 @@ class EvalPlusGenerationReport(BaseModel):
     temperature: float = 0.0
     top_p: float = 0.95
     max_new_tokens: int = 512
+    sample_batch_size: int = 1
     load_in_4bit: bool = True
     elapsed_seconds: float = 0.0
 
@@ -51,6 +52,7 @@ def generate_evalplus_samples(
     temperature: float = 0.0,
     top_p: float = 0.95,
     max_new_tokens: int = 512,
+    sample_batch_size: int = 1,
     load_in_4bit: bool = True,
     bf16: bool = True,
     seed: int = 42,
@@ -117,39 +119,48 @@ def generate_evalplus_samples(
             already = existing.get(task_id, 0)
             if already >= n_samples:
                 continue
-            for sample_index in range(already, n_samples):
+            sample_index = already
+            while sample_index < n_samples:
+                batch_size = min(sample_batch_size, n_samples - sample_index)
+                if temperature == 0:
+                    batch_size = 1
                 prompt = build_evalplus_prompt(task["prompt"])
-                completion = generate_one(
+                completions = generate_many(
                     model=model,
                     tokenizer=tokenizer,
                     prompt=prompt,
                     temperature=temperature,
                     top_p=top_p,
                     max_new_tokens=max_new_tokens,
+                    num_return_sequences=batch_size,
                 )
-                code_text = strip_markdown_code_fence(completion)
-                solution_input = task["prompt"].rstrip() + "\n" + code_text
-                sanitized = sanitize(solution_input, entrypoint=task["entry_point"])
-                if not sanitized.strip():
-                    sanitized = solution_input
+                for completion in completions:
+                    code_text = strip_markdown_code_fence(completion)
+                    solution_input = task["prompt"].rstrip() + "\n" + code_text
+                    sanitized = sanitize(solution_input, entrypoint=task["entry_point"])
+                    if not sanitized.strip():
+                        sanitized = solution_input
 
-                sanitized_handle.write(json.dumps({"task_id": task_id, "solution": sanitized}) + "\n")
-                raw_handle.write(
-                    json.dumps(
-                        {
-                            "task_id": task_id,
-                            "sample_index": sample_index,
-                            "prompt": prompt,
-                            "completion": completion,
-                            "solution_input": solution_input,
-                            "sanitized": sanitized,
-                        }
+                    sanitized_handle.write(
+                        json.dumps({"task_id": task_id, "solution": sanitized}) + "\n"
                     )
-                    + "\n"
-                )
-                sanitized_handle.flush()
-                raw_handle.flush()
-                samples_written += 1
+                    raw_handle.write(
+                        json.dumps(
+                            {
+                                "task_id": task_id,
+                                "sample_index": sample_index,
+                                "prompt": prompt,
+                                "completion": completion,
+                                "solution_input": solution_input,
+                                "sanitized": sanitized,
+                            }
+                        )
+                        + "\n"
+                    )
+                    sanitized_handle.flush()
+                    raw_handle.flush()
+                    samples_written += 1
+                    sample_index += 1
 
     return EvalPlusGenerationReport(
         dataset=dataset,
@@ -166,6 +177,7 @@ def generate_evalplus_samples(
         temperature=temperature,
         top_p=top_p,
         max_new_tokens=max_new_tokens,
+        sample_batch_size=sample_batch_size,
         load_in_4bit=load_in_4bit,
         elapsed_seconds=round(time.monotonic() - started, 3),
     )
@@ -230,9 +242,12 @@ def parse_evalplus_pass_at_1(stdout: str) -> dict[str, float]:
         if line.endswith("(base + extra tests)"):
             current = "plus"
             continue
-        if line.startswith("pass@1") and current and index + 1 < len(lines):
+        if line.startswith("pass@1") and current:
+            score_text = line.split(":", 1)[1].strip()
+            if not score_text and index + 1 < len(lines):
+                score_text = lines[index + 1]
             try:
-                scores[current] = float(lines[index + 1])
+                scores[current] = float(score_text)
             except ValueError:
                 pass
             current = None
@@ -291,14 +306,15 @@ def build_evalplus_prompt(function_prompt: str) -> str:
     )
 
 
-def generate_one(
+def generate_many(
     model: Any,
     tokenizer: Any,
     prompt: str,
     temperature: float,
     top_p: float,
     max_new_tokens: int,
-) -> str:
+    num_return_sequences: int = 1,
+) -> list[str]:
     import torch
 
     chat = [{"role": "user", "content": prompt}]
@@ -309,16 +325,26 @@ def generate_one(
         "pad_token_id": tokenizer.eos_token_id,
     }
     if temperature > 0:
-        kwargs.update({"do_sample": True, "temperature": temperature, "top_p": top_p})
+        kwargs.update(
+            {
+                "do_sample": True,
+                "temperature": temperature,
+                "top_p": top_p,
+                "num_return_sequences": num_return_sequences,
+            }
+        )
     else:
         kwargs["do_sample"] = False
 
     with torch.inference_mode():
         output_ids = model.generate(**encoded, **kwargs)
-    return tokenizer.decode(
-        output_ids[0][encoded["input_ids"].shape[1] :],
-        skip_special_tokens=True,
-    )
+    return [
+        tokenizer.decode(
+            output[encoded["input_ids"].shape[1] :],
+            skip_special_tokens=True,
+        )
+        for output in output_ids
+    ]
 
 
 def strip_markdown_code_fence(text: str) -> str:

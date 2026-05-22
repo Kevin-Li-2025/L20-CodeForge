@@ -54,3 +54,13 @@ pass@1:
 """
 
     assert parse_evalplus_pass_at_1(stdout) == {"base": 0.89, "plus": 0.848}
+
+
+def test_parse_evalplus_pass_at_1_inline_format() -> None:
+    stdout = """humaneval (base tests)
+pass@1:\t0.415
+humaneval+ (base + extra tests)
+pass@1:\t0.409
+"""
+
+    assert parse_evalplus_pass_at_1(stdout) == {"base": 0.415, "plus": 0.409}
