@@ -103,6 +103,47 @@ HumanEval+ base + extra tests pass@1: 0.848
 This is the score to beat. The next adapter or verifier step must improve the
 official HumanEval+ `pass@1`, not only training loss.
 
+## MBPP+ Generalization Baseline
+
+After the HumanEval+ sprint reached a strong system result, the next check is
+whether the base pipeline has a second public benchmark anchor. The first MBPP+
+run is a greedy baseline only, with no sampling, selector, repair loop, or
+task-specific symbolic ablation:
+
+```bash
+python -m l20_codeforge generate-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  --dataset mbpp \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.greedy.samples.jsonl \
+  --n-samples 1 \
+  --temperature 0 \
+  --max-new-tokens 512 \
+  --overwrite
+
+python -m l20_codeforge eval-evalplus \
+  mbpp \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.greedy.samples.jsonl \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.greedy.evalplus_report.json \
+  --parallel 8
+```
+
+Result:
+
+```text
+dataset: MBPP+
+tasks: 378
+generation time: 776.8 seconds
+MBPP base tests pass@1: 0.828
+MBPP+ base + extra tests pass@1: 0.722
+```
+
+Interpretation: HumanEval+ now has a high system score, but MBPP+ has not yet
+received the same sampling/selection treatment. This is the clean
+generalization baseline. Do not compare the HumanEval+ symbolic-ablation result
+against MBPP+ greedy as if they were the same protocol; the next fair
+cross-benchmark step is MBPP+ n-sample generation followed by the same
+base-test selector and a leakage-free ablation.
+
 ## MBPP SFT Negative Result
 
 The first MBPP-train transfer adapter was intentionally small and fast:
