@@ -201,6 +201,39 @@ def load_lcb_modules(lcb_repo: Path) -> tuple[Any, Any]:
     return CodeGenerationProblem, codegen_metrics
 
 
+def load_generation_records(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    records = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(records, list):
+        raise ValueError(f"{path} must contain a JSON list")
+    return records
+
+
+def validate_resume_records(
+    records: list[dict[str, Any]],
+    n_samples: int,
+) -> dict[str, dict[str, Any]]:
+    resumed: dict[str, dict[str, Any]] = {}
+    for record in records:
+        question_id = record.get("question_id")
+        code_list = record.get("code_list") or []
+        raw_outputs = record.get("raw_outputs") or []
+        if not isinstance(question_id, str) or not question_id:
+            raise ValueError("resume generation record is missing question_id")
+        if question_id in resumed:
+            raise ValueError(f"duplicate resume generation record for {question_id}")
+        if len(code_list) < n_samples or len(raw_outputs) < n_samples:
+            raise ValueError(
+                f"resume generation record for {question_id} has fewer than "
+                f"{n_samples} samples"
+            )
+        record["code_list"] = code_list[:n_samples]
+        record["raw_outputs"] = raw_outputs[:n_samples]
+        resumed[question_id] = record
+    return resumed
+
+
 def load_problems_from_parquet(
     parquet_path: Path,
     lcb_repo: Path,
@@ -359,8 +392,13 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
     output_dir = Path(args.output_dir)
     lcb_repo = Path(args.lcb_repo)
     output_dir.mkdir(parents=True, exist_ok=True)
-    if any(output_dir.iterdir()) and not args.overwrite:
-        raise FileExistsError(f"{output_dir} is not empty; pass --overwrite to replace files")
+    generations_path = output_dir / "generations.json"
+    if any(output_dir.iterdir()) and not (args.overwrite or args.resume):
+        raise FileExistsError(
+            f"{output_dir} is not empty; pass --overwrite or --resume to continue"
+        )
+    if args.overwrite and args.resume:
+        raise ValueError("--overwrite and --resume are mutually exclusive")
 
     _, codegen_metrics = load_lcb_modules(lcb_repo)
     problems = load_problems_from_parquet(
@@ -385,9 +423,19 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         load_in_4bit=not args.no_4bit,
         bf16=not args.no_bf16,
     )
-    generations: list[list[str]] = []
+    existing_records = load_generation_records(generations_path) if args.resume else []
+    resumed_records = validate_resume_records(existing_records, args.n_samples)
     generation_records: list[dict[str, Any]] = []
+    generated_this_run = 0
     for index, problem in enumerate(problems, start=1):
+        existing_record = resumed_records.get(problem.question_id)
+        if existing_record is not None:
+            print(
+                f"[{index}/{len(problems)}] resuming {problem.question_id} "
+                f"{problem.question_title}"
+            )
+            generation_records.append(existing_record)
+            continue
         print(f"[{index}/{len(problems)}] generating {problem.question_id} {problem.question_title}")
         raw_outputs, code_outputs = generate_problem_outputs(
             model=model,
@@ -400,7 +448,6 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
         )
-        generations.append(code_outputs)
         generation_records.append(
             {
                 "question_id": problem.question_id,
@@ -413,10 +460,12 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "code_list": code_outputs,
             }
         )
-        (output_dir / "generations.json").write_text(
+        generated_this_run += 1
+        generations_path.write_text(
             json.dumps(generation_records, indent=2, ensure_ascii=True) + "\n",
             encoding="utf-8",
         )
+    generations = [record["code_list"] for record in generation_records]
 
     generation_seconds = round(time.monotonic() - generation_started, 3)
     if args.generate_only:
@@ -444,6 +493,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "load_in_4bit": not args.no_4bit,
             "bf16": not args.no_bf16,
             "generation_seconds": generation_seconds,
+            "resume": args.resume,
+            "resumed_count": len(existing_records),
+            "generated_this_run": generated_this_run,
             "evaluation_seconds": 0.0,
             "metrics": None,
             "passed_at_1_count": None,
@@ -557,6 +609,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "load_in_4bit": not args.no_4bit,
         "bf16": not args.no_bf16,
         "generation_seconds": generation_seconds,
+        "resume": args.resume,
+        "resumed_count": len(existing_records),
+        "generated_this_run": generated_this_run,
         "public_selection_seconds": public_selection_seconds,
         "evaluation_seconds": eval_seconds,
         "metrics": make_json_safe(metrics),
@@ -629,6 +684,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-4bit", action="store_true")
     parser.add_argument("--no-bf16", action="store_true")
     parser.add_argument("--generate-only", action="store_true")
+    parser.add_argument("--resume", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--debug", action="store_true")
     return parser

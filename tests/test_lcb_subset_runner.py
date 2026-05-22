@@ -109,3 +109,33 @@ def test_build_public_selection_records_returns_single_selected_generation() -> 
     assert selected == [["good"]]
     assert records[0]["selected_index"] == 1
     assert records[0]["public_oracle_pass"] is True
+
+
+def test_validate_resume_records_truncates_to_requested_samples() -> None:
+    runner = load_runner_module()
+
+    records = [
+        {
+            "question_id": "abc",
+            "raw_outputs": ["a", "b", "c"],
+            "code_list": ["A", "B", "C"],
+        }
+    ]
+
+    resumed = runner.validate_resume_records(records, n_samples=2)
+
+    assert resumed["abc"]["raw_outputs"] == ["a", "b"]
+    assert resumed["abc"]["code_list"] == ["A", "B"]
+
+
+def test_validate_resume_records_rejects_partial_samples() -> None:
+    runner = load_runner_module()
+
+    records = [{"question_id": "abc", "raw_outputs": ["a"], "code_list": ["A"]}]
+
+    try:
+        runner.validate_resume_records(records, n_samples=2)
+    except ValueError as exc:
+        assert "fewer than 2 samples" in str(exc)
+    else:
+        raise AssertionError("expected ValueError for partial resume record")
