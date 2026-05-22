@@ -1,0 +1,639 @@
+{
+  "metrics": {
+    "pass@1": 0.725,
+    "pass@4": 0.95,
+    "detail": {
+      "pass@1": {
+        "0": 0.75,
+        "1": 0.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 0.5,
+        "5": 0.25,
+        "6": 1.0,
+        "7": 1.0,
+        "8": 1.0,
+        "9": 0.75,
+        "10": 0.25,
+        "11": 0.75,
+        "12": 0.5,
+        "13": 1.0,
+        "14": 0.75,
+        "15": 1.0,
+        "16": 0.75,
+        "17": 0.25,
+        "18": 1.0,
+        "19": 1.0
+      },
+      "pass@4": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 1.0,
+        "5": 1.0,
+        "6": 1.0,
+        "7": 1.0,
+        "8": 1.0,
+        "9": 1.0,
+        "10": 1.0,
+        "11": 1.0,
+        "12": 1.0,
+        "13": 1.0,
+        "14": 1.0,
+        "15": 1.0,
+        "16": 1.0,
+        "17": 1.0,
+        "18": 1.0,
+        "19": 1.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "1873_A",
+      "question_title": "A. Short Sort",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2754",
+      "question_title": "maximum-strength-of-a-group",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "2786",
+      "question_title": "find-the-longest-semi-repetitive-substring",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2800",
+      "question_title": "minimum-string-length-after-removing-substrings",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2802",
+      "question_title": "find-the-punishment-number-of-an-integer",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2811",
+      "question_title": "determine-the-minimum-sum-of-a-k-avoiding-array",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2812",
+      "question_title": "find-the-maximum-achievable-number",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2824",
+      "question_title": "check-if-the-number-is-fascinating",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2837",
+      "question_title": "minimum-operations-to-make-the-integer-zero",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2850",
+      "question_title": "construct-the-longest-new-string",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2857",
+      "question_title": "total-distance-traveled",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        1
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2882",
+      "question_title": "ways-to-express-an-integer-as-sum-of-powers",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2883",
+      "question_title": "partition-string-into-minimum-beautiful-substrings",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2917",
+      "question_title": "count-pairs-whose-sum-is-less-than-target",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2955",
+      "question_title": "account-balance-after-rounded-purchase",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.5,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2998",
+      "question_title": "count-symmetric-integers",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2999",
+      "question_title": "check-if-strings-can-be-made-equal-with-operations-i",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3017",
+      "question_title": "number-of-beautiful-integers-in-the-range",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.5,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3019",
+      "question_title": "furthest-point-from-origin",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3055",
+      "question_title": "maximum-odd-binary-number",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    }
+  ],
+  "metadata": [
+    [
+      {},
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=3: YES != NO"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: '<=' not supported between instances of 'int' and 'str'"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ]
+  ]
+}

@@ -66,6 +66,90 @@ def sanitize_lcb_metadata(metadata: Any) -> Any:
     }
 
 
+def get_public_evaluation_sample(problem: Any) -> dict[str, str]:
+    return {
+        "input_output": json.dumps(
+            {
+                "inputs": [test.input for test in problem.public_test_cases],
+                "outputs": [test.output for test in problem.public_test_cases],
+                "fn_name": problem.metadata.get("func_name", None),
+            }
+        )
+    }
+
+
+def candidate_pass_fraction(result: list[Any]) -> float:
+    if not result:
+        return 0.0
+    return sum(item is True for item in result) / len(result)
+
+
+def tie_break_candidate_index(
+    indices: list[int],
+    code_outputs: list[str],
+    tie_breaker: str,
+) -> int:
+    if not indices:
+        return 0
+    if tie_breaker == "first":
+        return indices[0]
+    if tie_breaker == "shortest":
+        return min(indices, key=lambda index: (len(code_outputs[index]), index))
+    if tie_breaker == "longest":
+        return max(indices, key=lambda index: (len(code_outputs[index]), -index))
+    raise ValueError("tie_breaker must be one of: first, shortest, longest")
+
+
+def choose_public_selected_index(
+    public_results: list[list[Any]],
+    code_outputs: list[str],
+    tie_breaker: str = "shortest",
+) -> int:
+    if not public_results:
+        return 0
+    scores = [candidate_pass_fraction(result) for result in public_results]
+    passing_indices = [index for index, score in enumerate(scores) if score == 1.0]
+    if passing_indices:
+        return tie_break_candidate_index(passing_indices, code_outputs, tie_breaker)
+    best_score = max(scores)
+    best_indices = [index for index, score in enumerate(scores) if score == best_score]
+    return tie_break_candidate_index(best_indices, code_outputs, tie_breaker)
+
+
+def build_public_selection_records(
+    problems: list[Any],
+    generations: list[list[str]],
+    public_results: dict[int, list[list[Any]]],
+    tie_breaker: str,
+) -> tuple[list[list[str]], list[dict[str, Any]]]:
+    selected_generations: list[list[str]] = []
+    records: list[dict[str, Any]] = []
+    for problem_index, (problem, code_outputs) in enumerate(zip(problems, generations)):
+        problem_public_results = public_results.get(problem_index, [])
+        selected_index = choose_public_selected_index(
+            public_results=problem_public_results,
+            code_outputs=code_outputs,
+            tie_breaker=tie_breaker,
+        )
+        scores = [candidate_pass_fraction(result) for result in problem_public_results]
+        public_pass_indices = [index for index, score in enumerate(scores) if score == 1.0]
+        selected_generations.append([code_outputs[selected_index] if code_outputs else ""])
+        records.append(
+            {
+                "question_id": problem.question_id,
+                "question_title": problem.question_title,
+                "selected_index": selected_index,
+                "tie_breaker": tie_breaker,
+                "n_candidates": len(code_outputs),
+                "public_scores": scores,
+                "selected_public_score": scores[selected_index] if scores else 0.0,
+                "public_pass_indices": public_pass_indices,
+                "public_oracle_pass": bool(public_pass_indices),
+            }
+        )
+    return selected_generations, records
+
+
 def build_lcb_generation_prompt(question: Any) -> str:
     prompt = f"### Question:\n{question.question_content}\n\n"
     if question.starter_code:
@@ -335,11 +419,56 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         )
 
     generation_seconds = round(time.monotonic() - generation_started, 3)
+    public_selection_seconds = 0.0
+    public_selection_records: list[dict[str, Any]] = []
+    public_selection_metrics: dict[str, Any] | None = None
+    public_selection_metadata: Any | None = None
+    final_generations = generations
+    final_raw_outputs = [record["raw_outputs"] for record in generation_records]
+    if args.public_select:
+        public_selection_started = time.monotonic()
+        public_samples = [get_public_evaluation_sample(problem) for problem in problems]
+        public_k_list = sorted({1, args.n_samples})
+        public_metrics, public_results, public_metadata = codegen_metrics(
+            public_samples,
+            generations,
+            k_list=public_k_list,
+            num_process_evaluate=args.num_process_evaluate,
+            timeout=args.public_select_timeout,
+            debug=args.debug,
+        )
+        final_generations, public_selection_records = build_public_selection_records(
+            problems=problems,
+            generations=generations,
+            public_results=public_results,
+            tie_breaker=args.public_select_tie_breaker,
+        )
+        final_raw_outputs = [
+            [generation_records[index]["raw_outputs"][record["selected_index"]]]
+            for index, record in enumerate(public_selection_records)
+        ]
+        public_selection_seconds = round(time.monotonic() - public_selection_started, 3)
+        public_selection_metrics = make_json_safe(public_metrics)
+        public_selection_metadata = sanitize_lcb_metadata(public_metadata)
+        (output_dir / "public_selection.json").write_text(
+            json.dumps(
+                {
+                    "metrics": public_selection_metrics,
+                    "records": public_selection_records,
+                    "metadata": public_selection_metadata,
+                },
+                indent=2,
+                ensure_ascii=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
     eval_started = time.monotonic()
     eval_samples = [problem.get_evaluation_sample() for problem in problems]
     metrics, results, metadata = codegen_metrics(
         eval_samples,
-        generations,
+        final_generations,
         k_list=[1],
         num_process_evaluate=args.num_process_evaluate,
         timeout=args.timeout,
@@ -354,8 +483,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
     sanitized_metadata = sanitize_lcb_metadata(metadata)
     eval_all = [
         problem.insert_output_evaluation(
-            output_list=record["raw_outputs"],
-            code_list=record["code_list"],
+            output_list=final_raw_outputs[index],
+            code_list=final_generations[index],
             graded_list=pass_list,
             metadata=sanitized_metadata[index],
         )
@@ -375,6 +504,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "model": args.model,
         "adapter_path": args.adapter_path,
         "n_samples": args.n_samples,
+        "selection": "public_tests" if args.public_select else "none",
+        "public_select_tie_breaker": args.public_select_tie_breaker
+        if args.public_select
+        else None,
         "temperature": args.temperature,
         "top_p": args.top_p,
         "max_new_tokens": args.max_new_tokens,
@@ -387,8 +520,20 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "load_in_4bit": not args.no_4bit,
         "bf16": not args.no_bf16,
         "generation_seconds": generation_seconds,
+        "public_selection_seconds": public_selection_seconds,
         "evaluation_seconds": eval_seconds,
         "metrics": make_json_safe(metrics),
+        "public_selection_metrics": public_selection_metrics,
+        "public_selected_pass_count": sum(
+            record["selected_public_score"] == 1.0 for record in public_selection_records
+        )
+        if args.public_select
+        else None,
+        "public_oracle_pass_count": sum(
+            record["public_oracle_pass"] for record in public_selection_records
+        )
+        if args.public_select
+        else None,
         "passed_at_1_count": sum(pass_list[0] for pass_list in pass_lists if pass_list),
         "total": len(problems),
     }
@@ -430,6 +575,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--difficulty", choices=["easy", "medium", "hard"])
     parser.add_argument("--n-samples", type=int, default=1)
     parser.add_argument("--sample-batch-size", type=int, default=1)
+    parser.add_argument("--public-select", action="store_true")
+    parser.add_argument(
+        "--public-select-tie-breaker",
+        choices=["first", "shortest", "longest"],
+        default="shortest",
+    )
+    parser.add_argument("--public-select-timeout", type=int, default=4)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=0.95)
     parser.add_argument("--max-new-tokens", type=int, default=2048)

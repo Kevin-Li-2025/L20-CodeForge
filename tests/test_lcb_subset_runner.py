@@ -69,3 +69,43 @@ def test_sanitize_lcb_metadata_removes_test_payloads() -> None:
     sanitized = runner.sanitize_lcb_metadata([json.dumps(payload)])
 
     assert sanitized == [{"error_code": -2, "error_message": "Wrong"}]
+
+
+def test_choose_public_selected_index_prefers_short_public_pass() -> None:
+    runner = load_runner_module()
+
+    selected = runner.choose_public_selected_index(
+        public_results=[[False, True], [True, True], [True, True]],
+        code_outputs=["bad", "longer passing code", "ok"],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 2
+
+
+def test_choose_public_selected_index_uses_best_partial_score() -> None:
+    runner = load_runner_module()
+
+    selected = runner.choose_public_selected_index(
+        public_results=[[True, False, False], [True, True, False], [False, False, False]],
+        code_outputs=["a", "bb", "c"],
+        tie_breaker="first",
+    )
+
+    assert selected == 1
+
+
+def test_build_public_selection_records_returns_single_selected_generation() -> None:
+    runner = load_runner_module()
+    problem = type("Problem", (), {"question_id": "x", "question_title": "title"})()
+
+    selected, records = runner.build_public_selection_records(
+        problems=[problem],
+        generations=[["bad", "good"]],
+        public_results={0: [[False], [True]]},
+        tie_breaker="first",
+    )
+
+    assert selected == [["good"]]
+    assert records[0]["selected_index"] == 1
+    assert records[0]["public_oracle_pass"] is True

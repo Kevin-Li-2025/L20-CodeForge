@@ -1,0 +1,112 @@
+{
+  "metrics": {
+    "pass@1": 0.5833333333333334,
+    "pass@4": 0.6666666666666666,
+    "detail": {
+      "pass@1": {
+        "0": 0.75,
+        "1": 0.0,
+        "2": 1.0
+      },
+      "pass@4": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 1.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "1873_A",
+      "question_title": "A. Short Sort",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2754",
+      "question_title": "maximum-strength-of-a-group",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "2786",
+      "question_title": "find-the-longest-semi-repetitive-substring",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    }
+  ],
+  "metadata": [
+    [
+      {},
+      {},
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=3: YES != NO"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {},
+      {},
+      {},
+      {}
+    ]
+  ]
+}

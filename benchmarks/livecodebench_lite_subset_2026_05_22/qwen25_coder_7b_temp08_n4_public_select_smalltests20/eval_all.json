@@ -1,0 +1,471 @@
+[
+  {
+    "question_title": "A. Short Sort",
+    "question_content": "There are three cards with letters $\\texttt{a}$, $\\texttt{b}$, $\\texttt{c}$ placed in a row in some order. You can do the following operation at most once: \n\n \n-  Pick two cards, and swap them.  Is it possible that the row becomes $\\texttt{abc}$ after the operation? Output \"YES\" if it is possible, and \"NO\" otherwise.\n\nInput\n\nThe first line contains a single integer $t$ ($1 \\leq t \\leq 6$)\u00a0\u2014 the number of test cases.\n\nThe only line of each test case contains a single string consisting of each of the three characters $\\texttt{a}$, $\\texttt{b}$, and $\\texttt{c}$ exactly once, representing the cards.\n\nOutput\n\nFor each test case, output \"YES\" if you can make the row $\\texttt{abc}$ with at most one operation, or \"NO\" otherwise.\n\nYou can output the answer in any case (for example, the strings \"yEs\", \"yes\", \"Yes\" and \"YES\" will be recognized as a positive answer).Sample Input 1:\n6\n\nabc\n\nacb\n\nbac\n\nbca\n\ncab\n\ncba\n\n\n\nSample Output 1:\n\nYES\nYES\nYES\nNO\nNO\nYES\n\n\nNote\n\nIn the first test case, we don't need to do any operations, since the row is already $\\texttt{abc}$.\n\nIn the second test case, we can swap $\\texttt{c}$ and $\\texttt{b}$: $\\texttt{acb} \\to \\texttt{abc}$.\n\nIn the third test case, we can swap $\\texttt{b}$ and $\\texttt{a}$: $\\texttt{bac} \\to \\texttt{abc}$.\n\nIn the fourth test case, it is impossible to make $\\texttt{abc}$ using at most one operation.",
+    "platform": "codeforces",
+    "question_id": "1873_A",
+    "contest_id": "1873",
+    "contest_date": "2023-08-21T00:00:00",
+    "starter_code": "",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nimport sys\n\ndef can_make_abc(s):\n    if s == 'abc':\n        return \"YES\"\n    \n    # Check if swapping any two cards makes it 'abc'\n    for i in range(2):\n        for j in range(i + 1, 3):\n            swapped = list(s)\n            swapped[i], swapped[j] = swapped[j], swapped[i]\n            if ''.join(swapped) == 'abc':\n                return \"YES\"\n    \n    return \"NO\"\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\n\n# Process each test case\nt = int(data[0])\nresults = []\nindex = 1\nfor _ in range(t):\n    s = data[index]\n    results.append(can_make_abc(s))\n    index += 1\n\n# Write output\nfor result in results:\n    print(result)\n```"
+    ],
+    "code_list": [
+      "import sys\n\ndef can_make_abc(s):\n    if s == 'abc':\n        return \"YES\"\n    \n    # Check if swapping any two cards makes it 'abc'\n    for i in range(2):\n        for j in range(i + 1, 3):\n            swapped = list(s)\n            swapped[i], swapped[j] = swapped[j], swapped[i]\n            if ''.join(swapped) == 'abc':\n                return \"YES\"\n    \n    return \"NO\"\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\n\n# Process each test case\nt = int(data[0])\nresults = []\nindex = 1\nfor _ in range(t):\n    s = data[index]\n    results.append(can_make_abc(s))\n    index += 1\n\n# Write output\nfor result in results:\n    print(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-strength-of-a-group",
+    "question_content": "You are given a 0-indexed integer array nums representing the score of students in an exam. The teacher would like to form one non-empty group of students with maximal strength, where the strength of a group of students of indices i_0, i_1, i_2, ... , i_k is defined as nums[i_0] * nums[i_1] * nums[i_2] * ... * nums[i_k\u200b].\nReturn the maximum strength of a group the teacher can create.\n \nExample 1:\n\nInput: nums = [3,-1,-5,2,5,-9]\nOutput: 1350\nExplanation: One way to form a group of maximal strength is to group the students at indices [0,2,3,4,5]. Their strength is 3 * (-5) * 2 * 5 * (-9) = 1350, which we can show is optimal.\n\nExample 2:\n\nInput: nums = [-4,-5,-4]\nOutput: 20\nExplanation: Group the students at indices [0, 1] . Then, we\u2019ll have a resulting strength of 20. We cannot achieve greater strength.\n\n \nConstraints:\n\n1 <= nums.length <= 13\n-9 <= nums[i] <= 9",
+    "platform": "leetcode",
+    "question_id": "2754",
+    "contest_id": "biweekly-contest-105",
+    "contest_date": "2023-05-27T00:00:00",
+    "starter_code": "class Solution:\n    def maxStrength(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxStrength(self, nums: List[int]) -> int:\n        if len(nums) == 1:\n            return nums[0]\n        \n        positive = [n for n in nums if n > 0]\n        negative = sorted([n for n in nums if n < 0])\n        \n        if not positive and len(negative) % 2 == 1:\n            negative.pop()\n        \n        max_strength = 1\n        for num in positive + negative:\n            max_strength *= num\n        \n        return max_strength\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxStrength(self, nums: List[int]) -> int:\n        if len(nums) == 1:\n            return nums[0]\n        \n        positive = [n for n in nums if n > 0]\n        negative = sorted([n for n in nums if n < 0])\n        \n        if not positive and len(negative) % 2 == 1:\n            negative.pop()\n        \n        max_strength = 1\n        for num in positive + negative:\n            max_strength *= num\n        \n        return max_strength"
+    ],
+    "graded_list": [
+      false
+    ],
+    "pass@1": 0.0,
+    "metadata": [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  },
+  {
+    "question_title": "find-the-longest-semi-repetitive-substring",
+    "question_content": "You are given a 0-indexed string s that consists of digits from 0 to 9.\nA string t is called a semi-repetitive if there is at most one consecutive pair of the same digits inside t. For example, 0010, 002020, 0123, 2002, and 54944 are semi-repetitive while 00101022, and 1101234883 are not.\nReturn the length of the longest semi-repetitive substring inside s.\nA substring is a contiguous non-empty sequence of characters within a string.\n \nExample 1:\n\nInput: s = \"52233\"\nOutput: 4\nExplanation: The longest semi-repetitive substring is \"5223\", which starts at i = 0 and ends at j = 3. \n\nExample 2:\n\nInput: s = \"5494\"\nOutput: 4\nExplanation: s is a semi-reptitive string, so the answer is 4.\n\nExample 3:\n\nInput: s = \"1111111\"\nOutput: 2\nExplanation: The longest semi-repetitive substring is \"11\", which starts at i = 0 and ends at j = 1.\n\n \nConstraints:\n\n1 <= s.length <= 50\n'0' <= s[i] <= '9'",
+    "platform": "leetcode",
+    "question_id": "2786",
+    "contest_id": "biweekly-contest-106",
+    "contest_date": "2023-06-10T00:00:00",
+    "starter_code": "class Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        max_length = 0\n        left = 0\n        consecutive_count = 0\n\n        for right in range(len(s)):\n            if right > 0 and s[right] == s[right - 1]:\n                consecutive_count += 1\n\n            while consecutive_count > 1:\n                if s[left] == s[left + 1]:\n                    consecutive_count -= 1\n                left += 1\n\n            max_length = max(max_length, right - left + 1)\n\n        return max_length\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        max_length = 0\n        left = 0\n        consecutive_count = 0\n\n        for right in range(len(s)):\n            if right > 0 and s[right] == s[right - 1]:\n                consecutive_count += 1\n\n            while consecutive_count > 1:\n                if s[left] == s[left + 1]:\n                    consecutive_count -= 1\n                left += 1\n\n            max_length = max(max_length, right - left + 1)\n\n        return max_length"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-string-length-after-removing-substrings",
+    "question_content": "You are given a string s consisting only of uppercase English letters.\nYou can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings \"AB\" or \"CD\" from s.\nReturn the minimum possible length of the resulting string that you can obtain.\nNote that the string concatenates after removing the substring and could produce new \"AB\" or \"CD\" substrings.\n \nExample 1:\n\nInput: s = \"ABFCACDB\"\nOutput: 2\nExplanation: We can do the following operations:\n- Remove the substring \"ABFCACDB\", so s = \"FCACDB\".\n- Remove the substring \"FCACDB\", so s = \"FCAB\".\n- Remove the substring \"FCAB\", so s = \"FC\".\nSo the resulting length of the string is 2.\nIt can be shown that it is the minimum length that we can obtain.\nExample 2:\n\nInput: s = \"ACBBD\"\nOutput: 5\nExplanation: We cannot do any operations on the string so the length remains the same.\n\n \nConstraints:\n\n1 <= s.length <= 100\ns consists only of uppercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2800",
+    "contest_id": "weekly-contest-346",
+    "contest_date": "2023-05-21T00:00:00",
+    "starter_code": "class Solution:\n    def minLength(self, s: str) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def minLength(self, s: str) -> int:\n        while \"AB\" in s or \"CD\" in s:\n            s = s.replace(\"AB\", \"\").replace(\"CD\", \"\")\n        return len(s)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minLength(self, s: str) -> int:\n        while \"AB\" in s or \"CD\" in s:\n            s = s.replace(\"AB\", \"\").replace(\"CD\", \"\")\n        return len(s)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-punishment-number-of-an-integer",
+    "question_content": "Given a positive integer n, return the punishment number of n.\nThe punishment number of n is defined as the sum of the squares of all integers i such that:\n\n1 <= i <= n\nThe decimal representation of i * i can be partitioned into contiguous substrings such that the sum of the integer values of these substrings equals i.\n\n \nExample 1:\n\nInput: n = 10\nOutput: 182\nExplanation: There are exactly 3 integers i that satisfy the conditions in the statement:\n- 1 since 1 * 1 = 1\n- 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1.\n- 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0.\nHence, the punishment number of 10 is 1 + 81 + 100 = 182\n\nExample 2:\n\nInput: n = 37\nOutput: 1478\nExplanation: There are exactly 4 integers i that satisfy the conditions in the statement:\n- 1 since 1 * 1 = 1. \n- 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1. \n- 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0. \n- 36 since 36 * 36 = 1296 and 1296 can be partitioned into 1 + 29 + 6.\nHence, the punishment number of 37 is 1 + 81 + 100 + 1296 = 1478\n\n \nConstraints:\n\n1 <= n <= 1000",
+    "platform": "leetcode",
+    "question_id": "2802",
+    "contest_id": "weekly-contest-346",
+    "contest_date": "2023-05-21T00:00:00",
+    "starter_code": "class Solution:\n    def punishmentNumber(self, n: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def punishmentNumber(self, n: int) -> int:\n        def can_partition(s: str, target: int) -> bool:\n            if not s:\n                return target == 0\n            \n            for i in range(1, len(s) + 1):\n                num = int(s[:i])\n                if can_partition(s[i:], target - num):\n                    return True\n            return False\n        \n        result = 0\n        for i in range(1, n + 1):\n            if can_partition(str(i * i), i):\n                result += i * i\n        return result\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def punishmentNumber(self, n: int) -> int:\n        def can_partition(s: str, target: int) -> bool:\n            if not s:\n                return target == 0\n            \n            for i in range(1, len(s) + 1):\n                num = int(s[:i])\n                if can_partition(s[i:], target - num):\n                    return True\n            return False\n        \n        result = 0\n        for i in range(1, n + 1):\n            if can_partition(str(i * i), i):\n                result += i * i\n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "determine-the-minimum-sum-of-a-k-avoiding-array",
+    "question_content": "You are given two integers, n and k.\nAn array of distinct positive integers is called a k-avoiding array if there does not exist any pair of distinct elements that sum to k.\nReturn the minimum possible sum of a k-avoiding array of length n.\n \nExample 1:\n\nInput: n = 5, k = 4\nOutput: 18\nExplanation: Consider the k-avoiding array [1,2,4,5,6], which has a sum of 18.\nIt can be proven that there is no k-avoiding array with a sum less than 18.\n\nExample 2:\n\nInput: n = 2, k = 6\nOutput: 3\nExplanation: We can construct the array [1,2], which has a sum of 3.\nIt can be proven that there is no k-avoiding array with a sum less than 3.\n\n \nConstraints:\n\n1 <= n, k <= 50",
+    "platform": "leetcode",
+    "question_id": "2811",
+    "contest_id": "weekly-contest-359",
+    "contest_date": "2023-08-20T00:00:00",
+    "starter_code": "class Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        # If k is less than or equal to 2, we need to return the sum of first n natural numbers\n        if k <= 2:\n            return n * (n + 1) // 2\n        \n        # Initialize the result sum\n        total_sum = 0\n        used_numbers = set()\n        \n        # Start with the smallest number 1\n        num = 1\n        \n        while len(used_numbers) < n:\n            # Check if adding this number would violate the k-avoiding condition\n            if k - num not in used_numbers:\n                used_numbers.add(num)\n                total_sum += num\n            \n            num += 1\n        \n        return total_sum\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimumSum(self, n: int, k: int) -> int:\n        # If k is less than or equal to 2, we need to return the sum of first n natural numbers\n        if k <= 2:\n            return n * (n + 1) // 2\n        \n        # Initialize the result sum\n        total_sum = 0\n        used_numbers = set()\n        \n        # Start with the smallest number 1\n        num = 1\n        \n        while len(used_numbers) < n:\n            # Check if adding this number would violate the k-avoiding condition\n            if k - num not in used_numbers:\n                used_numbers.add(num)\n                total_sum += num\n            \n            num += 1\n        \n        return total_sum"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-maximum-achievable-number",
+    "question_content": "You are given two integers, num and t.\nAn integer x is called achievable if it can become equal to num after applying the following operation no more than t times:\n\nIncrease or decrease x by 1, and simultaneously increase or decrease num by 1.\n\nReturn the maximum possible achievable number. It can be proven that there exists at least one achievable number.\n \nExample 1:\n\nInput: num = 4, t = 1\nOutput: 6\nExplanation: The maximum achievable number is x = 6; it can become equal to num after performing this operation:\n1- Decrease x by 1, and increase num by 1. Now, x = 5 and num = 5. \nIt can be proven that there is no achievable number larger than 6.\n\n\nExample 2:\n\nInput: num = 3, t = 2\nOutput: 7\nExplanation: The maximum achievable number is x = 7; after performing these operations, x will equal num: \n1- Decrease x by 1, and increase num by 1. Now, x = 6 and num = 4.\n2- Decrease x by 1, and increase num by 1. Now, x = 5 and num = 5.\nIt can be proven that there is no achievable number larger than 7.\n\n \nConstraints:\n\n1 <= num, t <= 50",
+    "platform": "leetcode",
+    "question_id": "2812",
+    "contest_id": "weekly-contest-353",
+    "contest_date": "2023-07-09T00:00:00",
+    "starter_code": "class Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        return num + 2 * t\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        return num + 2 * t"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "check-if-the-number-is-fascinating",
+    "question_content": "You are given an integer n that consists of exactly 3 digits.\nWe call the number n fascinating if, after the following modification, the resulting number contains all the digits from 1 to 9 exactly once and does not contain any 0's:\n\nConcatenate n with the numbers 2 * n and 3 * n.\n\nReturn true if n is fascinating, or false otherwise.\nConcatenating two numbers means joining them together. For example, the concatenation of 121 and 371 is 121371.\n \nExample 1:\n\nInput: n = 192\nOutput: true\nExplanation: We concatenate the numbers n = 192 and 2 * n = 384 and 3 * n = 576. The resulting number is 192384576. This number contains all the digits from 1 to 9 exactly once.\n\nExample 2:\n\nInput: n = 100\nOutput: false\nExplanation: We concatenate the numbers n = 100 and 2 * n = 200 and 3 * n = 300. The resulting number is 100200300. This number does not satisfy any of the conditions.\n\n \nConstraints:\n\n100 <= n <= 999",
+    "platform": "leetcode",
+    "question_id": "2824",
+    "contest_id": "biweekly-contest-106",
+    "contest_date": "2023-06-10T00:00:00",
+    "starter_code": "class Solution:\n    def isFascinating(self, n: int) -> bool:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def isFascinating(self, n: int) -> bool:\n        concatenated = str(n) + str(2 * n) + str(3 * n)\n        return len(concatenated) == 9 and set(concatenated) == set('123456789')\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def isFascinating(self, n: int) -> bool:\n        concatenated = str(n) + str(2 * n) + str(3 * n)\n        return len(concatenated) == 9 and set(concatenated) == set('123456789')"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-operations-to-make-the-integer-zero",
+    "question_content": "You are given two integers num1 and num2.\nIn one operation, you can choose integer i in the range [0, 60] and subtract 2^i + num2 from num1.\nReturn the integer denoting the minimum number of operations needed to make num1 equal to 0.\nIf it is impossible to make num1 equal to 0, return -1.\n \nExample 1:\n\nInput: num1 = 3, num2 = -2\nOutput: 3\nExplanation: We can make 3 equal to 0 with the following operations:\n- We choose i = 2 and substract 2^2 + (-2) from 3, 3 - (4 + (-2)) = 1.\n- We choose i = 2 and substract 2^2 + (-2) from 1, 1 - (4 + (-2)) = -1.\n- We choose i = 0 and substract 2^0 + (-2) from -1, (-1) - (1 + (-2)) = 0.\nIt can be proven, that 3 is the minimum number of operations that we need to perform.\n\nExample 2:\n\nInput: num1 = 5, num2 = 7\nOutput: -1\nExplanation: It can be proven, that it is impossible to make 5 equal to 0 with the given operation.\n\n \nConstraints:\n\n1 <= num1 <= 10^9\n-10^9 <= num2 <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2837",
+    "contest_id": "weekly-contest-351",
+    "contest_date": "2023-06-25T00:00:00",
+    "starter_code": "class Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        for ops in range(1, 61):\n            if num1 - ops * num2 >= 0 and bin(num1 - ops * num2).count('1') <= ops:\n                return ops\n        return -1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        for ops in range(1, 61):\n            if num1 - ops * num2 >= 0 and bin(num1 - ops * num2).count('1') <= ops:\n                return ops\n        return -1"
+    ],
+    "graded_list": [
+      false
+    ],
+    "pass@1": 0.0,
+    "metadata": [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  },
+  {
+    "question_title": "construct-the-longest-new-string",
+    "question_content": "You are given three integers x, y, and z.\nYou have x strings equal to \"AA\", y strings equal to \"BB\", and z strings equal to \"AB\". You want to choose some (possibly all or none) of these strings and concatenate them in some order to form a new string. This new string must not contain \"AAA\" or \"BBB\" as a substring.\nReturn the maximum possible length of the new string.\nA substring is a contiguous non-empty sequence of characters within a string.\n \nExample 1:\n\nInput: x = 2, y = 5, z = 1\nOutput: 12\nExplanation: We can concactenate the strings \"BB\", \"AA\", \"BB\", \"AA\", \"BB\", and \"AB\" in that order. Then, our new string is \"BBAABBAABBAB\". \nThat string has length 12, and we can show that it is impossible to construct a string of longer length.\n\nExample 2:\n\nInput: x = 3, y = 2, z = 2\nOutput: 14\nExplanation: We can concactenate the strings \"AB\", \"AB\", \"AA\", \"BB\", \"AA\", \"BB\", and \"AA\" in that order. Then, our new string is \"ABABAABBAABBAA\". \nThat string has length 14, and we can show that it is impossible to construct a string of longer length.\n\n \nConstraints:\n\n1 <= x, y, z <= 50",
+    "platform": "leetcode",
+    "question_id": "2850",
+    "contest_id": "biweekly-contest-107",
+    "contest_date": "2023-06-24T00:00:00",
+    "starter_code": "class Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        return 2 * min(x, y) * 2 + (x != y) * 2 + z * 2\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        return 2 * min(x, y) * 2 + (x != y) * 2 + z * 2"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "total-distance-traveled",
+    "question_content": "A truck has two fuel tanks. You are given two integers, mainTank representing the fuel present in the main tank in liters and additionalTank representing the fuel present in the additional tank in liters.\nThe truck has a mileage of 10 km per liter. Whenever 5 liters of fuel get used up in the main tank, if the additional tank has at least 1 liters of fuel, 1 liters of fuel will be transferred from the additional tank to the main tank.\nReturn the maximum distance which can be traveled.\nNote: Injection from the additional tank is not continuous. It happens suddenly and immediately for every 5 liters consumed.\n \nExample 1:\n\nInput: mainTank = 5, additionalTank = 10\nOutput: 60\nExplanation: \nAfter spending 5 litre of fuel, fuel remaining is (5 - 5 + 1) = 1 litre and distance traveled is 50km.\nAfter spending another 1 litre of fuel, no fuel gets injected in the main tank and the main tank becomes empty.\nTotal distance traveled is 60km.\n\nExample 2:\n\nInput: mainTank = 1, additionalTank = 2\nOutput: 10\nExplanation: \nAfter spending 1 litre of fuel, the main tank becomes empty.\nTotal distance traveled is 10km.\n\n\n \nConstraints:\n\n1 <= mainTank, additionalTank <= 100",
+    "platform": "leetcode",
+    "question_id": "2857",
+    "contest_id": "weekly-contest-350",
+    "contest_date": "2023-06-18T00:00:00",
+    "starter_code": "class Solution:\n    def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:\n        distance = 0\n        while mainTank > 0:\n            mainTank -= 1\n            distance += 1\n            if distance % 5 == 0 and additionalTank > 0:\n                mainTank += 1\n                additionalTank -= 1\n        return distance * 10\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:\n        distance = 0\n        while mainTank > 0:\n            mainTank -= 1\n            distance += 1\n            if distance % 5 == 0 and additionalTank > 0:\n                mainTank += 1\n                additionalTank -= 1\n        return distance * 10"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "ways-to-express-an-integer-as-sum-of-powers",
+    "question_content": "Given two positive integers n and x.\nReturn the number of ways n can be expressed as the sum of the x^th power of unique positive integers, in other words, the number of sets of unique integers [n_1, n_2, ..., n_k] where n = n_1^x + n_2^x + ... + n_k^x.\nSince the result can be very large, return it modulo 10^9 + 7.\nFor example, if n = 160 and x = 3, one way to express n is n = 2^3 + 3^3 + 5^3.\n \nExample 1:\n\nInput: n = 10, x = 2\nOutput: 1\nExplanation: We can express n as the following: n = 3^2 + 1^2 = 10.\nIt can be shown that it is the only way to express 10 as the sum of the 2^nd power of unique integers.\n\nExample 2:\n\nInput: n = 4, x = 1\nOutput: 2\nExplanation: We can express n in the following ways:\n- n = 4^1 = 4.\n- n = 3^1 + 1^1 = 4.\n\n \nConstraints:\n\n1 <= n <= 300\n1 <= x <= 5",
+    "platform": "leetcode",
+    "question_id": "2882",
+    "contest_id": "biweekly-contest-109",
+    "contest_date": "2023-07-22T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        MOD = 10**9 + 7\n        max_val = int(n**(1/x)) + 1\n        dp = [0]*(n+1)\n        dp[0] = 1\n        \n        for i in range(1, max_val):\n            power = i ** x\n            for j in range(n, power - 1, -1):\n                dp[j] = (dp[j] + dp[j - power]) % MOD\n        \n        return dp[n]\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        MOD = 10**9 + 7\n        max_val = int(n**(1/x)) + 1\n        dp = [0]*(n+1)\n        dp[0] = 1\n        \n        for i in range(1, max_val):\n            power = i ** x\n            for j in range(n, power - 1, -1):\n                dp[j] = (dp[j] + dp[j - power]) % MOD\n        \n        return dp[n]"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "partition-string-into-minimum-beautiful-substrings",
+    "question_content": "Given a binary string s, partition the string into one or more substrings such that each substring is beautiful.\nA string is beautiful if:\n\nIt doesn't contain leading zeros.\nIt's the binary representation of a number that is a power of 5.\n\nReturn the minimum number of substrings in such partition. If it is impossible to partition the string s into beautiful substrings, return -1.\nA substring is a contiguous sequence of characters in a string.\n \nExample 1:\n\nInput: s = \"1011\"\nOutput: 2\nExplanation: We can paritition the given string into [\"101\", \"1\"].\n- The string \"101\" does not contain leading zeros and is the binary representation of integer 5^1 = 5.\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 5^0 = 1.\nIt can be shown that 2 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 2:\n\nInput: s = \"111\"\nOutput: 3\nExplanation: We can paritition the given string into [\"1\", \"1\", \"1\"].\n- The string \"1\" does not contain leading zeros and is the binary representation of integer 5^0 = 1.\nIt can be shown that 3 is the minimum number of beautiful substrings that s can be partitioned into.\n\nExample 3:\n\nInput: s = \"0\"\nOutput: -1\nExplanation: We can not partition the given string into beautiful substrings.\n\n \nConstraints:\n\n1 <= s.length <= 15\ns[i] is either '0' or '1'.",
+    "platform": "leetcode",
+    "question_id": "2883",
+    "contest_id": "biweekly-contest-108",
+    "contest_date": "2023-07-08T00:00:00",
+    "starter_code": "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        # Helper function to check if a binary string is a power of 5\n        def is_power_of_five(num_str):\n            num = int(num_str, 2)\n            while num % 5 == 0 and num > 1:\n                num //= 5\n            return num == 1\n        \n        n = len(s)\n        dp = [float('inf')] * (n + 1)\n        dp[0] = 0\n        \n        for i in range(1, n + 1):\n            for j in range(i):\n                if s[j:i] != \"\" and s[j:i][0] != '0' and is_power_of_five(s[j:i]):\n                    dp[i] = min(dp[i], dp[j] + 1)\n        \n        return dp[n] if dp[n] < float('inf') else -1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimumBeautifulSubstrings(self, s: str) -> int:\n        # Helper function to check if a binary string is a power of 5\n        def is_power_of_five(num_str):\n            num = int(num_str, 2)\n            while num % 5 == 0 and num > 1:\n                num //= 5\n            return num == 1\n        \n        n = len(s)\n        dp = [float('inf')] * (n + 1)\n        dp[0] = 0\n        \n        for i in range(1, n + 1):\n            for j in range(i):\n                if s[j:i] != \"\" and s[j:i][0] != '0' and is_power_of_five(s[j:i]):\n                    dp[i] = min(dp[i], dp[j] + 1)\n        \n        return dp[n] if dp[n] < float('inf') else -1"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "count-pairs-whose-sum-is-less-than-target",
+    "question_content": "Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.\n \nExample 1:\n\nInput: nums = [-1,1,2,3,1], target = 2\nOutput: 3\nExplanation: There are 3 pairs of indices that satisfy the conditions in the statement:\n- (0, 1) since 0 < 1 and nums[0] + nums[1] = 0 < target\n- (0, 2) since 0 < 2 and nums[0] + nums[2] = 1 < target \n- (0, 4) since 0 < 4 and nums[0] + nums[4] = 0 < target\nNote that (0, 3) is not counted since nums[0] + nums[3] is not strictly less than the target.\n\nExample 2:\n\nInput: nums = [-6,2,5,-2,-7,-1,3], target = -2\nOutput: 10\nExplanation: There are 10 pairs of indices that satisfy the conditions in the statement:\n- (0, 1) since 0 < 1 and nums[0] + nums[1] = -4 < target\n- (0, 3) since 0 < 3 and nums[0] + nums[3] = -8 < target\n- (0, 4) since 0 < 4 and nums[0] + nums[4] = -13 < target\n- (0, 5) since 0 < 5 and nums[0] + nums[5] = -7 < target\n- (0, 6) since 0 < 6 and nums[0] + nums[6] = -3 < target\n- (1, 4) since 1 < 4 and nums[1] + nums[4] = -5 < target\n- (3, 4) since 3 < 4 and nums[3] + nums[4] = -9 < target\n- (3, 5) since 3 < 5 and nums[3] + nums[5] = -3 < target\n- (4, 5) since 4 < 5 and nums[4] + nums[5] = -8 < target\n- (4, 6) since 4 < 6 and nums[4] + nums[6] = -4 < target\n\n \nConstraints:\n\n1 <= nums.length == n <= 50\n-50 <= nums[i], target <= 50",
+    "platform": "leetcode",
+    "question_id": "2917",
+    "contest_id": "biweekly-contest-111",
+    "contest_date": "2023-08-19T00:00:00",
+    "starter_code": "class Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        count = 0\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                if nums[i] + nums[j] < target:\n                    count += 1\n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        count = 0\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                if nums[i] + nums[j] < target:\n                    count += 1\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "account-balance-after-rounded-purchase",
+    "question_content": "Initially, you have a bank account balance of 100 dollars.\nYou are given an integer purchaseAmount representing the amount you will spend on a purchase in dollars.\nAt the store where you will make the purchase, the purchase amount is rounded to the nearest multiple of 10. In other words, you pay a non-negative amount, roundedAmount, such that roundedAmount is a multiple of 10 and abs(roundedAmount - purchaseAmount) is minimized.\nIf there is more than one nearest multiple of 10, the largest multiple is chosen.\nReturn an integer denoting your account balance after making a purchase worth purchaseAmount dollars from the store.\nNote: 0 is considered to be a multiple of 10 in this problem.\n \nExample 1:\n\nInput: purchaseAmount = 9\nOutput: 90\nExplanation: In this example, the nearest multiple of 10 to 9 is 10. Hence, your account balance becomes 100 - 10 = 90.\n\nExample 2:\n\nInput: purchaseAmount = 15\nOutput: 80\nExplanation: In this example, there are two nearest multiples of 10 to 15: 10 and 20. So, the larger multiple, 20, is chosen.\nHence, your account balance becomes 100 - 20 = 80.\n\n \nConstraints:\n\n0 <= purchaseAmount <= 100",
+    "platform": "leetcode",
+    "question_id": "2955",
+    "contest_id": "biweekly-contest-110",
+    "contest_date": "2023-08-05T00:00:00",
+    "starter_code": "class Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        return 100 - round(purchaseAmount / 10) * 10\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        return 100 - round(purchaseAmount / 10) * 10"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "count-symmetric-integers",
+    "question_content": "You are given two positive integers low and high.\nAn integer x consisting of 2 * n digits is symmetric if the sum of the first n digits of x is equal to the sum of the last n digits of x. Numbers with an odd number of digits are never symmetric.\nReturn the number of symmetric integers in the range [low, high].\n \nExample 1:\n\nInput: low = 1, high = 100\nOutput: 9\nExplanation: There are 9 symmetric integers between 1 and 100: 11, 22, 33, 44, 55, 66, 77, 88, and 99.\n\nExample 2:\n\nInput: low = 1200, high = 1230\nOutput: 4\nExplanation: There are 4 symmetric integers between 1200 and 1230: 1203, 1212, 1221, and 1230.\n\n \nConstraints:\n\n1 <= low <= high <= 10^4",
+    "platform": "leetcode",
+    "question_id": "2998",
+    "contest_id": "weekly-contest-361",
+    "contest_date": "2023-09-03T00:00:00",
+    "starter_code": "class Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        count = 0\n        for num in range(low, high + 1):\n            s = str(num)\n            if len(s) % 2 == 0:\n                mid = len(s) // 2\n                if sum(map(int, s[:mid])) == sum(map(int, s[mid:])):\n                    count += 1\n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        count = 0\n        for num in range(low, high + 1):\n            s = str(num)\n            if len(s) % 2 == 0:\n                mid = len(s) // 2\n                if sum(map(int, s[:mid])) == sum(map(int, s[mid:])):\n                    count += 1\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "check-if-strings-can-be-made-equal-with-operations-i",
+    "question_content": "You are given two strings s1 and s2, both of length 4, consisting of lowercase English letters.\nYou can apply the following operation on any of the two strings any number of times:\n\nChoose any two indices i and j such that j - i = 2, then swap the two characters at those indices in the string.\n\nReturn true if you can make the strings s1 and s2 equal, and false otherwise.\n \nExample 1:\n\nInput: s1 = \"abcd\", s2 = \"cdab\"\nOutput: true\nExplanation: We can do the following operations on s1:\n- Choose the indices i = 0, j = 2. The resulting string is s1 = \"cbad\".\n- Choose the indices i = 1, j = 3. The resulting string is s1 = \"cdab\" = s2.\n\nExample 2:\n\nInput: s1 = \"abcd\", s2 = \"dacb\"\nOutput: false\nExplanation: It is not possible to make the two strings equal.\n\n \nConstraints:\n\ns1.length == s2.length == 4\ns1 and s2 consist only of lowercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2999",
+    "contest_id": "biweekly-contest-112",
+    "contest_date": "2023-09-02T00:00:00",
+    "starter_code": "class Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        return sorted(s1[::2]) == sorted(s2[::2]) and sorted(s1[1::2]) == sorted(s2[1::2])\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        return sorted(s1[::2]) == sorted(s2[::2]) and sorted(s1[1::2]) == sorted(s2[1::2])"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "number-of-beautiful-integers-in-the-range",
+    "question_content": "You are given positive integers low, high, and k.\nA number is beautiful if it meets both of the following conditions:\n\nThe count of even digits in the number is equal to the count of odd digits.\nThe number is divisible by k.\n\nReturn the number of beautiful integers in the range [low, high].\n \nExample 1:\n\nInput: low = 10, high = 20, k = 3\nOutput: 2\nExplanation: There are 2 beautiful integers in the given range: [12,18]. \n- 12 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 3.\n- 18 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 3.\nAdditionally we can see that:\n- 16 is not beautiful because it is not divisible by k = 3.\n- 15 is not beautiful because it does not contain equal counts even and odd digits.\nIt can be shown that there are only 2 beautiful integers in the given range.\n\nExample 2:\n\nInput: low = 1, high = 10, k = 1\nOutput: 1\nExplanation: There is 1 beautiful integer in the given range: [10].\n- 10 is beautiful because it contains 1 odd digit and 1 even digit, and is divisible by k = 1.\nIt can be shown that there is only 1 beautiful integer in the given range.\n\nExample 3:\n\nInput: low = 5, high = 5, k = 2\nOutput: 0\nExplanation: There are 0 beautiful integers in the given range.\n- 5 is not beautiful because it is not divisible by k = 2 and it does not contain equal even and odd digits.\n\n \nConstraints:\n\n0 < low <= high <= 10^9\n0 < k <= 20",
+    "platform": "leetcode",
+    "question_id": "3017",
+    "contest_id": "biweekly-contest-111",
+    "contest_date": "2023-08-19T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        ",
+    "difficulty": "hard",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        # Helper function to check if a number is beautiful\n        def is_beautiful(num):\n            num_str = str(num)\n            odd_count = sum(1 for char in num_str if int(char) % 2 != 0)\n            even_count = sum(1 for char in num_str if int(char) % 2 == 0)\n            return odd_count == even_count and num % k == 0\n        \n        # Count beautiful numbers in the range [low, high]\n        beautiful_count = 0\n        for num in range(low, high + 1):\n            if is_beautiful(num):\n                beautiful_count += 1\n        \n        return beautiful_count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfBeautifulIntegers(self, low: int, high: int, k: int) -> int:\n        # Helper function to check if a number is beautiful\n        def is_beautiful(num):\n            num_str = str(num)\n            odd_count = sum(1 for char in num_str if int(char) % 2 != 0)\n            even_count = sum(1 for char in num_str if int(char) % 2 == 0)\n            return odd_count == even_count and num % k == 0\n        \n        # Count beautiful numbers in the range [low, high]\n        beautiful_count = 0\n        for num in range(low, high + 1):\n            if is_beautiful(num):\n                beautiful_count += 1\n        \n        return beautiful_count"
+    ],
+    "graded_list": [
+      false
+    ],
+    "pass@1": 0.0,
+    "metadata": [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ]
+  },
+  {
+    "question_title": "furthest-point-from-origin",
+    "question_content": "You are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.\nIn the i^th move, you can choose one of the following directions:\n\nmove to the left if moves[i] = 'L' or moves[i] = '_'\nmove to the right if moves[i] = 'R' or moves[i] = '_'\n\nReturn the distance from the origin of the furthest point you can get to after n moves.\n \nExample 1:\n\nInput: moves = \"L_RL__R\"\nOutput: 3\nExplanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves \"LLRLLLR\".\n\nExample 2:\n\nInput: moves = \"_R__LL_\"\nOutput: 5\nExplanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves \"LRLLLLL\".\n\nExample 3:\n\nInput: moves = \"_______\"\nOutput: 7\nExplanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves \"RRRRRRR\".\n\n \nConstraints:\n\n1 <= moves.length == n <= 50\nmoves consists only of characters 'L', 'R' and '_'.",
+    "platform": "leetcode",
+    "question_id": "3019",
+    "contest_id": "weekly-contest-360",
+    "contest_date": "2023-08-27T00:00:00",
+    "starter_code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        balance = moves.count('L') - moves.count('R')\n        blanks = moves.count('_')\n        return abs(balance) + blanks\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        balance = moves.count('L') - moves.count('R')\n        blanks = moves.count('_')\n        return abs(balance) + blanks"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-odd-binary-number",
+    "question_content": "You are given a binary string s that contains at least one '1'.\nYou have to rearrange the bits in such a way that the resulting binary number is the maximum odd binary number that can be created from this combination.\nReturn a string representing the maximum odd binary number that can be created from the given combination.\nNote that the resulting string can have leading zeros.\n \nExample 1:\n\nInput: s = \"010\"\nOutput: \"001\"\nExplanation: Because there is just one '1', it must be in the last position. So the answer is \"001\".\n\nExample 2:\n\nInput: s = \"0101\"\nOutput: \"1001\"\nExplanation: One of the '1's must be in the last position. The maximum number that can be made with the remaining digits is \"100\". So the answer is \"1001\".\n\n \nConstraints:\n\n1 <= s.length <= 100\ns consists only of '0' and '1'.\ns contains at least one '1'.",
+    "platform": "leetcode",
+    "question_id": "3055",
+    "contest_id": "weekly-contest-364",
+    "contest_date": "2023-09-24T00:00:00",
+    "starter_code": "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        count_ones = s.count('1')\n        return '1' * (count_ones - 1) + '0' * (len(s) - count_ones) + '1'\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def maximumOddBinaryNumber(self, s: str) -> str:\n        count_ones = s.count('1')\n        return '1' * (count_ones - 1) + '0' * (len(s) - count_ones) + '1'"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  }
+]
