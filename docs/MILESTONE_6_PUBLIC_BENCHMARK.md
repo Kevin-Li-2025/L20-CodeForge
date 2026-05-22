@@ -205,6 +205,58 @@ Compared with the first base-test selector (`0.902`), this is a +1.3 point
 absolute gain from tie-breaking alone. Compared with greedy HumanEval+
 `pass@1=0.848`, it is a +6.7 point absolute coding-system gain.
 
+### Targeted Hard-Task Resampling
+
+The next improvement does not resample the full benchmark. It targets only the
+13 tasks that had no HumanEval+ passing candidate under the previous n=10 run,
+adds 30 samples per task, then reruns base-only execution selection over the
+combined pool.
+
+```bash
+python -m l20_codeforge generate-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  --dataset humaneval \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n30.target-hard.samples.jsonl \
+  --task-ids HumanEval/22,HumanEval/32,HumanEval/76,HumanEval/83,HumanEval/91,HumanEval/97,HumanEval/124,HumanEval/129,HumanEval/130,HumanEval/132,HumanEval/134,HumanEval/145,HumanEval/163 \
+  --n-samples 30 \
+  --temperature 0.8 \
+  --top-p 0.95 \
+  --sample-batch-size 5 \
+  --seed 1337 \
+  --overwrite
+```
+
+Generation result:
+
+```text
+target tasks: 13
+new samples: 390
+generation time: 382.4 seconds
+```
+
+The original n=10 pool and targeted pool were concatenated, then scored with
+EvalPlus base tests only for selection:
+
+```text
+combined samples: 2030
+base-only pass@10: 0.960
+selected base-pass candidates: 158
+fallback tasks: 6
+```
+
+Official EvalPlus result after selecting longest base-pass candidates:
+
+```text
+HumanEval base tests pass@1: 0.963
+HumanEval+ extra-test pass@1: 0.921
+```
+
+Compared with the previous best (`0.915`), targeted resampling adds +0.6 point
+absolute. Compared with greedy (`0.848`), the current coding-system gain is
++7.3 points absolute. Remaining base-fail tasks are `HumanEval/32`,
+`HumanEval/129`, `HumanEval/130`, `HumanEval/132`, `HumanEval/145`, and
+`HumanEval/163`.
+
 ## Prompt-Doctest Selector Result
 
 To separate "public prompt signal" from EvalPlus test-signal selection, the

@@ -22,6 +22,7 @@ class EvalPlusGenerationReport(BaseModel):
     limit: int | None = None
     id_start: int | None = None
     id_end: int | None = None
+    task_ids: list[str] | None = None
     temperature: float = 0.0
     top_p: float = 0.95
     max_new_tokens: int = 512
@@ -69,6 +70,7 @@ def generate_evalplus_samples(
     limit: int | None = None,
     id_start: int | None = None,
     id_end: int | None = None,
+    task_ids: list[str] | None = None,
     temperature: float = 0.0,
     top_p: float = 0.95,
     max_new_tokens: int = 512,
@@ -88,6 +90,7 @@ def generate_evalplus_samples(
         limit=limit,
         id_start=id_start,
         id_end=id_end,
+        task_ids=task_ids,
     )
     if not tasks:
         raise ValueError(f"no EvalPlus tasks selected for dataset={dataset!r}")
@@ -194,6 +197,7 @@ def generate_evalplus_samples(
         limit=limit,
         id_start=id_start,
         id_end=id_end,
+        task_ids=task_ids,
         temperature=temperature,
         top_p=top_p,
         max_new_tokens=max_new_tokens,
@@ -463,9 +467,13 @@ def select_evalplus_tasks(
     limit: int | None = None,
     id_start: int | None = None,
     id_end: int | None = None,
+    task_ids: list[str] | None = None,
 ) -> list[tuple[str, dict[str, Any]]]:
+    task_id_filter = set(task_ids or [])
     selected: list[tuple[str, dict[str, Any]]] = []
     for task_id, task in tasks.items():
+        if task_id_filter and task_id not in task_id_filter:
+            continue
         task_num = int(task_id.split("/")[1])
         if id_start is not None and task_num < id_start:
             continue

@@ -322,6 +322,7 @@ def generate_evalplus_command(
     limit: int | None = None,
     id_start: int | None = None,
     id_end: int | None = None,
+    task_ids: str | None = None,
     temperature: float = 0.0,
     top_p: float = 0.95,
     max_new_tokens: int = 512,
@@ -342,6 +343,7 @@ def generate_evalplus_command(
             limit=limit,
             id_start=id_start,
             id_end=id_end,
+            task_ids=parse_csv(task_ids),
             temperature=temperature,
             top_p=top_p,
             max_new_tokens=max_new_tokens,
@@ -355,6 +357,13 @@ def generate_evalplus_command(
         console.print(f"[red]failed to generate EvalPlus samples:[/red] {exc}")
         raise typer.Exit(1) from exc
     console.print_json(data=report.model_dump())
+
+
+def parse_csv(value: str | None) -> list[str] | None:
+    if value is None:
+        return None
+    items = [item.strip() for item in value.split(",") if item.strip()]
+    return items or None
 
 
 @app.command("eval-evalplus")

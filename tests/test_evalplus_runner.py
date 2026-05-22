@@ -25,6 +25,17 @@ def test_select_evalplus_tasks_respects_id_range_and_limit() -> None:
     assert [task_id for task_id, _ in selected] == ["HumanEval/2", "HumanEval/3", "HumanEval/4"]
 
 
+def test_select_evalplus_tasks_respects_explicit_task_ids() -> None:
+    tasks = {f"HumanEval/{idx}": {"prompt": str(idx)} for idx in range(10)}
+
+    selected = select_evalplus_tasks(
+        tasks,
+        task_ids=["HumanEval/3", "HumanEval/7"],
+    )
+
+    assert [task_id for task_id, _ in selected] == ["HumanEval/3", "HumanEval/7"]
+
+
 def test_strip_markdown_code_fence_prefers_python_block() -> None:
     text = "Here is code:\n```python\ndef f():\n    return 1\n```\n"
 
