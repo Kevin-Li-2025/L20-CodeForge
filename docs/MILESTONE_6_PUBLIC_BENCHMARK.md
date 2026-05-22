@@ -128,6 +128,27 @@ too aggressively and degraded a strong instruction-code base model. Do not scale
 this SFT recipe. The next attempt should use either much lower LR/shorter
 adapter training or a fixed public pass@k sampling protocol.
 
+## Fixed Sampling Checkpoint
+
+Base model sampled with a fixed public protocol:
+
+```text
+model: Qwen2.5-Coder-7B-Instruct
+dataset: HumanEval+
+samples: 10 per task, 1640 total
+temperature: 0.8
+top_p: 0.95
+sample_batch_size: 5
+generation time: 1345.8 seconds
+HumanEval base tests pass@1/pass@10: 0.851 / 0.951
+HumanEval+ pass@1/pass@10: 0.812 / 0.921
+```
+
+Interpretation: sampling gives a strong public pass@10 result, but sampled
+pass@1 is below greedy pass@1. The next algorithmic target is therefore a
+selection model or verifier trained without using EvalPlus hidden tests, not
+more temperature alone.
+
 ## Research Anchors
 
 - EvalPlus adds stronger generated tests to HumanEval and MBPP and exposes

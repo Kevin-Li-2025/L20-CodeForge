@@ -35,6 +35,7 @@ class EvalPlusOfficialReport(BaseModel):
     exit_code: int
     base_pass_at_1: float | None = None
     plus_pass_at_1: float | None = None
+    scores: dict[str, float] = Field(default_factory=dict)
     stdout: str = ""
     stderr: str = ""
     result_files: list[str] = Field(default_factory=list)
@@ -215,13 +216,14 @@ def run_evalplus_official(
         for path in sorted(samples.parent.glob(samples.stem + "*eval_results*.json"))
         if str(path) not in result_files
     )
-    parsed_scores = parse_evalplus_pass_at_1(completed.stdout)
+    parsed_scores = parse_evalplus_scores(completed.stdout)
     report = EvalPlusOfficialReport(
         dataset=dataset,
         samples=str(samples),
         exit_code=completed.returncode,
-        base_pass_at_1=parsed_scores.get("base"),
-        plus_pass_at_1=parsed_scores.get("plus"),
+        base_pass_at_1=parsed_scores.get("base_pass@1"),
+        plus_pass_at_1=parsed_scores.get("plus_pass@1"),
+        scores=parsed_scores,
         stdout=completed.stdout[-20000:],
         stderr=completed.stderr[-20000:],
         result_files=result_files,
@@ -232,6 +234,15 @@ def run_evalplus_official(
 
 
 def parse_evalplus_pass_at_1(stdout: str) -> dict[str, float]:
+    scores = parse_evalplus_scores(stdout)
+    return {
+        key.removesuffix("_pass@1"): value
+        for key, value in scores.items()
+        if key.endswith("_pass@1")
+    }
+
+
+def parse_evalplus_scores(stdout: str) -> dict[str, float]:
     scores: dict[str, float] = {}
     current: str | None = None
     lines = [line.strip() for line in stdout.splitlines()]
@@ -242,15 +253,15 @@ def parse_evalplus_pass_at_1(stdout: str) -> dict[str, float]:
         if line.endswith("(base + extra tests)"):
             current = "plus"
             continue
-        if line.startswith("pass@1") and current:
+        if line.startswith("pass@") and current:
+            metric = line.split(":", 1)[0]
             score_text = line.split(":", 1)[1].strip()
             if not score_text and index + 1 < len(lines):
                 score_text = lines[index + 1]
             try:
-                scores[current] = float(score_text)
+                scores[f"{current}_{metric}"] = float(score_text)
             except ValueError:
                 pass
-            current = None
     return scores
 
 

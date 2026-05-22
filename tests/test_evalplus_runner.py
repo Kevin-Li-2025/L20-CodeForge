@@ -6,6 +6,7 @@ from l20_codeforge.evals.evalplus_runner import (
     build_evalplus_prompt,
     count_existing_samples,
     parse_evalplus_pass_at_1,
+    parse_evalplus_scores,
     select_evalplus_tasks,
     strip_markdown_code_fence,
 )
@@ -64,3 +65,20 @@ pass@1:\t0.409
 """
 
     assert parse_evalplus_pass_at_1(stdout) == {"base": 0.415, "plus": 0.409}
+
+
+def test_parse_evalplus_scores_multiple_k() -> None:
+    stdout = """humaneval (base tests)
+pass@1:\t0.890
+pass@10:\t0.970
+humaneval+ (base + extra tests)
+pass@1:\t0.848
+pass@10:\t0.951
+"""
+
+    assert parse_evalplus_scores(stdout) == {
+        "base_pass@1": 0.89,
+        "base_pass@10": 0.97,
+        "plus_pass@1": 0.848,
+        "plus_pass@10": 0.951,
+    }
