@@ -5,6 +5,7 @@ from pathlib import Path
 
 from l20_codeforge.evals.evalplus_runner import (
     build_evalplus_prompt,
+    choose_evalplus_candidate_index,
     count_existing_samples,
     parse_evalplus_pass_at_1,
     parse_evalplus_scores,
@@ -124,6 +125,54 @@ def test_select_evalplus_by_base_tests(tmp_path: Path) -> None:
         '{"task_id": "HumanEval/0", "solution": "good"}',
         '{"task_id": "HumanEval/1", "solution": "fallback"}',
     ]
+
+
+def test_select_evalplus_by_base_tests_can_tie_break_by_length(tmp_path: Path) -> None:
+    samples = tmp_path / "samples.jsonl"
+    samples.write_text(
+        '{"task_id": "HumanEval/0", "solution": "short"}\n'
+        '{"task_id": "HumanEval/0", "solution": "much longer solution"}\n',
+        encoding="utf-8",
+    )
+    eval_results = tmp_path / "results.json"
+    eval_results.write_text(
+        """
+{
+  "eval": {
+    "HumanEval/0": [
+      {"base_status": "pass", "plus_status": "fail"},
+      {"base_status": "pass", "plus_status": "pass"}
+    ]
+  }
+}
+""",
+        encoding="utf-8",
+    )
+    output = tmp_path / "selected.jsonl"
+
+    report = select_evalplus_by_base_tests(
+        samples,
+        eval_results,
+        output,
+        tie_breaker="longest",
+    )
+
+    assert report.selected_base_pass == 1
+    assert report.selected_plus_pass == 1
+    assert output.read_text(encoding="utf-8").strip() == (
+        '{"task_id": "HumanEval/0", "solution": "much longer solution"}'
+    )
+
+
+def test_choose_evalplus_candidate_index_rejects_unknown_tie_breaker() -> None:
+    candidates = [{"solution": "a"}]
+
+    try:
+        choose_evalplus_candidate_index(candidates, [0], tie_breaker="unknown")
+    except ValueError as exc:
+        assert "tie_breaker" in str(exc)
+    else:
+        raise AssertionError("expected ValueError")
 
 
 def test_run_prompt_doctests() -> None:

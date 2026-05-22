@@ -389,12 +389,14 @@ def select_evalplus_command(
     samples: Path,
     eval_results: Path,
     output: Path = Path("artifacts/evalplus/selected.samples.jsonl"),
+    tie_breaker: str = "first",
 ) -> None:
     """Select one sample per EvalPlus task using only base-test pass/fail results."""
     report = select_evalplus_by_base_tests(
         samples=samples,
         eval_results=eval_results,
         output=output,
+        tie_breaker=tie_breaker,
     )
     console.print_json(data=report.model_dump())
 

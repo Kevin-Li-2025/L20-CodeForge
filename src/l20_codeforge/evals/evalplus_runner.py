@@ -256,6 +256,7 @@ def select_evalplus_by_base_tests(
     samples: Path,
     eval_results: Path,
     output: Path,
+    tie_breaker: str = "first",
 ) -> EvalPlusSelectionReport:
     grouped_samples = load_evalplus_samples_by_task(samples)
     results = json.loads(eval_results.read_text(encoding="utf-8"))["eval"]
@@ -267,12 +268,19 @@ def select_evalplus_by_base_tests(
     with output.open("w", encoding="utf-8") as handle:
         for task_id, candidates in grouped_samples.items():
             task_results = results.get(task_id, [])
-            selected_index = 0
-            for index, result in enumerate(task_results):
-                if result.get("base_status") == "pass":
-                    selected_index = index
-                    break
+            base_pass_indices = [
+                index
+                for index, result in enumerate(task_results)
+                if result.get("base_status") == "pass"
+            ]
+            if base_pass_indices:
+                selected_index = choose_evalplus_candidate_index(
+                    candidates=candidates,
+                    indices=base_pass_indices,
+                    tie_breaker=tie_breaker,
+                )
             else:
+                selected_index = 0
                 fallback_tasks.append(task_id)
 
             chosen = candidates[min(selected_index, len(candidates) - 1)]
@@ -293,6 +301,24 @@ def select_evalplus_by_base_tests(
         selected_plus_pass=selected_plus_pass,
         fallback_tasks=fallback_tasks,
     )
+
+
+def choose_evalplus_candidate_index(
+    candidates: list[dict[str, Any]],
+    indices: list[int],
+    tie_breaker: str = "first",
+) -> int:
+    if not indices:
+        return 0
+    if tie_breaker == "first":
+        return indices[0]
+    if tie_breaker == "last":
+        return indices[-1]
+    if tie_breaker == "shortest":
+        return min(indices, key=lambda index: len(str(candidates[index].get("solution", ""))))
+    if tie_breaker == "longest":
+        return max(indices, key=lambda index: len(str(candidates[index].get("solution", ""))))
+    raise ValueError("tie_breaker must be one of: first, last, shortest, longest")
 
 
 def select_evalplus_by_prompt_doctests(

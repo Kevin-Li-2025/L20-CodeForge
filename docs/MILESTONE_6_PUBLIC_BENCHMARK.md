@@ -176,6 +176,35 @@ Compared with greedy HumanEval+ `pass@1=0.848`, this is a +5.4 point absolute
 gain from execution-guided selection. It should be described as a coding system
 result, not as a pure model-weight result.
 
+### Base-Test Selector With Length Tie-Break
+
+The first selector chose the first sampled candidate that passed base tests.
+Among candidates that all pass base tests, selecting the longest solution is a
+small but measurable robustness prior on this run: it tends to keep more
+complete branch handling without reading EvalPlus extra tests.
+
+```bash
+python -m l20_codeforge select-evalplus \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples_eval_results.json \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.base-longest-selected.samples.jsonl \
+  --tie-breaker longest
+```
+
+Official EvalPlus result:
+
+```text
+selected tasks: 164
+selected base-pass candidates: 156
+fallback tasks: 8
+HumanEval base tests pass@1: 0.951
+HumanEval+ extra-test pass@1: 0.915
+```
+
+Compared with the first base-test selector (`0.902`), this is a +1.3 point
+absolute gain from tie-breaking alone. Compared with greedy HumanEval+
+`pass@1=0.848`, it is a +6.7 point absolute coding-system gain.
+
 ## Prompt-Doctest Selector Result
 
 To separate "public prompt signal" from EvalPlus test-signal selection, the
