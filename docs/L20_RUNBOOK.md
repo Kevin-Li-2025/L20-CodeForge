@@ -143,3 +143,20 @@ python -m l20_codeforge fetch-real-tasks \
 ```
 
 Keep these JSONL files out of git. They are generated data.
+
+## Real SFT Smoke
+
+Use the local cached 0.5B model first to verify the training stack:
+
+```bash
+python -m l20_codeforge train-real-sft \
+  /home/hhai/model-cache/qwen2.5-0.5b-instruct \
+  data/processed/real_sft/swe_bench_lite_sft.jsonl \
+  --output-dir artifacts/checkpoints/qwen25-0p5b-real-sft-smoke \
+  --max-steps 5 \
+  --limit 64 \
+  --max-length 2048
+```
+
+For a 7B offline run, first stage the model directory on the L20 host, then run
+the same command with `--load-in-4bit`.

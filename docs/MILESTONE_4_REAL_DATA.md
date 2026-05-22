@@ -66,6 +66,18 @@ python -m l20_codeforge build-real-sft \
 This uses real issue text and gold patches, but does not include `test_patch` in
 the training prompt or completion.
 
+Run a real-data SFT smoke on the L20 host:
+
+```bash
+python -m l20_codeforge train-real-sft \
+  /home/hhai/model-cache/qwen2.5-0.5b-instruct \
+  data/processed/real_sft/swe_bench_lite_sft.jsonl \
+  --output-dir artifacts/checkpoints/qwen25-0p5b-real-sft-smoke \
+  --max-steps 5 \
+  --limit 64 \
+  --max-length 2048
+```
+
 Fetch SWE-Gym:
 
 ```bash

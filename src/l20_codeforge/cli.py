@@ -17,6 +17,7 @@ from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.gpu.profile import L20Profile
+from l20_codeforge.training.sft import train_real_sft
 from l20_codeforge.utils.paths import ensure_project_dirs
 
 app = typer.Typer(no_args_is_help=True)
@@ -81,6 +82,43 @@ def build_real_sft(
         min_patch_chars=min_patch_chars,
     )
     console.print_json(data={"records": count, "output": str(output)})
+
+
+@app.command("train-real-sft")
+def train_real_sft_command(
+    model: str,
+    train_jsonl: Path,
+    output_dir: Path = Path("artifacts/checkpoints/real-sft-smoke"),
+    max_steps: int = 5,
+    max_length: int = 2048,
+    limit: int | None = 64,
+    learning_rate: float = 2e-4,
+    per_device_train_batch_size: int = 1,
+    gradient_accumulation_steps: int = 4,
+    lora_r: int = 16,
+    lora_alpha: int = 32,
+    lora_dropout: float = 0.05,
+    load_in_4bit: bool = False,
+    bf16: bool = True,
+) -> None:
+    """Run LoRA/QLoRA SFT on real gold-patch chat data."""
+    report = train_real_sft(
+        model_name_or_path=model,
+        train_jsonl=train_jsonl,
+        output_dir=output_dir,
+        max_steps=max_steps,
+        max_length=max_length,
+        limit=limit,
+        learning_rate=learning_rate,
+        per_device_train_batch_size=per_device_train_batch_size,
+        gradient_accumulation_steps=gradient_accumulation_steps,
+        lora_r=lora_r,
+        lora_alpha=lora_alpha,
+        lora_dropout=lora_dropout,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+    )
+    console.print_json(data=report)
 
 
 @app.command("pack-context")
