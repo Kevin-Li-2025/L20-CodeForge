@@ -287,6 +287,58 @@ point absolute gain. It should not become the universal default without a
 dataset check: on HumanEval n=10, the same shortest tie-breaker scores
 `0.909`, below consensus-longest and length tie-break at `0.915`.
 
+### MBPP+ Public-Base Fallback Resampling
+
+The next MBPP+ improvement targets only the 31 tasks where the n=5 pool had no
+candidate passing public base tests. This task set is selected from public
+base-test feedback, not from EvalPlus extra-test failures. The run adds 30 more
+samples per base-fallback task, then reruns full-pool base-only evaluation and
+the public-input consensus selector with the MBPP-specific shortest tie-breaker.
+
+```bash
+python -m l20_codeforge generate-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  --dataset mbpp \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp09.n30.base-fallback.samples.jsonl \
+  --task-ids Mbpp/20,Mbpp/74,Mbpp/123,Mbpp/124,Mbpp/138,Mbpp/141,Mbpp/235,Mbpp/237,Mbpp/260,Mbpp/305,Mbpp/306,Mbpp/310,Mbpp/311,Mbpp/398,Mbpp/415,Mbpp/430,Mbpp/448,Mbpp/462,Mbpp/468,Mbpp/572,Mbpp/581,Mbpp/590,Mbpp/603,Mbpp/610,Mbpp/615,Mbpp/633,Mbpp/722,Mbpp/773,Mbpp/777,Mbpp/780,Mbpp/794 \
+  --n-samples 30 \
+  --temperature 0.9 \
+  --top-p 0.98 \
+  --max-new-tokens 512 \
+  --sample-batch-size 5 \
+  --seed 271828 \
+  --overwrite
+```
+
+The targeted samples are concatenated with the original n=5 full-task pool,
+then scored with base tests only for selection:
+
+```text
+target tasks: 31
+new samples: 930
+generation time: 1076.4 seconds
+combined samples: 2820
+selected base-pass candidates: 363
+fallback tasks: 15
+```
+
+Official EvalPlus result after consensus-shortest selection:
+
+```text
+selected MBPP base tests pass@1: 0.960
+selected MBPP+ base + extra tests pass@1: 0.817
+changed selections vs. previous MBPP best: 16 tasks
+plus-test wins/losses vs. previous MBPP best: 10 / 0
+net plus-test gain vs. previous MBPP best: +10 tasks
+```
+
+Interpretation: this is the strongest clean MBPP+ system result so far. It
+moves MBPP+ from greedy `0.722` to `0.817`, a +9.5 point absolute gain, and
+from the previous consensus-shortest result `0.791` to `0.817`, a +2.6 point
+absolute gain. The improvement path is still public-signal driven: use public
+base tests to identify underexplored tasks, spend additional L20 sampling budget
+only there, then select without reading extra tests.
+
 ## MBPP SFT Negative Result
 
 The first MBPP-train transfer adapter was intentionally small and fast:
