@@ -9,7 +9,7 @@ GPU time.
 ```text
 task spec
   -> context compiler
-  -> agent rollout
+  -> agent rollout or reference patch
   -> patch/test execution
   -> reward decomposition
   -> trajectory store
@@ -40,6 +40,11 @@ The data layer uses explicit schemas for:
 - `TaskSpec`: the issue, repo, base commit, allowed commands, and hidden tests.
 - `AgentStep`: command, observation, status, elapsed time, and token estimates.
 - `Trajectory`: full rollout plus patch and reward decomposition.
+
+The smoke task generator creates small Python repo-repair tasks with reference
+patches. These are not meant to be impressive benchmarks. They are a regression
+suite for the training data factory: if they fail, the larger SWE-style loop is
+not ready.
 
 This makes trajectories usable for SFT, DPO, GRPO, and offline audits.
 
@@ -86,3 +91,18 @@ There are two environment levels:
 The current scaffold implements the local repo path first because it is fast,
 debuggable, and appropriate for L20 iteration.
 
+## Current Executable Loop
+
+```bash
+python -m l20_codeforge smoke-loop
+```
+
+Outputs:
+
+```text
+artifacts/trajectories/smoke_reference.jsonl
+data/processed/smoke_sft.jsonl
+```
+
+This loop validates patch application, test execution, reward scoring, trajectory
+serialization, and SFT conversion without downloading a model.

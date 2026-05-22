@@ -24,6 +24,7 @@ class AgentStep(BaseModel):
     observation: str
     exit_code: int | None = None
     elapsed_seconds: float | None = None
+    elapsed_timeout: bool = False
     approx_prompt_tokens: int | None = None
     approx_completion_tokens: int | None = None
 
@@ -55,4 +56,3 @@ class Trajectory(BaseModel):
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("a", encoding="utf-8") as handle:
             handle.write(self.model_dump_json() + "\n")
-

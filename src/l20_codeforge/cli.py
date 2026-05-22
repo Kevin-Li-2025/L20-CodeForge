@@ -7,7 +7,10 @@ import typer
 from rich.console import Console
 
 from l20_codeforge.context.compiler import ContextCompiler
+from l20_codeforge.data.sft import build_sft_jsonl
+from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
+from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.gpu.profile import L20Profile
 from l20_codeforge.utils.paths import ensure_project_dirs
 
@@ -61,6 +64,98 @@ def eval_card(
     console.print(f"wrote {out}")
 
 
+@app.command("generate-smoke-tasks")
+def generate_smoke_tasks(
+    output_dir: Path = Path("data/raw/smoke_tasks"),
+    overwrite: bool = False,
+) -> None:
+    """Generate small executable repo-repair tasks."""
+    task_files = write_smoke_tasks(output_dir=output_dir, overwrite=overwrite)
+    for task_file in task_files:
+        console.print(str(task_file))
+
+
+@app.command("eval-patch")
+def eval_patch(
+    task_file: Path,
+    patch_file: Path,
+    output: Path = Path("artifacts/trajectories/patch_eval.jsonl"),
+    keep_worktree: bool = False,
+    timeout_seconds: int = 120,
+) -> None:
+    """Apply a patch to an isolated task repo, run tests, and append a trajectory."""
+    task = load_task(task_file)
+    patch = patch_file.read_text(encoding="utf-8")
+    result = evaluate_patch(
+        task=task,
+        patch=patch,
+        keep_worktree=keep_worktree,
+        timeout_seconds=timeout_seconds,
+    )
+    result.trajectory.write_jsonl(output)
+    console.print_json(
+        data={
+            "task_id": task.task_id,
+            "status": result.trajectory.status,
+            "reward": result.trajectory.reward.model_dump(),
+            "trajectory_output": str(output),
+            "worktree": result.worktree if keep_worktree else None,
+        }
+    )
+
+
+@app.command("build-sft")
+def build_sft(
+    trajectories: Path,
+    output: Path = Path("data/processed/soft_verified_trajectories.jsonl"),
+    min_reward: float = 1.0,
+    include_partial: bool = False,
+) -> None:
+    """Convert verified trajectories into chat SFT JSONL."""
+    count = build_sft_jsonl(
+        trajectories_path=trajectories,
+        output_path=output,
+        min_reward=min_reward,
+        include_partial=include_partial,
+    )
+    console.print_json(data={"records": count, "output": str(output)})
+
+
+@app.command("smoke-loop")
+def smoke_loop(
+    task_dir: Path = Path("data/raw/smoke_tasks"),
+    trajectories: Path = Path("artifacts/trajectories/smoke_reference.jsonl"),
+    sft_output: Path = Path("data/processed/smoke_sft.jsonl"),
+    overwrite: bool = True,
+) -> None:
+    """Run the full local loop: generate tasks, evaluate reference patches, build SFT."""
+    task_files = write_smoke_tasks(output_dir=task_dir, overwrite=overwrite)
+    if overwrite and trajectories.exists():
+        trajectories.unlink()
+    success = 0
+    for task_file in task_files:
+        task = load_task(task_file)
+        patch_path = Path(task.metadata["reference_patch"])
+        result = evaluate_patch(task=task, patch=patch_path.read_text(encoding="utf-8"))
+        result.trajectory.write_jsonl(trajectories)
+        if result.trajectory.status == "success":
+            success += 1
+
+    records = build_sft_jsonl(
+        trajectories_path=trajectories,
+        output_path=sft_output,
+        min_reward=1.0,
+    )
+    console.print_json(
+        data={
+            "tasks": len(task_files),
+            "success": success,
+            "trajectories": str(trajectories),
+            "sft_records": records,
+            "sft_output": str(sft_output),
+        }
+    )
+
+
 if __name__ == "__main__":
     app()
-

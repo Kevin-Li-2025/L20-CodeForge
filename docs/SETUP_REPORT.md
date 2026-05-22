@@ -55,16 +55,18 @@ pytest -q
 ruff check .
 mini --help
 python -m l20_codeforge eval-card remote-smoke pass
+python -m l20_codeforge smoke-loop
 ```
 
 Results:
 
 ```text
 GPU smoke: pass
-pytest: 3 passed
+pytest: 5 passed
 ruff: all checks passed
 mini CLI: available
 eval card: artifacts/eval_cards/remote-smoke.json
+smoke loop: generates executable repair trajectories and SFT JSONL
 ```
 
 ## Research Basis
@@ -115,7 +117,7 @@ scripts/
 
 ## Next Build Step
 
-The next concrete step is not another environment install. It is data and eval:
+The next concrete step after the smoke loop is larger data and eval:
 
 1. Create 20-50 small local repo repair tasks.
 2. Run mini-SWE-agent trajectories into `artifacts/trajectories`.

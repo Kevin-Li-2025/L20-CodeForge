@@ -57,6 +57,7 @@ pytest -q
 ```bash
 python -m l20_codeforge init-dirs
 python -m l20_codeforge eval-card local-reward-smoke pass
+python -m l20_codeforge smoke-loop
 ```
 
 3. Download primary model only when the stack is ready:
@@ -78,3 +79,16 @@ For 14B:
 
 - Use QLoRA only.
 - Avoid long-context GRPO until 7B results justify it.
+
+## Smoke Loop Expectations
+
+`smoke-loop` should report three tasks and three successful reference patches.
+It writes:
+
+```text
+artifacts/trajectories/smoke_reference.jsonl
+data/processed/smoke_sft.jsonl
+```
+
+If this fails, fix the local data/eval/reward loop before downloading large
+weights or starting GPU training.

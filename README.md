@@ -90,4 +90,17 @@ After that, run a toy reward loop before loading a large model:
 ```bash
 python -m l20_codeforge init-dirs
 python -m l20_codeforge eval-card smoke pass
+python -m l20_codeforge smoke-loop
 ```
+
+`smoke-loop` creates executable repo-repair tasks, evaluates known-good patches in
+isolated worktrees, writes trajectories, and builds chat SFT JSONL:
+
+```text
+data/raw/smoke_tasks/
+artifacts/trajectories/smoke_reference.jsonl
+data/processed/smoke_sft.jsonl
+```
+
+This is the first quality gate. Do not start GPU training until this local loop
+passes on the target machine.
