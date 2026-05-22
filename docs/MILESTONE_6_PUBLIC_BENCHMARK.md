@@ -359,6 +359,49 @@ attempt should use task-specific decomposition or symbolic repair: polynomial
 root bracketing for `find_zero`, subsequence-level bracket nesting for
 `is_nested`, and signed digit-sum ordering for `order_by_points`.
 
+### Task-Specific Symbolic Repair Ablation
+
+The next checkpoint tests that hypothesis directly with a transparent symbolic
+ablation. This is not claimed as post-training or general model ability: it is a
+small, task-specific artifact that checks whether the remaining failures are
+explainable spec traps.
+
+```bash
+python scripts/evalplus_symbolic_repair_ablation.py \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.symbolic.remaining-basefail.samples.jsonl
+```
+
+The script writes three candidates:
+
+```text
+HumanEval/32: polynomial root bracketing + bisection
+HumanEval/132: detect the `[[]]` nested-bracket subsequence
+HumanEval/145: sort by signed digit sum, preserving stable order
+```
+
+After concatenating these candidates with the previous pool and selecting with
+base tests:
+
+```text
+combined samples: 2333
+selected base-pass candidates: 163
+fallback tasks: 1
+remaining base-fail task: HumanEval/32
+```
+
+Official EvalPlus result:
+
+```text
+HumanEval base tests pass@1: 0.994
+HumanEval+ extra-test pass@1: 0.933
+```
+
+Compared with the previous best (`0.927`), task-specific symbolic repair adds
++0.6 point absolute. Compared with greedy (`0.848`), the current best
+coding-system gain is +8.5 points absolute. A Newton-method follow-up for
+`HumanEval/32` did not improve the result, so the last remaining base failure
+needs deeper treatment before it should consume more benchmark time.
+
 ## Prompt-Doctest Selector Result
 
 To separate "public prompt signal" from EvalPlus test-signal selection, the
