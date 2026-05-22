@@ -144,6 +144,69 @@ against MBPP+ greedy as if they were the same protocol; the next fair
 cross-benchmark step is MBPP+ n-sample generation followed by the same
 base-test selector and a leakage-free ablation.
 
+### MBPP+ n=5 Base-Test Selector
+
+The next cross-benchmark check applies the same execution-guided selector to
+MBPP+ without using the EvalPlus extra tests for selection. Generation uses five
+sampled candidates per task:
+
+```bash
+python -m l20_codeforge generate-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  --dataset mbpp \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples.jsonl \
+  --n-samples 5 \
+  --temperature 0.8 \
+  --top-p 0.95 \
+  --max-new-tokens 512 \
+  --sample-batch-size 5 \
+  --seed 31415 \
+  --overwrite
+
+python -m l20_codeforge eval-evalplus \
+  mbpp \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples.jsonl \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-only.evalplus_report.json \
+  --base-only \
+  --parallel 8
+
+python -m l20_codeforge select-evalplus \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.samples_eval_results.json \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-longest-selected.samples.jsonl \
+  --tie-breaker longest
+
+python -m l20_codeforge eval-evalplus \
+  mbpp \
+  artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-longest-selected.samples.jsonl \
+  --output artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-longest-selected.evalplus_report.json \
+  --parallel 8
+```
+
+Result:
+
+```text
+dataset: MBPP+
+tasks: 378
+samples: 1890, five per task
+temperature/top_p: 0.8 / 0.95
+sample_batch_size: 5
+generation time: 1644.9 seconds
+first sampled candidate MBPP base pass@1: 0.794
+selected base-pass candidates: 347
+fallback tasks: 31
+selected MBPP base tests pass@1: 0.918
+selected MBPP+ base + extra tests pass@1: 0.757
+```
+
+Interpretation: the selector moves MBPP+ from greedy `0.722` to `0.757`, a
++3.5 point absolute public-benchmark gain, while base-test pass@1 moves from
+`0.828` to `0.918`. This is a real cross-benchmark system improvement, but the
+generalization gap is now clear: base tests are much easier to satisfy than
+EvalPlus hidden extra tests. The next high-leverage step is not more blind SFT;
+it is a stronger public-test-only verifier or reranker that penalizes brittle,
+over-specialized candidates before final EvalPlus scoring.
+
 ## MBPP SFT Negative Result
 
 The first MBPP-train transfer adapter was intentionally small and fast:
