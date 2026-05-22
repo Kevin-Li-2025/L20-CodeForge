@@ -101,3 +101,26 @@ For repeat validation:
 ```bash
 bash scripts/run_remote_quality_gate.sh
 ```
+
+## Agent Rollout Bridge
+
+Export mini-SWE-agent prompts:
+
+```bash
+python -m l20_codeforge export-mini-tasks
+```
+
+After running mini and saving a `.traj.json`, normalize it:
+
+```bash
+python -m l20_codeforge convert-mini \
+  data/raw/smoke_tasks/<task_id>/task.json \
+  artifacts/mini_swe/trajectories/<task_id>.traj.json
+```
+
+Then build preference pairs when the trajectory file contains both strong and
+weak patches for the same task:
+
+```bash
+python -m l20_codeforge build-dpo artifacts/trajectories/mini_swe_converted.jsonl
+```

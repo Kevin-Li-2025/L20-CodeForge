@@ -6,7 +6,9 @@ from pathlib import Path
 import typer
 from rich.console import Console
 
+from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_mini_task_records
 from l20_codeforge.context.compiler import ContextCompiler
+from l20_codeforge.data.preferences import build_preference_pairs
 from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
@@ -177,6 +179,66 @@ def report_trajectories(
     """Summarize trajectory status, rewards, and tags."""
     report = write_trajectory_report(trajectories, output)
     console.print_json(data={"output": str(output), **report.model_dump()})
+
+
+@app.command("export-mini-tasks")
+def export_mini_tasks(
+    task_dir: Path = Path("data/raw/smoke_tasks"),
+    output: Path = Path("artifacts/mini_swe/mini_task_records.jsonl"),
+    mini_output_dir: Path = Path("artifacts/mini_swe/trajectories"),
+    overwrite_tasks: bool = False,
+) -> None:
+    """Write mini-SWE-agent prompts and suggested commands for generated tasks."""
+    task_files = write_smoke_tasks(output_dir=task_dir, overwrite=overwrite_tasks)
+    count = export_mini_task_records(
+        task_files=task_files,
+        output_path=output,
+        output_dir=mini_output_dir,
+    )
+    console.print_json(data={"records": count, "output": str(output)})
+
+
+@app.command("convert-mini")
+def convert_mini(
+    task_file: Path,
+    mini_trajectory: Path,
+    output: Path = Path("artifacts/trajectories/mini_swe_converted.jsonl"),
+    run_hidden: bool = True,
+    timeout_seconds: int = 120,
+) -> None:
+    """Convert a mini-SWE-agent trajectory into L20 CodeForge trajectory JSONL."""
+    result = convert_mini_trajectory_file(
+        task_file=task_file,
+        mini_trajectory_file=mini_trajectory,
+        run_hidden=run_hidden,
+        timeout_seconds=timeout_seconds,
+    )
+    result.trajectory.write_jsonl(output)
+    console.print_json(
+        data={
+            "task_id": result.trajectory.task.task_id,
+            "status": result.trajectory.status,
+            "patch_found": result.patch_found,
+            "mini_exit_status": result.mini_exit_status,
+            "reward": result.trajectory.reward.model_dump(),
+            "output": str(output),
+        }
+    )
+
+
+@app.command("build-dpo")
+def build_dpo(
+    trajectories: Path,
+    output: Path = Path("data/processed/preference_pairs.jsonl"),
+    min_reward_gap: float = 0.25,
+) -> None:
+    """Build task-level chosen/rejected patch pairs from trajectory JSONL."""
+    count = build_preference_pairs(
+        trajectories_path=trajectories,
+        output_path=output,
+        min_reward_gap=min_reward_gap,
+    )
+    console.print_json(data={"pairs": count, "output": str(output)})
 
 
 if __name__ == "__main__":

@@ -88,6 +88,5 @@ Run model-generated patches against the same suite:
 mini --task "$(cat data/raw/smoke_tasks/<task>/task.json)" --yolo --output artifacts/trajectories/<task>.json
 ```
 
-That command shape will need a thin adapter so mini-SWE-agent trajectories can be
-normalized into L20 CodeForge's `Trajectory` schema.
-
+Milestone 3 adds the adapter that normalizes mini-SWE-agent trajectories into
+L20 CodeForge's `Trajectory` schema.

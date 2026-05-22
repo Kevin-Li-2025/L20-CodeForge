@@ -91,6 +91,19 @@ There are two environment levels:
 The current scaffold implements the local repo path first because it is fast,
 debuggable, and appropriate for L20 iteration.
 
+### mini-SWE-agent Adapter
+
+The mini adapter normalizes external agent rollouts into the same trajectory
+schema used by reference patches. It extracts commands, observations, final
+submissions, and unified diffs from mini-SWE-agent `.traj.json` files, then
+re-runs patch evaluation with visible and hidden tests.
+
+This keeps agent behavior and reference patches comparable:
+
+```text
+mini .traj.json -> L20 Trajectory -> report / SFT / DPO
+```
+
 ## Current Executable Loop
 
 ```bash

@@ -6,6 +6,7 @@ from pathlib import Path
 PROJECT_DIRS = [
     "artifacts/checkpoints",
     "artifacts/eval_cards",
+    "artifacts/mini_swe",
     "artifacts/reports",
     "artifacts/trajectories",
     "data/raw",

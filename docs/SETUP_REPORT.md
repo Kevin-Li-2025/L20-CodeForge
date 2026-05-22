@@ -56,6 +56,7 @@ ruff check .
 mini --help
 python -m l20_codeforge eval-card remote-smoke pass
 python -m l20_codeforge smoke-loop
+python -m l20_codeforge export-mini-tasks
 ```
 
 Results:
@@ -67,6 +68,7 @@ ruff: all checks passed
 mini CLI: available
 eval card: artifacts/eval_cards/remote-smoke.json
 smoke loop: generates executable repair trajectories, report JSON, and SFT JSONL
+mini export: writes mini-SWE-agent task prompts and suggested commands
 ```
 
 ## Research Basis

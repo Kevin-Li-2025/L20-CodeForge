@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import difflib
+import json
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -1835,9 +1836,21 @@ def write_smoke_tasks(output_dir: Path, overwrite: bool = False) -> list[Path]:
             _write_text(repo_dir / rel_path, content)
         for rel_path, content in definition.hidden_test_files.items():
             _write_text(repo_dir / rel_path, content)
+        _write_patch_helper(repo_dir, definition.buggy_files)
         _write_text(
             repo_dir / "README.md",
-            f"# {definition.task_id}\n\n{definition.issue}\n\nTags: {', '.join(definition.tags)}\n",
+            "\n".join(
+                [
+                    f"# {definition.task_id}",
+                    "",
+                    definition.issue,
+                    "",
+                    "Visible tests: `python3 -m unittest discover -s tests_visible`",
+                    "Patch helper: `python3 .l20_codeforge/make_patch.py`",
+                    f"Tags: {', '.join(definition.tags)}",
+                    "",
+                ]
+            ),
         )
 
         patch = _make_patch(definition.buggy_files, definition.fixed_files)
@@ -1878,3 +1891,51 @@ def _make_patch(buggy_files: dict[str, str], fixed_files: dict[str, str]) -> str
 def _write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
+
+
+def _write_patch_helper(repo_dir: Path, original_files: dict[str, str]) -> None:
+    helper_dir = repo_dir / ".l20_codeforge"
+    source_files = sorted(original_files)
+    for rel_path, content in original_files.items():
+        _write_text(helper_dir / "original" / rel_path, content)
+    _write_text(helper_dir / "source_files.json", json.dumps(source_files, indent=2) + "\n")
+    _write_text(
+        helper_dir / "make_patch.py",
+        '''\
+from __future__ import annotations
+
+import difflib
+import json
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+HELPER = ROOT / ".l20_codeforge"
+SOURCE_FILES = json.loads((HELPER / "source_files.json").read_text(encoding="utf-8"))
+
+
+def main() -> int:
+    parts: list[str] = []
+    for rel_path in SOURCE_FILES:
+        original_path = HELPER / "original" / rel_path
+        current_path = ROOT / rel_path
+        original = original_path.read_text(encoding="utf-8").splitlines(keepends=True)
+        current = current_path.read_text(encoding="utf-8").splitlines(keepends=True)
+        if original == current:
+            continue
+        parts.extend(
+            difflib.unified_diff(
+                original,
+                current,
+                fromfile=f"a/{rel_path}",
+                tofile=f"b/{rel_path}",
+            )
+        )
+    print("".join(parts), end="")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+''',
+    )
