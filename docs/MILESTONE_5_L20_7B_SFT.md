@@ -210,3 +210,62 @@ base samples and 3/3 adapter samples. The adapter outputs were syntactically
 patch-like, but this is still only a format check. The next milestone must
 materialize real SWE-bench tasks, apply generated patches, and run the
 task-specific tests.
+
+## Executable Spot Check
+
+The first executable check used a held-out SWE-bench Lite task that was not in
+the Verified SFT training set:
+
+```text
+task: django__django-10924
+repo: django/django
+base commit: bceadd2788dc2dad53eba0caae172bd8522fd483
+test: model_fields.test_filepathfield.FilePathFieldTests.test_callable_path
+```
+
+Evaluation setup:
+
+1. Check out the base commit.
+2. Apply the SWE-bench `test_patch`.
+3. Confirm the base repo fails the new test.
+4. Apply the gold patch and confirm the test passes.
+5. Apply generated patches from the base model and the SFT adapter.
+
+Harness validation:
+
+```text
+base commit + test_patch: FAIL
+gold patch + test_patch: PASS
+```
+
+The failure reproduced the expected bug:
+
+```text
+TypeError: scandir: path should be string, bytes, os.PathLike, integer or None, not function
+```
+
+Generated-patch results:
+
+```text
+base model generated patch:    apply failed, corrupt patch at line 277
+SFT adapter generated patch:   apply failed, wrong target file
+```
+
+The adapter generated a patch for:
+
+```text
+django/db/models/fields/files.py
+```
+
+The gold patch modifies:
+
+```text
+django/db/models/fields/__init__.py
+```
+
+This spot check does not prove the adapter is globally worse, but it does prove
+that the NLL/perplexity improvement is not enough to claim improved coding-task
+performance. The current SFT run improves gold-patch likelihood while still
+failing a real apply-and-test loop. The next milestone should optimize for
+executable reward: valid unified diffs, correct file localization, test feedback,
+and pass/fail trajectory training.
