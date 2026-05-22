@@ -23,6 +23,7 @@ class EvalPlusGenerationReport(BaseModel):
     id_start: int | None = None
     id_end: int | None = None
     task_ids: list[str] | None = None
+    prompt_style: str = "default"
     temperature: float = 0.0
     top_p: float = 0.95
     max_new_tokens: int = 512
@@ -71,6 +72,7 @@ def generate_evalplus_samples(
     id_start: int | None = None,
     id_end: int | None = None,
     task_ids: list[str] | None = None,
+    prompt_style: str = "default",
     temperature: float = 0.0,
     top_p: float = 0.95,
     max_new_tokens: int = 512,
@@ -147,7 +149,7 @@ def generate_evalplus_samples(
                 batch_size = min(sample_batch_size, n_samples - sample_index)
                 if temperature == 0:
                     batch_size = 1
-                prompt = build_evalplus_prompt(task["prompt"])
+                prompt = build_evalplus_prompt(task["prompt"], style=prompt_style)
                 completions = generate_many(
                     model=model,
                     tokenizer=tokenizer,
@@ -198,6 +200,7 @@ def generate_evalplus_samples(
         id_start=id_start,
         id_end=id_end,
         task_ids=task_ids,
+        prompt_style=prompt_style,
         temperature=temperature,
         top_p=top_p,
         max_new_tokens=max_new_tokens,
@@ -500,12 +503,23 @@ def count_existing_samples(path: Path) -> dict[str, int]:
     return counts
 
 
-def build_evalplus_prompt(function_prompt: str) -> str:
-    return (
-        "Complete the following Python function for an execution-based coding benchmark.\n"
-        "Return only valid Python code. Do not include markdown or explanations.\n\n"
-        f"{function_prompt.rstrip()}\n"
-    )
+def build_evalplus_prompt(function_prompt: str, style: str = "default") -> str:
+    if style == "default":
+        instruction = (
+            "Complete the following Python function for an execution-based coding benchmark.\n"
+            "Return only valid Python code. Do not include markdown or explanations."
+        )
+    elif style == "literal":
+        instruction = (
+            "Complete the following Python function for an execution-based coding benchmark.\n"
+            "Implement the exact behavior described by the docstring and examples, including "
+            "surprising wording, edge cases, and helper-function conventions. Use only the "
+            "Python standard library. Return only valid Python code, with no markdown or "
+            "explanations."
+        )
+    else:
+        raise ValueError("style must be one of: default, literal")
+    return f"{instruction}\n\n{function_prompt.rstrip()}\n"
 
 
 def generate_many(

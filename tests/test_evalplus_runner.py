@@ -49,6 +49,14 @@ def test_build_evalplus_prompt_requests_code_only() -> None:
     assert "def add" in prompt
 
 
+def test_build_evalplus_prompt_literal_style_requests_exact_behavior() -> None:
+    prompt = build_evalplus_prompt("def add(a, b):\n    pass", style="literal")
+
+    assert "exact behavior" in prompt
+    assert "standard library" in prompt
+    assert "def add" in prompt
+
+
 def test_count_existing_samples(tmp_path: Path) -> None:
     samples = tmp_path / "samples.jsonl"
     samples.write_text(

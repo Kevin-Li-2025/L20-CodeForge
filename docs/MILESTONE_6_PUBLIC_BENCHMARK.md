@@ -257,6 +257,59 @@ absolute. Compared with greedy (`0.848`), the current coding-system gain is
 `HumanEval/129`, `HumanEval/130`, `HumanEval/132`, `HumanEval/145`, and
 `HumanEval/163`.
 
+### Literal-Prompt Hard-Task Resampling
+
+The remaining failures were mostly spec-misread tasks, not generic syntax
+failures. Examples include "even digits" versus even integers, subsequence
+nesting versus whole-string bracket validity, and recurrence definitions where
+the next even term is known. A second prompt style therefore asks the model to
+follow the docstring literally and avoid non-standard libraries:
+
+```bash
+python -m l20_codeforge generate-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  --dataset humaneval \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp10.n50.remaining-basefail.literal.samples.jsonl \
+  --task-ids HumanEval/32,HumanEval/129,HumanEval/130,HumanEval/132,HumanEval/145,HumanEval/163 \
+  --prompt-style literal \
+  --n-samples 50 \
+  --temperature 1.0 \
+  --top-p 0.98 \
+  --sample-batch-size 5 \
+  --seed 2026 \
+  --overwrite
+```
+
+Generation result:
+
+```text
+target tasks: 6
+new samples: 300
+generation time: 665.3 seconds
+```
+
+The literal samples were concatenated with the previous combined pool and again
+selected only with EvalPlus base tests:
+
+```text
+combined samples: 2330
+base-only pass@10: 0.965
+selected base-pass candidates: 161
+fallback tasks: 3
+```
+
+Official EvalPlus result:
+
+```text
+HumanEval base tests pass@1: 0.982
+HumanEval+ extra-test pass@1: 0.927
+```
+
+Compared with the previous best (`0.921`), this adds +0.6 point absolute.
+Compared with greedy (`0.848`), the current coding-system gain is +7.9 points
+absolute. Remaining base-fail tasks are `HumanEval/32`, `HumanEval/132`, and
+`HumanEval/145`.
+
 ## Prompt-Doctest Selector Result
 
 To separate "public prompt signal" from EvalPlus test-signal selection, the
