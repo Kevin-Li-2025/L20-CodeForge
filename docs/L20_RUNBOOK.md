@@ -158,5 +158,54 @@ python -m l20_codeforge train-real-sft \
   --max-length 2048
 ```
 
-For a 7B offline run, first stage the model directory on the L20 host, then run
-the same command with `--load-in-4bit`.
+For a 7B offline run, first stage the model directory on the L20 host. If the
+host cannot reach Hugging Face directly, use the mirror endpoint and explicit
+filenames:
+
+```bash
+HF_ENDPOINT=https://hf-mirror.com hf download \
+  Qwen/Qwen2.5-Coder-7B-Instruct \
+  config.json generation_config.json model.safetensors.index.json \
+  model-00001-of-00004.safetensors \
+  model-00002-of-00004.safetensors \
+  model-00003-of-00004.safetensors \
+  model-00004-of-00004.safetensors \
+  tokenizer.json tokenizer_config.json merges.txt vocab.json \
+  --local-dir /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct
+```
+
+Then run the 7B QLoRA smoke:
+
+```bash
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+python -m l20_codeforge train-real-sft \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  data/processed/real_sft/swe_bench_lite_sft.jsonl \
+  --output-dir artifacts/checkpoints/qwen25-coder-7b-real-sft-smoke \
+  --max-steps 5 \
+  --limit 64 \
+  --max-length 2048 \
+  --gradient-accumulation-steps 4 \
+  --load-in-4bit
+```
+
+Use this verified-data configuration for the first full single-L20 pass:
+
+```bash
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+python -m l20_codeforge train-real-sft \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  data/processed/real_sft/swe_bench_verified_sft.jsonl \
+  --output-dir artifacts/checkpoints/qwen25-coder-7b-verified-sft-4096-epoch1 \
+  --max-steps 64 \
+  --limit 500 \
+  --max-length 4096 \
+  --per-device-train-batch-size 2 \
+  --gradient-accumulation-steps 4 \
+  --load-in-4bit
+```
+
+Observed on the L20: 64 steps over 500 SWE-bench Verified SFT records completed
+in 1011.2 seconds with train loss 0.9147. Peak memory was about 29.6 GiB. A
+4096-token batch size of 4 OOMed near 41.9 GiB, so use batch size 2 unless the
+loss path is changed to avoid full-logit materialization.

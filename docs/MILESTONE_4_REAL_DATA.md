@@ -78,6 +78,9 @@ python -m l20_codeforge train-real-sft \
   --max-length 2048
 ```
 
+See `docs/MILESTONE_5_L20_7B_SFT.md` for the completed 7B QLoRA run on
+SWE-bench Verified.
+
 Fetch SWE-Gym:
 
 ```bash
