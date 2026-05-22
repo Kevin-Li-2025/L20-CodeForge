@@ -41,10 +41,10 @@ The data layer uses explicit schemas for:
 - `AgentStep`: command, observation, status, elapsed time, and token estimates.
 - `Trajectory`: full rollout plus patch and reward decomposition.
 
-The smoke task generator creates small Python repo-repair tasks with reference
-patches. These are not meant to be impressive benchmarks. They are a regression
-suite for the training data factory: if they fail, the larger SWE-style loop is
-not ready.
+The smoke task generator creates 36 small Python repo-repair tasks with reference
+patches, visible tests, and hidden tests. These are not meant to be impressive
+benchmarks. They are a regression suite for the training data factory: if they
+fail, the larger SWE-style loop is not ready.
 
 This makes trajectories usable for SFT, DPO, GRPO, and offline audits.
 
@@ -101,8 +101,9 @@ Outputs:
 
 ```text
 artifacts/trajectories/smoke_reference.jsonl
+artifacts/reports/smoke_reference_report.json
 data/processed/smoke_sft.jsonl
 ```
 
 This loop validates patch application, test execution, reward scoring, trajectory
-serialization, and SFT conversion without downloading a model.
+serialization, reporting, and SFT conversion without downloading a model.

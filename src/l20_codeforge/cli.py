@@ -7,6 +7,7 @@ import typer
 from rich.console import Console
 
 from l20_codeforge.context.compiler import ContextCompiler
+from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
@@ -81,6 +82,7 @@ def eval_patch(
     patch_file: Path,
     output: Path = Path("artifacts/trajectories/patch_eval.jsonl"),
     keep_worktree: bool = False,
+    run_hidden: bool = False,
     timeout_seconds: int = 120,
 ) -> None:
     """Apply a patch to an isolated task repo, run tests, and append a trajectory."""
@@ -90,6 +92,7 @@ def eval_patch(
         task=task,
         patch=patch,
         keep_worktree=keep_worktree,
+        run_hidden=run_hidden,
         timeout_seconds=timeout_seconds,
     )
     result.trajectory.write_jsonl(output)
@@ -126,6 +129,8 @@ def smoke_loop(
     task_dir: Path = Path("data/raw/smoke_tasks"),
     trajectories: Path = Path("artifacts/trajectories/smoke_reference.jsonl"),
     sft_output: Path = Path("data/processed/smoke_sft.jsonl"),
+    report_output: Path = Path("artifacts/reports/smoke_reference_report.json"),
+    run_hidden: bool = True,
     overwrite: bool = True,
 ) -> None:
     """Run the full local loop: generate tasks, evaluate reference patches, build SFT."""
@@ -136,11 +141,16 @@ def smoke_loop(
     for task_file in task_files:
         task = load_task(task_file)
         patch_path = Path(task.metadata["reference_patch"])
-        result = evaluate_patch(task=task, patch=patch_path.read_text(encoding="utf-8"))
+        result = evaluate_patch(
+            task=task,
+            patch=patch_path.read_text(encoding="utf-8"),
+            run_hidden=run_hidden,
+        )
         result.trajectory.write_jsonl(trajectories)
         if result.trajectory.status == "success":
             success += 1
 
+    report = write_trajectory_report(trajectories, report_output)
     records = build_sft_jsonl(
         trajectories_path=trajectories,
         output_path=sft_output,
@@ -151,10 +161,22 @@ def smoke_loop(
             "tasks": len(task_files),
             "success": success,
             "trajectories": str(trajectories),
+            "report": str(report_output),
+            "status_counts": report.status_counts,
             "sft_records": records,
             "sft_output": str(sft_output),
         }
     )
+
+
+@app.command("report-trajectories")
+def report_trajectories(
+    trajectories: Path,
+    output: Path = Path("artifacts/reports/trajectory_report.json"),
+) -> None:
+    """Summarize trajectory status, rewards, and tags."""
+    report = write_trajectory_report(trajectories, output)
+    console.print_json(data={"output": str(output), **report.model_dump()})
 
 
 if __name__ == "__main__":

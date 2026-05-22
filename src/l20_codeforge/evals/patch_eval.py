@@ -17,8 +17,10 @@ class PatchEvalResult(BaseModel):
     worktree: str
     apply_stdout: str = ""
     apply_stderr: str = ""
-    test_stdout: str = ""
-    test_stderr: str = ""
+    visible_test_stdout: str = ""
+    visible_test_stderr: str = ""
+    hidden_test_stdout: str = ""
+    hidden_test_stderr: str = ""
 
 
 def load_task(path: Path) -> TaskSpec:
@@ -29,6 +31,7 @@ def evaluate_patch(
     task: TaskSpec,
     patch: str,
     keep_worktree: bool = False,
+    run_hidden: bool = False,
     timeout_seconds: int = 120,
 ) -> PatchEvalResult:
     source_repo = Path(task.repo).expanduser().resolve()
@@ -45,28 +48,53 @@ def evaluate_patch(
         )
     ]
 
-    test_result = None
+    visible_result = None
     if apply_result.returncode == 0 and task.visible_test_command:
         test_env = RepoEnv(worktree, timeout_seconds=timeout_seconds)
-        test_result = test_env.run(task.visible_test_command)
+        visible_result = test_env.run(task.visible_test_command)
         steps.append(
             AgentStep(
                 index=1,
                 action=task.visible_test_command,
-                observation=(test_result.stdout + test_result.stderr)[-20000:],
-                exit_code=test_result.exit_code,
-                elapsed_timeout=test_result.elapsed_timeout,
+                observation=(visible_result.stdout + visible_result.stderr)[-20000:],
+                exit_code=visible_result.exit_code,
+                elapsed_timeout=visible_result.elapsed_timeout,
             )
         )
 
-    test_exit_code = test_result.exit_code if test_result else 1
+    hidden_result = None
+    if (
+        apply_result.returncode == 0
+        and run_hidden
+        and task.hidden_test_command
+        and (visible_result is None or visible_result.exit_code == 0)
+    ):
+        test_env = RepoEnv(worktree, timeout_seconds=timeout_seconds)
+        hidden_result = test_env.run(task.hidden_test_command)
+        steps.append(
+            AgentStep(
+                index=len(steps),
+                action=task.hidden_test_command,
+                observation=(hidden_result.stdout + hidden_result.stderr)[-20000:],
+                exit_code=hidden_result.exit_code,
+                elapsed_timeout=hidden_result.elapsed_timeout,
+            )
+        )
+
+    visible_exit_code = visible_result.exit_code if visible_result else 1
+    hidden_exit_code = hidden_result.exit_code if hidden_result else 0
+    test_exit_code = 0 if visible_exit_code == 0 and hidden_exit_code == 0 else 1
     reward = score_patch(test_exit_code=test_exit_code, patch=patch)
     if apply_result.returncode != 0:
         status = "invalid"
         reward.notes.append("patch did not apply")
         reward.recompute_total()
-    elif test_exit_code == 0:
+    elif visible_exit_code == 0 and hidden_exit_code == 0:
         status = "success"
+    elif visible_exit_code == 0:
+        status = "partial"
+        reward.notes.append("visible tests passed; hidden tests failed")
+        reward.recompute_total()
     else:
         status = "partial"
 
@@ -85,8 +113,10 @@ def evaluate_patch(
         worktree=str(worktree),
         apply_stdout=apply_result.stdout,
         apply_stderr=apply_result.stderr,
-        test_stdout=test_result.stdout if test_result else "",
-        test_stderr=test_result.stderr if test_result else "",
+        visible_test_stdout=visible_result.stdout if visible_result else "",
+        visible_test_stderr=visible_result.stderr if visible_result else "",
+        hidden_test_stdout=hidden_result.stdout if hidden_result else "",
+        hidden_test_stderr=hidden_result.stderr if hidden_result else "",
     )
 
 

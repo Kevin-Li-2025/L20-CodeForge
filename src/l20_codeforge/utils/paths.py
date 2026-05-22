@@ -6,6 +6,7 @@ from pathlib import Path
 PROJECT_DIRS = [
     "artifacts/checkpoints",
     "artifacts/eval_cards",
+    "artifacts/reports",
     "artifacts/trajectories",
     "data/raw",
     "data/processed",
@@ -20,4 +21,3 @@ def ensure_project_dirs(root: Path) -> list[Path]:
         path.mkdir(parents=True, exist_ok=True)
         created.append(path)
     return created
-

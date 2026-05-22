@@ -24,6 +24,8 @@ bash scripts/bootstrap_remote.sh
 source .venv/bin/activate
 python scripts/check_gpu.py
 pytest -q
+ruff check .
+python -m l20_codeforge smoke-loop
 ```
 
 Keep vLLM in a separate environment if needed. The vLLM docs recommend a fresh
@@ -82,13 +84,20 @@ For 14B:
 
 ## Smoke Loop Expectations
 
-`smoke-loop` should report three tasks and three successful reference patches.
+`smoke-loop` should report 36 tasks and 36 successful reference patches.
 It writes:
 
 ```text
 artifacts/trajectories/smoke_reference.jsonl
+artifacts/reports/smoke_reference_report.json
 data/processed/smoke_sft.jsonl
 ```
 
 If this fails, fix the local data/eval/reward loop before downloading large
 weights or starting GPU training.
+
+For repeat validation:
+
+```bash
+bash scripts/run_remote_quality_gate.sh
+```

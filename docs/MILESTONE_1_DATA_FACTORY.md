@@ -10,13 +10,14 @@ python -m l20_codeforge smoke-loop
 
 The command:
 
-1. generates three small Python repo-repair tasks,
+1. generates 36 small Python repo-repair tasks,
 2. writes a reference patch for each task,
 3. applies each patch in an isolated worktree,
-4. runs `python3 -m unittest discover -s tests`,
+4. runs visible and hidden unittest suites,
 5. decomposes reward into tests, patch quality, anti-hack, and self-verification,
 6. appends trajectories to JSONL,
-7. converts successful trajectories into chat SFT JSONL.
+7. writes a trajectory report,
+8. converts successful trajectories into chat SFT JSONL.
 
 ## Why This Matters
 
@@ -28,6 +29,7 @@ produce executable, inspectable training examples before using GPU time.
 ```text
 data/raw/smoke_tasks/
 artifacts/trajectories/smoke_reference.jsonl
+artifacts/reports/smoke_reference_report.json
 data/processed/smoke_sft.jsonl
 ```
 

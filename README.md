@@ -93,14 +93,21 @@ python -m l20_codeforge eval-card smoke pass
 python -m l20_codeforge smoke-loop
 ```
 
-`smoke-loop` creates executable repo-repair tasks, evaluates known-good patches in
-isolated worktrees, writes trajectories, and builds chat SFT JSONL:
+`smoke-loop` creates 36 executable repo-repair tasks with visible and hidden
+tests, evaluates known-good patches in isolated worktrees, writes trajectories,
+builds a report, and builds chat SFT JSONL:
 
 ```text
 data/raw/smoke_tasks/
 artifacts/trajectories/smoke_reference.jsonl
+artifacts/reports/smoke_reference_report.json
 data/processed/smoke_sft.jsonl
 ```
 
 This is the first quality gate. Do not start GPU training until this local loop
 passes on the target machine.
+
+Milestone notes:
+
+- `docs/MILESTONE_1_DATA_FACTORY.md`: first executable data loop.
+- `docs/MILESTONE_2_REPAIR_SUITE.md`: 36-task visible/hidden repair suite.

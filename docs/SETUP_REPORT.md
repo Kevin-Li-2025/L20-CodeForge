@@ -66,7 +66,7 @@ pytest: 5 passed
 ruff: all checks passed
 mini CLI: available
 eval card: artifacts/eval_cards/remote-smoke.json
-smoke loop: generates executable repair trajectories and SFT JSONL
+smoke loop: generates executable repair trajectories, report JSON, and SFT JSONL
 ```
 
 ## Research Basis
@@ -117,10 +117,10 @@ scripts/
 
 ## Next Build Step
 
-The next concrete step after the smoke loop is larger data and eval:
+The next concrete step after the 36-task smoke loop is larger data and eval:
 
-1. Create 20-50 small local repo repair tasks.
-2. Run mini-SWE-agent trajectories into `artifacts/trajectories`.
+1. Replace reference patches with mini-SWE-agent trajectories for the same task suite.
+2. Add 20-50 larger multi-file local repo repair tasks.
 3. Convert successful and partial trajectories into
    `data/processed/soft_verified_trajectories.jsonl`.
 4. Run Qwen2.5-Coder-7B QLoRA SFT.
