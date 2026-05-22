@@ -32,6 +32,8 @@ agent = [
 ]
 bench = [
   "evalplus>=0.3",
+  "pebble>=5.0",
+  "pyarrow>=16.0",
 ]
 dev = [
   "pytest>=8.2",

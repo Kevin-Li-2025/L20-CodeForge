@@ -1,0 +1,37 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "benchmark_scope": "release_v6 parquet shard subset; not a full leaderboard run",
+  "lcb_repo": "/path/to/LiveCodeBench",
+  "lcb_repo_commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+  "parquet": "data/raw/livecodebench/release_v6_test_00000_smalltests20.parquet",
+  "parquet_sha256": "9a35057e923ae1892c05202ca83ee6aeb47ec22911550e34c158f2b2a817b510",
+  "parquet_rows_selected": 3,
+  "model": "/path/to/Qwen2.5-Coder-7B-Instruct",
+  "adapter_path": null,
+  "n_samples": 1,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "max_new_tokens": 1024,
+  "max_input_tokens": 8192,
+  "seed": 42,
+  "start_date": null,
+  "end_date": null,
+  "difficulty": null,
+  "limit": 3,
+  "load_in_4bit": true,
+  "bf16": true,
+  "generation_seconds": 48.133,
+  "evaluation_seconds": 0.534,
+  "metrics": {
+    "pass@1": 0.3333333333333333,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 1.0
+      }
+    }
+  },
+  "passed_at_1_count": 1,
+  "total": 3
+}
