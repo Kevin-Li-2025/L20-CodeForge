@@ -210,6 +210,170 @@ def generate_evalplus_samples(
     )
 
 
+def generate_evalplus_repairs(
+    model_name_or_path: str,
+    dataset: str,
+    samples: Path,
+    eval_results: Path,
+    output: Path,
+    adapter_path: str | None = None,
+    n_repairs: int = 10,
+    task_ids: list[str] | None = None,
+    temperature: float = 0.7,
+    top_p: float = 0.95,
+    max_new_tokens: int = 512,
+    sample_batch_size: int = 1,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    overwrite: bool = False,
+) -> EvalPlusGenerationReport:
+    import torch
+    from evalplus.sanitize import sanitize
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+    tasks = load_evalplus_tasks(dataset)
+    grouped_samples = load_evalplus_samples_by_task(samples)
+    results = json.loads(eval_results.read_text(encoding="utf-8"))["eval"]
+    target_task_ids = task_ids or [
+        task_id
+        for task_id, task_results in results.items()
+        if any(result.get("base_status") != "pass" for result in task_results)
+    ]
+    selected_tasks = [
+        (task_id, tasks[task_id])
+        for task_id in target_task_ids
+        if task_id in tasks and task_id in grouped_samples
+    ]
+    if not selected_tasks:
+        raise ValueError("no repairable EvalPlus tasks selected")
+
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        adapter_path or model_name_or_path,
+        trust_remote_code=True,
+        local_files_only=Path(model_name_or_path).exists(),
+    )
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    model_kwargs: dict[str, Any] = {
+        "trust_remote_code": True,
+        "low_cpu_mem_usage": True,
+        "torch_dtype": torch.bfloat16 if bf16 else torch.float16,
+    }
+    if load_in_4bit:
+        model_kwargs["device_map"] = "auto"
+        model_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16 if bf16 else torch.float16,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+        )
+
+    model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
+    if adapter_path:
+        model = PeftModel.from_pretrained(model, adapter_path)
+    model.eval()
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    raw_output = output.with_suffix(".raw.jsonl")
+    if overwrite:
+        output.unlink(missing_ok=True)
+        raw_output.unlink(missing_ok=True)
+
+    existing = count_existing_samples(output)
+    started = time.monotonic()
+    samples_written = 0
+    with output.open("a", encoding="utf-8") as sanitized_handle, raw_output.open(
+        "a", encoding="utf-8"
+    ) as raw_handle:
+        for task_id, task in selected_tasks:
+            already = existing.get(task_id, 0)
+            if already >= n_repairs:
+                continue
+            task_results = results.get(task_id, [])
+            source_index = next(
+                (
+                    index
+                    for index, result in enumerate(task_results)
+                    if result.get("base_status") != "pass"
+                ),
+                0,
+            )
+            candidates = grouped_samples[task_id]
+            source_candidate = candidates[min(source_index, len(candidates) - 1)]
+            source_result = task_results[source_index] if source_index < len(task_results) else {}
+            prompt = build_evalplus_repair_prompt(
+                function_prompt=task["prompt"],
+                candidate_solution=str(source_candidate.get("solution", "")),
+                base_fail_tests=source_result.get("base_fail_tests", []),
+            )
+            sample_index = already
+            while sample_index < n_repairs:
+                batch_size = min(sample_batch_size, n_repairs - sample_index)
+                completions = generate_many(
+                    model=model,
+                    tokenizer=tokenizer,
+                    prompt=prompt,
+                    temperature=temperature,
+                    top_p=top_p,
+                    max_new_tokens=max_new_tokens,
+                    num_return_sequences=batch_size,
+                )
+                for completion in completions:
+                    code_text = strip_markdown_code_fence(completion)
+                    solution_input = task["prompt"].rstrip() + "\n" + code_text
+                    sanitized = sanitize(solution_input, entrypoint=task["entry_point"])
+                    if not sanitized.strip():
+                        sanitized = solution_input
+
+                    sanitized_handle.write(
+                        json.dumps({"task_id": task_id, "solution": sanitized}) + "\n"
+                    )
+                    raw_handle.write(
+                        json.dumps(
+                            {
+                                "task_id": task_id,
+                                "sample_index": sample_index,
+                                "source_index": source_index,
+                                "prompt": prompt,
+                                "completion": completion,
+                                "solution_input": solution_input,
+                                "sanitized": sanitized,
+                            }
+                        )
+                        + "\n"
+                    )
+                    sanitized_handle.flush()
+                    raw_handle.flush()
+                    samples_written += 1
+                    sample_index += 1
+
+    return EvalPlusGenerationReport(
+        dataset=dataset,
+        model_name_or_path=model_name_or_path,
+        adapter_path=adapter_path,
+        output=str(output),
+        raw_output=str(raw_output),
+        tasks_seen=len(selected_tasks),
+        samples_written=samples_written,
+        n_samples=n_repairs,
+        task_ids=[task_id for task_id, _ in selected_tasks],
+        prompt_style="repair",
+        temperature=temperature,
+        top_p=top_p,
+        max_new_tokens=max_new_tokens,
+        sample_batch_size=sample_batch_size,
+        load_in_4bit=load_in_4bit,
+        elapsed_seconds=round(time.monotonic() - started, 3),
+    )
+
+
 def run_evalplus_official(
     dataset: str,
     samples: Path,
@@ -520,6 +684,34 @@ def build_evalplus_prompt(function_prompt: str, style: str = "default") -> str:
     else:
         raise ValueError("style must be one of: default, literal")
     return f"{instruction}\n\n{function_prompt.rstrip()}\n"
+
+
+def build_evalplus_repair_prompt(
+    function_prompt: str,
+    candidate_solution: str,
+    base_fail_tests: Any,
+    max_fail_tests: int = 16,
+) -> str:
+    if isinstance(base_fail_tests, list):
+        shown_tests = base_fail_tests[:max_fail_tests]
+    else:
+        shown_tests = base_fail_tests
+    return (
+        "Repair the following Python benchmark solution using the public failing "
+        "test inputs. Return only valid Python code for the corrected function and "
+        "any helper functions. Use only the Python standard library.\n\n"
+        "Problem:\n"
+        f"{function_prompt.rstrip()}\n\n"
+        "Candidate solution that failed:\n"
+        "```python\n"
+        f"{candidate_solution.strip()}\n"
+        "```\n\n"
+        "Failing public base-test inputs. Each item is the argument list passed to "
+        "the target function:\n"
+        f"{json.dumps(shown_tests, ensure_ascii=True)}\n\n"
+        "Fix the logic implied by the docstring, examples, and failing inputs. "
+        "Do not include markdown or explanations."
+    )
 
 
 def generate_many(

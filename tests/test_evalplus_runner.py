@@ -5,6 +5,7 @@ from pathlib import Path
 
 from l20_codeforge.evals.evalplus_runner import (
     build_evalplus_prompt,
+    build_evalplus_repair_prompt,
     choose_evalplus_candidate_index,
     count_existing_samples,
     parse_evalplus_pass_at_1,
@@ -54,6 +55,18 @@ def test_build_evalplus_prompt_literal_style_requests_exact_behavior() -> None:
 
     assert "exact behavior" in prompt
     assert "standard library" in prompt
+    assert "def add" in prompt
+
+
+def test_build_evalplus_repair_prompt_includes_failed_inputs() -> None:
+    prompt = build_evalplus_repair_prompt(
+        function_prompt="def add(a, b):\n    pass",
+        candidate_solution="def add(a, b):\n    return a - b",
+        base_fail_tests=[[1, 2]],
+    )
+
+    assert "Candidate solution that failed" in prompt
+    assert "[[1, 2]]" in prompt
     assert "def add" in prompt
 
 

@@ -310,6 +310,55 @@ Compared with greedy (`0.848`), the current coding-system gain is +7.9 points
 absolute. Remaining base-fail tasks are `HumanEval/32`, `HumanEval/132`, and
 `HumanEval/145`.
 
+### Failure-Feedback Repair Negative Result
+
+The next ablation adds an explicit repair loop: take the currently selected
+failed solution, show the model the public base-test inputs that failed, and ask
+for corrected code. This is a reusable execution-feedback path, but it should
+still be evaluated honestly because it uses base-test feedback during candidate
+generation.
+
+```bash
+python -m l20_codeforge repair-evalplus \
+  /home/hhai/model-cache/Qwen2.5-Coder-7B-Instruct \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.base-longest-selected.samples.jsonl \
+  artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.base-longest-selected.samples_eval_results.json \
+  --dataset humaneval \
+  --output artifacts/evalplus/qwen25-coder-7b-base/humaneval.repair.remaining-basefail.n20.samples.jsonl \
+  --task-ids HumanEval/32,HumanEval/132,HumanEval/145 \
+  --n-repairs 20 \
+  --temperature 0.7 \
+  --top-p 0.95 \
+  --sample-batch-size 5 \
+  --seed 4242 \
+  --overwrite
+```
+
+Generation result:
+
+```text
+target tasks: 3
+new repair samples: 60
+generation time: 75.6 seconds
+```
+
+After concatenating repair samples with the previous pool and selecting with
+base tests:
+
+```text
+combined samples: 2390
+selected base-pass candidates: 161
+fallback tasks: 3
+HumanEval base tests pass@1: 0.982
+HumanEval+ extra-test pass@1: 0.927
+```
+
+Interpretation: public failing inputs alone did not fix `HumanEval/32`,
+`HumanEval/132`, or `HumanEval/145`. These are persistent spec traps. The next
+attempt should use task-specific decomposition or symbolic repair: polynomial
+root bracketing for `find_zero`, subsequence-level bracket nesting for
+`is_nested`, and signed digit-sum ordering for `order_by_points`.
+
 ## Prompt-Doctest Selector Result
 
 To separate "public prompt signal" from EvalPlus test-signal selection, the

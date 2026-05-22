@@ -17,6 +17,7 @@ from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.eval_card import EvalCard
 from l20_codeforge.evals.evalplus_runner import (
+    generate_evalplus_repairs,
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
@@ -366,6 +367,49 @@ def parse_csv(value: str | None) -> list[str] | None:
         return None
     items = [item.strip() for item in value.split(",") if item.strip()]
     return items or None
+
+
+@app.command("repair-evalplus")
+def repair_evalplus_command(
+    model: str,
+    samples: Path,
+    eval_results: Path,
+    dataset: str = "humaneval",
+    output: Path = Path("artifacts/evalplus/repairs.samples.jsonl"),
+    n_repairs: int = 10,
+    task_ids: str | None = None,
+    temperature: float = 0.7,
+    top_p: float = 0.95,
+    max_new_tokens: int = 512,
+    sample_batch_size: int = 1,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    overwrite: bool = False,
+) -> None:
+    """Generate repair candidates from failed EvalPlus samples and base-test feedback."""
+    try:
+        report = generate_evalplus_repairs(
+            model_name_or_path=model,
+            dataset=dataset,
+            samples=samples,
+            eval_results=eval_results,
+            output=output,
+            n_repairs=n_repairs,
+            task_ids=parse_csv(task_ids),
+            temperature=temperature,
+            top_p=top_p,
+            max_new_tokens=max_new_tokens,
+            sample_batch_size=sample_batch_size,
+            load_in_4bit=load_in_4bit,
+            bf16=bf16,
+            seed=seed,
+            overwrite=overwrite,
+        )
+    except Exception as exc:
+        console.print(f"[red]failed to generate EvalPlus repairs:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print_json(data=report.model_dump())
 
 
 @app.command("eval-evalplus")
