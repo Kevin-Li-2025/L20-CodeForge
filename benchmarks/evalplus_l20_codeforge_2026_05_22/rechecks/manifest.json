@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "path": "rechecks/humaneval_clean_system_best.recheck.json",
+      "size_bytes": 3123,
+      "sha256": "df95edd6f20b9359b4108d884dce005b2a3fedcf16905386b340895a0fad8660"
+    },
+    {
+      "path": "rechecks/mbpp_clean_system_best.recheck.json",
+      "size_bytes": 9360,
+      "sha256": "bcb930397c494549ad8a96092ebce710f74d8522d7e56265bd72c2efb21a5296"
+    },
+    {
+      "path": "samples/humaneval.mixed-target.literal-combined.public-consensus-selected.samples_eval_results.json",
+      "size_bytes": 300449,
+      "sha256": "1ed774f893aeec25f79f085f17af8a7e90e4379211e2d0a222731a20f4339929"
+    },
+    {
+      "path": "samples/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.samples_eval_results.json",
+      "size_bytes": 232113,
+      "sha256": "0c10f6357d31e5543066392defc91613e2feff1656a45b6de855be810363c202"
+    }
+  ]
+}

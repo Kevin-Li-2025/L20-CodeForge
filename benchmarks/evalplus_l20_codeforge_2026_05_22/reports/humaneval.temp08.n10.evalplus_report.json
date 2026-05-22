@@ -1,0 +1,18 @@
+{
+  "dataset": "humaneval",
+  "samples": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl",
+  "exit_code": 0,
+  "base_pass_at_1": 0.851,
+  "plus_pass_at_1": 0.812,
+  "scores": {
+    "base_pass@1": 0.851,
+    "base_pass@10": 0.951,
+    "plus_pass@1": 0.812,
+    "plus_pass@10": 0.921
+  },
+  "stdout": "Load from previous results from artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples_eval_results.json\nhumaneval (base tests)\npass@1:\t0.851\npass@10:\t0.951\nhumaneval+ (base + extra tests)\npass@1:\t0.812\npass@10:\t0.921\n",
+  "stderr": "",
+  "result_files": [
+    "artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples_eval_results.json"
+  ]
+}

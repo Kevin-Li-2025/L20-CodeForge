@@ -1,0 +1,207 @@
+{
+  "package": "evalplus_l20_codeforge_2026_05_22",
+  "created_at_utc": "2026-05-22T12:48:27.192592+00:00",
+  "git_commit": "a80c6937e610356bf6f1019104c94880b4733937",
+  "artifact_root": "artifacts/evalplus/qwen25-coder-7b-base",
+  "evalplus_version_note": "Use the installed evalplus package and official evalplus.evaluate command; the copied reports preserve original stdout/stderr.",
+  "cases": [
+    {
+      "name": "humaneval_greedy",
+      "dataset": "humaneval",
+      "protocol": "greedy_model",
+      "base_pass@1": 0.89,
+      "plus_pass@1": 0.848,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "humaneval.greedy.samples.jsonl",
+      "report_file": "humaneval.greedy.evalplus_report.json",
+      "notes": "Greedy n=1 model baseline, official EvalPlus scoring.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/humaneval.greedy.evalplus_report.json",
+        "size_bytes": 2773,
+        "sha256": "accd4fb5d2464c9dc35f7209ee09f1280abda1d4e5d257fbd244499c8c8cb1fb"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/humaneval.greedy.samples.jsonl",
+        "size_bytes": 48576,
+        "sha256": "e85553371c91b473846044349b4ba5bcfe9a91da7a0b08395c7d9584991ee47c"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.greedy.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.greedy.samples.jsonl"
+    },
+    {
+      "name": "humaneval_n10_sampling",
+      "dataset": "humaneval",
+      "protocol": "sampled_pass_at_k",
+      "base_pass@1": 0.851,
+      "plus_pass@1": 0.812,
+      "base_pass@10": 0.951,
+      "plus_pass@10": 0.921,
+      "sample_file": "humaneval.temp08.n10.samples.jsonl",
+      "report_file": "humaneval.temp08.n10.evalplus_report.json",
+      "notes": "Fixed n=10 sampling report; pass@10 is reported by official EvalPlus.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/humaneval.temp08.n10.evalplus_report.json",
+        "size_bytes": 709,
+        "sha256": "b64591ba789e0f5551123f9592b073a2d7dab02ac77f5acf642d8196646873f8"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/humaneval.temp08.n10.samples.jsonl",
+        "size_bytes": 467566,
+        "sha256": "b783ad01c97029e40c4a77f2917b3dcf28ae87548f7decd115cef5aad1f5cc9b"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.temp08.n10.samples.jsonl"
+    },
+    {
+      "name": "humaneval_clean_system_best",
+      "dataset": "humaneval",
+      "protocol": "clean_public_signal_system",
+      "base_pass@1": 0.982,
+      "plus_pass@1": 0.927,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl",
+      "report_file": "humaneval.mixed-target.literal-combined.public-consensus-selected.evalplus_report.json",
+      "notes": "Best non-symbolic HumanEval+ system result; selection does not read extra tests.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/humaneval.mixed-target.literal-combined.public-consensus-selected.evalplus_report.json",
+        "size_bytes": 3003,
+        "sha256": "0b4bbcc0971e08ecf3abf7c912b76ac25bdc19cf531990c12c43b5ed6ece61a4"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl",
+        "size_bytes": 57092,
+        "sha256": "9b345fe29fa25b9ce774ad1342176ac7a76dc926b3464301c6a66f9b589b5c5c"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.public-consensus-selected.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl"
+    },
+    {
+      "name": "humaneval_symbolic_ablation",
+      "dataset": "humaneval",
+      "protocol": "task_specific_symbolic_ablation",
+      "base_pass@1": 0.994,
+      "plus_pass@1": 0.933,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.samples.jsonl",
+      "report_file": "humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.evalplus_report.json",
+      "notes": "Transparent task-specific ablation, not a general model/system score.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.evalplus_report.json",
+        "size_bytes": 3080,
+        "sha256": "9955620dd40b5769577455ae4955c1880cf6551557cef1ff5b795e5001a2fdd8"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.samples.jsonl",
+        "size_bytes": 58234,
+        "sha256": "b67f07d5066bb670cddf488fbc275a3edd28776f9959dede3b009a044738f8dd"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-symbolic-combined.base-longest-selected.samples.jsonl"
+    },
+    {
+      "name": "mbpp_greedy",
+      "dataset": "mbpp",
+      "protocol": "greedy_model",
+      "base_pass@1": 0.828,
+      "plus_pass@1": 0.722,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "mbpp.greedy.samples.jsonl",
+      "report_file": "mbpp.greedy.evalplus_report.json",
+      "notes": "Greedy n=1 model baseline, official EvalPlus scoring.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/mbpp.greedy.evalplus_report.json",
+        "size_bytes": 7817,
+        "sha256": "ca1878d959af69276a3560b39fca9dd2f9c093af609b2e93fe67b6a149d524a1"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/mbpp.greedy.samples.jsonl",
+        "size_bytes": 72249,
+        "sha256": "a8f219be3582e2abe85816ff92bf0c380885a2a014873911ded94e3851b1b4bd"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.greedy.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.greedy.samples.jsonl"
+    },
+    {
+      "name": "mbpp_clean_system_best",
+      "dataset": "mbpp",
+      "protocol": "clean_public_signal_system",
+      "base_pass@1": 0.96,
+      "plus_pass@1": 0.817,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.samples.jsonl",
+      "report_file": "mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.evalplus_report.json",
+      "notes": "Best clean MBPP+ system result: public-base fallback resampling plus public-input consensus-shortest selection.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.evalplus_report.json",
+        "size_bytes": 9168,
+        "sha256": "3277b0696d44158857f64de7f4e48b6404bee5d099d60650993415e5b978498a"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.samples.jsonl",
+        "size_bytes": 66863,
+        "sha256": "098cb22a5ca6aebac97c2fb4421bf20cd4d22036d7258ff1604246729efa925a"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.samples.jsonl"
+    },
+    {
+      "name": "mbpp_n5_selector",
+      "dataset": "mbpp",
+      "protocol": "clean_public_signal_system_ablation",
+      "base_pass@1": 0.918,
+      "plus_pass@1": 0.757,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "mbpp.temp08.n5.base-longest-selected.samples.jsonl",
+      "report_file": "mbpp.temp08.n5.base-longest-selected.evalplus_report.json",
+      "notes": "First MBPP n=5 base-test selector ablation.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/mbpp.temp08.n5.base-longest-selected.evalplus_report.json",
+        "size_bytes": 10074,
+        "sha256": "612f00c685617a611df196c2b270b7ed5c82c93b421aa51af15d302c0e88a88d"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/mbpp.temp08.n5.base-longest-selected.samples.jsonl",
+        "size_bytes": 94783,
+        "sha256": "fe01b6571ab6cd3386eeed978c6c12f4c180acd567620d89e0b1207f831eedb2"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-longest-selected.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.base-longest-selected.samples.jsonl"
+    },
+    {
+      "name": "mbpp_consensus_shortest",
+      "dataset": "mbpp",
+      "protocol": "clean_public_signal_system_ablation",
+      "base_pass@1": 0.918,
+      "plus_pass@1": 0.791,
+      "base_pass@10": null,
+      "plus_pass@10": null,
+      "sample_file": "mbpp.temp08.n5.public-consensus-shortest-selected.samples.jsonl",
+      "report_file": "mbpp.temp08.n5.public-consensus-shortest-selected.evalplus_report.json",
+      "notes": "MBPP n=5 public-input consensus with shortest tie-breaker.",
+      "report_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/reports/mbpp.temp08.n5.public-consensus-shortest-selected.evalplus_report.json",
+        "size_bytes": 8465,
+        "sha256": "efecc28836586dfafa7af74a8dc5285bfd8cb6500be1ba11b793867c29f138c9"
+      },
+      "sample_artifact": {
+        "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/samples/mbpp.temp08.n5.public-consensus-shortest-selected.samples.jsonl",
+        "size_bytes": 66886,
+        "sha256": "9d402dad75bc191ea9d355c21e09a4d1fdda03ca3a8feae5be5483097fabf13d"
+      },
+      "source_report": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-shortest-selected.evalplus_report.json",
+      "source_sample": "artifacts/evalplus/qwen25-coder-7b-base/mbpp.temp08.n5.public-consensus-shortest-selected.samples.jsonl"
+    }
+  ],
+  "summary_artifact": {
+    "path": "benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv",
+    "size_bytes": 2187,
+    "sha256": "08732bbb76450f92ef3c02fa97a163aba01f71028365072c205c5a3af45d5550"
+  },
+  "package_note": "Benchmark artifacts were produced during the L20 sprint before this reproducibility package commit; this commit is the source state for the recorded benchmark results."
+}

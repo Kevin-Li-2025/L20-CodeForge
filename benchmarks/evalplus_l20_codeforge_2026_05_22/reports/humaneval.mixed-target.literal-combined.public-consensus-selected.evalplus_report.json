@@ -1,0 +1,16 @@
+{
+  "dataset": "humaneval",
+  "samples": "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl",
+  "exit_code": 0,
+  "base_pass_at_1": 0.982,
+  "plus_pass_at_1": 0.927,
+  "scores": {
+    "base_pass@1": 0.982,
+    "plus_pass@1": 0.927
+  },
+  "stdout": "Load from ground-truth from /home/hhai/.cache/evalplus/fe585eb4df8c88d844eeb463ea4d0302.pkl\nReading samples...\nhumaneval (base tests)\npass@1:\t0.982\nhumaneval+ (base + extra tests)\npass@1:\t0.927\n",
+  "stderr": "\n0it [00:00, ?it/s]\n156it [00:00, 836.03it/s]\n164it [00:00, 875.93it/s]\n\n  0%|          | 0/164 [00:00<?, ?it/s]\n  6%|▌         | 10/164 [00:00<00:03, 51.27it/s]\n 10%|▉         | 16/164 [00:00<00:04, 30.80it/s]\n 16%|█▌        | 26/164 [00:00<00:03, 44.78it/s]\n 20%|█▉        | 32/164 [00:00<00:03, 39.96it/s]\n 23%|██▎       | 37/164 [00:00<00:03, 41.97it/s]\n 27%|██▋       | 45/164 [00:01<00:02, 48.60it/s]\n 33%|███▎      | 54/164 [00:01<00:01, 55.78it/s]\n 37%|███▋      | 60/164 [00:01<00:01, 56.61it/s]\n 40%|████      | 66/164 [00:01<00:01, 54.04it/s]\n 44%|████▍     | 72/164 [00:01<00:01, 54.74it/s]\n 49%|████▉     | 80/164 [00:01<00:01, 60.84it/s]\n 53%|█████▎    | 87/164 [00:01<00:01, 58.56it/s]\n 57%|█████▋    | 93/164 [00:01<00:01, 56.39it/s]\n 60%|██████    | 99/164 [00:01<00:01, 53.55it/s]\n 64%|██████▍   | 105/164 [00:02<00:01, 50.19it/s]\n 68%|██████▊   | 111/164 [00:02<00:01, 47.97it/s]\n 71%|███████▏  | 117/164 [00:02<00:00, 50.45it/s]\n 75%|███████▌  | 123/164 [00:02<00:01, 28.55it/s]\n 78%|███████▊  | 128/164 [00:02<00:01, 27.79it/s]\n 84%|████████▎ | 137/164 [00:03<00:00, 37.06it/s]\n 88%|████████▊ | 145/164 [00:03<00:00, 41.22it/s]\n 93%|█████████▎| 153/164 [00:03<00:00, 46.56it/s]\n 98%|█████████▊| 161/164 [00:04<00:00, 17.21it/s]\n 98%|█████████▊| 161/164 [00:19<00:00, 17.21it/s]/home/hhai/l20-codeforge/.venv/lib/python3.12/site-packages/evalplus/evaluate.py:239: UserWarning: No samples had finished testing in the last 20s\n  warn(\"No samples had finished testing in the last 20s\")\n/home/hhai/l20-codeforge/.venv/lib/python3.12/site-packages/evalplus/evaluate.py:240: UserWarning: 1 samples to be tested: {'HumanEval/163 (line 164 in artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl)'}\n  warn(f\"{len(remainings)} samples to be tested: {remainings}\")\n\n100%|██████████| 164/164 [01:06<00:00,  3.06s/it]\n100%|██████████| 164/164 [01:06<00:00,  2.46it/s]\n",
+  "result_files": [
+    "artifacts/evalplus/qwen25-coder-7b-base/humaneval.mixed-target.literal-combined.public-consensus-selected.samples_eval_results.json"
+  ]
+}

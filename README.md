@@ -113,6 +113,9 @@ Milestone notes:
 - `docs/MILESTONE_2_REPAIR_SUITE.md`: 36-task visible/hidden repair suite.
 - `docs/MILESTONE_3_MINI_SWE_ADAPTER.md`: mini-SWE-agent trajectory adapter and DPO pairs.
 - `docs/MILESTONE_4_REAL_DATA.md`: real SWE dataset registry and fetch path.
+- `benchmarks/evalplus_l20_codeforge_2026_05_22/`: reproducibility package
+  for the EvalPlus HumanEval+/MBPP+ benchmark sprint, including selected
+  samples, official reports, rechecks, hashes, and a summary table.
 
 Agent trajectory bridge:
 
