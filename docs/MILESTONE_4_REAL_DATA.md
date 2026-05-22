@@ -55,6 +55,17 @@ python -m l20_codeforge fetch-real-tasks \
   --limit 500
 ```
 
+Build real gold-patch SFT data:
+
+```bash
+python -m l20_codeforge build-real-sft \
+  data/raw/real/swe_bench_lite_test.jsonl \
+  --output data/processed/real_sft/swe_bench_lite_sft.jsonl
+```
+
+This uses real issue text and gold patches, but does not include `test_patch` in
+the training prompt or completion.
+
 Fetch SWE-Gym:
 
 ```bash

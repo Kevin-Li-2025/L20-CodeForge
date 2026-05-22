@@ -10,6 +10,7 @@ from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_m
 from l20_codeforge.context.compiler import ContextCompiler
 from l20_codeforge.data.preferences import build_preference_pairs
 from l20_codeforge.data.real_datasets import fetch_hf_real_dataset, list_real_dataset_specs
+from l20_codeforge.data.real_sft import build_real_sft_jsonl
 from l20_codeforge.data.report import write_trajectory_report
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
@@ -63,6 +64,23 @@ def fetch_real_tasks(
         console.print(f"[red]failed to fetch real dataset:[/red] {exc}")
         raise typer.Exit(1) from exc
     console.print_json(data=report.model_dump())
+
+
+@app.command("build-real-sft")
+def build_real_sft(
+    real_tasks: Path,
+    output: Path = Path("data/processed/real_sft.jsonl"),
+    limit: int | None = None,
+    min_patch_chars: int = 20,
+) -> None:
+    """Convert real issue/PR gold patches into chat SFT JSONL."""
+    count = build_real_sft_jsonl(
+        real_tasks_path=real_tasks,
+        output_path=output,
+        limit=limit,
+        min_patch_chars=min_patch_chars,
+    )
+    console.print_json(data={"records": count, "output": str(output)})
 
 
 @app.command("pack-context")

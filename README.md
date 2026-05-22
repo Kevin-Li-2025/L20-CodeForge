@@ -127,4 +127,5 @@ Real data entry:
 ```bash
 python -m l20_codeforge list-real-sources
 python -m l20_codeforge fetch-real-tasks swe-bench-lite --output data/raw/real/swe_bench_lite_sample.jsonl --limit 25
+python -m l20_codeforge build-real-sft data/raw/real/swe_bench_lite_sample.jsonl --output data/processed/real_sft/swe_bench_lite_sample_sft.jsonl
 ```
