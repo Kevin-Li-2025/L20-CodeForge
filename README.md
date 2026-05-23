@@ -178,6 +178,11 @@ Current generated-test probe:
   records the first expanded `public-fragility` generation run: `128` prompt
   records, `112` parsed non-empty behavior-test records, and `1130` generated
   input-only behavior tests in `1227.057s`.
+- The targeted 112-task conservative replay was a stabilized-neutral result:
+  public-selection baseline `68/112`, raw behavior replay `66/112` due to two
+  known unchanged-code flaky tasks, and rechecked audit `68/112`. The selector
+  made four public-pass overrides but did not change hidden outcomes, so the
+  full-suite headline remains `378/1055`.
 
 Generalization gate:
 
@@ -189,6 +194,19 @@ python scripts/build_generalization_scorecard.py \
 This builds a cross-benchmark scorecard over full LiveCodeBench `release_v6`
 and EvalPlus HumanEval+/MBPP+. Any future selector, repair, SFT, or RLVR change
 should improve the target benchmark without failing this gate.
+
+Full hidden-test materialization:
+
+```bash
+python scripts/materialize_lcb_release_jsonl.py \
+  --release-version release_v6 \
+  --output-jsonl data/raw/livecodebench/full_release_v6/release_v6_test_full.jsonl \
+  --manifest data/raw/livecodebench/full_release_v6/release_v6_test_full.manifest.json
+```
+
+The generated full JSONL contains private tests and is intentionally not
+committed. Commit hashes, manifests, evaluator outputs, and compact summaries
+only.
 
 Agent trajectory bridge:
 

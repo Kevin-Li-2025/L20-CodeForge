@@ -244,6 +244,20 @@ This is still an input-only verifier artifact, not a new headline benchmark
 score. The next score update requires conservative selector replay plus
 retry-stabilized hidden-test evaluation.
 
+The targeted 112-task conservative replay is now recorded as a negative result:
+
+| Run | Passed | Total | Status |
+| --- | ---: | ---: | --- |
+| Same target IDs, public-selection baseline | 68 | 112 | baseline |
+| Conservative behavior selector, raw replay | 66 | 112 | unstable replay |
+| Conservative behavior selector, rechecked audit | 68 | 112 | stabilized neutral |
+
+The selector made four public-pass overrides but did not change any hidden
+outcome. The raw loss was due to the two known unchanged-code flaky tasks,
+`abc363_c` and `abc378_e`, both stabilized by the existing recheck payload. This
+keeps the main full-suite score at `378/1055` and argues against a full merged
+replay until the verifier has a stronger expected-output or margin signal.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.
