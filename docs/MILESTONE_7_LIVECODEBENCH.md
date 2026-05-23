@@ -225,13 +225,20 @@ this situation. It marks the 54-task conservative replay as `improved` and the
 full hybrid replay as `unstable_replay`, because `abc363_c` and `abc378_e` had
 unchanged selected code but different hidden outcomes.
 
+The same audit gate can now consume candidate recheck payloads for those
+unchanged-code flips. Applying the two-task recheck changes the full hybrid
+audit from raw `377/1055` to stabilized `379/1055`, with status
+`stabilized_improved` and no unresolved unchanged-code flips. This is an audit
+count, not the headline benchmark score; the next official score should come
+from an evaluator run that performs this retry/majority logic automatically.
+
 The next gate is therefore conservative:
 
-- Retry or majority-recheck unchanged selected code when hidden outcome flips
-  across runs.
+- Build retry or majority-recheck into full-suite evaluation rather than only
+  post-hoc audit.
 - Apply the conservative override policy to full-suite replay.
 - Refresh the generalization scorecard only after the stabilized replay has no
-  unchanged-code outcome flips.
+  unresolved unchanged-code outcome flips.
 
 ## Research Update: High-Leverage Next Step
 

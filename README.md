@@ -165,6 +165,9 @@ Current generated-test probe:
   generated-test agreement before overriding the public-selected candidate.
 - The full-suite headline score remains `378/1055` until the full evaluator has
   retry-stabilized replay for flaky unchanged selections.
+- Post-hoc recheck of the two unchanged-code full hybrid flips gives a
+  stabilized audit count of `379/1055`; this stays separate from the headline
+  score until retry logic is built into the evaluator path.
 
 Generalization gate:
 

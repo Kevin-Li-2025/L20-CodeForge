@@ -65,6 +65,17 @@ public-selection result, `378/1055`, until a retry-stabilized full evaluator is
 in place. The automated comparison summary is
 `full_hybrid_stability_summary.json`, with status `unstable_replay`.
 
+The comparison script now supports candidate recheck payloads for unchanged-code
+outcome flips. With the two-task recheck applied, `full_hybrid_rechecked_summary.json`
+reports:
+
+- Raw full hybrid: `377/1055`, status `unstable_replay`.
+- Rechecked unchanged-code flips: `2/2`.
+- Stabilized audit count: `379/1055`, status `stabilized_improved`.
+
+This is still an audit result, not the public headline. The next official full
+score should come from a replay path that performs this recheck automatically.
+
 ## Next Gate
 
 Before adopting generated behavior tests into the main score:

@@ -60,3 +60,34 @@ def test_selection_comparison_marks_unchanged_flips_as_unstable() -> None:
     assert summary["status"] == "unstable_replay"
     assert summary["unchanged_outcome_flip_count"] == 1
     assert summary["unchanged_outcome_flips"] == ["a"]
+
+
+def test_selection_comparison_uses_recheck_for_unchanged_flips() -> None:
+    compare = load_compare_module()
+
+    summary = compare.summarize_comparison(
+        baseline_eval={
+            "a": {"question_title": "A", "passed": True},
+            "b": {"question_title": "B", "passed": False},
+        },
+        candidate_eval={
+            "a": {"question_title": "A", "passed": False},
+            "b": {"question_title": "B", "passed": True},
+        },
+        baseline_selection={
+            "a": {"selected_index": 0},
+            "b": {"selected_index": 0},
+        },
+        candidate_selection={
+            "a": {"selected_index": 0},
+            "b": {"selected_index": 1},
+        },
+        candidate_recheck_eval={"a": {"question_title": "A", "passed": True}},
+    )
+
+    assert summary["status"] == "stabilized_improved"
+    assert summary["raw_status"] == "unstable_replay"
+    assert summary["candidate_passed"] == 1
+    assert summary["stabilized_candidate_passed"] == 2
+    assert summary["rechecked_unchanged_outcome_flips"] == ["a"]
+    assert summary["unresolved_unchanged_outcome_flips"] == []
