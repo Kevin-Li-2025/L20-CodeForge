@@ -220,6 +220,28 @@ This keeps the verifier honest: generated tests provide inputs only. Candidate
 outputs are compared by execution agreement, and hidden tests are used only for
 final measurement.
 
+## Generalization Guardrail
+
+The project now records a cross-benchmark generalization scorecard under
+`benchmarks/generalization_scorecard_2026_05_23/`.
+
+Current gate status: `PASS`.
+
+- Full LiveCodeBench `release_v6`: `297/1055` greedy to `378/1055` with `n=4`
+  public-test selection, `+0.0768` pass@1.
+- LiveCodeBench difficulty splits all improved: easy `+0.1398`, medium
+  `+0.0731`, hard `+0.0229`.
+- LiveCodeBench platform splits all improved: AtCoder `+0.0615`, Codeforces
+  `+0.3333`, LeetCode `+0.0923`.
+- EvalPlus holdouts also improved relative to greedy: HumanEval+ `+0.079`,
+  MBPP+ `+0.095`.
+
+This is the key anti-overfitting rule for the next stage: a future experiment
+cannot be treated as a real improvement if it lifts LiveCodeBench while failing
+EvalPlus or regressing important LiveCodeBench slices. The next generated-test,
+repair, or post-training run should update this scorecard before being
+presented as progress.
+
 ## Next Experiments
 
 1. Run a small model on the prompt bank to generate differential behavior

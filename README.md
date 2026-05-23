@@ -153,6 +153,17 @@ python scripts/generate_lcb_behavior_tests.py \
 The generated `behavior_inputs.json` is then used only as extra public-side
 candidate discrimination; hidden tests remain reserved for final measurement.
 
+Generalization gate:
+
+```bash
+python scripts/build_generalization_scorecard.py \
+  --output-dir benchmarks/generalization_scorecard_2026_05_23
+```
+
+This builds a cross-benchmark scorecard over full LiveCodeBench `release_v6`
+and EvalPlus HumanEval+/MBPP+. Any future selector, repair, SFT, or RLVR change
+should improve the target benchmark without failing this gate.
+
 Agent trajectory bridge:
 
 ```bash
