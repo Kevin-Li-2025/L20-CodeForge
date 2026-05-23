@@ -118,7 +118,26 @@ Milestone notes:
   samples, official reports, rechecks, hashes, and a summary table.
 - `benchmarks/livecodebench_full_release_v6_2026_05_22/`: full 1,055-task
   LiveCodeBench `release_v6` greedy baseline with saved generations, hidden-test
-  evaluator outputs, hashes, and breakdowns.
+  evaluator outputs, hashes, and breakdowns. It also includes the `n=4`
+  public-test selection result and a candidate-aware behavior-test prompt bank
+  for the next verifier loop.
+
+LiveCodeBench verifier loop:
+
+```bash
+python scripts/build_lcb_behavior_test_prompts.py \
+  --lcb-repo /tmp/LiveCodeBench \
+  --full-jsonl /tmp/lcb_data/full_release_v6/release_v6_test_full.jsonl \
+  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
+  --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64 \
+  --limit 64 \
+  --max-samples 4
+```
+
+After a local model fills the generated-test prompts, parse them to
+`behavior_inputs.json` and pass that file to `scripts/evaluate_lcb_generations.py`
+with `--behavior-inputs` and `--behavior-public-scores`.
 
 Agent trajectory bridge:
 

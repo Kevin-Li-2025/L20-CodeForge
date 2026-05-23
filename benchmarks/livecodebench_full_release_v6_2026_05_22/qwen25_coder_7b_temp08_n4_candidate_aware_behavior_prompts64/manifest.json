@@ -1,0 +1,17 @@
+{
+  "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64/prompts.jsonl",
+  "prompt_count": 64,
+  "parsed_behavior_input_count": 0,
+  "lcb_repo": "/tmp/LiveCodeBench",
+  "full_jsonl": "/tmp/lcb_data/full_release_v6/release_v6_test_full.jsonl",
+  "full_jsonl_sha256": "4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd",
+  "generations": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json",
+  "generations_sha256": "3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d",
+  "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json",
+  "public_selection_sha256": "df415885f08a42557bdc94ed4855a58fd227c41ce35603e2750e5963dbc71009",
+  "targeting": {
+    "min_public_score": 1.0,
+    "include_non_ties": false,
+    "limit": 64
+  }
+}

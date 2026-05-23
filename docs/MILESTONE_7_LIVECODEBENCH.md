@@ -148,13 +148,85 @@ alone are too weak as the final verifier. The next step should target
 public-pass-hidden-fail cases with repair, additional generated tests, or a
 second candidate-ranking signal.
 
+## Behavior-Consensus Selector Probe
+
+A first verifier extension now runs each candidate on deterministic mutations of
+the public inputs, then selects by public-test score, behavior-cluster size,
+per-test consensus, behavior success count, and the configured tie-breaker.
+
+On the 60-task stratified slice:
+
+- Public-test selection: `21/60`, pass@1 `0.3500`.
+- Public + deterministic behavior consensus: `21/60`, pass@1 `0.3500`.
+- The selector changed `8/60` choices but produced no hidden-score change.
+- Two hidden-oracle misses had all candidates tied on public tests; deterministic
+  mutations did not distinguish the hidden-passing candidate.
+
+This is a useful negative result. Simple public-input perturbation is not enough
+for the main failure mode. The next verifier must generate candidate-aware
+distinguishing inputs, not only mutate visible examples.
+
+A second run exercised the new public-score reuse path:
+
+- Same 60-task slice, same deterministic behavior inputs: `21/60`, pass@1
+  `0.3500`.
+- Public scores loaded from the saved `public_selection.json` instead of
+  re-running public tests.
+- Behavior-selection wall time dropped from `152.367s` to `86.522s`.
+
+The project also generated a 64-task candidate-aware prompt bank from the full
+`n=4` public-selection result. These prompts target public-score-tied tasks and
+ask a local model to produce additional input-only differential tests. The prompt
+bank intentionally contains no hidden test outputs.
+
+## Research Update: High-Leverage Next Step
+
+The current literature points strongly toward generated tests and execution
+grounding as the most promising path for a single-L20 setup:
+
+- CodeT uses generated tests plus dual execution agreement to select among
+  multiple code samples:
+  https://arxiv.org/abs/2207.10397
+- AlphaCodium shows that code generation improves when organized as a
+  test-based, multi-stage flow rather than a single prompt:
+  https://arxiv.org/abs/2401.08500
+- S* adds test-time scaling for code by generating distinguishing inputs for
+  pairwise candidate comparison:
+  https://arxiv.org/abs/2502.14382
+- HardTests shows that high-quality synthetic edge-case tests materially improve
+  verifier precision and recall, especially on hard programming tasks:
+  https://arxiv.org/abs/2505.24098
+- ACECODER uses automated test-case synthesis to build preference/reward data
+  and reports gains for Qwen2.5-Coder-7B-Instruct:
+  https://aclanthology.org/2025.acl-long.587/
+- rStar-Coder reports large gains from verified competitive-programming data
+  with rich test cases and long-reasoning solutions:
+  https://arxiv.org/abs/2505.21297
+
+The project now has the start of this path:
+
+- `scripts/evaluate_lcb_generations.py` can consume external behavior-test
+  inputs through `--behavior-inputs`.
+- The same evaluator can reuse saved public scores via `--behavior-public-scores`
+  so full-suite behavior selection does not repeat public-test execution.
+- `scripts/build_lcb_behavior_test_prompts.py` builds candidate-aware prompts
+  for public-score-tied tasks and can parse LLM JSON outputs into evaluator-ready
+  `behavior_inputs.json`.
+
+This keeps the verifier honest: generated tests provide inputs only. Candidate
+outputs are compared by execution agreement, and hidden tests are used only for
+final measurement.
+
 ## Next Experiments
 
-1. Add lightweight repair prompts for candidates that fail public tests.
-2. Add a second selector signal, such as shortest-public-pass plus diversity or
-   multi-candidate consensus on public tests.
-3. Mine the public-pass-hidden-fail cases for synthetic adversarial tests and
-   verifier features.
-4. Record pass@1, public-pass rate, hidden-pass rate, wall time, and tokens so
-   improvements are attributable to algorithmic test-time compute, not hidden
-   leakage.
+1. Run a small model on the prompt bank to generate differential behavior
+   inputs for public-score-tied tasks.
+2. Re-run behavior selection with `--behavior-inputs` on the stratified 60 slice,
+   then on the full 1,055-task suite if the slice improves.
+3. Use public/generated-test pass rates to build preference pairs for a small
+   reward model or LoRA verifier before any broad SFT.
+4. Add repair prompts for candidates that fail public tests; keep this separate
+   from hidden evaluation.
+5. Record pass@1, public-pass rate, generated-test discrimination rate,
+   hidden-pass rate, wall time, and hashes so improvements are attributable to
+   algorithmic test-time compute rather than hidden leakage.
