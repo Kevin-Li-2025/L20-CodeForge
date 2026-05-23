@@ -280,13 +280,28 @@ only one neutral override. Both replays stabilized to `68/112`, so this is a
 verifier-signal improvement but not a benchmark-score improvement. The next
 step is expected-output verification or a learned pairwise tester.
 
-That expected-output stage is now scaffolded under
+That expected-output stage is now recorded under
 `qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/`. It converts
 the `154` adaptive differential inputs into multiple-choice verifier prompts by
 executing the candidate pool and deduplicating successful outputs into labeled
-options. A verifier model can now choose `A/B/C/.../NONE`, after which
-`scripts/select_lcb_expected_verifier_candidates.py` turns the choices into a
-conservative selection payload for hidden replay.
+options. The L20 Qwen2.5-Coder-7B verifier generated and parsed all `154/154`
+choices in `292.974s`. Its choices produced `10` conservative public-pass
+overrides on the 112-target replay, but hidden results regressed:
+
+| Run | Passed | Total | Status |
+| --- | ---: | ---: | --- |
+| Same target IDs, public-selection baseline | 68 | 112 | baseline |
+| Expected-output verifier selector, raw replay | 65 | 112 | regressed |
+| Expected-output verifier selector, rechecked audit | 67 | 112 | regressed |
+
+The override audit is the key result: the selector found one real improvement
+(`2854`) but introduced two real regressions (`abc355_a`, `abc366_a`) and seven
+neutral changes. A post-hoc threshold sweep across choice-count and confidence
+margin settings did not recover a setting that beat the baseline; the two bad
+overrides had high verifier margins, so simple abstention thresholds are not
+enough. This should stay out of the headline `378/1055` score and be used as a
+calibration set for a stronger verifier, self-consistency verifier, or RLVR
+reward model.
 
 Primary artifacts:
 

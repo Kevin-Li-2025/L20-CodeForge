@@ -200,7 +200,14 @@ Current generated-test probe:
   154 differential inputs into multiple-choice expected-output verifier
   prompts. The verifier sees the problem, public examples, one input, and
   deduplicated candidate output options; it must choose an option or `NONE`.
-  This is the next L20 inference batch before another hidden replay.
+  The L20 Qwen2.5-Coder-7B verifier run completed `154/154` parsed choices in
+  `292.974s`, but the conservative selection replay regressed: `65/112` raw
+  and `67/112` after rechecking unchanged-code flakes versus the `68/112`
+  public-selection baseline. The audit found `10` overrides: one true
+  improvement, two true regressions, and seven neutral changes. This is a
+  high-signal negative result: expected-output verification needs calibration,
+  a stronger verifier, or a learned/RLVR verifier before it should touch the
+  headline `378/1055` run.
 
 Generalization gate:
 

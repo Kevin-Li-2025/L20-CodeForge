@@ -1,0 +1,2667 @@
+{
+  "metadata": {
+    "source": "lcb_expected_output_verifier_audit_v1",
+    "sweep_inference": "post_hoc_from_existing_baseline_and_candidate_hidden_replays"
+  },
+  "comparison_summary": {
+    "status": "regressed",
+    "raw_status": "unstable_replay",
+    "total": 112,
+    "baseline_passed": 68,
+    "candidate_passed": 65,
+    "net_gain": -3,
+    "stabilized_candidate_passed": 67,
+    "stabilized_net_gain": -1,
+    "selection_changed_count": 10,
+    "outcome_changed_count": 5,
+    "unchanged_outcome_flip_count": 2,
+    "rechecked_unchanged_outcome_flip_count": 2,
+    "unresolved_unchanged_outcome_flip_count": 0,
+    "changed_selection_improvement_count": 1,
+    "changed_selection_regression_count": 2,
+    "unchanged_outcome_flips": [
+      "abc363_c",
+      "abc378_e"
+    ],
+    "rechecked_unchanged_outcome_flips": [
+      "abc363_c",
+      "abc378_e"
+    ],
+    "unresolved_unchanged_outcome_flips": []
+  },
+  "override_audit_records": [
+    {
+      "question_id": "2854",
+      "question_title": "decremental-string-concatenation",
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 1,
+      "baseline_pass": false,
+      "candidate_pass": true,
+      "stabilized_candidate_pass": true,
+      "verifier_selected_index": 1,
+      "verifier_selected_choice_count": 2,
+      "verifier_confidence_margin_vs_public": 2.0,
+      "expected_verifier_scores": {
+        "1": {
+          "confidence_sum": 2.0,
+          "choice_count": 2
+        },
+        "3": {
+          "confidence_sum": 0.0,
+          "choice_count": 0
+        }
+      },
+      "choice_votes": {
+        "B": {
+          "choice_count": 2,
+          "confidence_sum": 2.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "107059265b7af831",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "3e40395a2dac572e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3478",
+      "question_title": "check-if-the-rectangle-corner-is-reachable",
+      "baseline_selected_index": 2,
+      "candidate_selected_index": 0,
+      "baseline_pass": false,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 0,
+      "verifier_selected_choice_count": 3,
+      "verifier_confidence_margin_vs_public": 3.0,
+      "expected_verifier_scores": {
+        "0": {
+          "confidence_sum": 3.0,
+          "choice_count": 3
+        },
+        "2": {
+          "confidence_sum": 0.0,
+          "choice_count": 0
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 3,
+          "confidence_sum": 3.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "8a9aa12280f6ca65",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "9629667393f7d1eb",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "4dcecfa46a34ba96",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "question_title": "Flavors",
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 3,
+      "baseline_pass": false,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 3,
+      "verifier_selected_choice_count": 5,
+      "verifier_confidence_margin_vs_public": 5.0,
+      "expected_verifier_scores": {
+        "1": {
+          "confidence_sum": 0.0,
+          "choice_count": 0
+        },
+        "3": {
+          "confidence_sum": 5.0,
+          "choice_count": 5
+        }
+      },
+      "choice_votes": {
+        "B": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "C": {
+          "choice_count": 3,
+          "confidence_sum": 3.0
+        },
+        "D": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "NONE": {
+          "choice_count": 3,
+          "confidence_sum": 0.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "e545c039cfd63427",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "861f7e79e9b812ca",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "287fcfd62ed09f9b",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "c34eab959bbcfe98",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                2
+              ]
+            },
+            {
+              "label": "D",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "f3b39af38425dfd2",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "7767d294d7057623",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "39f31eda73d26d7c",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "94ee115274f79b62",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "question_title": "Who Ate the Cake?",
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 0,
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 0,
+      "verifier_selected_choice_count": 8,
+      "verifier_confidence_margin_vs_public": 8.0,
+      "expected_verifier_scores": {
+        "0": {
+          "confidence_sum": 8.0,
+          "choice_count": 8
+        },
+        "1": {
+          "confidence_sum": 0.0,
+          "choice_count": 0
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 8,
+          "confidence_sum": 8.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "f4a8ae8e74ddfb89",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "858d60e9521eb723",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "665ae877edd92e75",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "ece3d232c1ca9ef8",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "34b914ae86f8b512",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "94694e403180f50e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "784cfeeb6a02dfb6",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "3aebd7327cb0c84b",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "question_title": "Ticket Counter",
+      "baseline_selected_index": 2,
+      "candidate_selected_index": 3,
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "stabilized_candidate_pass": true,
+      "verifier_selected_index": 3,
+      "verifier_selected_choice_count": 6,
+      "verifier_confidence_margin_vs_public": 5.0,
+      "expected_verifier_scores": {
+        "2": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "3": {
+          "confidence_sum": 6.0,
+          "choice_count": 6
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "B": {
+          "choice_count": 5,
+          "confidence_sum": 5.0
+        },
+        "C": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "NONE": {
+          "choice_count": 1,
+          "confidence_sum": 0.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "928d07621d86d99e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "de8018906ac79e05",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "ac9f141770eb609e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "e8cd4dc25a52c5ab",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "ae9d010c767ec445",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "312d7f4e8d8415a2",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "6270514689e6ff3c",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "f9d59a25a44920a1",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "question_title": "Election 2",
+      "baseline_selected_index": 0,
+      "candidate_selected_index": 3,
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 3,
+      "verifier_selected_choice_count": 6,
+      "verifier_confidence_margin_vs_public": 5.0,
+      "expected_verifier_scores": {
+        "0": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "2": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "3": {
+          "confidence_sum": 6.0,
+          "choice_count": 6
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "B": {
+          "choice_count": 6,
+          "confidence_sum": 6.0
+        },
+        "NONE": {
+          "choice_count": 1,
+          "confidence_sum": 0.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "b45ef3326ef90cfa",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "4d20fd239382763a",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "1c10e7074bcd3dd7",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "2830661aed7bb176",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "ffd27d665b9bc24e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "9f97bacbc7d10c13",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "efea7869feba2ced",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "008062623c93da69",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "question_title": "11/22 String",
+      "baseline_selected_index": 0,
+      "candidate_selected_index": 2,
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "stabilized_candidate_pass": true,
+      "verifier_selected_index": 2,
+      "verifier_selected_choice_count": 7,
+      "verifier_confidence_margin_vs_public": 6.0,
+      "expected_verifier_scores": {
+        "0": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "1": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "2": {
+          "confidence_sum": 7.0,
+          "choice_count": 7
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "B": {
+          "choice_count": 7,
+          "confidence_sum": 7.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "6e593326f44a1606",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "6506c5a6299ddab0",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "ce294156e6cb4c1d",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "691099ae85713aee",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "8e84203019e88034",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "3c33e20a78947a39",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "a8a57d1c88f7fe8d",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "5a561bcfe2daa858",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2,
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "question_title": "Dangerous Sugoroku",
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 3,
+      "baseline_pass": false,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 3,
+      "verifier_selected_choice_count": 4,
+      "verifier_confidence_margin_vs_public": 2.0,
+      "expected_verifier_scores": {
+        "1": {
+          "confidence_sum": 2.0,
+          "choice_count": 2
+        },
+        "3": {
+          "confidence_sum": 4.0,
+          "choice_count": 4
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 2,
+          "confidence_sum": 2.0
+        },
+        "B": {
+          "choice_count": 4,
+          "confidence_sum": 4.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "e590651521190507",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "d14ddd1b5df6d388",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "dc66cbc302c70b7d",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "57096deb14a7749a",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "0ffeabed38c1905e",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "7482d090dcb11b5f",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                2,
+                3
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "question_title": "tcaF",
+      "baseline_selected_index": 0,
+      "candidate_selected_index": 3,
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "stabilized_candidate_pass": true,
+      "verifier_selected_index": 3,
+      "verifier_selected_choice_count": 4,
+      "verifier_confidence_margin_vs_public": 3.0,
+      "expected_verifier_scores": {
+        "0": {
+          "confidence_sum": 1.0,
+          "choice_count": 1
+        },
+        "3": {
+          "confidence_sum": 4.0,
+          "choice_count": 4
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "B": {
+          "choice_count": 4,
+          "confidence_sum": 4.0
+        },
+        "NONE": {
+          "choice_count": 2,
+          "confidence_sum": 2.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "5feceb66ffc86f38",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "1bad6b8cf97131fc",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "4e07408562bedb8b",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "4a44dc15364204a8",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "52a5d4a071d82cae",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "4b227777d4dd1fc6",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "fdf86ecc0c16a8d1",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1,
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "question_title": "Fine Triplets",
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 2,
+      "baseline_pass": false,
+      "candidate_pass": false,
+      "stabilized_candidate_pass": false,
+      "verifier_selected_index": 2,
+      "verifier_selected_choice_count": 3,
+      "verifier_confidence_margin_vs_public": 1.0,
+      "expected_verifier_scores": {
+        "1": {
+          "confidence_sum": 2.0,
+          "choice_count": 2
+        },
+        "2": {
+          "confidence_sum": 3.0,
+          "choice_count": 3
+        }
+      },
+      "choice_votes": {
+        "A": {
+          "choice_count": 2,
+          "confidence_sum": 2.0
+        },
+        "B": {
+          "choice_count": 1,
+          "confidence_sum": 1.0
+        },
+        "C": {
+          "choice_count": 2,
+          "confidence_sum": 2.0
+        },
+        "NONE": {
+          "choice_count": 3,
+          "confidence_sum": 0.0
+        }
+      },
+      "option_maps": [
+        {
+          "input_index": 0,
+          "input_sha256_16": "0f3be39ccf69ec81",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 1,
+          "input_sha256_16": "cd836f6886b0f105",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 2,
+          "input_sha256_16": "5a5bd3988310d75f",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 3,
+          "input_sha256_16": "274430d586e55481",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 4,
+          "input_sha256_16": "bfbc01ca2fca7f42",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 5,
+          "input_sha256_16": "36f6537d6b9faeab",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                1
+              ]
+            },
+            {
+              "label": "C",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 6,
+          "input_sha256_16": "7dae99167cbacb8d",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "input_index": 7,
+          "input_sha256_16": "97eb90381a838b9d",
+          "options": [
+            {
+              "label": "A",
+              "candidate_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "label": "B",
+              "candidate_indices": [
+                2
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "threshold_sweep": [
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 10,
+      "target_override_count": 10,
+      "target_override_question_ids": [
+        "2854",
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b",
+        "abc392_g"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 9,
+      "target_override_count": 9,
+      "target_override_question_ids": [
+        "2854",
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 7,
+      "target_override_count": 7,
+      "target_override_question_ids": [
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 2,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 9,
+      "target_override_count": 9,
+      "target_override_question_ids": [
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b",
+        "abc392_g"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 8,
+      "target_override_count": 8,
+      "target_override_question_ids": [
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 7,
+      "target_override_count": 7,
+      "target_override_question_ids": [
+        "3478",
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 3,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 7,
+      "target_override_count": 7,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 7,
+      "target_override_count": 7,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc388_f",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 6,
+      "target_override_count": 6,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a",
+        "abc389_b"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 4,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 5,
+      "target_override_count": 5,
+      "target_override_question_ids": [
+        "abc315_c",
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 5,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 4,
+      "target_override_count": 4,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 4,
+      "target_override_count": 4,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 4,
+      "target_override_count": 4,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 4,
+      "target_override_count": 4,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 4,
+      "target_override_count": 4,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc358_b",
+        "abc366_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 64,
+      "inferred_raw_net_gain": -4,
+      "inferred_stabilized_passed": 66,
+      "inferred_stabilized_net_gain": -2,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 6,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 2,
+      "target_override_count": 2,
+      "target_override_question_ids": [
+        "abc355_a",
+        "abc381_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 7,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 1.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 2.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 3.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 4.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 5.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 6.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 7.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    },
+    {
+      "min_choice_count": 8,
+      "min_confidence_margin": 8.0,
+      "global_override_count": 1,
+      "target_override_count": 1,
+      "target_override_question_ids": [
+        "abc355_a"
+      ],
+      "inferred_raw_passed": 65,
+      "inferred_raw_net_gain": -3,
+      "inferred_stabilized_passed": 67,
+      "inferred_stabilized_net_gain": -1,
+      "unknown_question_ids": []
+    }
+  ]
+}

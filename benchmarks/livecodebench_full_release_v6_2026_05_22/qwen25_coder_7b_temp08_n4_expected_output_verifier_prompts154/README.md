@@ -30,8 +30,52 @@ Primary files:
 - `prompts.jsonl`: verifier prompt records keyed by `record_id`.
 - `candidate_outputs.json`: raw candidate outputs and deduplicated options.
 - `dry_run/manifest.json`: local dry-run manifest for the L20 verifier generator.
+- `l20_qwen25_coder_7b_choices/`: completed L20 verifier choices, selection,
+  hidden replay comparison, and override audit.
 
-## Next Command
+## L20 Verifier Result
+
+The L20 Qwen2.5-Coder-7B verifier generated and parsed all `154/154` prompt
+records in `292.974s`.
+
+Choice distribution:
+
+| Choice | Count |
+| --- | ---: |
+| `B` | 63 |
+| `NONE` | 43 |
+| `A` | 37 |
+| `C` | 10 |
+| `D` | 1 |
+
+The conservative selector used `min_choice_count=2` and
+`min_confidence_margin=1.0`. It made `10` public-pass overrides on the
+112-target replay.
+
+| Run | Passed | Total | Status |
+| --- | ---: | ---: | --- |
+| Same target IDs, public-selection baseline | 68 | 112 | baseline |
+| Expected-output verifier selector, raw replay | 65 | 112 | regressed |
+| Expected-output verifier selector, rechecked audit | 67 | 112 | regressed |
+
+Override audit:
+
+- Improvements: `1` (`2854`, selected index `3 -> 1`).
+- Regressions: `2` (`abc355_a`, selected index `1 -> 0`; `abc366_a`, selected
+  index `0 -> 3`).
+- Neutral overrides: `7`.
+- Unchanged-code flaky tasks in the raw replay: `abc363_c`, `abc378_e`; both
+  stabilize under the existing recheck payload.
+
+The threshold sweep in
+`l20_qwen25_coder_7b_choices/expected_verifier_override_audit.json` shows that
+simple count/margin tightening does not solve the problem. The two regressions
+had high verifier confidence margins (`8.0` and `5.0`), so this verifier is
+overconfident on some expected-output judgments. The artifact is useful as a
+calibration set, but it should not be merged into the headline `378/1055`
+LiveCodeBench result.
+
+## Reproduction Commands
 
 Run on the L20 host after pulling the repo:
 
@@ -56,3 +100,17 @@ python scripts/select_lcb_expected_verifier_candidates.py \
 The resulting selection payload can be replayed through
 `scripts/evaluate_lcb_generations.py` with `--public-selection` for hidden-test
 measurement.
+
+The completed audit can be regenerated with:
+
+```bash
+python scripts/audit_lcb_expected_verifier.py \
+  --comparison-summary benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/l20_qwen25_coder_7b_choices/expected_verifier_targets112_rechecked_summary.json \
+  --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
+  --candidate-outputs benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/candidate_outputs.json \
+  --verifier-choices benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/l20_qwen25_coder_7b_choices/verifier_choices.json \
+  --candidate-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/l20_qwen25_coder_7b_choices/expected_verifier_selection.json \
+  --baseline-eval-all benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/eval_all.json \
+  --candidate-eval-all benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_targets112_eval/eval_all.json \
+  --output benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/l20_qwen25_coder_7b_choices/expected_verifier_override_audit.json
+```
