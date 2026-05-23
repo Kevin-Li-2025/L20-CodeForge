@@ -160,13 +160,13 @@ def test_load_resume_generation_records_prefers_output_file(tmp_path: Path) -> N
     runner = load_runner_module()
     output = tmp_path / "output_generations.json"
     source = tmp_path / "source_generations.json"
-    output.write_text('[{"question_id": "output"}]', encoding="utf-8")
-    source.write_text('[{"question_id": "source"}]', encoding="utf-8")
+    output.write_text('[{"question_id": "same", "code_list": ["new"]}]', encoding="utf-8")
+    source.write_text('[{"question_id": "same", "code_list": ["old"]}]', encoding="utf-8")
 
     records, source_path = runner.load_resume_generation_records(output, source)
 
-    assert records == [{"question_id": "output"}]
-    assert source_path == str(output)
+    assert records == [{"question_id": "same", "code_list": ["new"]}]
+    assert source_path == f"{output} over {source}"
 
 
 def test_load_resume_generation_records_uses_seed_when_output_missing(
@@ -181,3 +181,27 @@ def test_load_resume_generation_records_uses_seed_when_output_missing(
 
     assert records == [{"question_id": "source"}]
     assert source_path == str(source)
+
+
+def test_load_resume_generation_records_merges_partial_output_with_seed(
+    tmp_path: Path,
+) -> None:
+    runner = load_runner_module()
+    output = tmp_path / "output_generations.json"
+    source = tmp_path / "source_generations.json"
+    source.write_text(
+        '[{"question_id": "a", "code_list": ["old-a"]},'
+        ' {"question_id": "b", "code_list": ["old-b"]}]',
+        encoding="utf-8",
+    )
+    output.write_text(
+        '[{"question_id": "a", "code_list": ["new-a"]}]',
+        encoding="utf-8",
+    )
+
+    records, _ = runner.load_resume_generation_records(output, source)
+
+    assert records == [
+        {"question_id": "a", "code_list": ["new-a"]},
+        {"question_id": "b", "code_list": ["old-b"]},
+    ]

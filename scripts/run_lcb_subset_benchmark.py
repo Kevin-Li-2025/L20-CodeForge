@@ -214,10 +214,39 @@ def load_resume_generation_records(
     generations_path: Path,
     resume_from_generations: Path | None,
 ) -> tuple[list[dict[str, Any]], str | None]:
-    if generations_path.exists():
-        return load_generation_records(generations_path), str(generations_path)
-    if resume_from_generations is not None:
-        return load_generation_records(resume_from_generations), str(resume_from_generations)
+    seed_records = (
+        load_generation_records(resume_from_generations)
+        if resume_from_generations is not None
+        else []
+    )
+    output_records = (
+        load_generation_records(generations_path) if generations_path.exists() else []
+    )
+    if seed_records and output_records:
+        merged_by_id = {
+            record["question_id"]: record
+            for record in seed_records
+            if isinstance(record.get("question_id"), str)
+        }
+        merged_order = [
+            record["question_id"]
+            for record in seed_records
+            if isinstance(record.get("question_id"), str)
+        ]
+        for record in output_records:
+            question_id = record.get("question_id")
+            if not isinstance(question_id, str):
+                continue
+            if question_id not in merged_by_id:
+                merged_order.append(question_id)
+            merged_by_id[question_id] = record
+        return [merged_by_id[question_id] for question_id in merged_order], (
+            f"{generations_path} over {resume_from_generations}"
+        )
+    if output_records:
+        return output_records, str(generations_path)
+    if seed_records:
+        return seed_records, str(resume_from_generations)
     return [], None
 
 
