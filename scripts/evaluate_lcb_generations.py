@@ -417,6 +417,95 @@ def differential_behavior_candidate_features(
     }
 
 
+def differential_support_candidate_features(
+    candidate_index: int,
+    behavior_outputs: list[list[str]],
+    candidate_indices: list[int],
+    support_indices: list[int],
+) -> dict[str, int | float]:
+    differential_indices = differential_behavior_test_indices(
+        behavior_outputs=behavior_outputs,
+        candidate_indices=candidate_indices,
+    )
+    outputs = (
+        behavior_outputs[candidate_index]
+        if candidate_index < len(behavior_outputs)
+        else []
+    )
+    signature = differential_signature(outputs, differential_indices)
+    support_signatures = []
+    for support_index in support_indices:
+        support_outputs = (
+            behavior_outputs[support_index]
+            if support_index < len(behavior_outputs)
+            else []
+        )
+        if all(
+            index < len(support_outputs) and support_outputs[index].startswith("OK:")
+            for index in differential_indices
+        ):
+            support_signatures.append(
+                differential_signature(support_outputs, differential_indices)
+            )
+    signature_counts = Counter(support_signatures)
+    return {
+        "differential_behavior_tests": len(differential_indices),
+        "differential_support_cluster_size": signature_counts.get(signature, 0),
+    }
+
+
+def choose_differential_support_selected_index_from_scores(
+    public_scores: list[float],
+    code_outputs: list[str],
+    behavior_outputs: list[list[str]],
+    tie_breaker: str,
+) -> int:
+    if not code_outputs:
+        return 0
+    public_scores = list(public_scores[: len(code_outputs)])
+    while len(public_scores) < len(code_outputs):
+        public_scores.append(0.0)
+    public_pass_indices = [
+        index for index, score in enumerate(public_scores) if score == 1.0
+    ]
+    if len(public_pass_indices) < 2:
+        return choose_public_selected_index_from_scores(
+            public_scores=public_scores,
+            code_outputs=code_outputs,
+            tie_breaker=tie_breaker,
+        )
+    support_indices = list(range(len(code_outputs)))
+    features_by_index = {
+        index: differential_support_candidate_features(
+            index,
+            behavior_outputs,
+            public_pass_indices,
+            support_indices,
+        )
+        for index in public_pass_indices
+    }
+    if not any(
+        features["differential_behavior_tests"] > 0
+        for features in features_by_index.values()
+    ):
+        return choose_public_selected_index_from_scores(
+            public_scores=public_scores,
+            code_outputs=code_outputs,
+            tie_breaker=tie_breaker,
+        )
+    best_support = max(
+        features["differential_support_cluster_size"]
+        for features in features_by_index.values()
+    )
+    best_indices = [
+        index
+        for index in public_pass_indices
+        if features_by_index[index]["differential_support_cluster_size"]
+        == best_support
+    ]
+    return tie_break_candidate_index(best_indices, code_outputs, tie_breaker)
+
+
 def tie_break_candidate_index(
     indices: list[int],
     code_outputs: list[str],
@@ -693,6 +782,83 @@ def choose_conservative_differential_medoid_selected_index_from_scores(
     return medoid_index
 
 
+def choose_conservative_differential_support_selected_index_from_scores(
+    public_scores: list[float],
+    code_outputs: list[str],
+    behavior_outputs: list[list[str]],
+    tie_breaker: str,
+    min_behavior_tests: int,
+    min_behavior_success_rate: float,
+    min_behavior_cluster_margin: int,
+    min_differential_tests: int,
+) -> int:
+    if not code_outputs:
+        return 0
+    public_scores = list(public_scores[: len(code_outputs)])
+    while len(public_scores) < len(code_outputs):
+        public_scores.append(0.0)
+    public_selected_index = choose_public_selected_index_from_scores(
+        public_scores=public_scores,
+        code_outputs=code_outputs,
+        tie_breaker=tie_breaker,
+    )
+    public_pass_indices = [
+        index for index, score in enumerate(public_scores) if score == 1.0
+    ]
+    if len(public_pass_indices) < 2:
+        return public_selected_index
+    support_index = choose_differential_support_selected_index_from_scores(
+        public_scores=public_scores,
+        code_outputs=code_outputs,
+        behavior_outputs=behavior_outputs,
+        tie_breaker=tie_breaker,
+    )
+    if support_index == public_selected_index:
+        return public_selected_index
+    if public_scores[support_index] != 1.0:
+        return public_selected_index
+
+    support_outputs = (
+        behavior_outputs[support_index]
+        if support_index < len(behavior_outputs)
+        else []
+    )
+    support_behavior_features = behavior_candidate_features(
+        support_outputs,
+        behavior_outputs,
+    )
+    if support_behavior_features["behavior_tests"] < min_behavior_tests:
+        return public_selected_index
+    if support_behavior_features["behavior_success_rate"] < min_behavior_success_rate:
+        return public_selected_index
+
+    support_indices = list(range(len(code_outputs)))
+    support_differential_features = differential_support_candidate_features(
+        support_index,
+        behavior_outputs,
+        public_pass_indices,
+        support_indices,
+    )
+    public_differential_features = differential_support_candidate_features(
+        public_selected_index,
+        behavior_outputs,
+        public_pass_indices,
+        support_indices,
+    )
+    if (
+        support_differential_features["differential_behavior_tests"]
+        < min_differential_tests
+    ):
+        return public_selected_index
+    if (
+        support_differential_features["differential_support_cluster_size"]
+        < public_differential_features["differential_support_cluster_size"]
+        + min_behavior_cluster_margin
+    ):
+        return public_selected_index
+    return support_index
+
+
 def build_behavior_selection_records_from_scores(
     problems: list[Any],
     generations: list[list[str]],
@@ -729,6 +895,12 @@ def build_behavior_selection_records_from_scores(
             behavior_outputs=problem_behavior_results,
             tie_breaker=tie_breaker,
         )
+        differential_support_index = choose_differential_support_selected_index_from_scores(
+            public_scores=problem_public_scores,
+            code_outputs=code_outputs,
+            behavior_outputs=problem_behavior_results,
+            tie_breaker=tie_breaker,
+        )
         if behavior_selection_policy == "ranked":
             selected_index = ranked_index
         elif behavior_selection_policy == "conservative-public-pass":
@@ -753,10 +925,22 @@ def build_behavior_selection_records_from_scores(
                 min_behavior_cluster_margin=min_behavior_cluster_margin,
                 min_differential_tests=min_differential_tests,
             )
+        elif behavior_selection_policy == "conservative-differential-support":
+            selected_index = choose_conservative_differential_support_selected_index_from_scores(
+                public_scores=problem_public_scores,
+                code_outputs=code_outputs,
+                behavior_outputs=problem_behavior_results,
+                tie_breaker=tie_breaker,
+                min_behavior_tests=min_behavior_tests,
+                min_behavior_success_rate=min_behavior_success_rate,
+                min_behavior_cluster_margin=min_behavior_cluster_margin,
+                min_differential_tests=min_differential_tests,
+            )
         else:
             raise ValueError(
                 "behavior_selection_policy must be one of: ranked, "
-                "conservative-public-pass, conservative-differential-medoid"
+                "conservative-public-pass, conservative-differential-medoid, "
+                "conservative-differential-support"
             )
         while len(problem_public_scores) < len(code_outputs):
             problem_public_scores.append(0.0)
@@ -792,6 +976,19 @@ def build_behavior_selection_records_from_scores(
             problem_behavior_results,
             public_pass_indices,
         )
+        support_indices = list(range(len(code_outputs)))
+        selected_support_features = differential_support_candidate_features(
+            selected_index,
+            problem_behavior_results,
+            public_pass_indices,
+            support_indices,
+        )
+        public_support_features = differential_support_candidate_features(
+            public_selected_index,
+            problem_behavior_results,
+            public_pass_indices,
+            support_indices,
+        )
         selected_generations.append([code_outputs[selected_index] if code_outputs else ""])
         records.append(
             {
@@ -801,6 +998,7 @@ def build_behavior_selection_records_from_scores(
                 "public_selected_index": public_selected_index,
                 "behavior_ranked_index": ranked_index,
                 "behavior_differential_medoid_index": differential_medoid_index,
+                "behavior_differential_support_index": differential_support_index,
                 "behavior_selection_policy": behavior_selection_policy,
                 "override_from_public": selected_index != public_selected_index,
                 "tie_breaker": tie_breaker,
@@ -845,6 +1043,13 @@ def build_behavior_selection_records_from_scores(
                 "differential_behavior_cluster_margin_vs_public": (
                     selected_differential_features["differential_behavior_cluster_size"]
                     - public_differential_features["differential_behavior_cluster_size"]
+                ),
+                "differential_support_cluster_size": selected_support_features[
+                    "differential_support_cluster_size"
+                ],
+                "differential_support_cluster_margin_vs_public": (
+                    selected_support_features["differential_support_cluster_size"]
+                    - public_support_features["differential_support_cluster_size"]
                 ),
             }
         )
@@ -1386,6 +1591,7 @@ def build_parser() -> argparse.ArgumentParser:
             "ranked",
             "conservative-public-pass",
             "conservative-differential-medoid",
+            "conservative-differential-support",
         ],
         default="ranked",
     )

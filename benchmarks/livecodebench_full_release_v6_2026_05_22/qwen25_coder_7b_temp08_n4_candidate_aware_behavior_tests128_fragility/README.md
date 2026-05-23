@@ -71,3 +71,17 @@ high-risk batch to beat public selection, and ordinary extra inputs rarely
 separate the public-passing candidate set. The next measurement should use
 adaptive pairwise input synthesis or an expected-output/verifier stage before a
 full merged replay.
+
+## Follow-Up Adaptive Fuzz Probe
+
+`../qwen25_coder_7b_temp08_n4_adaptive_differential_fuzz_targets112_probe/`
+implements the first CPU-only adaptive attempt on this same target set. It
+mutates public example inputs, executes the `n=4` candidates, and keeps inputs
+only when public-pass candidates produce different successful outputs.
+
+This raised differential coverage from `23/112` tasks and `98` differential
+tests in this generated-test run to `34/112` tasks and `154` differential tests.
+The hidden-test result was still stabilized-neutral: medoid selection made `0`
+overrides, and support-cluster selection made `1` neutral override. This
+confirms that adaptive input synthesis helps, but the next score-moving stage
+needs expected-output verification.

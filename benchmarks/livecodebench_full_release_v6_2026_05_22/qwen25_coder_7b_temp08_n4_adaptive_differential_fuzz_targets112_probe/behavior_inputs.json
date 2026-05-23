@@ -1,0 +1,551 @@
+{
+  "records": [
+    {
+      "question_id": "1873_A",
+      "inputs": [
+        "0\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "1\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "-1\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "2\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "3\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "4\nabc\nacb\nbac\nbca\ncab\ncba\n",
+        "5\nabc\nacb\nbac\nbca\ncab\ncba\n"
+      ],
+      "n_inputs": 7,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "2848",
+      "inputs": [
+        "[]"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "2854",
+      "inputs": [
+        "[\"bc\", \"ab\", \"aa\"]",
+        "[\"b\", \"ab\"]"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "2868",
+      "inputs": [
+        "[4, 2, 4, 5]",
+        "[5, 4, 2, -1]",
+        "[1, 2, 6]"
+      ],
+      "n_inputs": 3,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "question_id": "3297",
+      "inputs": [
+        "\"\"\n3",
+        "\"\"\n4",
+        "\"abacaba\"\n-1",
+        "\"\"\n2"
+      ],
+      "n_inputs": 4,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "3344",
+      "inputs": [
+        "[[3, 10]]",
+        "[[1, 1]]"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "3356",
+      "inputs": [
+        "[\"\", \"ad\", \"bad\", \"c\"]",
+        "[\"cab\", \"ad\"]",
+        "[\"abc\", \"bcd\", \"abcd\", \"abcd\"]",
+        "[\"abc\", \"bcd\"]"
+      ],
+      "n_inputs": 4,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "3363",
+      "inputs": [
+        "[2, 3, 2, 1]\n[1, -3, 2, 3]",
+        "[5, 5, 3]\n[1, -2, 2]"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "3416",
+      "inputs": [
+        "[13, 46, 12]",
+        "[13, 23, 12, 12]",
+        "[13, 23, 11]",
+        "[14, 23, 12]",
+        "[13, 1, 12]",
+        "[10, 10, 10, -1]",
+        "[9, 10, 10, 10]"
+      ],
+      "n_inputs": 7,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "3423",
+      "inputs": [
+        "[3, 5]\n[[1, -2], [0, -3]]",
+        "[3, 5, 9, 9]\n[[1, -2], [0, -3]]",
+        "[3, 5, 9]\n[[0, -3], [1, -2]]"
+      ],
+      "n_inputs": 3,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "question_id": "3450",
+      "inputs": [
+        "1\n5",
+        "1\n6"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "3478",
+      "inputs": [
+        "3\n3\n[[2, 1, 1]]",
+        "-1\n4\n[[2, 1, 1]]",
+        "3\n6\n[[1, 1, 2]]"
+      ],
+      "n_inputs": 3,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        2
+      ]
+    },
+    {
+      "question_id": "3579",
+      "inputs": [
+        "[3, 2, 1]",
+        "[16, 8, 2]"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "3653",
+      "inputs": [
+        "[-1]\n4"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "3702",
+      "inputs": [
+        "[2]"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "3817",
+      "inputs": [
+        "3\n5\n-1"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        2
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "inputs": [
+        "0\nACABB\n",
+        "1\nACABB\n",
+        "-1\nACABB\n",
+        "2\nACABB\n",
+        "3\nACABB\n",
+        "0\nCABC\n",
+        "1\nCABC\n",
+        "-1\nCABC\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "inputs": [
+        "-1\n1 4\n2 10\n2 8\n3 6\n",
+        "0\n1 4\n2 10\n2 8\n3 6\n",
+        "1\n1 4\n2 10\n2 8\n3 6\n",
+        "2\n1 4\n2 10\n2 8\n3 6\n",
+        "3\n1 4\n2 10\n2 8\n3 6\n",
+        "-1\n4 10\n3 2\n2 4\n4 12\n",
+        "0\n4 10\n3 2\n2 4\n4 12\n",
+        "1\n4 10\n3 2\n2 4\n4 12\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "abc348_c",
+      "inputs": [
+        "10\n68 3\n17 2\n99 2\n92 4\n82 4\n10 3\n100 2\n78 1\n3 1\n35 0\n",
+        "10\n68 3\n17 2\n99 2\n92 4\n82 4\n10 3\n100 2\n78 1\n3 1\n35 1\n"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "abc352_a",
+      "inputs": [
+        "7 6 1 1\n"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "question_id": "abc354_a",
+      "inputs": [
+        "-1\n"
+      ],
+      "n_inputs": 1,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "inputs": [
+        "1 0\n",
+        "-1 2\n",
+        "0 2\n",
+        "3 2\n",
+        "10 2\n",
+        "1000000000 2\n",
+        "1 -1\n",
+        "-1 1\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "inputs": [
+        "-1 4\n0 2 10\n",
+        "0 4\n0 2 10\n",
+        "1 4\n0 2 10\n",
+        "2 4\n0 2 10\n",
+        "-1 3\n1 4 7\n",
+        "0 3\n1 4 7\n",
+        "1 3\n1 4 7\n",
+        "2 3\n1 4 7\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "inputs": [
+        "-1 2\naab\n",
+        "0 2\naab\n",
+        "1 2\naab\n",
+        "2 2\naab\n",
+        "10 2\naab\n",
+        "1000000000 2\naab\n",
+        "-1 3\nzzyyx\n",
+        "0 3\nzzyyx\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "inputs": [
+        "10 4 2\n",
+        "99 12 0\n",
+        "99 12 1\n",
+        "-1 12 48\n",
+        "0 12 48\n",
+        "1 12 48\n",
+        "2 12 48\n",
+        "3 12 48\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "question_id": "abc367_b",
+      "inputs": [
+        "1.0\n",
+        "12.0\n"
+      ],
+      "n_inputs": 2,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "inputs": [
+        "3\n2 3 0\n",
+        "3\n2 3 1\n",
+        "-1\n2 3 4\n",
+        "1\n2 3 4\n",
+        "10\n2 3 4\n",
+        "1000000000\n2 3 4\n",
+        "4\n2 3 4 0\n",
+        "4\n2 3 4 1\n"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "inputs": [
+        "-1\n11/22",
+        "0\n11/22",
+        "1\n11/22",
+        "2\n11/22",
+        "3\n11/22",
+        "10\n11/22",
+        "0\n/",
+        "-1\n/"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "inputs": [
+        "3 8 1",
+        "-1 8 5",
+        "1 8 5",
+        "10 2 2",
+        "1000000000 2 2"
+      ],
+      "n_inputs": 5,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        2
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "inputs": [
+        "1 2 3 5\n7 8\n17 20",
+        "2 2 3 5\n7 8\n17 20",
+        "3 2 3 5\n7 8\n17 20",
+        "1 1 5 8\n4 24",
+        "2 1 5 8\n4 24",
+        "3 1 5 8\n4 24"
+      ],
+      "n_inputs": 6,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        3
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "inputs": [
+        "0",
+        "-1",
+        "3",
+        "10",
+        "1000000000",
+        "4",
+        "2432902008176639998"
+      ],
+      "n_inputs": 7,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        0,
+        3
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "inputs": [
+        "5\n8 3 1 5 1",
+        "-1\n8 3 1 5 2",
+        "0\n8 3 1 5 2",
+        "1\n8 3 1 5 2",
+        "2\n8 3 1 5 2",
+        "3\n8 3 1 5 2",
+        "-1\n300000 100000 499998 499999 200000 400000 500000",
+        "0\n300000 100000 499998 499999 200000 400000 500000"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "inputs": [
+        "-1\n3 9 5 3 1",
+        "0\n3 9 5 3 1",
+        "1\n3 9 5 3 1",
+        "2\n3 9 5 3 1",
+        "3\n3 9 5 3 1"
+      ],
+      "n_inputs": 5,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "inputs": [
+        "-1 3\n2 1 0",
+        "0 3\n2 1 0",
+        "1 3\n2 1 0",
+        "2 3\n2 1 0",
+        "-1 6\n5 3 5 0 1",
+        "0 6\n5 3 5 0 1",
+        "1 6\n5 3 5 0 1",
+        "2 6\n5 3 5 0 1"
+      ],
+      "n_inputs": 8,
+      "source": "adaptive_differential_fuzz_v1",
+      "public_pass_indices": [
+        1,
+        2
+      ]
+    }
+  ],
+  "metadata": {
+    "source": "adaptive_differential_fuzz_v1",
+    "lcb_repo": "/tmp/LiveCodeBench",
+    "full_jsonl": "data/raw/livecodebench/full_release_v6/release_v6_test_full.jsonl",
+    "full_jsonl_sha256": null,
+    "generations": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility/generations_subset.json",
+    "generations_sha256": "9ca254264a27303ee9d0a6fa6d44baa5e25cd98b593e7d3b7179156e360e7184",
+    "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json",
+    "public_selection_sha256": "df415885f08a42557bdc94ed4855a58fd227c41ce35603e2750e5963dbc71009",
+    "max_samples": 4,
+    "max_candidate_inputs": 16,
+    "max_output_inputs": 8,
+    "seed": 20260523,
+    "hidden_expected_outputs_used": false
+  }
+}

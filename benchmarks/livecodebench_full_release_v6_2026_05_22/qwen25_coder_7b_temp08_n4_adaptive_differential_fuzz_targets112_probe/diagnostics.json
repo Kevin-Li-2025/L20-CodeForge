@@ -1,0 +1,1559 @@
+{
+  "source": "adaptive_differential_fuzz_v1",
+  "records": 34,
+  "tasks_considered": 112,
+  "tasks_with_differential_inputs": 34,
+  "candidate_inputs_tried_total": 1578,
+  "differential_inputs_total": 154,
+  "seconds": 1289.549,
+  "diagnostics": [
+    {
+      "question_id": "1873_A",
+      "question_title": "A. Short Sort",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 12,
+      "differential_inputs": 7,
+      "selected_candidate_input_indices": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "1883_B",
+      "question_title": "B. Chemistry",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 9,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2848",
+      "question_title": "special-permutations",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 11,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        0
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "2854",
+      "question_title": "decremental-string-concatenation",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 15,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        2,
+        7
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "2868",
+      "question_title": "continuous-subarrays",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 15,
+      "differential_inputs": 3,
+      "selected_candidate_input_indices": [
+        5,
+        6,
+        11
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "2877",
+      "question_title": "shortest-string-that-contains-three-strings",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2892",
+      "question_title": "check-if-array-is-good",
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2902",
+      "question_title": "max-pair-sum-in-an-array",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 14,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2919",
+      "question_title": "maximum-number-of-groups-with-increasing-length",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 12,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2955",
+      "question_title": "account-balance-after-rounded-purchase",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "2999",
+      "question_title": "check-if-strings-can-be-made-equal-with-operations-i",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 13,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3104",
+      "question_title": "happy-students",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 13,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3153",
+      "question_title": "apply-operations-on-array-to-maximize-sum-of-squares",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3171",
+      "question_title": "minimum-equal-sum-of-two-arrays-after-replacing-zeros",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3172",
+      "question_title": "divisible-and-non-divisible-sums-difference",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3192",
+      "question_title": "maximum-xor-product",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3229",
+      "question_title": "minimum-cost-to-make-array-equalindromic",
+      "public_pass_indices": [
+        0,
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3244",
+      "question_title": "minimize-length-of-array-using-operations",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3297",
+      "question_title": "minimum-time-to-revert-word-to-initial-state-i",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 4,
+      "selected_candidate_input_indices": [
+        0,
+        6,
+        9,
+        11
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3344",
+      "question_title": "minimize-manhattan-distances",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        1,
+        6
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3354",
+      "question_title": "replace-question-marks-in-string-to-minimize-its-value",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 5,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3356",
+      "question_title": "shortest-uncommon-substring-in-an-array",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 4,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3363",
+      "question_title": "most-frequent-ids",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        2,
+        12
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3374",
+      "question_title": "count-alternating-subarrays",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 13,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3408",
+      "question_title": "count-the-number-of-special-characters-i",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 12,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3413",
+      "question_title": "find-the-first-player-to-win-k-games-in-a-row",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3416",
+      "question_title": "sum-of-digit-differences-of-all-pairs",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 14,
+      "differential_inputs": 7,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        11,
+        13
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3422",
+      "question_title": "find-the-n-th-value-after-k-seconds",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3423",
+      "question_title": "maximum-sum-of-subsequence-with-non-adjacent-elements",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 3,
+      "selected_candidate_input_indices": [
+        3,
+        4,
+        6
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3430",
+      "question_title": "count-days-without-meetings",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3450",
+      "question_title": "find-the-child-who-has-the-ball-after-k-seconds",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        1,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3463",
+      "question_title": "alternating-groups-i",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 13,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3478",
+      "question_title": "check-if-the-rectangle-corner-is-reachable",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 3,
+      "selected_candidate_input_indices": [
+        2,
+        6,
+        10
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3507",
+      "question_title": "find-the-count-of-numbers-which-are-not-special",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3517",
+      "question_title": "shortest-distance-after-road-addition-queries-i",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3526",
+      "question_title": "minimum-number-of-flips-to-make-binary-grid-palindromic-i",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3567",
+      "question_title": "convert-date-to-binary",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 5,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3570",
+      "question_title": "count-of-substrings-containing-every-vowel-and-k-consonants-i",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3579",
+      "question_title": "maximum-possible-number-by-binary-concatenation",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 15,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        2,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3612",
+      "question_title": "adjacent-increasing-subarrays-detection-i",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3625",
+      "question_title": "stone-removal-game",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 7,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3644",
+      "question_title": "minimum-positive-sum-subarray",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3653",
+      "question_title": "maximum-subarray-sum-with-length-divisible-by-k",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3680",
+      "question_title": "count-connected-components-in-lcm-graph",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3702",
+      "question_title": "maximum-subarray-with-equal-products",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        8
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "3708",
+      "question_title": "zigzag-grid-traversal-with-skip",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3801",
+      "question_title": "count-beautiful-numbers",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3811",
+      "question_title": "reverse-degree-of-a-string",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 7,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3817",
+      "question_title": "maximum-containers-on-a-ship",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        13
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc303_c",
+      "question_title": "Dash",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc304_c",
+      "question_title": "Virus",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc305_c",
+      "question_title": "Snuke the Cookie Picker",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc306_e",
+      "question_title": "Best Performances",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc309_a",
+      "question_title": "Nine",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc311_a",
+      "question_title": "First ABC",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc315_c",
+      "question_title": "Flavors",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        10,
+        11,
+        12
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc318_b",
+      "question_title": "Overlapping sheets",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc322_c",
+      "question_title": "Festival",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc323_b",
+      "question_title": "Round",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc324_e",
+      "question_title": "Joint Two Strings",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc325_e",
+      "question_title": "Our clients, please wait a moment",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc329_b",
+      "question_title": "Next",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc330_c",
+      "question_title": "Minimize Abs 2",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc332_b",
+      "question_title": "Glass and Mug",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc334_b",
+      "question_title": "Christmas Trees",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc342_b",
+      "question_title": "Which is ahead?",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc348_c",
+      "question_title": "Colorful Beans",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc349_c",
+      "question_title": "Airport Code",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc352_a",
+      "question_title": "AtCoder Line",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        1
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc352_b",
+      "question_title": "Typing",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc353_d",
+      "question_title": "Another Sigma Problem",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc354_a",
+      "question_title": "Exponential Plant",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 1,
+      "selected_candidate_input_indices": [
+        2
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc355_a",
+      "question_title": "Who Ate the Cake?",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc358_b",
+      "question_title": "Ticket Counter",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12,
+        13
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc360_b",
+      "question_title": "Vertical Reading",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc363_b",
+      "question_title": "Japanese Cursed Doll",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc363_c",
+      "question_title": "Avoid K Palindrome 2",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        10,
+        11
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc365_c",
+      "question_title": "Transportation Expenses",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc365_e",
+      "question_title": "Xor Sigma Problem",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc366_a",
+      "question_title": "Election 2",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc366_f",
+      "question_title": "Maximum Composition",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc367_b",
+      "question_title": "Cut .0",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 2,
+      "selected_candidate_input_indices": [
+        0,
+        8
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc368_b",
+      "question_title": "Decrease 2 max elements",
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc368_f",
+      "question_title": "Dividing Game",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc370_d",
+      "question_title": "Cross Explosion",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc371_d",
+      "question_title": "1D Country",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc372_d",
+      "question_title": "Buildings",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc374_b",
+      "question_title": "Unvarnished Report",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc376_d",
+      "question_title": "Cycle",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc378_b",
+      "question_title": "Garbage Collection",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc378_e",
+      "question_title": "Mod Sigma Problem",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc381_a",
+      "question_title": "11/22 String",
+      "public_pass_indices": [
+        0,
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc381_b",
+      "question_title": "1122 String",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc382_a",
+      "question_title": "Daily Cookie",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc382_c",
+      "question_title": "Kaiten Sushi",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc383_a",
+      "question_title": "Humidifier 1",
+      "public_pass_indices": [
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc385_a",
+      "question_title": "Equally",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 5,
+      "selected_candidate_input_indices": [
+        1,
+        2,
+        4,
+        14,
+        15
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc386_e",
+      "question_title": "Maximize XOR",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc386_f",
+      "question_title": "Operate K",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc388_f",
+      "question_title": "Dangerous Sugoroku",
+      "public_pass_indices": [
+        1,
+        3
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 6,
+      "selected_candidate_input_indices": [
+        4,
+        5,
+        6,
+        12,
+        13,
+        14
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc389_b",
+      "question_title": "tcaF",
+      "public_pass_indices": [
+        0,
+        3
+      ],
+      "candidate_inputs_tried": 9,
+      "differential_inputs": 7,
+      "selected_candidate_input_indices": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc392_b",
+      "question_title": "Who is Missing?",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc392_g",
+      "question_title": "Fine Triplets",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        10,
+        11
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc393_e",
+      "question_title": "GCD of Subset",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc395_c",
+      "question_title": "Shortest Duplicate Subarray",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 5,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc396_f",
+      "question_title": "Rotated Inversions",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 8,
+      "selected_candidate_input_indices": [
+        2,
+        3,
+        4,
+        5,
+        10,
+        11,
+        12,
+        13
+      ],
+      "status": "ok"
+    },
+    {
+      "question_id": "abc398_a",
+      "question_title": "Doors in the Center",
+      "public_pass_indices": [
+        1,
+        2,
+        3
+      ],
+      "candidate_inputs_tried": 8,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc398_d",
+      "question_title": "Bonfire",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "abc400_a",
+      "question_title": "ABC400 Party",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 10,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "arc181_d",
+      "question_title": "Prefix Bubble Sort",
+      "public_pass_indices": [
+        1,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "arc192_a",
+      "question_title": "ARC Arc",
+      "public_pass_indices": [
+        0,
+        2
+      ],
+      "candidate_inputs_tried": 16,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    }
+  ]
+}

@@ -25,6 +25,23 @@ def load_behavior_generator_module():
     return module
 
 
+def load_adaptive_differential_module():
+    script = (
+        Path(__file__).parents[1]
+        / "scripts"
+        / "build_lcb_adaptive_differential_inputs.py"
+    )
+    spec = importlib.util.spec_from_file_location(
+        "build_lcb_adaptive_differential_inputs",
+        script,
+    )
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -261,6 +278,45 @@ def test_evaluator_conservative_differential_medoid_allows_strong_override() -> 
     assert selected == 1
 
 
+def test_evaluator_differential_support_uses_public_failed_cluster_votes() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_differential_support_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 0.0, 0.0],
+        code_outputs=["public", "supported", "failed peer a", "failed peer b"],
+        behavior_outputs=[
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:ccc", "OK:1:ddd"],
+            ["OK:1:ccc", "OK:1:ddd"],
+            ["OK:1:ccc", "OK:1:ddd"],
+        ],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 1
+
+
+def test_evaluator_conservative_differential_support_requires_margin() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_differential_support_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 0.0],
+        code_outputs=["public", "supported", "failed peer"],
+        behavior_outputs=[
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:ccc", "OK:1:ddd"],
+            ["OK:1:ccc", "OK:1:ddd"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_cluster_margin=2,
+        min_differential_tests=2,
+    )
+
+    assert selected == 0
+
+
 def test_evaluator_loads_external_behavior_inputs(tmp_path: Path) -> None:
     evaluator = load_evaluator_module()
     payload = {
@@ -305,6 +361,45 @@ def test_evaluator_generates_deterministic_behavior_mutations() -> None:
     assert stdin == evaluator.mutate_stdin_input("2\n3 4\n5 6\n", limit=4)
     assert "[1, 2, 3]\n\"abc\"" not in functional
     assert "2\n3 4\n5 6\n" not in stdin
+
+
+def test_adaptive_differential_stdin_mutations_are_deterministic() -> None:
+    adaptive = load_adaptive_differential_module()
+
+    first = adaptive.adaptive_stdin_mutations(
+        "3\n1 2 3\n",
+        rng=adaptive.random.Random(7),
+        limit=12,
+        max_input_chars=200,
+    )
+    second = adaptive.adaptive_stdin_mutations(
+        "3\n1 2 3\n",
+        rng=adaptive.random.Random(7),
+        limit=12,
+        max_input_chars=200,
+    )
+
+    assert first == second
+    assert len(first) == 12
+    assert "3\n1 2 3\n" not in first
+
+
+def test_adaptive_differential_chooses_only_public_pass_differences() -> None:
+    adaptive = load_adaptive_differential_module()
+
+    inputs, indices = adaptive.choose_differential_inputs(
+        behavior_inputs=["a", "b", "c"],
+        behavior_outputs=[
+            ["OK:1:x", "OK:1:y", "ERR:1:z"],
+            ["OK:1:x", "OK:1:z", "OK:1:k"],
+            ["OK:1:q", "OK:1:z", "OK:1:k"],
+        ],
+        candidate_indices=[0, 1],
+        max_output_inputs=8,
+    )
+
+    assert inputs == ["b"]
+    assert indices == [1]
 
 
 def test_evaluator_sanitizes_hidden_payloads() -> None:

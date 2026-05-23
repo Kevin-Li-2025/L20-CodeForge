@@ -269,6 +269,17 @@ cluster margin. The next useful improvement is therefore adaptive pairwise test
 synthesis or expected-output verification, not simply adding more ordinary
 generated inputs.
 
+The first adaptive pairwise-style probe is recorded under
+`qwen25_coder_7b_temp08_n4_adaptive_differential_fuzz_targets112_probe/`. It is
+CPU-only: mutate public example inputs, execute the candidate pool, and keep
+inputs that make public-pass candidates produce different successful outputs.
+It improved differential coverage from `23/112` tasks and `98` differential
+tests to `34/112` tasks and `154` differential tests. However, the conservative
+medoid selector still made `0` overrides, and a support-cluster selector made
+only one neutral override. Both replays stabilized to `68/112`, so this is a
+verifier-signal improvement but not a benchmark-score improvement. The next
+step is expected-output verification or a learned pairwise tester.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.

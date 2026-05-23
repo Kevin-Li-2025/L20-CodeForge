@@ -189,6 +189,13 @@ Current generated-test probe:
   that differentiated public-passing candidates. The next verifier step should
   synthesize adaptive pairwise distinguishing inputs or add expected-output
   verification before another full merged replay.
+- `qwen25_coder_7b_temp08_n4_adaptive_differential_fuzz_targets112_probe`
+  adds a CPU-only adaptive fuzz probe over the same 112 targets. It improved
+  differential coverage from `23/112` tasks and `98` differential tests to
+  `34/112` tasks and `154` differential tests, but hidden replay remained
+  stabilized-neutral at `68/112`. A support-cluster selector made one neutral
+  override, so the remaining bottleneck is expected-output verification rather
+  than input-only candidate clustering.
 
 Generalization gate:
 
