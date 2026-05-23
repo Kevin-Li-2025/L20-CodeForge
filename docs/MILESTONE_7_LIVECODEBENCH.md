@@ -179,6 +179,46 @@ The project also generated a 64-task candidate-aware prompt bank from the full
 ask a local model to produce additional input-only differential tests. The prompt
 bank intentionally contains no hidden test outputs.
 
+## Generated Behavior-Test Probe
+
+The first local-model generation pass over that prompt bank is recorded under
+`benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests64/`.
+
+- Prompt records: `64`.
+- Raw model outputs: `64`.
+- Parsed behavior-test records: `54`.
+- Generated behavior inputs: `558`.
+- Generation wall time on the L20: `580.994s`.
+
+On the 54 tasks with parsed behavior inputs:
+
+- Reused public-test selection: `51/54`, pass@1 `0.9444`.
+- Public score plus generated behavior consensus: `52/54`, pass@1 `0.9630`.
+- Net targeted gain: `+1` task.
+
+The selector changed three tasks. Two remained hidden-pass cases with a
+different selected candidate (`2837`, `2848`), and one changed a hidden failure
+into a pass (`2854`, `decremental-string-concatenation`). This is the first
+positive signal that candidate-aware generated tests can add useful selection
+information beyond public tests.
+
+A full-suite hybrid replay replaced those 54 records in the prior public
+selection payload and produced `377/1055` in one run. That number is not adopted
+as the main score: the diff showed two unrelated non-target tasks with unchanged
+selected indices (`abc363_c`, `abc378_e`) flipping from pass to fail, and both
+passed again in an immediate two-task recheck. Until full-suite evaluation has a
+retry-stabilized path, the stable full score remains the prior public-selection
+result, `378/1055`.
+
+The next gate is therefore conservative:
+
+- Retry or majority-recheck unchanged selected code when hidden outcome flips
+  across runs.
+- Use generated behavior tests only for strong overrides among public-passing
+  candidates.
+- Re-run full hybrid evaluation after stabilizing the evaluator, then refresh
+  the generalization scorecard before reporting any new headline score.
+
 ## Research Update: High-Leverage Next Step
 
 The current literature points strongly toward generated tests and execution

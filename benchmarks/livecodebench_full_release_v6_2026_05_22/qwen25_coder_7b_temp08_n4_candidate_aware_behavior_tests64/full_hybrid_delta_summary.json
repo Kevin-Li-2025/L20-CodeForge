@@ -1,0 +1,52 @@
+{
+  "public_full_passed": 378,
+  "hybrid_full_passed": 377,
+  "net_gain": -1,
+  "changed_or_outcome_different": [
+    {
+      "question_id": "2837",
+      "title": "minimum-operations-to-make-the-integer-zero",
+      "public_full_pass": true,
+      "hybrid_full_pass": true,
+      "public_idx": 1,
+      "hybrid_idx": 3,
+      "targeted": true
+    },
+    {
+      "question_id": "2848",
+      "title": "special-permutations",
+      "public_full_pass": true,
+      "hybrid_full_pass": true,
+      "public_idx": 3,
+      "hybrid_idx": 1,
+      "targeted": true
+    },
+    {
+      "question_id": "2854",
+      "title": "decremental-string-concatenation",
+      "public_full_pass": false,
+      "hybrid_full_pass": true,
+      "public_idx": 3,
+      "hybrid_idx": 1,
+      "targeted": true
+    },
+    {
+      "question_id": "abc363_c",
+      "title": "Avoid K Palindrome 2",
+      "public_full_pass": true,
+      "hybrid_full_pass": false,
+      "public_idx": 1,
+      "hybrid_idx": 1,
+      "targeted": false
+    },
+    {
+      "question_id": "abc378_e",
+      "title": "Mod Sigma Problem",
+      "public_full_pass": true,
+      "hybrid_full_pass": false,
+      "public_idx": 3,
+      "hybrid_idx": 3,
+      "targeted": false
+    }
+  ]
+}

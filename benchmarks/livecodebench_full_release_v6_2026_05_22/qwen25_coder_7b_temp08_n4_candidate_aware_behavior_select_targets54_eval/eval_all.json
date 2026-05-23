@@ -1,0 +1,1250 @@
+[
+  {
+    "question_title": "A. Short Sort",
+    "question_content": "There are three cards with letters $\\texttt{a}$, $\\texttt{b}$, $\\texttt{c}$ placed in a row in some order. You can do the following operation at most once: \n\n \n-  Pick two cards, and swap them.  Is it possible that the row becomes $\\texttt{abc}$ after the operation? Output \"YES\" if it is possible, and \"NO\" otherwise.\n\nInput\n\nThe first line contains a single integer $t$ ($1 \\leq t \\leq 6$)\u00a0\u2014 the number of test cases.\n\nThe only line of each test case contains a single string consisting of each of the three characters $\\texttt{a}$, $\\texttt{b}$, and $\\texttt{c}$ exactly once, representing the cards.\n\nOutput\n\nFor each test case, output \"YES\" if you can make the row $\\texttt{abc}$ with at most one operation, or \"NO\" otherwise.\n\nYou can output the answer in any case (for example, the strings \"yEs\", \"yes\", \"Yes\" and \"YES\" will be recognized as a positive answer).Sample Input 1:\n6\n\nabc\n\nacb\n\nbac\n\nbca\n\ncab\n\ncba\n\n\n\nSample Output 1:\n\nYES\nYES\nYES\nNO\nNO\nYES\n\n\nNote\n\nIn the first test case, we don't need to do any operations, since the row is already $\\texttt{abc}$.\n\nIn the second test case, we can swap $\\texttt{c}$ and $\\texttt{b}$: $\\texttt{acb} \\to \\texttt{abc}$.\n\nIn the third test case, we can swap $\\texttt{b}$ and $\\texttt{a}$: $\\texttt{bac} \\to \\texttt{abc}$.\n\nIn the fourth test case, it is impossible to make $\\texttt{abc}$ using at most one operation.",
+    "platform": "codeforces",
+    "question_id": "1873_A",
+    "contest_id": "1873",
+    "contest_date": "2023-08-21T00:00:00",
+    "starter_code": "",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nt = int(data[0])\nresults = []\n\nfor i in range(1, len(data)):\n    card = data[i]\n    if card == 'abc':\n        results.append('YES')\n    else:\n        # Check if there's only one misplaced character\n        misplaced_count = sum(1 for j in range(3) if card[j] != 'abc'[j])\n        if misplaced_count <= 2:\n            results.append('YES')\n        else:\n            results.append('NO')\n\nfor result in results:\n    print(result)\n```"
+    ],
+    "code_list": [
+      "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nt = int(data[0])\nresults = []\n\nfor i in range(1, len(data)):\n    card = data[i]\n    if card == 'abc':\n        results.append('YES')\n    else:\n        # Check if there's only one misplaced character\n        misplaced_count = sum(1 for j in range(3) if card[j] != 'abc'[j])\n        if misplaced_count <= 2:\n            results.append('YES')\n        else:\n            results.append('NO')\n\nfor result in results:\n    print(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "B. Chemistry",
+    "question_content": "You are given a string $s$ of length $n$, consisting of lowercase Latin letters, and an integer $k$.\n\nYou need to check if it is possible to remove exactly $k$ characters from the string $s$ in such a way that the remaining characters can be rearranged to form a palindrome. Note that you can reorder the remaining characters in any way.\n\nA palindrome is a string that reads the same forwards and backwards. For example, the strings \"z\", \"aaa\", \"aba\", \"abccba\" are palindromes, while the strings \"codeforces\", \"reality\", \"ab\" are not.\n\nInput\n\nEach test consists of multiple test cases. The first line contains a single integer $t$ ($1 \\leq t \\leq 10^4$) \u2014 the number of the test cases. This is followed by their description.\n\nThe first line of each test case contains two integers $n$ and $k$ ($0 \\leq k < n \\leq 10^5$) \u2014 the length of the string $s$ and the number of characters to be deleted.\n\nThe second line of each test case contains a string $s$ of length $n$, consisting of lowercase Latin letters.\n\nIt is guaranteed that the sum of $n$ over all test cases does not exceed $2 \\cdot 10^5$.\n\nOutput\n\nFor each test case, output \"YES\" if it is possible to remove exactly $k$ characters from the string $s$ in such a way that the remaining characters can be rearranged to form a palindrome, and \"NO\" otherwise.\n\nYou can output the answer in any case (uppercase or lowercase). For example, the strings \"yEs\", \"yes\", \"Yes\", and \"YES\" will be recognized as positive answers.Sample Input 1:\n14\n\n1 0\n\na\n\n2 0\n\nab\n\n2 1\n\nba\n\n3 1\n\nabb\n\n3 2\n\nabc\n\n6 2\n\nbacacd\n\n6 2\n\nfagbza\n\n6 2\n\nzwaafa\n\n7 2\n\ntaagaak\n\n14 3\n\nttrraakkttoorr\n\n5 3\n\ndebdb\n\n5 4\n\necadc\n\n5 3\n\ndebca\n\n5 3\n\nabaac\n\n\n\nSample Output 1:\n\nYES\nNO\nYES\nYES\nYES\nYES\nNO\nNO\nYES\nYES\nYES\nYES\nNO\nYES\n\n\nNote\n\nIn the first test case, nothing can be removed, and the string \"a\" is a palindrome.\n\nIn the second test case, nothing can be removed, but the strings \"ab\" and \"ba\" are not palindromes.\n\nIn the third test case, any character can be removed, and the resulting string will be a palindrome.\n\nIn the fourth test case, one occurrence of the character \"a\" can be removed, resulting in the string \"bb\", which is a palindrome.\n\nIn the sixth test case, one occurrence of the characters \"b\" and \"d\" can be removed, resulting in the string \"acac\", which can be rearranged to the string \"acca\".\n\nIn the ninth test case, one occurrence of the characters \"t\" and \"k\" can be removed, resulting in the string \"aagaa\", which is a palindrome.",
+    "platform": "codeforces",
+    "question_id": "1883_B",
+    "contest_id": "1883",
+    "contest_date": "2023-09-22T00:00:00",
+    "starter_code": "",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nimport sys\nfrom collections import Counter\n\ndef can_form_palindrome(s, k):\n    # Count the frequency of each character\n    char_count = Counter(s)\n    \n    # Calculate the number of characters with odd counts\n    odd_count = sum(1 for count in char_count.values() if count % 2 != 0)\n    \n    # If the number of characters with odd counts is more than k + 1,\n    # it's impossible to form a palindrome by removing exactly k characters\n    return odd_count <= k + 1\n\n# Read input from stdin\ninput = sys.stdin.read\ndata = input().split()\n\n# Number of test cases\nt = int(data[0])\nindex = 1\n\nresults = []\nfor _ in range(t):\n    n = int(data[index])\n    k = int(data[index + 1])\n    s = data[index + 2]\n    index += 3\n    \n    if can_form_palindrome(s, k):\n        results.append(\"YES\")\n    else:\n        results.append(\"NO\")\n\n# Write the results to stdout\nprint(\"\\n\".join(results))\n```"
+    ],
+    "code_list": [
+      "import sys\nfrom collections import Counter\n\ndef can_form_palindrome(s, k):\n    # Count the frequency of each character\n    char_count = Counter(s)\n    \n    # Calculate the number of characters with odd counts\n    odd_count = sum(1 for count in char_count.values() if count % 2 != 0)\n    \n    # If the number of characters with odd counts is more than k + 1,\n    # it's impossible to form a palindrome by removing exactly k characters\n    return odd_count <= k + 1\n\n# Read input from stdin\ninput = sys.stdin.read\ndata = input().split()\n\n# Number of test cases\nt = int(data[0])\nindex = 1\n\nresults = []\nfor _ in range(t):\n    n = int(data[index])\n    k = int(data[index + 1])\n    s = data[index + 2]\n    index += 3\n    \n    if can_form_palindrome(s, k):\n        results.append(\"YES\")\n    else:\n        results.append(\"NO\")\n\n# Write the results to stdout\nprint(\"\\n\".join(results))"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "B. 250 Thousand Tons of TNT",
+    "question_content": "Alex is participating in the filming of another video of BrMeast, and BrMeast asked Alex to prepare 250 thousand tons of TNT, but Alex didn't hear him well, so he prepared $n$ boxes and arranged them in a row waiting for trucks. The $i$-th box from the left weighs $a_i$ tons.\n\nAll trucks that Alex is going to use hold the same number of boxes, denoted by $k$. Loading happens the following way:\n\n \n-  The first $k$ boxes goes to the first truck, \n-  The second $k$ boxes goes to the second truck, \n-  $\\dotsb$ \n-  The last $k$ boxes goes to the $\\frac{n}{k}$-th truck. Upon loading is completed, each truck must have exactly $k$ boxes. In other words, if at some point it is not possible to load exactly $k$ boxes into the truck, then the loading option with that $k$ is not possible.\n\nAlex hates justice, so he wants the maximum absolute difference between the total weights of two trucks to be as great as possible. If there is only one truck, this value is $0$.\n\nAlex has quite a lot of connections, so for every $1 \\leq k \\leq n$, he can find a company such that each of its trucks can hold exactly $k$ boxes. Print the maximum absolute difference between the total weights of any two trucks.\n\nInput\n\nThe first line contains one integer $t$ ($1 \\leq t \\leq 10^4$)\u00a0\u2014 the number of test cases.\n\nThe first line of each test case contains one integer $n$ ($1 \\leq n \\leq 150\\,000$)\u00a0\u2014 the number of boxes.\n\nThe second line contains $n$ integers $a_1, a_2, \\dots, a_n$ ($1 \\leq a_i \\leq 10^9$)\u00a0\u2014 the weights of the boxes.\n\nIt is guaranteed that the sum of $n$ for all test cases does not exceed $150\\,000$.\n\nOutput\n\nFor each test case, print a single integer\u00a0\u2014 the answer to the problem.Sample Input 1:\n5\n\n2\n\n1 2\n\n6\n\n10 2 3 6 1 3\n\n4\n\n1000000000 1000000000 1000000000 1000000000\n\n15\n\n60978 82265 78961 56708 39846 31071 4913 4769 29092 91348 64119 72421 98405 222 14294\n\n8\n\n19957 69913 37531 96991 57838 21008 14207 19198\n\n\n\nSample Output 1:\n\n1\n9\n0\n189114\n112141\n\n\nNote\n\nIn the first case, we should pick two trucks, so the first one will have only the first box, and the second one will have only the second box.\n\nIn the second case, we should pick six trucks, so the maximum will be $10$, the minimum will be $1$, and the answer is $10 - 1 = 9$.\n\nIn the third case, for any possible $k$, the trucks will have the same total weight of boxes, so the answer is $0$.",
+    "platform": "codeforces",
+    "question_id": "1899_B",
+    "contest_id": "1899",
+    "contest_date": "2023-10-17T00:00:00",
+    "starter_code": "",
+    "difficulty": "hard",
+    "output_list": [
+      "```python\nimport sys\n\ninput = sys.stdin.read\ndata = input().split()\n\nt = int(data[0])\nindex = 1\n\nresults = []\n\nfor _ in range(t):\n    n = int(data[index])\n    index += 1\n    a = list(map(int, data[index:index + n]))\n    index += n\n    \n    max_diff = 0\n    \n    for k in range(1, n + 1):\n        if n % k == 0:\n            boxes = [sum(a[i:i + k]) for i in range(0, n, k)]\n            max_diff = max(max_diff, max(boxes) - min(boxes))\n    \n    results.append(max_diff)\n\nfor result in results:\n    print(result)\n```"
+    ],
+    "code_list": [
+      "import sys\n\ninput = sys.stdin.read\ndata = input().split()\n\nt = int(data[0])\nindex = 1\n\nresults = []\n\nfor _ in range(t):\n    n = int(data[index])\n    index += 1\n    a = list(map(int, data[index:index + n]))\n    index += n\n    \n    max_diff = 0\n    \n    for k in range(1, n + 1):\n        if n % k == 0:\n            boxes = [sum(a[i:i + k]) for i in range(0, n, k)]\n            max_diff = max(max_diff, max(boxes) - min(boxes))\n    \n    results.append(max_diff)\n\nfor result in results:\n    print(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "sum-in-a-matrix",
+    "question_content": "You are given a 0-indexed 2D integer array nums. Initially, your score is 0. Perform the following operations until the matrix becomes empty:\n\nFrom each row in the matrix, select the largest number and remove it. In the case of a tie, it does not matter which number is chosen.\nIdentify the highest number amongst all those removed in step 1. Add that number to your score.\n\nReturn the final score.\n \nExample 1:\n\nInput: nums = [[7,2,1],[6,4,2],[6,5,3],[3,2,1]]\nOutput: 15\nExplanation: In the first operation, we remove 7, 6, 6, and 3. We then add 7 to our score. Next, we remove 2, 4, 5, and 2. We add 5 to our score. Lastly, we remove 1, 2, 3, and 1. We add 3 to our score. Thus, our final score is 7 + 5 + 3 = 15.\n\nExample 2:\n\nInput: nums = [[1]]\nOutput: 1\nExplanation: We remove 1 and add it to the answer. We return 1.\n \nConstraints:\n\n1 <= nums.length <= 300\n1 <= nums[i].length <= 500\n0 <= nums[i][j] <= 10^3",
+    "platform": "leetcode",
+    "question_id": "2728",
+    "contest_id": "biweekly-contest-104",
+    "contest_date": "2023-05-13T00:00:00",
+    "starter_code": "class Solution:\n    def matrixSum(self, nums: List[List[int]]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def matrixSum(self, nums: List[List[int]]) -> int:\n        for row in nums:\n            row.sort(reverse=True)\n        score = 0\n        for col in range(len(nums[0])):\n            max_val = 0\n            for row in range(len(nums)):\n                max_val = max(max_val, nums[row][col])\n            score += max_val\n        return score\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def matrixSum(self, nums: List[List[int]]) -> int:\n        for row in nums:\n            row.sort(reverse=True)\n        score = 0\n        for col in range(len(nums[0])):\n            max_val = 0\n            for row in range(len(nums)):\n                max_val = max(max_val, nums[row][col])\n            score += max_val\n        return score"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-or",
+    "question_content": "You are given a 0-indexed integer array nums of length n and an integer k. In an operation, you can choose an element and multiply it by 2.\nReturn the maximum possible value of nums[0] | nums[1] | ... | nums[n - 1] that can be obtained after applying the operation on nums at most k times.\nNote that a | b denotes the bitwise or between two integers a and b.\n \nExample 1:\n\nInput: nums = [12,9], k = 1\nOutput: 30\nExplanation: If we apply the operation to index 1, our new array nums will be equal to [12,18]. Thus, we return the bitwise or of 12 and 18, which is 30.\n\nExample 2:\n\nInput: nums = [8,1,2], k = 2\nOutput: 35\nExplanation: If we apply the operation twice on index 0, we yield a new array of [32,1,2]. Thus, we return 32|1|2 = 35.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9\n1 <= k <= 15",
+    "platform": "leetcode",
+    "question_id": "2730",
+    "contest_id": "biweekly-contest-104",
+    "contest_date": "2023-05-13T00:00:00",
+    "starter_code": "class Solution:\n    def maximumOr(self, nums: List[int], k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maximumOr(self, nums: List[int], k: int) -> int:\n        total_or = 0\n        for num in nums:\n            total_or |= num\n        \n        max_result = 0\n        left_or = 0\n        right_or = total_or\n        \n        for i, num in enumerate(nums):\n            right_or ^= num\n            result = left_or | (num << k) | right_or\n            max_result = max(max_result, result)\n            left_or |= num\n        \n        return max_result\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maximumOr(self, nums: List[int], k: int) -> int:\n        total_or = 0\n        for num in nums:\n            total_or |= num\n        \n        max_result = 0\n        left_or = 0\n        right_or = total_or\n        \n        for i, num in enumerate(nums):\n            right_or ^= num\n            result = left_or | (num << k) | right_or\n            max_result = max(max_result, result)\n            left_or |= num\n        \n        return max_result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "extra-characters-in-a-string",
+    "question_content": "You are given a 0-indexed string s and a dictionary of words dictionary. You have to break s into one or more non-overlapping substrings such that each substring is present in dictionary. There may be some extra characters in s which are not present in any of the substrings.\nReturn the minimum number of extra characters left over if you break up s optimally.\n \nExample 1:\n\nInput: s = \"leetscode\", dictionary = [\"leet\",\"code\",\"leetcode\"]\nOutput: 1\nExplanation: We can break s in two substrings: \"leet\" from index 0 to 3 and \"code\" from index 5 to 8. There is only 1 unused character (at index 4), so we return 1.\n\n\nExample 2:\n\nInput: s = \"sayhelloworld\", dictionary = [\"hello\",\"world\"]\nOutput: 3\nExplanation: We can break s in two substrings: \"hello\" from index 3 to 7 and \"world\" from index 8 to 12. The characters at indices 0, 1, 2 are not used in any substring and thus are considered as extra characters. Hence, we return 3.\n\n \nConstraints:\n\n1 <= s.length <= 50\n1 <= dictionary.length <= 50\n1 <= dictionary[i].length <= 50\ndictionary[i] and s consists of only lowercase English letters\ndictionary contains distinct words",
+    "platform": "leetcode",
+    "question_id": "2755",
+    "contest_id": "biweekly-contest-105",
+    "contest_date": "2023-05-27T00:00:00",
+    "starter_code": "class Solution:\n    def minExtraChar(self, s: str, dictionary: List[str]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "Here's a Python program that solves the given problem using dynamic programming:\n\n```python\nfrom typing import List\n\nclass Solution:\n    def minExtraChar(self, s: str, dictionary: List[str]) -> int:\n        n = len(s)\n        dp = [float('inf')] * (n + 1)\n        dp[0] = 0\n        \n        for i in range(1, n + 1):\n            dp[i] = dp[i - 1] + 1  # Extra character for the current position\n            \n            for word in dictionary:\n                if s.startswith(word, i - len(word)):\n                    dp[i] = min(dp[i], dp[i - len(word)])\n        \n        return dp[n]\n```\n\nThis solution works as follows:\n\n1. We initialize a list `dp` where `dp[i]` represents the minimum number of extra characters needed for the first `i` characters of the string `s`.\n\n2. We set `dp[0]` to 0 because no extra characters are needed for an empty string.\n\n3. We iterate through each character of the string `s`. For each character at position `i`, we assume that it needs an extra character (`dp[i] = dp[i - 1] + 1`).\n\n4. We then check each word in the dictionary to see if it matches the suffix of the string starting from position `i - len(word)`. If it does, we update `dp[i]` to be the minimum of its current value and `dp[i - len(word)]`.\n\n5. Finally, we return `dp[n]`, which gives us the minimum number of extra characters needed for the entire string `s`.\n\nThis approach ensures that we find the optimal way to break the string into valid substrings while minimizing the number of extra characters. The time complexity of this solution is O(n * m * k), where `n` is the length of the string `s`, `m` is the number of words in the dictionary, and `k` is the average length of the words in the dictionary. This is efficient enough given the constraints."
+    ],
+    "code_list": [
+      "from typing import List\n\nclass Solution:\n    def minExtraChar(self, s: str, dictionary: List[str]) -> int:\n        n = len(s)\n        dp = [float('inf')] * (n + 1)\n        dp[0] = 0\n        \n        for i in range(1, n + 1):\n            dp[i] = dp[i - 1] + 1  # Extra character for the current position\n            \n            for word in dictionary:\n                if s.startswith(word, i - len(word)):\n                    dp[i] = min(dp[i], dp[i - len(word)])\n        \n        return dp[n]"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "buy-two-chocolates",
+    "question_content": "You are given an integer array prices representing the prices of various chocolates in a store. You are also given a single integer money, which represents your initial amount of money.\nYou must buy exactly two chocolates in such a way that you still have some non-negative leftover money. You would like to minimize the sum of the prices of the two chocolates you buy.\nReturn the amount of money you will have leftover after buying the two chocolates. If there is no way for you to buy two chocolates without ending up in debt, return money. Note that the leftover must be non-negative.\n \nExample 1:\n\nInput: prices = [1,2,2], money = 3\nOutput: 0\nExplanation: Purchase the chocolates priced at 1 and 2 units respectively. You will have 3 - 3 = 0 units of money afterwards. Thus, we return 0.\n\nExample 2:\n\nInput: prices = [3,2,3], money = 3\nOutput: 3\nExplanation: You cannot buy 2 chocolates without going in debt, so we return 3.\n\n \nConstraints:\n\n2 <= prices.length <= 50\n1 <= prices[i] <= 100\n1 <= money <= 100",
+    "platform": "leetcode",
+    "question_id": "2756",
+    "contest_id": "biweekly-contest-105",
+    "contest_date": "2023-05-27T00:00:00",
+    "starter_code": "class Solution:\n    def buyChoco(self, prices: List[int], money: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def buyChoco(self, prices: List[int], money: int) -> int:\n        min_prices = heapq.nsmallest(2, prices)\n        total_cost = sum(min_prices)\n        if total_cost > money:\n            return money\n        else:\n            return money - total_cost\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def buyChoco(self, prices: List[int], money: int) -> int:\n        min_prices = heapq.nsmallest(2, prices)\n        total_cost = sum(min_prices)\n        if total_cost > money:\n            return money\n        else:\n            return money - total_cost"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-distinct-difference-array",
+    "question_content": "You are given a 0-indexed array nums of length n.\nThe distinct difference array of nums is an array diff of length n such that diff[i] is equal to the number of distinct elements in the suffix nums[i + 1, ..., n - 1] subtracted from the number of distinct elements in the prefix nums[0, ..., i].\nReturn the distinct difference array of nums.\nNote that nums[i, ..., j] denotes the subarray of nums starting at index i and ending at index j inclusive. Particularly, if i > j then nums[i, ..., j] denotes an empty subarray.\n \nExample 1:\n\nInput: nums = [1,2,3,4,5]\nOutput: [-3,-1,1,3,5]\nExplanation: For index i = 0, there is 1 element in the prefix and 4 distinct elements in the suffix. Thus, diff[0] = 1 - 4 = -3.\nFor index i = 1, there are 2 distinct elements in the prefix and 3 distinct elements in the suffix. Thus, diff[1] = 2 - 3 = -1.\nFor index i = 2, there are 3 distinct elements in the prefix and 2 distinct elements in the suffix. Thus, diff[2] = 3 - 2 = 1.\nFor index i = 3, there are 4 distinct elements in the prefix and 1 distinct element in the suffix. Thus, diff[3] = 4 - 1 = 3.\nFor index i = 4, there are 5 distinct elements in the prefix and no elements in the suffix. Thus, diff[4] = 5 - 0 = 5.\n\nExample 2:\n\nInput: nums = [3,2,3,4,2]\nOutput: [-2,-1,0,2,3]\nExplanation: For index i = 0, there is 1 element in the prefix and 3 distinct elements in the suffix. Thus, diff[0] = 1 - 3 = -2.\nFor index i = 1, there are 2 distinct elements in the prefix and 3 distinct elements in the suffix. Thus, diff[1] = 2 - 3 = -1.\nFor index i = 2, there are 2 distinct elements in the prefix and 2 distinct elements in the suffix. Thus, diff[2] = 2 - 2 = 0.\nFor index i = 3, there are 3 distinct elements in the prefix and 1 distinct element in the suffix. Thus, diff[3] = 3 - 1 = 2.\nFor index i = 4, there are 3 distinct elements in the prefix and no elements in the suffix. Thus, diff[4] = 3 - 0 = 3.\n\n \nConstraints:\n\n1 <= n == nums.length <= 50\n1 <= nums[i] <= 50",
+    "platform": "leetcode",
+    "question_id": "2777",
+    "contest_id": "weekly-contest-344",
+    "contest_date": "2023-05-07T00:00:00",
+    "starter_code": "class Solution:\n    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        diff = []\n        \n        for i in range(n):\n            prefix_distinct = len(set(nums[:i+1]))\n            suffix_distinct = len(set(nums[i+1:]))\n            diff.append(prefix_distinct - suffix_distinct)\n            \n        return diff\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def distinctDifferenceArray(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        diff = []\n        \n        for i in range(n):\n            prefix_distinct = len(set(nums[:i+1]))\n            suffix_distinct = len(set(nums[i+1:]))\n            diff.append(prefix_distinct - suffix_distinct)\n            \n        return diff"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "semi-ordered-permutation",
+    "question_content": "You are given a 0-indexed permutation of n integers nums.\nA permutation is called semi-ordered if the first number equals 1 and the last number equals n. You can perform the below operation as many times as you want until you make nums a semi-ordered permutation:\n\nPick two adjacent elements in nums, then swap them.\n\nReturn the minimum number of operations to make nums a semi-ordered permutation.\nA permutation is a sequence of integers from 1 to n of length n containing each number exactly once.\n \nExample 1:\n\nInput: nums = [2,1,4,3]\nOutput: 2\nExplanation: We can make the permutation semi-ordered using these sequence of operations: \n1 - swap i = 0 and j = 1. The permutation becomes [1,2,4,3].\n2 - swap i = 2 and j = 3. The permutation becomes [1,2,3,4].\nIt can be proved that there is no sequence of less than two operations that make nums a semi-ordered permutation. \n\nExample 2:\n\nInput: nums = [2,4,1,3]\nOutput: 3\nExplanation: We can make the permutation semi-ordered using these sequence of operations:\n1 - swap i = 1 and j = 2. The permutation becomes [2,1,4,3].\n2 - swap i = 0 and j = 1. The permutation becomes [1,2,4,3].\n3 - swap i = 2 and j = 3. The permutation becomes [1,2,3,4].\nIt can be proved that there is no sequence of less than three operations that make nums a semi-ordered permutation.\n\nExample 3:\n\nInput: nums = [1,3,4,2,5]\nOutput: 0\nExplanation: The permutation is already a semi-ordered permutation.\n\n \nConstraints:\n\n2 <= nums.length == n <= 50\n1 <= nums[i] <= 50\nnums is a permutation.",
+    "platform": "leetcode",
+    "question_id": "2785",
+    "contest_id": "weekly-contest-348",
+    "contest_date": "2023-06-04T00:00:00",
+    "starter_code": "class Solution:\n    def semiOrderedPermutation(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def semiOrderedPermutation(self, nums: List[int]) -> int:\n        # Find the indices of 1 and n in the array\n        one_index = nums.index(1)\n        n_index = nums.index(len(nums))\n        \n        # If 1 is already at the beginning and n is at the end, no swaps needed\n        if one_index < n_index:\n            return one_index + len(nums) - 1 - n_index\n        \n        # If 1 is after n, we need to move n to the end before moving 1 to the front\n        else:\n            return one_index + len(nums) - 1 - n_index - 1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def semiOrderedPermutation(self, nums: List[int]) -> int:\n        # Find the indices of 1 and n in the array\n        one_index = nums.index(1)\n        n_index = nums.index(len(nums))\n        \n        # If 1 is already at the beginning and n is at the end, no swaps needed\n        if one_index < n_index:\n            return one_index + len(nums) - 1 - n_index\n        \n        # If 1 is after n, we need to move n to the end before moving 1 to the front\n        else:\n            return one_index + len(nums) - 1 - n_index - 1"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-longest-semi-repetitive-substring",
+    "question_content": "You are given a 0-indexed string s that consists of digits from 0 to 9.\nA string t is called a semi-repetitive if there is at most one consecutive pair of the same digits inside t. For example, 0010, 002020, 0123, 2002, and 54944 are semi-repetitive while 00101022, and 1101234883 are not.\nReturn the length of the longest semi-repetitive substring inside s.\nA substring is a contiguous non-empty sequence of characters within a string.\n \nExample 1:\n\nInput: s = \"52233\"\nOutput: 4\nExplanation: The longest semi-repetitive substring is \"5223\", which starts at i = 0 and ends at j = 3. \n\nExample 2:\n\nInput: s = \"5494\"\nOutput: 4\nExplanation: s is a semi-reptitive string, so the answer is 4.\n\nExample 3:\n\nInput: s = \"1111111\"\nOutput: 2\nExplanation: The longest semi-repetitive substring is \"11\", which starts at i = 0 and ends at j = 1.\n\n \nConstraints:\n\n1 <= s.length <= 50\n'0' <= s[i] <= '9'",
+    "platform": "leetcode",
+    "question_id": "2786",
+    "contest_id": "biweekly-contest-106",
+    "contest_date": "2023-06-10T00:00:00",
+    "starter_code": "class Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        max_length = 0\n        left = 0\n        consecutive_pairs = 0\n        \n        for right in range(1, len(s)):\n            if s[right] == s[right - 1]:\n                consecutive_pairs += 1\n            \n            while consecutive_pairs > 1:\n                if s[left] == s[left + 1]:\n                    consecutive_pairs -= 1\n                left += 1\n            \n            max_length = max(max_length, right - left + 1)\n        \n        return max_length\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def longestSemiRepetitiveSubstring(self, s: str) -> int:\n        max_length = 0\n        left = 0\n        consecutive_pairs = 0\n        \n        for right in range(1, len(s)):\n            if s[right] == s[right - 1]:\n                consecutive_pairs += 1\n            \n            while consecutive_pairs > 1:\n                if s[left] == s[left + 1]:\n                    consecutive_pairs -= 1\n                left += 1\n            \n            max_length = max(max_length, right - left + 1)\n        \n        return max_length"
+    ],
+    "graded_list": [
+      false
+    ],
+    "pass@1": 0.0,
+    "metadata": [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  },
+  {
+    "question_title": "neighboring-bitwise-xor",
+    "question_content": "A 0-indexed array derived with length n is derived by computing the bitwise XOR (\u2295) of adjacent values in a binary array original of length n.\nSpecifically, for each index i in the range [0, n - 1]:\n\nIf i = n - 1, then derived[i] = original[i] \u2295 original[0].\nOtherwise, derived[i] = original[i] \u2295 original[i + 1].\n\nGiven an array derived, your task is to determine whether there exists a valid binary array original that could have formed derived.\nReturn true if such an array exists or false otherwise.\n\nA binary array is an array containing only 0's and 1's\n\n \nExample 1:\n\nInput: derived = [1,1,0]\nOutput: true\nExplanation: A valid original array that gives derived is [0,1,0].\nderived[0] = original[0] \u2295 original[1] = 0 \u2295 1 = 1 \nderived[1] = original[1] \u2295 original[2] = 1 \u2295 0 = 1\nderived[2] = original[2] \u2295 original[0] = 0 \u2295 0 = 0\n\nExample 2:\n\nInput: derived = [1,1]\nOutput: true\nExplanation: A valid original array that gives derived is [0,1].\nderived[0] = original[0] \u2295 original[1] = 1\nderived[1] = original[1] \u2295 original[0] = 1\n\nExample 3:\n\nInput: derived = [1,0]\nOutput: false\nExplanation: There is no valid original array that gives derived.\n\n \nConstraints:\n\nn == derived.length\n1 <= n <= 10^5\nThe values in derived are either 0's or 1's",
+    "platform": "leetcode",
+    "question_id": "2792",
+    "contest_id": "weekly-contest-345",
+    "contest_date": "2023-05-14T00:00:00",
+    "starter_code": "class Solution:\n    def doesValidArrayExist(self, derived: List[int]) -> bool:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def doesValidArrayExist(self, derived: List[int]) -> bool:\n        # The derived array can be formed if and only if its elements sum up to 0 modulo 2\n        return sum(derived) % 2 == 0\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def doesValidArrayExist(self, derived: List[int]) -> bool:\n        # The derived array can be formed if and only if its elements sum up to 0 modulo 2\n        return sum(derived) % 2 == 0"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-string-length-after-removing-substrings",
+    "question_content": "You are given a string s consisting only of uppercase English letters.\nYou can apply some operations to this string where, in one operation, you can remove any occurrence of one of the substrings \"AB\" or \"CD\" from s.\nReturn the minimum possible length of the resulting string that you can obtain.\nNote that the string concatenates after removing the substring and could produce new \"AB\" or \"CD\" substrings.\n \nExample 1:\n\nInput: s = \"ABFCACDB\"\nOutput: 2\nExplanation: We can do the following operations:\n- Remove the substring \"ABFCACDB\", so s = \"FCACDB\".\n- Remove the substring \"FCACDB\", so s = \"FCAB\".\n- Remove the substring \"FCAB\", so s = \"FC\".\nSo the resulting length of the string is 2.\nIt can be shown that it is the minimum length that we can obtain.\nExample 2:\n\nInput: s = \"ACBBD\"\nOutput: 5\nExplanation: We cannot do any operations on the string so the length remains the same.\n\n \nConstraints:\n\n1 <= s.length <= 100\ns consists only of uppercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2800",
+    "contest_id": "weekly-contest-346",
+    "contest_date": "2023-05-21T00:00:00",
+    "starter_code": "class Solution:\n    def minLength(self, s: str) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def minLength(self, s: str) -> int:\n        while 'AB' in s or 'CD' in s:\n            s = s.replace('AB', '').replace('CD', '')\n        return len(s)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minLength(self, s: str) -> int:\n        while 'AB' in s or 'CD' in s:\n            s = s.replace('AB', '').replace('CD', '')\n        return len(s)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-punishment-number-of-an-integer",
+    "question_content": "Given a positive integer n, return the punishment number of n.\nThe punishment number of n is defined as the sum of the squares of all integers i such that:\n\n1 <= i <= n\nThe decimal representation of i * i can be partitioned into contiguous substrings such that the sum of the integer values of these substrings equals i.\n\n \nExample 1:\n\nInput: n = 10\nOutput: 182\nExplanation: There are exactly 3 integers i that satisfy the conditions in the statement:\n- 1 since 1 * 1 = 1\n- 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1.\n- 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0.\nHence, the punishment number of 10 is 1 + 81 + 100 = 182\n\nExample 2:\n\nInput: n = 37\nOutput: 1478\nExplanation: There are exactly 4 integers i that satisfy the conditions in the statement:\n- 1 since 1 * 1 = 1. \n- 9 since 9 * 9 = 81 and 81 can be partitioned into 8 + 1. \n- 10 since 10 * 10 = 100 and 100 can be partitioned into 10 + 0. \n- 36 since 36 * 36 = 1296 and 1296 can be partitioned into 1 + 29 + 6.\nHence, the punishment number of 37 is 1 + 81 + 100 + 1296 = 1478\n\n \nConstraints:\n\n1 <= n <= 1000",
+    "platform": "leetcode",
+    "question_id": "2802",
+    "contest_id": "weekly-contest-346",
+    "contest_date": "2023-05-21T00:00:00",
+    "starter_code": "class Solution:\n    def punishmentNumber(self, n: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def punishmentNumber(self, n: int) -> int:\n        def can_partition(s, target):\n            if not s:\n                return target == 0\n            for i in range(len(s)):\n                num = int(s[:i+1])\n                if can_partition(s[i+1:], target - num):\n                    return True\n            return False\n        \n        result = 0\n        for i in range(1, n + 1):\n            square = i * i\n            if can_partition(str(square), i):\n                result += square\n        return result\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def punishmentNumber(self, n: int) -> int:\n        def can_partition(s, target):\n            if not s:\n                return target == 0\n            for i in range(len(s)):\n                num = int(s[:i+1])\n                if can_partition(s[i+1:], target - num):\n                    return True\n            return False\n        \n        result = 0\n        for i in range(1, n + 1):\n            square = i * i\n            if can_partition(str(square), i):\n                result += square\n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-maximum-achievable-number",
+    "question_content": "You are given two integers, num and t.\nAn integer x is called achievable if it can become equal to num after applying the following operation no more than t times:\n\nIncrease or decrease x by 1, and simultaneously increase or decrease num by 1.\n\nReturn the maximum possible achievable number. It can be proven that there exists at least one achievable number.\n \nExample 1:\n\nInput: num = 4, t = 1\nOutput: 6\nExplanation: The maximum achievable number is x = 6; it can become equal to num after performing this operation:\n1- Decrease x by 1, and increase num by 1. Now, x = 5 and num = 5. \nIt can be proven that there is no achievable number larger than 6.\n\n\nExample 2:\n\nInput: num = 3, t = 2\nOutput: 7\nExplanation: The maximum achievable number is x = 7; after performing these operations, x will equal num: \n1- Decrease x by 1, and increase num by 1. Now, x = 6 and num = 4.\n2- Decrease x by 1, and increase num by 1. Now, x = 5 and num = 5.\nIt can be proven that there is no achievable number larger than 7.\n\n \nConstraints:\n\n1 <= num, t <= 50",
+    "platform": "leetcode",
+    "question_id": "2812",
+    "contest_id": "weekly-contest-353",
+    "contest_date": "2023-07-09T00:00:00",
+    "starter_code": "class Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        return num + 2 * t\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def theMaximumAchievableX(self, num: int, t: int) -> int:\n        return num + 2 * t"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "lexicographically-smallest-palindrome",
+    "question_content": "You are given a string s consisting of lowercase English letters, and you are allowed to perform operations on it. In one operation, you can replace a character in s with another lowercase English letter.\nYour task is to make s a palindrome with the minimum number of operations possible. If there are multiple palindromes that can be made using the minimum number of operations, make the lexicographically smallest one.\nA string a is lexicographically smaller than a string b (of the same length) if in the first position where a and b differ, string a has a letter that appears earlier in the alphabet than the corresponding letter in b.\nReturn the resulting palindrome string.\n \nExample 1:\n\nInput: s = \"egcfe\"\nOutput: \"efcfe\"\nExplanation: The minimum number of operations to make \"egcfe\" a palindrome is 1, and the lexicographically smallest palindrome string we can get by modifying one character is \"efcfe\", by changing 'g'.\n\nExample 2:\n\nInput: s = \"abcd\"\nOutput: \"abba\"\nExplanation: The minimum number of operations to make \"abcd\" a palindrome is 2, and the lexicographically smallest palindrome string we can get by modifying two characters is \"abba\".\n\nExample 3:\n\nInput: s = \"seven\"\nOutput: \"neven\"\nExplanation: The minimum number of operations to make \"seven\" a palindrome is 1, and the lexicographically smallest palindrome string we can get by modifying one character is \"neven\".\n\n \nConstraints:\n\n1 <= s.length <= 1000\ns consists of only lowercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2816",
+    "contest_id": "weekly-contest-346",
+    "contest_date": "2023-05-21T00:00:00",
+    "starter_code": "class Solution:\n    def makeSmallestPalindrome(self, s: str) -> str:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def makeSmallestPalindrome(self, s: str) -> str:\n        left, right = 0, len(s) - 1\n        result = list(s)\n        \n        while left < right:\n            if s[left] < s[right]:\n                result[right] = s[left]\n            else:\n                result[left] = s[right]\n            left += 1\n            right -= 1\n        \n        return ''.join(result)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def makeSmallestPalindrome(self, s: str) -> str:\n        left, right = 0, len(s) - 1\n        result = list(s)\n        \n        while left < right:\n            if s[left] < s[right]:\n                result[right] = s[left]\n            else:\n                result[left] = s[right]\n            left += 1\n            right -= 1\n        \n        return ''.join(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "check-if-the-number-is-fascinating",
+    "question_content": "You are given an integer n that consists of exactly 3 digits.\nWe call the number n fascinating if, after the following modification, the resulting number contains all the digits from 1 to 9 exactly once and does not contain any 0's:\n\nConcatenate n with the numbers 2 * n and 3 * n.\n\nReturn true if n is fascinating, or false otherwise.\nConcatenating two numbers means joining them together. For example, the concatenation of 121 and 371 is 121371.\n \nExample 1:\n\nInput: n = 192\nOutput: true\nExplanation: We concatenate the numbers n = 192 and 2 * n = 384 and 3 * n = 576. The resulting number is 192384576. This number contains all the digits from 1 to 9 exactly once.\n\nExample 2:\n\nInput: n = 100\nOutput: false\nExplanation: We concatenate the numbers n = 100 and 2 * n = 200 and 3 * n = 300. The resulting number is 100200300. This number does not satisfy any of the conditions.\n\n \nConstraints:\n\n100 <= n <= 999",
+    "platform": "leetcode",
+    "question_id": "2824",
+    "contest_id": "biweekly-contest-106",
+    "contest_date": "2023-06-10T00:00:00",
+    "starter_code": "class Solution:\n    def isFascinating(self, n: int) -> bool:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "Here's the complete solution enclosed in the specified format:\n\n```python\nclass Solution:\n    def isFascinating(self, n: int) -> bool:\n        concatenated = str(n) + str(2 * n) + str(3 * n)\n        return len(concatenated) == 9 and set(concatenated) == set('123456789')\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def isFascinating(self, n: int) -> bool:\n        concatenated = str(n) + str(2 * n) + str(3 * n)\n        return len(concatenated) == 9 and set(concatenated) == set('123456789')"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimize-string-length",
+    "question_content": "Given a 0-indexed string s, repeatedly perform the following operation any number of times:\n\nChoose an index i in the string, and let c be the character in position i. Delete the closest occurrence of c to the left of i (if any) and the closest occurrence of c to the right of i (if any).\n\nYour task is to minimize the length of s by performing the above operation any number of times.\nReturn an integer denoting the length of the minimized string.\n \nExample 1:\n\nInput: s = \"aaabc\"\nOutput: 3\nExplanation: In this example, s is \"aaabc\". We can start by selecting the character 'a' at index 1. We then remove the closest 'a' to the left of index 1, which is at index 0, and the closest 'a' to the right of index 1, which is at index 2. After this operation, the string becomes \"abc\". Any further operation we perform on the string will leave it unchanged. Therefore, the length of the minimized string is 3.\nExample 2:\n\nInput: s = \"cbbd\"\nOutput: 3\nExplanation: For this we can start with character 'b' at index 1. There is no occurrence of 'b' to the left of index 1, but there is one to the right at index 2, so we delete the 'b' at index 2. The string becomes \"cbd\" and further operations will leave it unchanged. Hence, the minimized length is 3. \n\nExample 3:\n\nInput: s = \"dddaaa\"\nOutput: 2\nExplanation: For this, we can start with the character 'd' at index 1. The closest occurrence of a 'd' to its left is at index 0, and the closest occurrence of a 'd' to its right is at index 2. We delete both index 0 and 2, so the string becomes \"daaa\". In the new string, we can select the character 'a' at index 2. The closest occurrence of an 'a' to its left is at index 1, and the closest occurrence of an 'a' to its right is at index 3. We delete both of them, and the string becomes \"da\". We cannot minimize this further, so the minimized length is 2.\n\n \n \nConstraints:\n\n1 <= s.length <= 100\ns contains only lowercase English letters",
+    "platform": "leetcode",
+    "question_id": "2825",
+    "contest_id": "weekly-contest-348",
+    "contest_date": "2023-06-04T00:00:00",
+    "starter_code": "class Solution:\n    def minimizedStringLength(self, s: str) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimizedStringLength(self, s: str) -> int:\n        return len(set(s))\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimizedStringLength(self, s: str) -> int:\n        return len(set(s))"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "lexicographically-smallest-string-after-substring-operation",
+    "question_content": "You are given a string s consisting of only lowercase English letters. In one operation, you can do the following:\n\nSelect any non-empty substring of s, possibly the entire string, then replace each one of its characters with the previous character of the English alphabet. For example, 'b' is converted to 'a', and 'a' is converted to 'z'.\n\nReturn the lexicographically smallest string you can obtain after performing the above operation exactly once.\nA substring is a contiguous sequence of characters in a string.\nA string x is lexicographically smaller than a string y of the same length if x[i] comes before y[i] in alphabetic order for the first position i such that x[i] != y[i].\n \nExample 1:\n\nInput: s = \"cbabc\"\nOutput: \"baabc\"\nExplanation: We apply the operation on the substring starting at index 0, and ending at index 1 inclusive. \nIt can be proven that the resulting string is the lexicographically smallest. \n\nExample 2:\n\nInput: s = \"acbbc\"\nOutput: \"abaab\"\nExplanation: We apply the operation on the substring starting at index 1, and ending at index 4 inclusive. \nIt can be proven that the resulting string is the lexicographically smallest. \n\nExample 3:\n\nInput: s = \"leetcode\"\nOutput: \"kddsbncd\"\nExplanation: We apply the operation on the entire string. \nIt can be proven that the resulting string is the lexicographically smallest. \n\n \nConstraints:\n\n1 <= s.length <= 3 * 10^5\ns consists of lowercase English letters",
+    "platform": "leetcode",
+    "question_id": "2828",
+    "contest_id": "weekly-contest-349",
+    "contest_date": "2023-06-11T00:00:00",
+    "starter_code": "class Solution:\n    def smallestString(self, s: str) -> str:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def smallestString(self, s: str) -> str:\n        # Convert the string to a list of characters for easy manipulation\n        chars = list(s)\n        \n        # Find the first character that is not 'a'\n        for i, char in enumerate(chars):\n            if char != 'a':\n                # Start converting from this character to the end or until we encounter another 'a'\n                while i < len(chars) and chars[i] != 'a':\n                    chars[i] = chr(ord(chars[i]) - 1)\n                    i += 1\n                return ''.join(chars)\n        \n        # If all characters are 'a', convert the last character to 'z'\n        chars[-1] = 'z'\n        return ''.join(chars)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def smallestString(self, s: str) -> str:\n        # Convert the string to a list of characters for easy manipulation\n        chars = list(s)\n        \n        # Find the first character that is not 'a'\n        for i, char in enumerate(chars):\n            if char != 'a':\n                # Start converting from this character to the end or until we encounter another 'a'\n                while i < len(chars) and chars[i] != 'a':\n                    chars[i] = chr(ord(chars[i]) - 1)\n                    i += 1\n                return ''.join(chars)\n        \n        # If all characters are 'a', convert the last character to 'z'\n        chars[-1] = 'z'\n        return ''.join(chars)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "number-of-beautiful-pairs",
+    "question_content": "You are given a 0-indexed integer array nums. A pair of indices i, j where 0 <= i < j < nums.length is called beautiful if the first digit of nums[i] and the last digit of nums[j] are coprime.\nReturn the total number of beautiful pairs in nums.\nTwo integers x and y are coprime if there is no integer greater than 1 that divides both of them. In other words, x and y are coprime if gcd(x, y) == 1, where gcd(x, y) is the greatest common divisor of x and y.\n \nExample 1:\n\nInput: nums = [2,5,1,4]\nOutput: 5\nExplanation: There are 5 beautiful pairs in nums:\nWhen i = 0 and j = 1: the first digit of nums[0] is 2, and the last digit of nums[1] is 5. We can confirm that 2 and 5 are coprime, since gcd(2,5) == 1.\nWhen i = 0 and j = 2: the first digit of nums[0] is 2, and the last digit of nums[2] is 1. Indeed, gcd(2,1) == 1.\nWhen i = 1 and j = 2: the first digit of nums[1] is 5, and the last digit of nums[2] is 1. Indeed, gcd(5,1) == 1.\nWhen i = 1 and j = 3: the first digit of nums[1] is 5, and the last digit of nums[3] is 4. Indeed, gcd(5,4) == 1.\nWhen i = 2 and j = 3: the first digit of nums[2] is 1, and the last digit of nums[3] is 4. Indeed, gcd(1,4) == 1.\nThus, we return 5.\n\nExample 2:\n\nInput: nums = [11,21,12]\nOutput: 2\nExplanation: There are 2 beautiful pairs:\nWhen i = 0 and j = 1: the first digit of nums[0] is 1, and the last digit of nums[1] is 1. Indeed, gcd(1,1) == 1.\nWhen i = 0 and j = 2: the first digit of nums[0] is 1, and the last digit of nums[2] is 2. Indeed, gcd(1,2) == 1.\nThus, we return 2.\n\n \nConstraints:\n\n2 <= nums.length <= 100\n1 <= nums[i] <= 9999\nnums[i] % 10 != 0",
+    "platform": "leetcode",
+    "question_id": "2831",
+    "contest_id": "weekly-contest-351",
+    "contest_date": "2023-06-25T00:00:00",
+    "starter_code": "class Solution:\n    def countBeautifulPairs(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def countBeautifulPairs(self, nums: List[int]) -> int:\n        from math import gcd\n        ans = 0\n        for i in range(len(nums)):\n            for j in range(i+1, len(nums)):\n                if gcd(int(str(nums[i])[0]), int(str(nums[j])[-1])) == 1:\n                    ans += 1\n        return ans\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countBeautifulPairs(self, nums: List[int]) -> int:\n        from math import gcd\n        ans = 0\n        for i in range(len(nums)):\n            for j in range(i+1, len(nums)):\n                if gcd(int(str(nums[i])[0]), int(str(nums[j])[-1])) == 1:\n                    ans += 1\n        return ans"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-longest-equal-subarray",
+    "question_content": "You are given a 0-indexed integer array nums and an integer k.\nA subarray is called equal if all of its elements are equal. Note that the empty subarray is an equal subarray.\nReturn the length of the longest possible equal subarray after deleting at most k elements from nums.\nA subarray is a contiguous, possibly empty sequence of elements within an array.\n \nExample 1:\n\nInput: nums = [1,3,2,3,1,3], k = 3\nOutput: 3\nExplanation: It's optimal to delete the elements at index 2 and index 4.\nAfter deleting them, nums becomes equal to [1, 3, 3, 3].\nThe longest equal subarray starts at i = 1 and ends at j = 3 with length equal to 3.\nIt can be proven that no longer equal subarrays can be created.\n\nExample 2:\n\nInput: nums = [1,1,2,2,1,1], k = 2\nOutput: 4\nExplanation: It's optimal to delete the elements at index 2 and index 3.\nAfter deleting them, nums becomes equal to [1, 1, 1, 1].\nThe array itself is an equal subarray, so the answer is 4.\nIt can be proven that no longer equal subarrays can be created.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= nums.length\n0 <= k <= nums.length",
+    "platform": "leetcode",
+    "question_id": "2832",
+    "contest_id": "weekly-contest-359",
+    "contest_date": "2023-08-20T00:00:00",
+    "starter_code": "class Solution:\n    def longestEqualSubarray(self, nums: List[int], k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def longestEqualSubarray(self, nums: List[int], k: int) -> int:\n        count = defaultdict(int)\n        left = maxLength = 0\n        \n        for right in range(len(nums)):\n            count[nums[right]] += 1\n            maxLength = max(maxLength, count[nums[right]])\n            \n            if (right - left + 1) - maxLength > k:\n                count[nums[left]] -= 1\n                if not count[nums[left]]:\n                    del count[nums[left]]\n                left += 1\n        \n        return maxLength\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def longestEqualSubarray(self, nums: List[int], k: int) -> int:\n        count = defaultdict(int)\n        left = maxLength = 0\n        \n        for right in range(len(nums)):\n            count[nums[right]] += 1\n            maxLength = max(maxLength, count[nums[right]])\n            \n            if (right - left + 1) - maxLength > k:\n                count[nums[left]] -= 1\n                if not count[nums[left]]:\n                    del count[nums[left]]\n                left += 1\n        \n        return maxLength"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-operations-to-make-the-integer-zero",
+    "question_content": "You are given two integers num1 and num2.\nIn one operation, you can choose integer i in the range [0, 60] and subtract 2^i + num2 from num1.\nReturn the integer denoting the minimum number of operations needed to make num1 equal to 0.\nIf it is impossible to make num1 equal to 0, return -1.\n \nExample 1:\n\nInput: num1 = 3, num2 = -2\nOutput: 3\nExplanation: We can make 3 equal to 0 with the following operations:\n- We choose i = 2 and substract 2^2 + (-2) from 3, 3 - (4 + (-2)) = 1.\n- We choose i = 2 and substract 2^2 + (-2) from 1, 1 - (4 + (-2)) = -1.\n- We choose i = 0 and substract 2^0 + (-2) from -1, (-1) - (1 + (-2)) = 0.\nIt can be proven, that 3 is the minimum number of operations that we need to perform.\n\nExample 2:\n\nInput: num1 = 5, num2 = 7\nOutput: -1\nExplanation: It can be proven, that it is impossible to make 5 equal to 0 with the given operation.\n\n \nConstraints:\n\n1 <= num1 <= 10^9\n-10^9 <= num2 <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2837",
+    "contest_id": "weekly-contest-351",
+    "contest_date": "2023-06-25T00:00:00",
+    "starter_code": "class Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        for ops in range(61):\n            target = num1 - ops * num2\n            if target >= ops and bin(target).count('1') <= ops:\n                return ops\n        return -1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def makeTheIntegerZero(self, num1: int, num2: int) -> int:\n        for ops in range(61):\n            target = num1 - ops * num2\n            if target >= ops and bin(target).count('1') <= ops:\n                return ops\n        return -1"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "sum-of-squares-of-special-elements",
+    "question_content": "You are given a 1-indexed integer array nums of length n.\nAn element nums[i] of nums is called special if i divides n, i.e. n % i == 0.\nReturn the sum of the squares of all special elements of nums.\n \nExample 1:\n\nInput: nums = [1,2,3,4]\nOutput: 21\nExplanation: There are exactly 3 special elements in nums: nums[1] since 1 divides 4, nums[2] since 2 divides 4, and nums[4] since 4 divides 4. \nHence, the sum of the squares of all special elements of nums is nums[1] * nums[1] + nums[2] * nums[2] + nums[4] * nums[4] = 1 * 1 + 2 * 2 + 4 * 4 = 21.  \n\nExample 2:\n\nInput: nums = [2,7,1,19,18,3]\nOutput: 63\nExplanation: There are exactly 4 special elements in nums: nums[1] since 1 divides 6, nums[2] since 2 divides 6, nums[3] since 3 divides 6, and nums[6] since 6 divides 6. \nHence, the sum of the squares of all special elements of nums is nums[1] * nums[1] + nums[2] * nums[2] + nums[3] * nums[3] + nums[6] * nums[6] = 2 * 2 + 7 * 7 + 1 * 1 + 3 * 3 = 63. \n\n \nConstraints:\n\n1 <= nums.length == n <= 50\n1 <= nums[i] <= 50",
+    "platform": "leetcode",
+    "question_id": "2844",
+    "contest_id": "weekly-contest-354",
+    "contest_date": "2023-07-16T00:00:00",
+    "starter_code": "class Solution:\n    def sumOfSquares(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def sumOfSquares(self, nums: List[int]) -> int:\n        n = len(nums)\n        return sum(nums[i-1]**2 for i in range(1, n+1) if n % i == 0)\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def sumOfSquares(self, nums: List[int]) -> int:\n        n = len(nums)\n        return sum(nums[i-1]**2 for i in range(1, n+1) if n % i == 0)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-the-value-of-the-partition",
+    "question_content": "You are given a positive integer array nums.\nPartition nums into two arrays, nums1 and nums2, such that:\n\nEach element of the array nums belongs to either the array nums1 or the array nums2.\nBoth arrays are non-empty.\nThe value of the partition is minimized.\n\nThe value of the partition is |max(nums1) - min(nums2)|.\nHere, max(nums1) denotes the maximum element of the array nums1, and min(nums2) denotes the minimum element of the array nums2.\nReturn the integer denoting the value of such partition.\n \nExample 1:\n\nInput: nums = [1,3,2,4]\nOutput: 1\nExplanation: We can partition the array nums into nums1 = [1,2] and nums2 = [3,4].\n- The maximum element of the array nums1 is equal to 2.\n- The minimum element of the array nums2 is equal to 3.\nThe value of the partition is |2 - 3| = 1. \nIt can be proven that 1 is the minimum value out of all partitions.\n\nExample 2:\n\nInput: nums = [100,1,10]\nOutput: 9\nExplanation: We can partition the array nums into nums1 = [10] and nums2 = [100,1].\n- The maximum element of the array nums1 is equal to 10.\n- The minimum element of the array nums2 is equal to 1.\nThe value of the partition is |10 - 1| = 9.\nIt can be proven that 9 is the minimum value out of all partitions.\n\n \nConstraints:\n\n2 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2845",
+    "contest_id": "weekly-contest-350",
+    "contest_date": "2023-06-18T00:00:00",
+    "starter_code": "class Solution:\n    def findValueOfPartition(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def findValueOfPartition(self, nums: List[int]) -> int:\n        nums.sort()\n        return min(nums[i+1] - nums[i] for i in range(len(nums)-1))\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def findValueOfPartition(self, nums: List[int]) -> int:\n        nums.sort()\n        return min(nums[i+1] - nums[i] for i in range(len(nums)-1))"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "find-maximum-number-of-string-pairs",
+    "question_content": "You are given a 0-indexed array words consisting of distinct strings.\nThe string words[i] can be paired with the string words[j] if:\n\nThe string words[i] is equal to the reversed string of words[j].\n0 <= i < j < words.length.\n\nReturn the maximum number of pairs that can be formed from the array words.\nNote that each string can belong in at most one pair.\n \nExample 1:\n\nInput: words = [\"cd\",\"ac\",\"dc\",\"ca\",\"zz\"]\nOutput: 2\nExplanation: In this example, we can form 2 pair of strings in the following way:\n- We pair the 0^th string with the 2^nd string, as the reversed string of word[0] is \"dc\" and is equal to words[2].\n- We pair the 1^st string with the 3^rd string, as the reversed string of word[1] is \"ca\" and is equal to words[3].\nIt can be proven that 2 is the maximum number of pairs that can be formed.\nExample 2:\n\nInput: words = [\"ab\",\"ba\",\"cc\"]\nOutput: 1\nExplanation: In this example, we can form 1 pair of strings in the following way:\n- We pair the 0^th string with the 1^st string, as the reversed string of words[1] is \"ab\" and is equal to words[0].\nIt can be proven that 1 is the maximum number of pairs that can be formed.\n\nExample 3:\n\nInput: words = [\"aa\",\"ab\"]\nOutput: 0\nExplanation: In this example, we are unable to form any pair of strings.\n\n \nConstraints:\n\n1 <= words.length <= 50\nwords[i].length == 2\nwords consists of distinct strings.\nwords[i] contains only lowercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2847",
+    "contest_id": "biweekly-contest-107",
+    "contest_date": "2023-06-24T00:00:00",
+    "starter_code": "class Solution:\n    def maximumNumberOfStringPairs(self, words: List[str]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def maximumNumberOfStringPairs(self, words: List[str]) -> int:\n        count = 0\n        seen = set()\n        for word in words:\n            rev_word = word[::-1]\n            if rev_word in seen:\n                count += 1\n            seen.add(word)\n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def maximumNumberOfStringPairs(self, words: List[str]) -> int:\n        count = 0\n        seen = set()\n        for word in words:\n            rev_word = word[::-1]\n            if rev_word in seen:\n                count += 1\n            seen.add(word)\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "special-permutations",
+    "question_content": "You are given a 0-indexed integer array nums containing n distinct positive integers. A permutation of nums is called special if:\n\nFor all indexes 0 <= i < n - 1, either nums[i] % nums[i+1] == 0 or nums[i+1] % nums[i] == 0.\n\nReturn the total number of special permutations. As the answer could be large, return it modulo 10^9 + 7.\n \nExample 1:\n\nInput: nums = [2,3,6]\nOutput: 2\nExplanation: [3,6,2] and [2,6,3] are the two special permutations of nums.\n\nExample 2:\n\nInput: nums = [1,4,3]\nOutput: 2\nExplanation: [3,1,4] and [4,1,3] are the two special permutations of nums.\n\n \nConstraints:\n\n2 <= nums.length <= 14\n1 <= nums[i] <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2848",
+    "contest_id": "weekly-contest-350",
+    "contest_date": "2023-06-18T00:00:00",
+    "starter_code": "class Solution:\n    def specialPerm(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def specialPerm(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        n = len(nums)\n        \n        @cache\n        def dfs(mask, last):\n            if mask == (1 << n) - 1:\n                return 1\n            \n            count = 0\n            for i in range(n):\n                if not (mask & (1 << i)) and (last % nums[i] == 0 or nums[i] % last == 0):\n                    count += dfs(mask | (1 << i), nums[i])\n            \n            return count\n        \n        total_permutations = 0\n        for num in nums:\n            total_permutations += dfs(1 << nums.index(num), num)\n        \n        return total_permutations % MOD\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def specialPerm(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        n = len(nums)\n        \n        @cache\n        def dfs(mask, last):\n            if mask == (1 << n) - 1:\n                return 1\n            \n            count = 0\n            for i in range(n):\n                if not (mask & (1 << i)) and (last % nums[i] == 0 or nums[i] % last == 0):\n                    count += dfs(mask | (1 << i), nums[i])\n            \n            return count\n        \n        total_permutations = 0\n        for num in nums:\n            total_permutations += dfs(1 << nums.index(num), num)\n        \n        return total_permutations % MOD"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "construct-the-longest-new-string",
+    "question_content": "You are given three integers x, y, and z.\nYou have x strings equal to \"AA\", y strings equal to \"BB\", and z strings equal to \"AB\". You want to choose some (possibly all or none) of these strings and concatenate them in some order to form a new string. This new string must not contain \"AAA\" or \"BBB\" as a substring.\nReturn the maximum possible length of the new string.\nA substring is a contiguous non-empty sequence of characters within a string.\n \nExample 1:\n\nInput: x = 2, y = 5, z = 1\nOutput: 12\nExplanation: We can concactenate the strings \"BB\", \"AA\", \"BB\", \"AA\", \"BB\", and \"AB\" in that order. Then, our new string is \"BBAABBAABBAB\". \nThat string has length 12, and we can show that it is impossible to construct a string of longer length.\n\nExample 2:\n\nInput: x = 3, y = 2, z = 2\nOutput: 14\nExplanation: We can concactenate the strings \"AB\", \"AB\", \"AA\", \"BB\", \"AA\", \"BB\", and \"AA\" in that order. Then, our new string is \"ABABAABBAABBAA\". \nThat string has length 14, and we can show that it is impossible to construct a string of longer length.\n\n \nConstraints:\n\n1 <= x, y, z <= 50",
+    "platform": "leetcode",
+    "question_id": "2850",
+    "contest_id": "biweekly-contest-107",
+    "contest_date": "2023-06-24T00:00:00",
+    "starter_code": "class Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        return 2 * (min(x, y) * 2 + (x != y) + z)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def longestString(self, x: int, y: int, z: int) -> int:\n        return 2 * (min(x, y) * 2 + (x != y) + z)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "decremental-string-concatenation",
+    "question_content": "You are given a 0-indexed array words containing n strings.\nLet's define a join operation join(x, y) between two strings x and y as concatenating them into xy. However, if the last character of x is equal to the first character of y, one of them is deleted.\nFor example join(\"ab\", \"ba\") = \"aba\" and join(\"ab\", \"cde\") = \"abcde\".\nYou are to perform n - 1 join operations. Let str_0 = words[0]. Starting from i = 1 up to i = n - 1, for the i^th operation, you can do one of the following:\n\nMake str_i = join(str_i - 1, words[i])\nMake str_i = join(words[i], str_i - 1)\n\nYour task is to minimize the length of str_n - 1.\nReturn an integer denoting the minimum possible length of str_n - 1.\n \nExample 1:\n\nInput: words = [\"aa\",\"ab\",\"bc\"]\nOutput: 4\nExplanation: In this example, we can perform join operations in the following order to minimize the length of str_2: \nstr_0 = \"aa\"\nstr_1 = join(str_0, \"ab\") = \"aab\"\nstr_2 = join(str_1, \"bc\") = \"aabc\" \nIt can be shown that the minimum possible length of str_2 is 4.\nExample 2:\n\nInput: words = [\"ab\",\"b\"]\nOutput: 2\nExplanation: In this example, str_0 = \"ab\", there are two ways to get str_1: \njoin(str_0, \"b\") = \"ab\" or join(\"b\", str_0) = \"bab\". \nThe first string, \"ab\", has the minimum length. Hence, the answer is 2.\n\nExample 3:\n\nInput: words = [\"aaa\",\"c\",\"aba\"]\nOutput: 6\nExplanation: In this example, we can perform join operations in the following order to minimize the length of str_2: \nstr_0 = \"aaa\"\nstr_1 = join(str_0, \"c\") = \"aaac\"\nstr_2 = join(\"aba\", str_1) = \"abaaac\"\nIt can be shown that the minimum possible length of str_2 is 6.\n\n \n \nConstraints:\n\n1 <= words.length <= 1000\n1 <= words[i].length <= 50\nEach character in words[i] is an English lowercase letter",
+    "platform": "leetcode",
+    "question_id": "2854",
+    "contest_id": "biweekly-contest-107",
+    "contest_date": "2023-06-24T00:00:00",
+    "starter_code": "class Solution:\n    def minimizeConcatenatedLength(self, words: List[str]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimizeConcatenatedLength(self, words: List[str]) -> int:\n        @lru_cache(None)\n        def dp(i, prev_start, prev_end):\n            if i == len(words):\n                return 0\n            \n            current_word = words[i]\n            current_start, current_end = current_word[0], current_word[-1]\n            \n            # Option 1: Join current word to the end of previous word\n            option1 = dp(i + 1, prev_start, current_end) + len(current_word) - 1 if prev_end == current_start else dp(i + 1, prev_start, current_end) + len(current_word)\n            \n            # Option 2: Join previous word to the start of current word\n            option2 = dp(i + 1, current_start, prev_end) + len(current_word) - 1 if prev_start == current_end else dp(i + 1, current_start, prev_end) + len(current_word)\n            \n            return min(option1, option2)\n        \n        # Initial call with the first word's characters\n        return dp(1, words[0][0], words[0][-1]) + len(words[0])\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimizeConcatenatedLength(self, words: List[str]) -> int:\n        @lru_cache(None)\n        def dp(i, prev_start, prev_end):\n            if i == len(words):\n                return 0\n            \n            current_word = words[i]\n            current_start, current_end = current_word[0], current_word[-1]\n            \n            # Option 1: Join current word to the end of previous word\n            option1 = dp(i + 1, prev_start, current_end) + len(current_word) - 1 if prev_end == current_start else dp(i + 1, prev_start, current_end) + len(current_word)\n            \n            # Option 2: Join previous word to the start of current word\n            option2 = dp(i + 1, current_start, prev_end) + len(current_word) - 1 if prev_start == current_end else dp(i + 1, current_start, prev_end) + len(current_word)\n            \n            return min(option1, option2)\n        \n        # Initial call with the first word's characters\n        return dp(1, words[0][0], words[0][-1]) + len(words[0])"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-number-of-jumps-to-reach-the-last-index",
+    "question_content": "You are given a 0-indexed array nums of n integers and an integer target.\nYou are initially positioned at index 0. In one step, you can jump from index i to any index j such that:\n\n0 <= i < j < n\n-target <= nums[j] - nums[i] <= target\n\nReturn the maximum number of jumps you can make to reach index n - 1.\nIf there is no way to reach index n - 1, return -1.\n \nExample 1:\n\nInput: nums = [1,3,6,4,1,2], target = 2\nOutput: 3\nExplanation: To go from index 0 to index n - 1 with the maximum number of jumps, you can perform the following jumping sequence:\n- Jump from index 0 to index 1. \n- Jump from index 1 to index 3.\n- Jump from index 3 to index 5.\nIt can be proven that there is no other jumping sequence that goes from 0 to n - 1 with more than 3 jumps. Hence, the answer is 3. \nExample 2:\n\nInput: nums = [1,3,6,4,1,2], target = 3\nOutput: 5\nExplanation: To go from index 0 to index n - 1 with the maximum number of jumps, you can perform the following jumping sequence:\n- Jump from index 0 to index 1.\n- Jump from index 1 to index 2.\n- Jump from index 2 to index 3.\n- Jump from index 3 to index 4.\n- Jump from index 4 to index 5.\nIt can be proven that there is no other jumping sequence that goes from 0 to n - 1 with more than 5 jumps. Hence, the answer is 5. \nExample 3:\n\nInput: nums = [1,3,6,4,1,2], target = 0\nOutput: -1\nExplanation: It can be proven that there is no jumping sequence that goes from 0 to n - 1. Hence, the answer is -1. \n\n \nConstraints:\n\n2 <= nums.length == n <= 1000\n-10^9 <= nums[i] <= 10^9\n0 <= target <= 2 * 10^9",
+    "platform": "leetcode",
+    "question_id": "2855",
+    "contest_id": "weekly-contest-353",
+    "contest_date": "2023-07-09T00:00:00",
+    "starter_code": "class Solution:\n    def maximumJumps(self, nums: List[int], target: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def maximumJumps(self, nums: List[int], target: int) -> int:\n        n = len(nums)\n        dp = [-1] * n\n        dp[0] = 0\n        \n        for i in range(1, n):\n            for j in range(i):\n                if abs(nums[i] - nums[j]) <= target:\n                    dp[i] = max(dp[i], dp[j] + 1)\n        \n        return dp[n - 1]\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def maximumJumps(self, nums: List[int], target: int) -> int:\n        n = len(nums)\n        dp = [-1] * n\n        dp[0] = 0\n        \n        for i in range(1, n):\n            for j in range(i):\n                if abs(nums[i] - nums[j]) <= target:\n                    dp[i] = max(dp[i], dp[j] + 1)\n        \n        return dp[n - 1]"
+    ],
+    "graded_list": [
+      false
+    ],
+    "pass@1": 0.0,
+    "metadata": [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  },
+  {
+    "question_title": "count-complete-subarrays-in-an-array",
+    "question_content": "You are given an array nums consisting of positive integers.\nWe call a subarray of an array complete if the following condition is satisfied:\n\nThe number of distinct elements in the subarray is equal to the number of distinct elements in the whole array.\n\nReturn the number of complete subarrays.\nA subarray is a contiguous non-empty part of an array.\n \nExample 1:\n\nInput: nums = [1,3,1,2,2]\nOutput: 4\nExplanation: The complete subarrays are the following: [1,3,1,2], [1,3,1,2,2], [3,1,2] and [3,1,2,2].\n\nExample 2:\n\nInput: nums = [5,5,5,5]\nOutput: 10\nExplanation: The array consists only of the integer 5, so any subarray is complete. The number of subarrays that we can choose is 10.\n\n \nConstraints:\n\n1 <= nums.length <= 1000\n1 <= nums[i] <= 2000",
+    "platform": "leetcode",
+    "question_id": "2856",
+    "contest_id": "weekly-contest-356",
+    "contest_date": "2023-07-30T00:00:00",
+    "starter_code": "class Solution:\n    def countCompleteSubarrays(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def countCompleteSubarrays(self, nums: List[int]) -> int:\n        unique_count = len(set(nums))\n        count = 0\n        left = 0\n        freq_map = {}\n        \n        for right, num in enumerate(nums):\n            freq_map[num] = freq_map.get(num, 0) + 1\n            \n            while len(freq_map) == unique_count:\n                count += len(nums) - right\n                freq_map[nums[left]] -= 1\n                if freq_map[nums[left]] == 0:\n                    del freq_map[nums[left]]\n                left += 1\n        \n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countCompleteSubarrays(self, nums: List[int]) -> int:\n        unique_count = len(set(nums))\n        count = 0\n        left = 0\n        freq_map = {}\n        \n        for right, num in enumerate(nums):\n            freq_map[num] = freq_map.get(num, 0) + 1\n            \n            while len(freq_map) == unique_count:\n                count += len(nums) - right\n                freq_map[nums[left]] -= 1\n                if freq_map[nums[left]] == 0:\n                    del freq_map[nums[left]]\n                left += 1\n        \n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "ways-to-split-array-into-good-subarrays",
+    "question_content": "You are given a binary array nums.\nA subarray of an array is good if it contains exactly one element with the value 1.\nReturn an integer denoting the number of ways to split the array nums into good subarrays. As the number may be too large, return it modulo 10^9 + 7.\nA subarray is a contiguous non-empty sequence of elements within an array.\n \nExample 1:\n\nInput: nums = [0,1,0,0,1]\nOutput: 3\nExplanation: There are 3 ways to split nums into good subarrays:\n- [0,1] [0,0,1]\n- [0,1,0] [0,1]\n- [0,1,0,0] [1]\n\nExample 2:\n\nInput: nums = [0,1,0]\nOutput: 1\nExplanation: There is 1 way to split nums into good subarrays:\n- [0,1,0]\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i] <= 1",
+    "platform": "leetcode",
+    "question_id": "2867",
+    "contest_id": "weekly-contest-351",
+    "contest_date": "2023-06-25T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfGoodSubarraySplits(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfGoodSubarraySplits(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        last_one_index = -1\n        count = 1\n        for i in range(len(nums)):\n            if nums[i] == 1:\n                if last_one_index != -1:\n                    count = (count * (i - last_one_index)) % MOD\n                last_one_index = i\n        return count if last_one_index != -1 else 0\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfGoodSubarraySplits(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        last_one_index = -1\n        count = 1\n        for i in range(len(nums)):\n            if nums[i] == 1:\n                if last_one_index != -1:\n                    count = (count * (i - last_one_index)) % MOD\n                last_one_index = i\n        return count if last_one_index != -1 else 0"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "continuous-subarrays",
+    "question_content": "You are given a 0-indexed integer array nums. A subarray of nums is called continuous if:\n\nLet i, i + 1, ..., j_ be the indices in the subarray. Then, for each pair of indices i <= i_1, i_2 <= j, 0 <= |nums[i_1] - nums[i_2]| <= 2.\n\nReturn the total number of continuous subarrays.\nA subarray is a contiguous non-empty sequence of elements within an array.\n \nExample 1:\n\nInput: nums = [5,4,2,4]\nOutput: 8\nExplanation: \nContinuous subarray of size 1: [5], [4], [2], [4].\nContinuous subarray of size 2: [5,4], [4,2], [2,4].\nContinuous subarray of size 3: [4,2,4].\nThereare no subarrys of size 4.\nTotal continuous subarrays = 4 + 3 + 1 = 8.\nIt can be shown that there are no more continuous subarrays.\n\n \nExample 2:\n\nInput: nums = [1,2,3]\nOutput: 6\nExplanation: \nContinuous subarray of size 1: [1], [2], [3].\nContinuous subarray of size 2: [1,2], [2,3].\nContinuous subarray of size 3: [1,2,3].\nTotal continuous subarrays = 3 + 2 + 1 = 6.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2868",
+    "contest_id": "weekly-contest-352",
+    "contest_date": "2023-07-02T00:00:00",
+    "starter_code": "class Solution:\n    def continuousSubarrays(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "Here's a Python program that solves the problem as described. The solution uses a sliding window approach with a dictionary to keep track of the counts of each number within the current window. This allows us to efficiently check if the window meets the condition of having numbers within 2 units of each other.\n\n```python\nfrom typing import List\nimport collections\n\nclass Solution:\n    def continuousSubarrays(self, nums: List[int]) -> int:\n        count = collections.defaultdict(int)\n        left = result = 0\n        \n        for right, num in enumerate(nums):\n            count[num] += 1\n            \n            # Ensure all numbers in the window are within 2 units of each other\n            while max(count.keys()) - min(count.keys()) > 2:\n                count[nums[left]] -= 1\n                if count[nums[left]] == 0:\n                    del count[nums[left]]\n                left += 1\n            \n            # Add the number of valid subarrays ending at `right`\n            result += right - left + 1\n        \n        return result\n```\n\nThis solution works as follows:\n\n1. We initialize a dictionary `count` to keep track of the frequency of each number in the current window, and two pointers `left` and `result` to represent the window and the total number of valid subarrays, respectively.\n\n2. We iterate through the array using the `right` pointer. For each number, we add it to the `count` dictionary and expand the window by moving the `right` pointer.\n\n3. If the difference between the maximum and minimum keys in the `count` dictionary exceeds 2, it means the window contains numbers that are not within 2 units of each other. In this case, we shrink the window from the left by moving the `left` pointer until all numbers in the window are within 2 units of each other.\n\n4. For each position of the `right` pointer, the number of valid subarrays ending at `right` is `right - left + 1`. We add this value to `result`.\n\n5. Finally, we return `result`, which contains the total number of continuous subarrays.\n\nThis solution has a time complexity of O(n) because each element is added and removed from the dictionary at most once, and the space complexity is also O(n) due to the dictionary used to store the counts of numbers in the window."
+    ],
+    "code_list": [
+      "from typing import List\nimport collections\n\nclass Solution:\n    def continuousSubarrays(self, nums: List[int]) -> int:\n        count = collections.defaultdict(int)\n        left = result = 0\n        \n        for right, num in enumerate(nums):\n            count[num] += 1\n            \n            # Ensure all numbers in the window are within 2 units of each other\n            while max(count.keys()) - min(count.keys()) > 2:\n                count[nums[left]] -= 1\n                if count[nums[left]] == 0:\n                    del count[nums[left]]\n                left += 1\n            \n            # Add the number of valid subarrays ending at `right`\n            result += right - left + 1\n        \n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "prime-pairs-with-target-sum",
+    "question_content": "You are given an integer n. We say that two integers x and y form a prime number pair if:\n\n1 <= x <= y <= n\nx + y == n\nx and y are prime numbers\n\nReturn the 2D sorted list of prime number pairs [x_i, y_i]. The list should be sorted in increasing order of x_i. If there are no prime number pairs at all, return an empty array.\nNote: A prime number is a natural number greater than 1 with only two factors, itself and 1.\n \nExample 1:\n\nInput: n = 10\nOutput: [[3,7],[5,5]]\nExplanation: In this example, there are two prime pairs that satisfy the criteria. \nThese pairs are [3,7] and [5,5], and we return them in the sorted order as described in the problem statement.\n\nExample 2:\n\nInput: n = 2\nOutput: []\nExplanation: We can show that there is no prime number pair that gives a sum of 2, so we return an empty array. \n\n \nConstraints:\n\n1 <= n <= 10^6",
+    "platform": "leetcode",
+    "question_id": "2873",
+    "contest_id": "weekly-contest-352",
+    "contest_date": "2023-07-02T00:00:00",
+    "starter_code": "class Solution:\n    def findPrimePairs(self, n: int) -> List[List[int]]:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def findPrimePairs(self, n: int) -> List[List[int]]:\n        def is_prime(num):\n            if num < 2:\n                return False\n            for i in range(2, int(num**0.5) + 1):\n                if num % i == 0:\n                    return False\n            return True\n        \n        primes = [i for i in range(2, n+1) if is_prime(i)]\n        prime_set = set(primes)\n        result = []\n        \n        for x in primes:\n            y = n - x\n            if y in prime_set and x <= y:\n                result.append([x, y])\n        \n        return result\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def findPrimePairs(self, n: int) -> List[List[int]]:\n        def is_prime(num):\n            if num < 2:\n                return False\n            for i in range(2, int(num**0.5) + 1):\n                if num % i == 0:\n                    return False\n            return True\n        \n        primes = [i for i in range(2, n+1) if is_prime(i)]\n        prime_set = set(primes)\n        result = []\n        \n        for x in primes:\n            y = n - x\n            if y in prime_set and x <= y:\n                result.append([x, y])\n        \n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "number-of-employees-who-met-the-target",
+    "question_content": "There are n employees in a company, numbered from 0 to n - 1. Each employee i has worked for hours[i] hours in the company.\nThe company requires each employee to work for at least target hours.\nYou are given a 0-indexed array of non-negative integers hours of length n and a non-negative integer target.\nReturn the integer denoting the number of employees who worked at least target hours.\n \nExample 1:\n\nInput: hours = [0,1,2,3,4], target = 2\nOutput: 3\nExplanation: The company wants each employee to work for at least 2 hours.\n- Employee 0 worked for 0 hours and didn't meet the target.\n- Employee 1 worked for 1 hours and didn't meet the target.\n- Employee 2 worked for 2 hours and met the target.\n- Employee 3 worked for 3 hours and met the target.\n- Employee 4 worked for 4 hours and met the target.\nThere are 3 employees who met the target.\n\nExample 2:\n\nInput: hours = [5,1,4,2,2], target = 6\nOutput: 0\nExplanation: The company wants each employee to work for at least 6 hours.\nThere are 0 employees who met the target.\n\n \nConstraints:\n\n1 <= n == hours.length <= 50\n0 <= hours[i], target <= 10^5",
+    "platform": "leetcode",
+    "question_id": "2876",
+    "contest_id": "weekly-contest-356",
+    "contest_date": "2023-07-30T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:\n        return sum(1 for h in hours if h >= target)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfEmployeesWhoMetTarget(self, hours: List[int], target: int) -> int:\n        return sum(1 for h in hours if h >= target)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "shortest-string-that-contains-three-strings",
+    "question_content": "Given three strings a, b, and c, your task is to find a string that has the minimum length and contains all three strings as substrings.\nIf there are multiple such strings, return the lexicographically smallest one.\nReturn a string denoting the answer to the problem.\nNotes\n\nA string a is lexicographically smaller than a string b (of the same length) if in the first position where a and b differ, string a has a letter that appears earlier in the alphabet than the corresponding letter in b.\nA substring is a contiguous sequence of characters within a string.\n\n \nExample 1:\n\nInput: a = \"abc\", b = \"bca\", c = \"aaa\"\nOutput: \"aaabca\"\nExplanation:  We show that \"aaabca\" contains all the given strings: a = ans[2...4], b = ans[3..5], c = ans[0..2]. It can be shown that the length of the resulting string would be at least 6 and \"aaabca\" is the lexicographically smallest one.\nExample 2:\n\nInput: a = \"ab\", b = \"ba\", c = \"aba\"\nOutput: \"aba\"\nExplanation: We show that the string \"aba\" contains all the given strings: a = ans[0..1], b = ans[1..2], c = ans[0..2]. Since the length of c is 3, the length of the resulting string would be at least 3. It can be shown that \"aba\" is the lexicographically smallest one.\n\n \nConstraints:\n\n1 <= a.length, b.length, c.length <= 100\na, b, c consist only of lowercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2877",
+    "contest_id": "weekly-contest-356",
+    "contest_date": "2023-07-30T00:00:00",
+    "starter_code": "class Solution:\n    def minimumString(self, a: str, b: str, c: str) -> str:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimumString(self, a: str, b: str, c: str) -> str:\n        from itertools import permutations\n        \n        def merge(x, y):\n            if y in x:\n                return x\n            for i in range(len(y), -1, -1):\n                if x.endswith(y[:i]):\n                    return x + y[i:]\n            return x + y\n        \n        def combine(p):\n            s1, s2, s3 = p\n            combined = merge(merge(s1, s2), s3)\n            return combined\n        \n        perms = permutations([a, b, c])\n        result = None\n        \n        for perm in perms:\n            combined_str = combine(perm)\n            if result is None or len(combined_str) < len(result) or (len(combined_str) == len(result) and combined_str < result):\n                result = combined_str\n        \n        return result\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimumString(self, a: str, b: str, c: str) -> str:\n        from itertools import permutations\n        \n        def merge(x, y):\n            if y in x:\n                return x\n            for i in range(len(y), -1, -1):\n                if x.endswith(y[:i]):\n                    return x + y[i:]\n            return x + y\n        \n        def combine(p):\n            s1, s2, s3 = p\n            combined = merge(merge(s1, s2), s3)\n            return combined\n        \n        perms = permutations([a, b, c])\n        result = None\n        \n        for perm in perms:\n            combined_str = combine(perm)\n            if result is None or len(combined_str) < len(result) or (len(combined_str) == len(result) and combined_str < result):\n                result = combined_str\n        \n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "split-strings-by-separator",
+    "question_content": "Given an array of strings words and a character separator, split each string in words by separator.\nReturn an array of strings containing the new strings formed after the splits, excluding empty strings.\nNotes\n\nseparator is used to determine where the split should occur, but it is not included as part of the resulting strings.\nA split may result in more than two strings.\nThe resulting strings must maintain the same order as they were initially given.\n\n \nExample 1:\n\nInput: words = [\"one.two.three\",\"four.five\",\"six\"], separator = \".\"\nOutput: [\"one\",\"two\",\"three\",\"four\",\"five\",\"six\"]\nExplanation: In this example we split as follows:\n\n\"one.two.three\" splits into \"one\", \"two\", \"three\"\n\"four.five\" splits into \"four\", \"five\"\n\"six\" splits into \"six\" \n\nHence, the resulting array is [\"one\",\"two\",\"three\",\"four\",\"five\",\"six\"].\nExample 2:\n\nInput: words = [\"$easy$\",\"$problem$\"], separator = \"$\"\nOutput: [\"easy\",\"problem\"]\nExplanation: In this example we split as follows: \n\n\"$easy$\" splits into \"easy\" (excluding empty strings)\n\"$problem$\" splits into \"problem\" (excluding empty strings)\n\nHence, the resulting array is [\"easy\",\"problem\"].\n\nExample 3:\n\nInput: words = [\"|||\"], separator = \"|\"\nOutput: []\nExplanation: In this example the resulting split of \"|||\" will contain only empty strings, so we return an empty array []. \n \nConstraints:\n\n1 <= words.length <= 100\n1 <= words[i].length <= 20\ncharacters in words[i] are either lowercase English letters or characters from the string \".,|$#@\" (excluding the quotes)\nseparator is a character from the string \".,|$#@\" (excluding the quotes)",
+    "platform": "leetcode",
+    "question_id": "2881",
+    "contest_id": "weekly-contest-355",
+    "contest_date": "2023-07-23T00:00:00",
+    "starter_code": "class Solution:\n    def splitWordsBySeparator(self, words: List[str], separator: str) -> List[str]:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def splitWordsBySeparator(self, words: List[str], separator: str) -> List[str]:\n        result = []\n        for word in words:\n            parts = word.split(separator)\n            for part in parts:\n                if part:\n                    result.append(part)\n        return result\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def splitWordsBySeparator(self, words: List[str], separator: str) -> List[str]:\n        result = []\n        for word in words:\n            parts = word.split(separator)\n            for part in parts:\n                if part:\n                    result.append(part)\n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "ways-to-express-an-integer-as-sum-of-powers",
+    "question_content": "Given two positive integers n and x.\nReturn the number of ways n can be expressed as the sum of the x^th power of unique positive integers, in other words, the number of sets of unique integers [n_1, n_2, ..., n_k] where n = n_1^x + n_2^x + ... + n_k^x.\nSince the result can be very large, return it modulo 10^9 + 7.\nFor example, if n = 160 and x = 3, one way to express n is n = 2^3 + 3^3 + 5^3.\n \nExample 1:\n\nInput: n = 10, x = 2\nOutput: 1\nExplanation: We can express n as the following: n = 3^2 + 1^2 = 10.\nIt can be shown that it is the only way to express 10 as the sum of the 2^nd power of unique integers.\n\nExample 2:\n\nInput: n = 4, x = 1\nOutput: 2\nExplanation: We can express n in the following ways:\n- n = 4^1 = 4.\n- n = 3^1 + 1^1 = 4.\n\n \nConstraints:\n\n1 <= n <= 300\n1 <= x <= 5",
+    "platform": "leetcode",
+    "question_id": "2882",
+    "contest_id": "biweekly-contest-109",
+    "contest_date": "2023-07-22T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        MOD = 10**9 + 7\n        max_val = int(n ** (1 / x)) + 1\n        \n        @lru_cache(None)\n        def dp(remaining, current):\n            if remaining == 0:\n                return 1\n            if remaining < 0 or current > max_val:\n                return 0\n            \n            # Include the current number\n            include = dp(remaining - current ** x, current + 1)\n            # Exclude the current number\n            exclude = dp(remaining, current + 1)\n            \n            return (include + exclude) % MOD\n        \n        return dp(n, 1)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfWays(self, n: int, x: int) -> int:\n        MOD = 10**9 + 7\n        max_val = int(n ** (1 / x)) + 1\n        \n        @lru_cache(None)\n        def dp(remaining, current):\n            if remaining == 0:\n                return 1\n            if remaining < 0 or current > max_val:\n                return 0\n            \n            # Include the current number\n            include = dp(remaining - current ** x, current + 1)\n            # Exclude the current number\n            exclude = dp(remaining, current + 1)\n            \n            return (include + exclude) % MOD\n        \n        return dp(n, 1)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "faulty-keyboard",
+    "question_content": "Your laptop keyboard is faulty, and whenever you type a character 'i' on it, it reverses the string that you have written. Typing other characters works as expected.\nYou are given a 0-indexed string s, and you type each character of s using your faulty keyboard.\nReturn the final string that will be present on your laptop screen.\n \nExample 1:\n\nInput: s = \"string\"\nOutput: \"rtsng\"\nExplanation: \nAfter typing first character, the text on the screen is \"s\".\nAfter the second character, the text is \"st\". \nAfter the third character, the text is \"str\".\nSince the fourth character is an 'i', the text gets reversed and becomes \"rts\".\nAfter the fifth character, the text is \"rtsn\". \nAfter the sixth character, the text is \"rtsng\". \nTherefore, we return \"rtsng\".\n\nExample 2:\n\nInput: s = \"poiinter\"\nOutput: \"ponter\"\nExplanation: \nAfter the first character, the text on the screen is \"p\".\nAfter the second character, the text is \"po\". \nSince the third character you type is an 'i', the text gets reversed and becomes \"op\". \nSince the fourth character you type is an 'i', the text gets reversed and becomes \"po\".\nAfter the fifth character, the text is \"pon\".\nAfter the sixth character, the text is \"pont\". \nAfter the seventh character, the text is \"ponte\". \nAfter the eighth character, the text is \"ponter\". \nTherefore, we return \"ponter\".\n \nConstraints:\n\n1 <= s.length <= 100\ns consists of lowercase English letters.\ns[0] != 'i'",
+    "platform": "leetcode",
+    "question_id": "2886",
+    "contest_id": "weekly-contest-357",
+    "contest_date": "2023-08-06T00:00:00",
+    "starter_code": "class Solution:\n    def finalString(self, s: str) -> str:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def finalString(self, s: str) -> str:\n        result = []\n        for char in s:\n            if char == 'i':\n                result.reverse()\n            else:\n                result.append(char)\n        return ''.join(result)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def finalString(self, s: str) -> str:\n        result = []\n        for char in s:\n            if char == 'i':\n                result.reverse()\n            else:\n                result.append(char)\n        return ''.join(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "sort-vowels-in-a-string",
+    "question_content": "Given a 0-indexed string s, permute s to get a new string t such that:\n\nAll consonants remain in their original places. More formally, if there is an index i with 0 <= i < s.length such that s[i] is a consonant, then t[i] = s[i].\nThe vowels must be sorted in the nondecreasing order of their ASCII values. More formally, for pairs of indices i, j with 0 <= i < j < s.length such that s[i] and s[j] are vowels, then t[i] must not have a higher ASCII value than t[j].\n\nReturn the resulting string.\nThe vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in lowercase or uppercase. Consonants comprise all letters that are not vowels.\n \nExample 1:\n\nInput: s = \"lEetcOde\"\nOutput: \"lEOtcede\"\nExplanation: 'E', 'O', and 'e' are the vowels in s; 'l', 't', 'c', and 'd' are all consonants. The vowels are sorted according to their ASCII values, and the consonants remain in the same places.\n\nExample 2:\n\nInput: s = \"lYmpH\"\nOutput: \"lYmpH\"\nExplanation: There are no vowels in s (all characters in s are consonants), so we return \"lYmpH\".\n\n \nConstraints:\n\n1 <= s.length <= 10^5\ns consists only of letters of the English alphabet in uppercase and lowercase.",
+    "platform": "leetcode",
+    "question_id": "2887",
+    "contest_id": "biweekly-contest-109",
+    "contest_date": "2023-07-22T00:00:00",
+    "starter_code": "class Solution:\n    def sortVowels(self, s: str) -> str:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def sortVowels(self, s: str) -> str:\n        vowels = 'aeiouAEIOU'\n        v_list = [char for char in s if char in vowels]\n        v_list.sort()\n        \n        result = list(s)\n        v_index = 0\n        \n        for i in range(len(result)):\n            if result[i] in vowels:\n                result[i] = v_list[v_index]\n                v_index += 1\n        \n        return ''.join(result)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def sortVowels(self, s: str) -> str:\n        vowels = 'aeiouAEIOU'\n        v_list = [char for char in s if char in vowels]\n        v_list.sort()\n        \n        result = list(s)\n        v_index = 0\n        \n        for i in range(len(result)):\n            if result[i] in vowels:\n                result[i] = v_list[v_index]\n                v_index += 1\n        \n        return ''.join(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-beauty-of-an-array-after-applying-operation",
+    "question_content": "You are given a 0-indexed array nums and a non-negative integer k.\nIn one operation, you can do the following:\n\nChoose an index i that hasn't been chosen before from the range [0, nums.length - 1].\nReplace nums[i] with any integer from the range [nums[i] - k, nums[i] + k].\n\nThe beauty of the array is the length of the longest subsequence consisting of equal elements.\nReturn the maximum possible beauty of the array nums after applying the operation any number of times.\nNote that you can apply the operation to each index only once.\nA subsequence of an array is a new array generated from the original array by deleting some elements (possibly none) without changing the order of the remaining elements.\n \nExample 1:\n\nInput: nums = [4,6,1,2], k = 2\nOutput: 3\nExplanation: In this example, we apply the following operations:\n- Choose index 1, replace it with 4 (from range [4,8]), nums = [4,4,1,2].\n- Choose index 3, replace it with 4 (from range [0,4]), nums = [4,4,1,4].\nAfter the applied operations, the beauty of the array nums is 3 (subsequence consisting of indices 0, 1, and 3).\nIt can be proven that 3 is the maximum possible length we can achieve.\n\nExample 2:\n\nInput: nums = [1,1,1,1], k = 10\nOutput: 4\nExplanation: In this example we don't have to apply any operations.\nThe beauty of the array nums is 4 (whole array).\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i], k <= 10^5",
+    "platform": "leetcode",
+    "question_id": "2891",
+    "contest_id": "weekly-contest-354",
+    "contest_date": "2023-07-16T00:00:00",
+    "starter_code": "class Solution:\n    def maximumBeauty(self, nums: List[int], k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def maximumBeauty(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        max_length = 0\n        left = 0\n        \n        for right in range(len(nums)):\n            while nums[right] - nums[left] > 2 * k:\n                left += 1\n            max_length = max(max_length, right - left + 1)\n        \n        return max_length\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def maximumBeauty(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        max_length = 0\n        left = 0\n        \n        for right in range(len(nums)):\n            while nums[right] - nums[left] > 2 * k:\n                left += 1\n            max_length = max(max_length, right - left + 1)\n        \n        return max_length"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "check-if-array-is-good",
+    "question_content": "You are given an integer array nums. We consider an array good if it is a permutation of an array base[n].\nbase[n] = [1, 2, ..., n - 1, n, n] (in other words, it is an array of length n + 1 which contains 1 to n - 1 exactly once, plus two occurrences of n). For example, base[1] = [1, 1] and base[3] = [1, 2, 3, 3].\nReturn true if the given array is good, otherwise return false.\nNote: A permutation of integers represents an arrangement of these numbers.\n \nExample 1:\n\nInput: nums = [2, 1, 3]\nOutput: false\nExplanation: Since the maximum element of the array is 3, the only candidate n for which this array could be a permutation of base[n], is n = 3. However, base[3] has four elements but array nums has three. Therefore, it can not be a permutation of base[3] = [1, 2, 3, 3]. So the answer is false.\n\nExample 2:\n\nInput: nums = [1, 3, 3, 2]\nOutput: true\nExplanation: Since the maximum element of the array is 3, the only candidate n for which this array could be a permutation of base[n], is n = 3. It can be seen that nums is a permutation of base[3] = [1, 2, 3, 3] (by swapping the second and fourth elements in nums, we reach base[3]). Therefore, the answer is true.\nExample 3:\n\nInput: nums = [1, 1]\nOutput: true\nExplanation: Since the maximum element of the array is 1, the only candidate n for which this array could be a permutation of base[n], is n = 1. It can be seen that nums is a permutation of base[1] = [1, 1]. Therefore, the answer is true.\nExample 4:\n\nInput: nums = [3, 4, 4, 1, 2, 1]\nOutput: false\nExplanation: Since the maximum element of the array is 4, the only candidate n for which this array could be a permutation of base[n], is n = 4. However, base[4] has five elements but array nums has six. Therefore, it can not be a permutation of base[4] = [1, 2, 3, 4, 4]. So the answer is false.\n\n \nConstraints:\n\n1 <= nums.length <= 100\n1 <= num[i] <= 200",
+    "platform": "leetcode",
+    "question_id": "2892",
+    "contest_id": "biweekly-contest-109",
+    "contest_date": "2023-07-22T00:00:00",
+    "starter_code": "class Solution:\n    def isGood(self, nums: List[int]) -> bool:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def isGood(self, nums: List[int]) -> bool:\n        n = len(nums) - 1\n        count = Counter(nums)\n        return count[n] == 2 and all(count[i] == 1 for i in range(1, n))\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def isGood(self, nums: List[int]) -> bool:\n        n = len(nums) - 1\n        count = Counter(nums)\n        return count[n] == 2 and all(count[i] == 1 for i in range(1, n))"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "max-pair-sum-in-an-array",
+    "question_content": "You are given a 0-indexed integer array nums. You have to find the maximum sum of a pair of numbers from nums such that the maximum digit in both numbers are equal.\nReturn the maximum sum or -1 if no such pair exists.\n \nExample 1:\n\nInput: nums = [51,71,17,24,42]\nOutput: 88\nExplanation: \nFor i = 1 and j = 2, nums[i] and nums[j] have equal maximum digits with a pair sum of 71 + 17 = 88. \nFor i = 3 and j = 4, nums[i] and nums[j] have equal maximum digits with a pair sum of 24 + 42 = 66.\nIt can be shown that there are no other pairs with equal maximum digits, so the answer is 88.\nExample 2:\n\nInput: nums = [1,2,3,4]\nOutput: -1\nExplanation: No pair exists in nums with equal maximum digits.\n\n \nConstraints:\n\n2 <= nums.length <= 100\n1 <= nums[i] <= 10^4",
+    "platform": "leetcode",
+    "question_id": "2902",
+    "contest_id": "weekly-contest-358",
+    "contest_date": "2023-08-13T00:00:00",
+    "starter_code": "class Solution:\n    def maxSum(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxSum(self, nums: List[int]) -> int:\n        max_sum = -1\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                num1 = nums[i]\n                num2 = nums[j]\n                max_digit1 = max(str(num1))\n                max_digit2 = max(str(num2))\n                if max_digit1 == max_digit2:\n                    current_sum = num1 + num2\n                    if current_sum > max_sum:\n                        max_sum = current_sum\n        return max_sum\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxSum(self, nums: List[int]) -> int:\n        max_sum = -1\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                num1 = nums[i]\n                num2 = nums[j]\n                max_digit1 = max(str(num1))\n                max_digit2 = max(str(num2))\n                if max_digit1 == max_digit2:\n                    current_sum = num1 + num2\n                    if current_sum > max_sum:\n                        max_sum = current_sum\n        return max_sum"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "count-pairs-whose-sum-is-less-than-target",
+    "question_content": "Given a 0-indexed integer array nums of length n and an integer target, return the number of pairs (i, j) where 0 <= i < j < n and nums[i] + nums[j] < target.\n \nExample 1:\n\nInput: nums = [-1,1,2,3,1], target = 2\nOutput: 3\nExplanation: There are 3 pairs of indices that satisfy the conditions in the statement:\n- (0, 1) since 0 < 1 and nums[0] + nums[1] = 0 < target\n- (0, 2) since 0 < 2 and nums[0] + nums[2] = 1 < target \n- (0, 4) since 0 < 4 and nums[0] + nums[4] = 0 < target\nNote that (0, 3) is not counted since nums[0] + nums[3] is not strictly less than the target.\n\nExample 2:\n\nInput: nums = [-6,2,5,-2,-7,-1,3], target = -2\nOutput: 10\nExplanation: There are 10 pairs of indices that satisfy the conditions in the statement:\n- (0, 1) since 0 < 1 and nums[0] + nums[1] = -4 < target\n- (0, 3) since 0 < 3 and nums[0] + nums[3] = -8 < target\n- (0, 4) since 0 < 4 and nums[0] + nums[4] = -13 < target\n- (0, 5) since 0 < 5 and nums[0] + nums[5] = -7 < target\n- (0, 6) since 0 < 6 and nums[0] + nums[6] = -3 < target\n- (1, 4) since 1 < 4 and nums[1] + nums[4] = -5 < target\n- (3, 4) since 3 < 4 and nums[3] + nums[4] = -9 < target\n- (3, 5) since 3 < 5 and nums[3] + nums[5] = -3 < target\n- (4, 5) since 4 < 5 and nums[4] + nums[5] = -8 < target\n- (4, 6) since 4 < 6 and nums[4] + nums[6] = -4 < target\n\n \nConstraints:\n\n1 <= nums.length == n <= 50\n-50 <= nums[i], target <= 50",
+    "platform": "leetcode",
+    "question_id": "2917",
+    "contest_id": "biweekly-contest-111",
+    "contest_date": "2023-08-19T00:00:00",
+    "starter_code": "class Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        count = 0\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                if nums[i] + nums[j] < target:\n                    count += 1\n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countPairs(self, nums: List[int], target: int) -> int:\n        count = 0\n        for i in range(len(nums)):\n            for j in range(i + 1, len(nums)):\n                if nums[i] + nums[j] < target:\n                    count += 1\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-number-of-groups-with-increasing-length",
+    "question_content": "You are given a 0-indexed array usageLimits of length n.\nYour task is to create groups using numbers from 0 to n - 1, ensuring that each number, i, is used no more than usageLimits[i] times in total across all groups. You must also satisfy the following conditions:\n\nEach group must consist of distinct numbers, meaning that no duplicate numbers are allowed within a single group.\nEach group (except the first one) must have a length strictly greater than the previous group.\n\nReturn an integer denoting the maximum number of groups you can create while satisfying these conditions.\n \nExample 1:\n\nInput: usageLimits = [1,2,5]\nOutput: 3\nExplanation: In this example, we can use 0 at most once, 1 at most twice, and 2 at most five times.\nOne way of creating the maximum number of groups while satisfying the conditions is: \nGroup 1 contains the number [2].\nGroup 2 contains the numbers [1,2].\nGroup 3 contains the numbers [0,1,2]. \nIt can be shown that the maximum number of groups is 3. \nSo, the output is 3. \nExample 2:\n\nInput: usageLimits = [2,1,2]\nOutput: 2\nExplanation: In this example, we can use 0 at most twice, 1 at most once, and 2 at most twice.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nGroup 2 contains the numbers [1,2].\nIt can be shown that the maximum number of groups is 2.\nSo, the output is 2. \n\nExample 3:\n\nInput: usageLimits = [1,1]\nOutput: 1\nExplanation: In this example, we can use both 0 and 1 at most once.\nOne way of creating the maximum number of groups while satisfying the conditions is:\nGroup 1 contains the number [0].\nIt can be shown that the maximum number of groups is 1.\nSo, the output is 1. \n\n \nConstraints:\n\n1 <= usageLimits.length <= 10^5\n1 <= usageLimits[i] <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2919",
+    "contest_id": "weekly-contest-355",
+    "contest_date": "2023-07-23T00:00:00",
+    "starter_code": "class Solution:\n    def maxIncreasingGroups(self, usageLimits: List[int]) -> int:\n        ",
+    "difficulty": "hard",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxIncreasingGroups(self, usageLimits: List[int]) -> int:\n        usageLimits.sort()\n        total = 0\n        result = 0\n        for limit in usageLimits:\n            total += limit\n            if total >= (result + 2) * (result + 1) // 2:\n                result += 1\n        return result\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxIncreasingGroups(self, usageLimits: List[int]) -> int:\n        usageLimits.sort()\n        total = 0\n        result = 0\n        for limit in usageLimits:\n            total += limit\n            if total >= (result + 2) * (result + 1) // 2:\n                result += 1\n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "count-pairs-of-points-with-distance-k",
+    "question_content": "You are given a 2D integer array coordinates and an integer k, where coordinates[i] = [x_i, y_i] are the coordinates of the i^th point in a 2D plane.\nWe define the distance between two points (x_1, y_1) and (x_2, y_2) as (x1 XOR x2) + (y1 XOR y2) where XOR is the bitwise XOR operation.\nReturn the number of pairs (i, j) such that i < j and the distance between points i and j is equal to k.\n \nExample 1:\n\nInput: coordinates = [[1,2],[4,2],[1,3],[5,2]], k = 5\nOutput: 2\nExplanation: We can choose the following pairs:\n- (0,1): Because we have (1 XOR 4) + (2 XOR 2) = 5.\n- (2,3): Because we have (1 XOR 5) + (3 XOR 2) = 5.\n\nExample 2:\n\nInput: coordinates = [[1,3],[1,3],[1,3],[1,3],[1,3]], k = 0\nOutput: 10\nExplanation: Any two chosen pairs will have a distance of 0. There are 10 ways to choose two pairs.\n\n \nConstraints:\n\n2 <= coordinates.length <= 50000\n0 <= x_i, y_i <= 10^6\n0 <= k <= 100",
+    "platform": "leetcode",
+    "question_id": "2953",
+    "contest_id": "biweekly-contest-113",
+    "contest_date": "2023-09-16T00:00:00",
+    "starter_code": "class Solution:\n    def countPairs(self, coordinates: List[List[int]], k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def countPairs(self, coordinates: List[List[int]], k: int) -> int:\n        count = 0\n        seen = defaultdict(int)\n        for x, y in coordinates:\n            count += seen[(x, y)]\n            for i in range(k + 1):\n                seen[(x ^ i, y ^ (k - i))] += 1\n        return count\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def countPairs(self, coordinates: List[List[int]], k: int) -> int:\n        count = 0\n        seen = defaultdict(int)\n        for x, y in coordinates:\n            count += seen[(x, y)]\n            for i in range(k + 1):\n                seen[(x ^ i, y ^ (k - i))] += 1\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "maximum-sum-of-almost-unique-subarray",
+    "question_content": "You are given an integer array nums and two positive integers m and k.\nReturn the maximum sum out of all almost unique subarrays of length k of nums. If no such subarray exists, return 0.\nA subarray of nums is almost unique if it contains at least m distinct elements.\nA subarray is a contiguous non-empty sequence of elements within an array.\n \nExample 1:\n\nInput: nums = [2,6,7,3,1,7], m = 3, k = 4\nOutput: 18\nExplanation: There are 3 almost unique subarrays of size k = 4. These subarrays are [2, 6, 7, 3], [6, 7, 3, 1], and [7, 3, 1, 7]. Among these subarrays, the one with the maximum sum is [2, 6, 7, 3] which has a sum of 18.\n\nExample 2:\n\nInput: nums = [5,9,9,2,4,5,4], m = 1, k = 3\nOutput: 23\nExplanation: There are 5 almost unique subarrays of size k. These subarrays are [5, 9, 9], [9, 9, 2], [9, 2, 4], [2, 4, 5], and [4, 5, 4]. Among these subarrays, the one with the maximum sum is [5, 9, 9] which has a sum of 23.\n\nExample 3:\n\nInput: nums = [1,2,1,2,1,2,1], m = 3, k = 3\nOutput: 0\nExplanation: There are no subarrays of size k = 3 that contain at least m = 3 distinct elements in the given array [1,2,1,2,1,2,1]. Therefore, no almost unique subarrays exist, and the maximum sum is 0.\n\n \nConstraints:\n\n1 <= nums.length <= 2 * 10^4\n1 <= m <= k <= nums.length\n1 <= nums[i] <= 10^9",
+    "platform": "leetcode",
+    "question_id": "2954",
+    "contest_id": "biweekly-contest-112",
+    "contest_date": "2023-09-02T00:00:00",
+    "starter_code": "class Solution:\n    def maxSum(self, nums: List[int], m: int, k: int) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxSum(self, nums: List[int], m: int, k: int) -> int:\n        n = len(nums)\n        max_sum = 0\n        window_sum = sum(nums[:k])\n        count = Counter(nums[:k])\n        \n        if len(count) >= m:\n            max_sum = max(max_sum, window_sum)\n        \n        for i in range(k, n):\n            window_sum += nums[i] - nums[i - k]\n            if nums[i - k] == nums[i]:\n                continue\n            count[nums[i]] += 1\n            count[nums[i - k]] -= 1\n            if count[nums[i - k]] == 0:\n                del count[nums[i - k]]\n            if len(count) >= m:\n                max_sum = max(max_sum, window_sum)\n        \n        return max_sum\n```"
+    ],
+    "code_list": [
+      "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxSum(self, nums: List[int], m: int, k: int) -> int:\n        n = len(nums)\n        max_sum = 0\n        window_sum = sum(nums[:k])\n        count = Counter(nums[:k])\n        \n        if len(count) >= m:\n            max_sum = max(max_sum, window_sum)\n        \n        for i in range(k, n):\n            window_sum += nums[i] - nums[i - k]\n            if nums[i - k] == nums[i]:\n                continue\n            count[nums[i]] += 1\n            count[nums[i - k]] -= 1\n            if count[nums[i - k]] == 0:\n                del count[nums[i - k]]\n            if len(count) >= m:\n                max_sum = max(max_sum, window_sum)\n        \n        return max_sum"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "account-balance-after-rounded-purchase",
+    "question_content": "Initially, you have a bank account balance of 100 dollars.\nYou are given an integer purchaseAmount representing the amount you will spend on a purchase in dollars.\nAt the store where you will make the purchase, the purchase amount is rounded to the nearest multiple of 10. In other words, you pay a non-negative amount, roundedAmount, such that roundedAmount is a multiple of 10 and abs(roundedAmount - purchaseAmount) is minimized.\nIf there is more than one nearest multiple of 10, the largest multiple is chosen.\nReturn an integer denoting your account balance after making a purchase worth purchaseAmount dollars from the store.\nNote: 0 is considered to be a multiple of 10 in this problem.\n \nExample 1:\n\nInput: purchaseAmount = 9\nOutput: 90\nExplanation: In this example, the nearest multiple of 10 to 9 is 10. Hence, your account balance becomes 100 - 10 = 90.\n\nExample 2:\n\nInput: purchaseAmount = 15\nOutput: 80\nExplanation: In this example, there are two nearest multiples of 10 to 15: 10 and 20. So, the larger multiple, 20, is chosen.\nHence, your account balance becomes 100 - 20 = 80.\n\n \nConstraints:\n\n0 <= purchaseAmount <= 100",
+    "platform": "leetcode",
+    "question_id": "2955",
+    "contest_id": "biweekly-contest-110",
+    "contest_date": "2023-08-05T00:00:00",
+    "starter_code": "class Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        return 100 - round(purchaseAmount / 10) * 10\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def accountBalanceAfterPurchase(self, purchaseAmount: int) -> int:\n        return 100 - round(purchaseAmount / 10) * 10"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "count-symmetric-integers",
+    "question_content": "You are given two positive integers low and high.\nAn integer x consisting of 2 * n digits is symmetric if the sum of the first n digits of x is equal to the sum of the last n digits of x. Numbers with an odd number of digits are never symmetric.\nReturn the number of symmetric integers in the range [low, high].\n \nExample 1:\n\nInput: low = 1, high = 100\nOutput: 9\nExplanation: There are 9 symmetric integers between 1 and 100: 11, 22, 33, 44, 55, 66, 77, 88, and 99.\n\nExample 2:\n\nInput: low = 1200, high = 1230\nOutput: 4\nExplanation: There are 4 symmetric integers between 1200 and 1230: 1203, 1212, 1221, and 1230.\n\n \nConstraints:\n\n1 <= low <= high <= 10^4",
+    "platform": "leetcode",
+    "question_id": "2998",
+    "contest_id": "weekly-contest-361",
+    "contest_date": "2023-09-03T00:00:00",
+    "starter_code": "class Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        count = 0\n        for num in range(low, high + 1):\n            s = str(num)\n            if len(s) % 2 == 0:\n                mid = len(s) // 2\n                if sum(map(int, s[:mid])) == sum(map(int, s[mid:])):\n                    count += 1\n        return count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countSymmetricIntegers(self, low: int, high: int) -> int:\n        count = 0\n        for num in range(low, high + 1):\n            s = str(num)\n            if len(s) % 2 == 0:\n                mid = len(s) // 2\n                if sum(map(int, s[:mid])) == sum(map(int, s[mid:])):\n                    count += 1\n        return count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "check-if-strings-can-be-made-equal-with-operations-i",
+    "question_content": "You are given two strings s1 and s2, both of length 4, consisting of lowercase English letters.\nYou can apply the following operation on any of the two strings any number of times:\n\nChoose any two indices i and j such that j - i = 2, then swap the two characters at those indices in the string.\n\nReturn true if you can make the strings s1 and s2 equal, and false otherwise.\n \nExample 1:\n\nInput: s1 = \"abcd\", s2 = \"cdab\"\nOutput: true\nExplanation: We can do the following operations on s1:\n- Choose the indices i = 0, j = 2. The resulting string is s1 = \"cbad\".\n- Choose the indices i = 1, j = 3. The resulting string is s1 = \"cdab\" = s2.\n\nExample 2:\n\nInput: s1 = \"abcd\", s2 = \"dacb\"\nOutput: false\nExplanation: It is not possible to make the two strings equal.\n\n \nConstraints:\n\ns1.length == s2.length == 4\ns1 and s2 consist only of lowercase English letters.",
+    "platform": "leetcode",
+    "question_id": "2999",
+    "contest_id": "biweekly-contest-112",
+    "contest_date": "2023-09-02T00:00:00",
+    "starter_code": "class Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        return sorted(s1[::2]) == sorted(s2[::2]) and sorted(s1[1::2]) == sorted(s2[1::2])\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def canBeEqual(self, s1: str, s2: str) -> bool:\n        return sorted(s1[::2]) == sorted(s2[::2]) and sorted(s1[1::2]) == sorted(s2[1::2])"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "furthest-point-from-origin",
+    "question_content": "You are given a string moves of length n consisting only of characters 'L', 'R', and '_'. The string represents your movement on a number line starting from the origin 0.\nIn the i^th move, you can choose one of the following directions:\n\nmove to the left if moves[i] = 'L' or moves[i] = '_'\nmove to the right if moves[i] = 'R' or moves[i] = '_'\n\nReturn the distance from the origin of the furthest point you can get to after n moves.\n \nExample 1:\n\nInput: moves = \"L_RL__R\"\nOutput: 3\nExplanation: The furthest point we can reach from the origin 0 is point -3 through the following sequence of moves \"LLRLLLR\".\n\nExample 2:\n\nInput: moves = \"_R__LL_\"\nOutput: 5\nExplanation: The furthest point we can reach from the origin 0 is point -5 through the following sequence of moves \"LRLLLLL\".\n\nExample 3:\n\nInput: moves = \"_______\"\nOutput: 7\nExplanation: The furthest point we can reach from the origin 0 is point 7 through the following sequence of moves \"RRRRRRR\".\n\n \nConstraints:\n\n1 <= moves.length == n <= 50\nmoves consists only of characters 'L', 'R' and '_'.",
+    "platform": "leetcode",
+    "question_id": "3019",
+    "contest_id": "weekly-contest-360",
+    "contest_date": "2023-08-27T00:00:00",
+    "starter_code": "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        l_count = moves.count('L')\n        r_count = moves.count('R')\n        underscore_count = moves.count('_')\n        \n        return abs(l_count - r_count) + underscore_count\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def furthestDistanceFromOrigin(self, moves: str) -> int:\n        l_count = moves.count('L')\n        r_count = moves.count('R')\n        underscore_count = moves.count('_')\n        \n        return abs(l_count - r_count) + underscore_count"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "points-that-intersect-with-cars",
+    "question_content": "You are given a 0-indexed 2D integer array nums representing the coordinates of the cars parking on a number line. For any index i, nums[i] = [start_i, end_i] where start_i is the starting point of the i^th car and end_i is the ending point of the i^th car.\nReturn the number of integer points on the line that are covered with any part of a car.\n \nExample 1:\n\nInput: nums = [[3,6],[1,5],[4,7]]\nOutput: 7\nExplanation: All the points from 1 to 7 intersect at least one car, therefore the answer would be 7.\n\nExample 2:\n\nInput: nums = [[1,3],[5,8]]\nOutput: 7\nExplanation: Points intersecting at least one car are 1, 2, 3, 5, 6, 7, 8. There are a total of 7 points, therefore the answer would be 7.\n\n \nConstraints:\n\n1 <= nums.length <= 100\nnums[i].length == 2\n1 <= start_i <= end_i <= 100",
+    "platform": "leetcode",
+    "question_id": "3034",
+    "contest_id": "weekly-contest-362",
+    "contest_date": "2023-09-10T00:00:00",
+    "starter_code": "class Solution:\n    def numberOfPoints(self, nums: List[List[int]]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def numberOfPoints(self, nums: List[List[int]]) -> int:\n        # Initialize a set to keep track of unique points\n        unique_points = set()\n        \n        # Iterate through each interval\n        for start, end in nums:\n            # Add all points in the current interval to the set\n            for point in range(start, end + 1):\n                unique_points.add(point)\n        \n        # Return the number of unique points\n        return len(unique_points)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def numberOfPoints(self, nums: List[List[int]]) -> int:\n        # Initialize a set to keep track of unique points\n        unique_points = set()\n        \n        # Iterate through each interval\n        for start, end in nums:\n            # Add all points in the current interval to the set\n            for point in range(start, end + 1):\n                unique_points.add(point)\n        \n        # Return the number of unique points\n        return len(unique_points)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-right-shifts-to-sort-the-array",
+    "question_content": "You are given a 0-indexed array nums of length n containing distinct positive integers. Return the minimum number of right shifts required to sort nums and -1 if this is not possible.\nA right shift is defined as shifting the element at index i to index (i + 1) % n, for all indices.\n \nExample 1:\n\nInput: nums = [3,4,5,1,2]\nOutput: 2\nExplanation: \nAfter the first right shift, nums = [2,3,4,5,1].\nAfter the second right shift, nums = [1,2,3,4,5].\nNow nums is sorted; therefore the answer is 2.\n\nExample 2:\n\nInput: nums = [1,3,5]\nOutput: 0\nExplanation: nums is already sorted therefore, the answer is 0.\nExample 3:\n\nInput: nums = [2,1,4]\nOutput: -1\nExplanation: It's impossible to sort the array using right shifts.\n\n \nConstraints:\n\n1 <= nums.length <= 100\n1 <= nums[i] <= 100\nnums contains distinct integers.",
+    "platform": "leetcode",
+    "question_id": "3045",
+    "contest_id": "biweekly-contest-113",
+    "contest_date": "2023-09-16T00:00:00",
+    "starter_code": "class Solution:\n    def minimumRightShifts(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def minimumRightShifts(self, nums: List[int]) -> int:\n        n = len(nums)\n        sorted_nums = sorted(nums)\n        for i in range(n):\n            if nums == sorted_nums:\n                return i\n            nums.insert(0, nums.pop())\n        return -1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minimumRightShifts(self, nums: List[int]) -> int:\n        n = len(nums)\n        sorted_nums = sorted(nums)\n        for i in range(n):\n            if nums == sorted_nums:\n                return i\n            nums.insert(0, nums.pop())\n        return -1"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "minimum-array-length-after-pair-removals",
+    "question_content": "You are given a 0-indexed sorted array of integers nums.\nYou can perform the following operation any number of times:\n\nChoose two indices, i and j, where i < j, such that nums[i] < nums[j].\nThen, remove the elements at indices i and j from nums. The remaining elements retain their original order, and the array is re-indexed.\n\nReturn an integer that denotes the minimum length of nums after performing the operation any number of times (including zero).\nNote that nums is sorted in non-decreasing order.\n \nExample 1:\n\nInput: nums = [1,3,4,9]\nOutput: 0\nExplanation: Initially, nums = [1, 3, 4, 9].\nIn the first operation, we can choose index 0 and 1 because nums[0] < nums[1] <=> 1 < 3.\nRemove indices 0 and 1, and nums becomes [4, 9].\nFor the next operation, we can choose index 0 and 1 because nums[0] < nums[1] <=> 4 < 9.\nRemove indices 0 and 1, and nums becomes an empty array [].\nHence, the minimum length achievable is 0.\nExample 2:\n\nInput: nums = [2,3,6,9]\nOutput: 0\nExplanation: Initially, nums = [2, 3, 6, 9]. \nIn the first operation, we can choose index 0 and 2 because nums[0] < nums[2] <=> 2 < 6. \nRemove indices 0 and 2, and nums becomes [3, 9]. \nFor the next operation, we can choose index 0 and 1 because nums[0] < nums[1] <=> 3 < 9. \nRemove indices 0 and 1, and nums becomes an empty array []. \nHence, the minimum length achievable is 0.\n\nExample 3:\n\nInput: nums = [1,1,2]\nOutput: 1\nExplanation: Initially, nums = [1, 1, 2].\nIn an operation, we can choose index 0 and 2 because nums[0] < nums[2] <=> 1 < 2. \nRemove indices 0 and 2, and nums becomes [1]. \nIt is no longer possible to perform an operation on the array. \nHence, the minimum achievable length is 1. \n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9\nnums is sorted in non-decreasing order.",
+    "platform": "leetcode",
+    "question_id": "3081",
+    "contest_id": "biweekly-contest-113",
+    "contest_date": "2023-09-16T00:00:00",
+    "starter_code": "class Solution:\n    def minLengthAfterRemovals(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def minLengthAfterRemovals(self, nums: List[int]) -> int:\n        n = len(nums)\n        if n % 2 == 0:\n            return 0\n        else:\n            return 1\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def minLengthAfterRemovals(self, nums: List[int]) -> int:\n        n = len(nums)\n        if n % 2 == 0:\n            return 0\n        else:\n            return 1"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "sum-of-values-at-indices-with-k-set-bits",
+    "question_content": "You are given a 0-indexed integer array nums and an integer k.\nReturn an integer that denotes the sum of elements in nums whose corresponding indices have exactly k set bits in their binary representation.\nThe set bits in an integer are the 1's present when it is written in binary.\n\nFor example, the binary representation of 21 is 10101, which has 3 set bits.\n\n \nExample 1:\n\nInput: nums = [5,10,1,5,2], k = 1\nOutput: 13\nExplanation: The binary representation of the indices are: \n0 = 000_2\n1 = 001_2\n2 = 010_2\n3 = 011_2\n4 = 100_2 \nIndices 1, 2, and 4 have k = 1 set bits in their binary representation.\nHence, the answer is nums[1] + nums[2] + nums[4] = 13.\nExample 2:\n\nInput: nums = [4,3,2,1], k = 2\nOutput: 1\nExplanation: The binary representation of the indices are:\n0 = 00_2\n1 = 01_2\n2 = 10_2\n3 = 11_2\nOnly index 3 has k = 2 set bits in its binary representation.\nHence, the answer is nums[3] = 1.\n\n \nConstraints:\n\n1 <= nums.length <= 1000\n1 <= nums[i] <= 10^5\n0 <= k <= 10",
+    "platform": "leetcode",
+    "question_id": "3093",
+    "contest_id": "weekly-contest-363",
+    "contest_date": "2023-09-17T00:00:00",
+    "starter_code": "class Solution:\n    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:\n        ",
+    "difficulty": "easy",
+    "output_list": [
+      "```python\nclass Solution:\n    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:\n        return sum(nums[i] for i in range(len(nums)) if bin(i).count('1') == k)\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def sumIndicesWithKSetBits(self, nums: List[int], k: int) -> int:\n        return sum(nums[i] for i in range(len(nums)) if bin(i).count('1') == k)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "happy-students",
+    "question_content": "You are given a 0-indexed integer array nums of length n where n is the total number of students in the class. The class teacher tries to select a group of students so that all the students remain happy.\nThe i^th student will become happy if one of these two conditions is met:\n\nThe student is selected and the total number of selected students is strictly greater than nums[i].\nThe student is not selected and the total number of selected students is strictly less than nums[i].\n\nReturn the number of ways to select a group of students so that everyone remains happy.\n \nExample 1:\n\nInput: nums = [1,1]\nOutput: 2\nExplanation: \nThe two possible ways are:\nThe class teacher selects no student.\nThe class teacher selects both students to form the group. \nIf the class teacher selects just one student to form a group then the both students will not be happy. Therefore, there are only two possible ways.\n\nExample 2:\n\nInput: nums = [6,0,3,3,6,7,2,7]\nOutput: 3\nExplanation: \nThe three possible ways are:\nThe class teacher selects the student with index = 1 to form the group.\nThe class teacher selects the students with index = 1, 2, 3, 6 to form the group.\nThe class teacher selects all the students to form the group.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i] < nums.length",
+    "platform": "leetcode",
+    "question_id": "3104",
+    "contest_id": "weekly-contest-363",
+    "contest_date": "2023-09-17T00:00:00",
+    "starter_code": "class Solution:\n    def countWays(self, nums: List[int]) -> int:\n        ",
+    "difficulty": "medium",
+    "output_list": [
+      "```python\nclass Solution:\n    def countWays(self, nums: List[int]) -> int:\n        nums.sort()\n        n = len(nums)\n        result = 0\n        \n        # Check for selecting no students\n        if nums[0] > 0:\n            result += 1\n        \n        # Check for each subset size\n        for i in range(n):\n            if i + 1 > nums[i] and (i == n - 1 or i + 1 < nums[i + 1]):\n                result += 1\n        \n        return result\n```"
+    ],
+    "code_list": [
+      "class Solution:\n    def countWays(self, nums: List[int]) -> int:\n        nums.sort()\n        n = len(nums)\n        result = 0\n        \n        # Check for selecting no students\n        if nums[0] > 0:\n            result += 1\n        \n        # Check for each subset size\n        for i in range(n):\n            if i + 1 > nums[i] and (i == n - 1 or i + 1 < nums[i + 1]):\n                result += 1\n        \n        return result"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  }
+]

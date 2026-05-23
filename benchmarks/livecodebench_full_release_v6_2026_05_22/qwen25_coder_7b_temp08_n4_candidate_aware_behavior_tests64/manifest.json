@@ -1,0 +1,12 @@
+{
+  "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64/prompts.jsonl",
+  "prompts_sha256": "43afb0bdc8addb40a7baf7ec178cf3899d0684c6c431a3bb08743963e6ae0556",
+  "outputs": "artifacts/lcb_behavior_tests/qwen25_coder_7b_prompts64/llm_outputs.jsonl",
+  "behavior_inputs": "artifacts/lcb_behavior_tests/qwen25_coder_7b_prompts64/behavior_inputs.json",
+  "model": "Qwen2.5-Coder-7B-Instruct",
+  "prompt_count": 64,
+  "generated_records": 64,
+  "nonempty_behavior_records": 54,
+  "behavior_inputs_total": 558,
+  "seconds": 580.994
+}

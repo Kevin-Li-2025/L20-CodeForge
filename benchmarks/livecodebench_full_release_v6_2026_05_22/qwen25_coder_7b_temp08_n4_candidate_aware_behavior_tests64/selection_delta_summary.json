@@ -1,0 +1,59 @@
+{
+  "target_tasks": 54,
+  "public_passed": 51,
+  "behavior_passed": 52,
+  "net_gain": 1,
+  "changed_or_outcome_different": [
+    {
+      "question_id": "2837",
+      "title": "minimum-operations-to-make-the-integer-zero",
+      "public_pass": true,
+      "behavior_pass": true,
+      "public_selected_index": 1,
+      "behavior_selected_index": 3,
+      "public_scores": [
+        1.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "behavior_tests": 12,
+      "behavior_cluster_size": 1,
+      "behavior_consensus_score": 39
+    },
+    {
+      "question_id": "2848",
+      "title": "special-permutations",
+      "public_pass": true,
+      "behavior_pass": true,
+      "public_selected_index": 3,
+      "behavior_selected_index": 1,
+      "public_scores": [
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "behavior_tests": 12,
+      "behavior_cluster_size": 1,
+      "behavior_consensus_score": 27
+    },
+    {
+      "question_id": "2854",
+      "title": "decremental-string-concatenation",
+      "public_pass": false,
+      "behavior_pass": true,
+      "public_selected_index": 3,
+      "behavior_selected_index": 1,
+      "public_scores": [
+        0.6666666666666666,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "behavior_tests": 12,
+      "behavior_cluster_size": 1,
+      "behavior_consensus_score": 30
+    }
+  ]
+}

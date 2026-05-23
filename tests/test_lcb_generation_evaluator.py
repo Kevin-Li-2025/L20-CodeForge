@@ -213,3 +213,21 @@ def test_behavior_generator_parses_llm_outputs() -> None:
             "source": "local_model_candidate_aware_differential_v1",
         },
     ]
+
+
+def test_behavior_generator_repairs_invalid_json_escapes() -> None:
+    generator = load_behavior_generator_module()
+
+    records = generator.parse_behavior_inputs_from_outputs(
+        [
+            {
+                "question_id": "a",
+                "raw_output": '```json\n{"inputs": ["6\\nabc\\acb\\n"]}\n```',
+            }
+        ],
+        max_inputs=4,
+        max_input_chars=100,
+    )
+
+    assert records[0]["n_inputs"] == 1
+    assert records[0]["inputs"] == ["6\nabc\\acb"]

@@ -153,6 +153,16 @@ python scripts/generate_lcb_behavior_tests.py \
 The generated `behavior_inputs.json` is then used only as extra public-side
 candidate discrimination; hidden tests remain reserved for final measurement.
 
+Current generated-test probe:
+
+- `benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests64/`
+  records the first 64-prompt local-model pass.
+- It parsed `54` usable task records with `558` generated behavior inputs.
+- On those 54 targets, generated behavior consensus improved selection from
+  `51/54` to `52/54`.
+- The full-suite headline score remains `378/1055` until the full evaluator has
+  retry-stabilized replay for flaky unchanged selections.
+
 Generalization gate:
 
 ```bash

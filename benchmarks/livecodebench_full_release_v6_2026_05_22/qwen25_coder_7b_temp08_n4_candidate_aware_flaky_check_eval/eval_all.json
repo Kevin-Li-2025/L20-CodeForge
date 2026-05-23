@@ -1,0 +1,48 @@
+[
+  {
+    "question_title": "Avoid K Palindrome 2",
+    "question_content": "You are given a string S of length N consisting only of lowercase English letters.\nFind the number of strings obtained by permuting the characters of S (including the string S itself) that do not contain a palindrome of length K as a substring.\nHere, a string T of length N is said to \"contain a palindrome of length K as a substring\" if and only if there exists a non-negative integer i not greater than (N-K) such that T_{i+j} = T_{i+K+1-j} for every integer j with 1 \\leq j \\leq K.\nHere, T_k denotes the k-th character of the string T.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN K\nS\n\nOutput\n\nPrint the number of strings obtained by permuting S that do not contain a palindrome of length K as a substring.\n\nConstraints\n\n\n- 2 \\leq K \\leq N \\leq 10\n- N and K are integers.\n- S is a string of length N consisting only of lowercase English letters.\n\nSample Input 1\n\n3 2\naab\n\nSample Output 1\n\n1\n\nThe strings obtained by permuting aab are aab, aba, and baa. Among these, aab and baa contain the palindrome aa of length 2 as a substring.\nThus, the only string that satisfies the condition is aba, so print 1.\n\nSample Input 2\n\n5 3\nzzyyx\n\nSample Output 2\n\n16\n\nThere are 30 strings obtained by permuting zzyyx, 16 of which do not contain a palindrome of length 3. Thus, print 16.\n\nSample Input 3\n\n10 5\nabcwxyzyxw\n\nSample Output 3\n\n440640",
+    "platform": "atcoder",
+    "question_id": "abc363_c",
+    "contest_id": "abc363",
+    "contest_date": "2024-07-20T00:00:00",
+    "starter_code": "",
+    "difficulty": "medium",
+    "output_list": [
+      "To solve this problem, we need to determine how many permutations of a given string \\( S \\) do not contain any palindrome of length \\( K \\) as a substring. Here's a step-by-step approach to achieve this:\n\n1. **Generate All Permutations**: Since \\( N \\) can be at most 10, generating all permutations of \\( S \\) is feasible. We can use Python's `itertools.permutations` to get all possible permutations.\n\n2. **Check for Palindromes**: For each permutation, check if there is any substring of length \\( K \\) that is a palindrome. A string is a palindrome if it reads the same forwards and backwards.\n\n3. **Count Valid Permutations**: Count the number of permutations that do not contain any palindromic substrings of length \\( K \\).\n\nHere's the complete Python program to implement this solution:\n\n```python\nimport itertools\n\ndef is_palindrome(s):\n    return s == s[::-1]\n\ndef count_valid_permutations(N, K, S):\n    permutations = set(itertools.permutations(S))\n    valid_count = 0\n    \n    for perm in permutations:\n        perm_str = ''.join(perm)\n        contains_palindrome = False\n        \n        for i in range(N - K + 1):\n            if is_palindrome(perm_str[i:i + K]):\n                contains_palindrome = True\n                break\n        \n        if not contains_palindrome:\n            valid_count += 1\n    \n    return valid_count\n\n# Read input\nN, K = map(int, input().split())\nS = input().strip()\n\n# Calculate and print the result\nresult = count_valid_permutations(N, K, S)\nprint(result)\n```\n\n### Explanation:\n\n1. **is_palindrome Function**: This function checks if a given string \\( s \\) is a palindrome by comparing it to its reverse.\n\n2. **count_valid_permutations Function**:\n   - It generates all unique permutations of the string \\( S \\).\n   - For each permutation, it checks if there is any substring of length \\( K \\) that is a palindrome.\n   - If no such palindrome is found, it increments the count of valid permutations.\n\n3. **Main Execution**:\n   - Read the input values \\( N \\), \\( K \\), and \\( S \\).\n   - Call the `count_valid_permutations` function with these inputs.\n   - Print the result.\n\nThis approach ensures that we correctly count the number of permutations that do not contain any palindromic substrings of length \\( K \\). Note that the use of a set to store permutations helps in avoiding duplicate permutations, although in this small case (with \\( N \\leq 10 \\)), duplicates are unlikely to cause significant issues."
+    ],
+    "code_list": [
+      "import itertools\n\ndef is_palindrome(s):\n    return s == s[::-1]\n\ndef count_valid_permutations(N, K, S):\n    permutations = set(itertools.permutations(S))\n    valid_count = 0\n    \n    for perm in permutations:\n        perm_str = ''.join(perm)\n        contains_palindrome = False\n        \n        for i in range(N - K + 1):\n            if is_palindrome(perm_str[i:i + K]):\n                contains_palindrome = True\n                break\n        \n        if not contains_palindrome:\n            valid_count += 1\n    \n    return valid_count\n\n# Read input\nN, K = map(int, input().split())\nS = input().strip()\n\n# Calculate and print the result\nresult = count_valid_permutations(N, K, S)\nprint(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  },
+  {
+    "question_title": "Mod Sigma Problem",
+    "question_content": "You are given a sequence A = (A_1, A_2, \\dots, A_N) of N non-negative integers, and a positive integer M.\nFind the following value:\n\\[\r\n\\sum_{1 \\leq l \\leq r \\leq N} \\left( \\left(\\sum_{l \\leq i \\leq r} A_i\\right) \\mathbin{\\mathrm{mod}} M \\right).\r\n\\]\nHere, X \\mathbin{\\mathrm{mod}} M denotes the remainder when the non-negative integer X is divided by M.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M\r\nA_1 A_2 \\dots A_N\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 1 \\leq N \\leq 2 \\times 10^5\n- 1 \\leq M \\leq 2 \\times 10^5\n- 0 \\leq A_i \\leq 10^9\n\nSample Input 1\n\n3 4\r\n2 5 0\n\nSample Output 1\n\n10\r\n\n\n- A_1 \\mathbin{\\mathrm{mod}} M = 2\n- (A_1+A_2) \\mathbin{\\mathrm{mod}} M = 3\n- (A_1+A_2+A_3) \\mathbin{\\mathrm{mod}} M = 3\n- A_2 \\mathbin{\\mathrm{mod}} M = 1\n- (A_2+A_3) \\mathbin{\\mathrm{mod}} M = 1\n- A_3 \\mathbin{\\mathrm{mod}} M = 0\n\nThe answer is the sum of these values, 10. Note that the outer sum is not taken modulo M.\n\nSample Input 2\n\n10 100\r\n320 578 244 604 145 839 156 857 556 400\n\nSample Output 2\n\n2736",
+    "platform": "atcoder",
+    "question_id": "abc378_e",
+    "contest_id": "abc378",
+    "contest_date": "2024-11-02T00:00:00",
+    "starter_code": "",
+    "difficulty": "hard",
+    "output_list": [
+      "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\nA = list(map(int, data[2:]))\n\n# Initialize prefix sums\nprefix_sums = [0] * (N + 1)\nfor i in range(N):\n    prefix_sums[i + 1] = prefix_sums[i] + A[i]\n\n# Calculate the result using the prefix sums\nresult = 0\nfor l in range(N):\n    for r in range(l, N):\n        subarray_sum = prefix_sums[r + 1] - prefix_sums[l]\n        result += subarray_sum % M\n\n# Print the final result\nprint(result)\n```"
+    ],
+    "code_list": [
+      "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\nA = list(map(int, data[2:]))\n\n# Initialize prefix sums\nprefix_sums = [0] * (N + 1)\nfor i in range(N):\n    prefix_sums[i + 1] = prefix_sums[i] + A[i]\n\n# Calculate the result using the prefix sums\nresult = 0\nfor l in range(N):\n    for r in range(l, N):\n        subarray_sum = prefix_sums[r + 1] - prefix_sums[l]\n        result += subarray_sum % M\n\n# Print the final result\nprint(result)"
+    ],
+    "graded_list": [
+      true
+    ],
+    "pass@1": 1.0,
+    "metadata": [
+      {}
+    ]
+  }
+]

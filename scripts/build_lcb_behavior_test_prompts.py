@@ -125,10 +125,32 @@ def extract_json_payload(text: str) -> Any:
         stripped = fenced.group(1).strip()
     decoder = json.JSONDecoder()
     for match in re.finditer(r"[\[{]", stripped):
-        with contextlib.suppress(json.JSONDecodeError):
-            value, _ = decoder.raw_decode(stripped[match.start() :])
-            return value
+        candidate = stripped[match.start() :]
+        for repair in (False, True):
+            with contextlib.suppress(json.JSONDecodeError):
+                repaired = repair_invalid_json_escapes(candidate) if repair else candidate
+                value, _ = decoder.raw_decode(repaired)
+                return value
     raise ValueError("could not parse JSON payload")
+
+
+def repair_invalid_json_escapes(text: str) -> str:
+    """Keep JSON valid when a model emits raw backslashes inside strings."""
+    result: list[str] = []
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if char == "\\":
+            next_char = text[index + 1] if index + 1 < len(text) else ""
+            if next_char and next_char in {'"', "\\", "/", "b", "f", "n", "r", "t", "u"}:
+                result.append(char)
+            else:
+                result.append("\\\\")
+            index += 1
+            continue
+        result.append(char)
+        index += 1
+    return "".join(result)
 
 
 def coerce_inputs(value: Any, max_inputs: int, max_input_chars: int) -> list[str]:
