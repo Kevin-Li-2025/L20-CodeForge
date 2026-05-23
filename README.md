@@ -212,7 +212,8 @@ Current generated-test probe:
   `n=4` pool to `n=8`/`n=16`, add public-test repair only on public-failing
   candidates, and keep hidden tests reserved for final replay. The LCB runner
   now supports `--allow-partial-resume`, so the L20 can reuse existing samples
-  and generate only missing completions when expanding a pool.
+  via `--resume-from-generations` and generate only missing completions when
+  expanding a pool.
 
 Generalization gate:
 

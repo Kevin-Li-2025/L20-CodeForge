@@ -154,3 +154,30 @@ def test_validate_resume_records_allows_partial_extension() -> None:
 
     assert resumed["abc"]["raw_outputs"] == ["a"]
     assert resumed["abc"]["code_list"] == ["A"]
+
+
+def test_load_resume_generation_records_prefers_output_file(tmp_path: Path) -> None:
+    runner = load_runner_module()
+    output = tmp_path / "output_generations.json"
+    source = tmp_path / "source_generations.json"
+    output.write_text('[{"question_id": "output"}]', encoding="utf-8")
+    source.write_text('[{"question_id": "source"}]', encoding="utf-8")
+
+    records, source_path = runner.load_resume_generation_records(output, source)
+
+    assert records == [{"question_id": "output"}]
+    assert source_path == str(output)
+
+
+def test_load_resume_generation_records_uses_seed_when_output_missing(
+    tmp_path: Path,
+) -> None:
+    runner = load_runner_module()
+    output = tmp_path / "output_generations.json"
+    source = tmp_path / "source_generations.json"
+    source.write_text('[{"question_id": "source"}]', encoding="utf-8")
+
+    records, source_path = runner.load_resume_generation_records(output, source)
+
+    assert records == [{"question_id": "source"}]
+    assert source_path == str(source)

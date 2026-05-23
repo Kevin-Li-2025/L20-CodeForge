@@ -333,9 +333,12 @@ python scripts/run_lcb_subset_benchmark.py \
   --max-new-tokens 2048 \
   --generate-only \
   --resume \
+  --resume-from-generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
   --allow-partial-resume
 ```
 
-To reuse the existing `n=4` pool, initialize the `n=8` output directory with
-the old `generations.json` and then run the command above. The script will keep
-the first four samples and generate only the missing four samples per task.
+With `--resume-from-generations`, the script seeds the new `n=8` output
+directory from the saved `n=4` pool, keeps the first four samples, and generates
+only the missing four samples per task. If the new output directory already has
+its own `generations.json`, that file takes precedence so interrupted `n=8`
+runs can continue normally.

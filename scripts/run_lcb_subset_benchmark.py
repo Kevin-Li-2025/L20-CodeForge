@@ -210,6 +210,17 @@ def load_generation_records(path: Path) -> list[dict[str, Any]]:
     return records
 
 
+def load_resume_generation_records(
+    generations_path: Path,
+    resume_from_generations: Path | None,
+) -> tuple[list[dict[str, Any]], str | None]:
+    if generations_path.exists():
+        return load_generation_records(generations_path), str(generations_path)
+    if resume_from_generations is not None:
+        return load_generation_records(resume_from_generations), str(resume_from_generations)
+    return [], None
+
+
 def validate_resume_records(
     records: list[dict[str, Any]],
     n_samples: int,
@@ -425,7 +436,14 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         load_in_4bit=not args.no_4bit,
         bf16=not args.no_bf16,
     )
-    existing_records = load_generation_records(generations_path) if args.resume else []
+    resume_from_generations = (
+        Path(args.resume_from_generations) if args.resume_from_generations else None
+    )
+    existing_records, resume_generations_source = (
+        load_resume_generation_records(generations_path, resume_from_generations)
+        if args.resume
+        else ([], None)
+    )
     resumed_records = validate_resume_records(
         existing_records,
         args.n_samples,
@@ -490,6 +508,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             encoding="utf-8",
         )
     generations = [record["code_list"] for record in generation_records]
+    generations_path.write_text(
+        json.dumps(generation_records, indent=2, ensure_ascii=True) + "\n",
+        encoding="utf-8",
+    )
 
     generation_seconds = round(time.monotonic() - generation_started, 3)
     if args.generate_only:
@@ -519,6 +541,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "generation_seconds": generation_seconds,
             "resume": args.resume,
             "allow_partial_resume": args.allow_partial_resume,
+            "resume_generations_source": resume_generations_source,
             "resumed_count": len(existing_records),
             "generated_this_run": generated_this_run,
             "samples_generated_this_run": samples_generated_this_run,
@@ -637,6 +660,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "generation_seconds": generation_seconds,
         "resume": args.resume,
         "allow_partial_resume": args.allow_partial_resume,
+        "resume_generations_source": resume_generations_source,
         "resumed_count": len(existing_records),
         "generated_this_run": generated_this_run,
         "samples_generated_this_run": samples_generated_this_run,
@@ -713,6 +737,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-bf16", action="store_true")
     parser.add_argument("--generate-only", action="store_true")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument(
+        "--resume-from-generations",
+        help=(
+            "Optional source generations.json used to seed a new output directory "
+            "when --resume is set and the output generations file does not exist."
+        ),
+    )
     parser.add_argument(
         "--allow-partial-resume",
         action="store_true",
