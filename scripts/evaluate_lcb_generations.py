@@ -285,6 +285,22 @@ def behavior_consensus_score(candidate_outputs: list[str], all_outputs: list[lis
     return score
 
 
+def behavior_candidate_features(
+    outputs: list[str],
+    all_outputs: list[list[str]],
+) -> dict[str, int | float]:
+    signature_counts = Counter(tuple(candidate_outputs) for candidate_outputs in all_outputs)
+    success_count = behavior_success_count(outputs)
+    test_count = len(outputs)
+    return {
+        "behavior_tests": test_count,
+        "behavior_cluster_size": signature_counts.get(tuple(outputs), 0),
+        "behavior_consensus_score": behavior_consensus_score(outputs, all_outputs),
+        "behavior_success_count": success_count,
+        "behavior_success_rate": success_count / test_count if test_count else 0.0,
+    }
+
+
 def tie_break_candidate_index(
     indices: list[int],
     code_outputs: list[str],
@@ -309,6 +325,19 @@ def choose_public_selected_index(
     if not public_results:
         return 0
     scores = [candidate_pass_fraction(result) for result in public_results]
+    return choose_public_selected_index_from_scores(scores, code_outputs, tie_breaker)
+
+
+def choose_public_selected_index_from_scores(
+    public_scores: list[float],
+    code_outputs: list[str],
+    tie_breaker: str,
+) -> int:
+    if not code_outputs:
+        return 0
+    scores = list(public_scores[: len(code_outputs)])
+    while len(scores) < len(code_outputs):
+        scores.append(0.0)
     passing_indices = [index for index, score in enumerate(scores) if score == 1.0]
     if passing_indices:
         return tie_break_candidate_index(passing_indices, code_outputs, tie_breaker)
@@ -372,6 +401,20 @@ def choose_behavior_selected_index_from_scores(
     behavior_outputs: list[list[str]],
     tie_breaker: str,
 ) -> int:
+    return choose_ranked_behavior_selected_index_from_scores(
+        public_scores=public_scores,
+        code_outputs=code_outputs,
+        behavior_outputs=behavior_outputs,
+        tie_breaker=tie_breaker,
+    )
+
+
+def choose_ranked_behavior_selected_index_from_scores(
+    public_scores: list[float],
+    code_outputs: list[str],
+    behavior_outputs: list[list[str]],
+    tie_breaker: str,
+) -> int:
     if not code_outputs:
         return 0
     public_scores = list(public_scores[: len(code_outputs)])
@@ -405,6 +448,64 @@ def choose_behavior_selected_index_from_scores(
     return max(ranked)[-1]
 
 
+def choose_conservative_behavior_selected_index_from_scores(
+    public_scores: list[float],
+    code_outputs: list[str],
+    behavior_outputs: list[list[str]],
+    tie_breaker: str,
+    min_behavior_tests: int,
+    min_behavior_success_rate: float,
+    min_behavior_consensus_margin: int,
+    min_behavior_cluster_margin: int,
+) -> int:
+    if not code_outputs:
+        return 0
+    public_scores = list(public_scores[: len(code_outputs)])
+    while len(public_scores) < len(code_outputs):
+        public_scores.append(0.0)
+    public_selected_index = choose_public_selected_index_from_scores(
+        public_scores=public_scores,
+        code_outputs=code_outputs,
+        tie_breaker=tie_breaker,
+    )
+    ranked_index = choose_ranked_behavior_selected_index_from_scores(
+        public_scores=public_scores,
+        code_outputs=code_outputs,
+        behavior_outputs=behavior_outputs,
+        tie_breaker=tie_breaker,
+    )
+    if ranked_index == public_selected_index:
+        return public_selected_index
+    if public_scores[ranked_index] != 1.0:
+        return public_selected_index
+
+    ranked_outputs = (
+        behavior_outputs[ranked_index] if ranked_index < len(behavior_outputs) else []
+    )
+    public_outputs = (
+        behavior_outputs[public_selected_index]
+        if public_selected_index < len(behavior_outputs)
+        else []
+    )
+    ranked_features = behavior_candidate_features(ranked_outputs, behavior_outputs)
+    public_features = behavior_candidate_features(public_outputs, behavior_outputs)
+    if ranked_features["behavior_tests"] < min_behavior_tests:
+        return public_selected_index
+    if ranked_features["behavior_success_rate"] < min_behavior_success_rate:
+        return public_selected_index
+    if (
+        ranked_features["behavior_consensus_score"]
+        < public_features["behavior_consensus_score"] + min_behavior_consensus_margin
+    ):
+        return public_selected_index
+    if (
+        ranked_features["behavior_cluster_size"]
+        < public_features["behavior_cluster_size"] + min_behavior_cluster_margin
+    ):
+        return public_selected_index
+    return ranked_index
+
+
 def build_behavior_selection_records_from_scores(
     problems: list[Any],
     generations: list[list[str]],
@@ -412,18 +513,45 @@ def build_behavior_selection_records_from_scores(
     behavior_inputs_by_problem: list[list[str]],
     behavior_results: dict[int, list[list[str]]],
     tie_breaker: str,
+    behavior_selection_policy: str = "ranked",
+    min_behavior_tests: int = 1,
+    min_behavior_success_rate: float = 0.0,
+    min_behavior_consensus_margin: int = 0,
+    min_behavior_cluster_margin: int = 0,
 ) -> tuple[list[list[str]], list[dict[str, Any]]]:
     selected_generations: list[list[str]] = []
     records: list[dict[str, Any]] = []
     for problem_index, (problem, code_outputs) in enumerate(zip(problems, generations)):
         problem_public_scores = list(public_scores_by_problem.get(problem_index, []))
         problem_behavior_results = behavior_results.get(problem_index, [[] for _ in code_outputs])
-        selected_index = choose_behavior_selected_index_from_scores(
+        public_selected_index = choose_public_selected_index_from_scores(
+            public_scores=problem_public_scores,
+            code_outputs=code_outputs,
+            tie_breaker=tie_breaker,
+        )
+        ranked_index = choose_ranked_behavior_selected_index_from_scores(
             public_scores=problem_public_scores,
             code_outputs=code_outputs,
             behavior_outputs=problem_behavior_results,
             tie_breaker=tie_breaker,
         )
+        if behavior_selection_policy == "ranked":
+            selected_index = ranked_index
+        elif behavior_selection_policy == "conservative-public-pass":
+            selected_index = choose_conservative_behavior_selected_index_from_scores(
+                public_scores=problem_public_scores,
+                code_outputs=code_outputs,
+                behavior_outputs=problem_behavior_results,
+                tie_breaker=tie_breaker,
+                min_behavior_tests=min_behavior_tests,
+                min_behavior_success_rate=min_behavior_success_rate,
+                min_behavior_consensus_margin=min_behavior_consensus_margin,
+                min_behavior_cluster_margin=min_behavior_cluster_margin,
+            )
+        else:
+            raise ValueError(
+                "behavior_selection_policy must be one of: ranked, conservative-public-pass"
+            )
         while len(problem_public_scores) < len(code_outputs):
             problem_public_scores.append(0.0)
         signature_counts = Counter(tuple(outputs) for outputs in problem_behavior_results)
@@ -431,6 +559,19 @@ def build_behavior_selection_records_from_scores(
             problem_behavior_results[selected_index]
             if selected_index < len(problem_behavior_results)
             else []
+        )
+        selected_behavior_features = behavior_candidate_features(
+            selected_behavior_outputs,
+            problem_behavior_results,
+        )
+        public_behavior_outputs = (
+            problem_behavior_results[public_selected_index]
+            if public_selected_index < len(problem_behavior_results)
+            else []
+        )
+        public_behavior_features = behavior_candidate_features(
+            public_behavior_outputs,
+            problem_behavior_results,
         )
         public_pass_indices = [
             index for index, score in enumerate(problem_public_scores) if score == 1.0
@@ -441,6 +582,10 @@ def build_behavior_selection_records_from_scores(
                 "question_id": problem.question_id,
                 "question_title": problem.question_title,
                 "selected_index": selected_index,
+                "public_selected_index": public_selected_index,
+                "behavior_ranked_index": ranked_index,
+                "behavior_selection_policy": behavior_selection_policy,
+                "override_from_public": selected_index != public_selected_index,
                 "tie_breaker": tie_breaker,
                 "n_candidates": len(code_outputs),
                 "public_scores": problem_public_scores,
@@ -457,12 +602,22 @@ def build_behavior_selection_records_from_scores(
                     tuple(selected_behavior_outputs),
                     0,
                 ),
-                "behavior_consensus_score": behavior_consensus_score(
-                    selected_behavior_outputs,
-                    problem_behavior_results,
+                "behavior_consensus_score": selected_behavior_features[
+                    "behavior_consensus_score"
+                ],
+                "behavior_success_count": selected_behavior_features[
+                    "behavior_success_count"
+                ],
+                "behavior_success_rate": selected_behavior_features[
+                    "behavior_success_rate"
+                ],
+                "behavior_consensus_margin_vs_public": (
+                    selected_behavior_features["behavior_consensus_score"]
+                    - public_behavior_features["behavior_consensus_score"]
                 ),
-                "behavior_success_count": behavior_success_count(
-                    selected_behavior_outputs
+                "behavior_cluster_margin_vs_public": (
+                    selected_behavior_features["behavior_cluster_size"]
+                    - public_behavior_features["behavior_cluster_size"]
                 ),
             }
         )
@@ -476,6 +631,11 @@ def build_behavior_selection_records(
     behavior_inputs_by_problem: list[list[str]],
     behavior_results: dict[int, list[list[str]]],
     tie_breaker: str,
+    behavior_selection_policy: str = "ranked",
+    min_behavior_tests: int = 1,
+    min_behavior_success_rate: float = 0.0,
+    min_behavior_consensus_margin: int = 0,
+    min_behavior_cluster_margin: int = 0,
 ) -> tuple[list[list[str]], list[dict[str, Any]]]:
     public_scores_by_problem = {
         problem_index: [
@@ -491,6 +651,11 @@ def build_behavior_selection_records(
         behavior_inputs_by_problem=behavior_inputs_by_problem,
         behavior_results=behavior_results,
         tie_breaker=tie_breaker,
+        behavior_selection_policy=behavior_selection_policy,
+        min_behavior_tests=min_behavior_tests,
+        min_behavior_success_rate=min_behavior_success_rate,
+        min_behavior_consensus_margin=min_behavior_consensus_margin,
+        min_behavior_cluster_margin=min_behavior_cluster_margin,
     )
 
 
@@ -755,6 +920,11 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                 behavior_inputs_by_problem,
                 behavior_results,
                 args.public_select_tie_breaker,
+                args.behavior_selection_policy,
+                args.min_behavior_tests,
+                args.min_behavior_success_rate,
+                args.min_behavior_consensus_margin,
+                args.min_behavior_cluster_margin,
             )
         )
         final_raw_outputs = [
@@ -773,6 +943,11 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                         "behavior_timeout": args.behavior_timeout,
                         "mutation_version": "v1_public_input_mutations",
                         "behavior_inputs_source": behavior_inputs_source,
+                        "behavior_selection_policy": args.behavior_selection_policy,
+                        "min_behavior_tests": args.min_behavior_tests,
+                        "min_behavior_success_rate": args.min_behavior_success_rate,
+                        "min_behavior_consensus_margin": args.min_behavior_consensus_margin,
+                        "min_behavior_cluster_margin": args.min_behavior_cluster_margin,
                     },
                 },
                 indent=2,
@@ -895,6 +1070,14 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         )
         if args.behavior_select or args.behavior_selection
         else None,
+        "behavior_selection_policy": args.behavior_selection_policy
+        if args.behavior_select
+        else None,
+        "behavior_override_count": sum(
+            record.get("override_from_public", False) for record in public_selection_records
+        )
+        if args.behavior_select
+        else None,
         "k": args.k,
         "max_samples": args.max_samples,
         "evaluation_seconds": evaluation_seconds,
@@ -966,6 +1149,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--public-timeout", type=int, default=6)
     parser.add_argument("--max-behavior-tests", type=int, default=6)
     parser.add_argument("--behavior-timeout", type=int, default=3)
+    parser.add_argument(
+        "--behavior-selection-policy",
+        choices=["ranked", "conservative-public-pass"],
+        default="ranked",
+    )
+    parser.add_argument("--min-behavior-tests", type=int, default=1)
+    parser.add_argument("--min-behavior-success-rate", type=float, default=0.0)
+    parser.add_argument("--min-behavior-consensus-margin", type=int, default=0)
+    parser.add_argument("--min-behavior-cluster-margin", type=int, default=0)
     parser.add_argument("--num-process-evaluate", type=int, default=8)
     parser.add_argument("--timeout", type=int, default=8)
     parser.add_argument("--debug", action="store_true")

@@ -160,6 +160,9 @@ Current generated-test probe:
 - It parsed `54` usable task records with `558` generated behavior inputs.
 - On those 54 targets, generated behavior consensus improved selection from
   `51/54` to `52/54`.
+- A stricter `conservative-public-pass` selector with consensus margin `1`
+  keeps the same `52/54` result while requiring public-test pass and strong
+  generated-test agreement before overriding the public-selected candidate.
 - The full-suite headline score remains `378/1055` until the full evaluator has
   retry-stabilized replay for flaky unchanged selections.
 

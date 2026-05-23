@@ -1,0 +1,93 @@
+{
+  "status": "unstable_replay",
+  "total": 1055,
+  "baseline_passed": 378,
+  "candidate_passed": 377,
+  "net_gain": -1,
+  "selection_changed_count": 3,
+  "outcome_changed_count": 3,
+  "unchanged_outcome_flip_count": 2,
+  "changed_selection_improvement_count": 1,
+  "changed_selection_regression_count": 0,
+  "changed_or_outcome_different": [
+    {
+      "question_id": "2837",
+      "question_title": "minimum-operations-to-make-the-integer-zero",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 3,
+      "selection_changed": true,
+      "outcome_changed": false,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": null,
+      "candidate_behavior_consensus_margin_vs_public": null
+    },
+    {
+      "question_id": "2848",
+      "question_title": "special-permutations",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 1,
+      "selection_changed": true,
+      "outcome_changed": false,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": null,
+      "candidate_behavior_consensus_margin_vs_public": null
+    },
+    {
+      "question_id": "2854",
+      "question_title": "decremental-string-concatenation",
+      "baseline_pass": false,
+      "candidate_pass": true,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 1,
+      "selection_changed": true,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": null,
+      "candidate_behavior_consensus_margin_vs_public": null
+    },
+    {
+      "question_id": "abc363_c",
+      "question_title": "Avoid K Palindrome 2",
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 1,
+      "selection_changed": false,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": null,
+      "candidate_behavior_consensus_margin_vs_public": null
+    },
+    {
+      "question_id": "abc378_e",
+      "question_title": "Mod Sigma Problem",
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 3,
+      "selection_changed": false,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": null,
+      "candidate_behavior_consensus_margin_vs_public": null
+    }
+  ],
+  "unchanged_outcome_flips": [
+    "abc363_c",
+    "abc378_e"
+  ]
+}

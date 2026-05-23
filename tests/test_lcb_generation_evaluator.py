@@ -124,6 +124,66 @@ def test_evaluator_behavior_selection_can_reuse_public_scores() -> None:
     assert selected == 1
 
 
+def test_evaluator_conservative_behavior_policy_requires_public_pass() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_behavior_selected_index_from_scores(
+        public_scores=[1.0, 0.0],
+        code_outputs=["short public pass", "better behavior"],
+        behavior_outputs=[
+            ["ERR:1:aaa", "ERR:1:bbb"],
+            ["OK:1:aaa", "OK:1:bbb"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_consensus_margin=0,
+        min_behavior_cluster_margin=0,
+    )
+
+    assert selected == 0
+
+
+def test_evaluator_conservative_behavior_policy_allows_strong_public_pass_override() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_behavior_selected_index_from_scores(
+        public_scores=[1.0, 1.0],
+        code_outputs=["short", "longer behavior candidate"],
+        behavior_outputs=[
+            ["ERR:1:aaa", "ERR:1:bbb"],
+            ["OK:1:aaa", "OK:1:bbb"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_consensus_margin=0,
+        min_behavior_cluster_margin=0,
+    )
+
+    assert selected == 1
+
+
+def test_evaluator_conservative_behavior_policy_rejects_weak_behavior_signal() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_behavior_selected_index_from_scores(
+        public_scores=[1.0, 1.0],
+        code_outputs=["short", "longer behavior candidate"],
+        behavior_outputs=[
+            ["ERR:1:aaa", "ERR:1:bbb"],
+            ["OK:1:aaa", "ERR:1:bbb"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_consensus_margin=0,
+        min_behavior_cluster_margin=0,
+    )
+
+    assert selected == 0
+
+
 def test_evaluator_loads_external_behavior_inputs(tmp_path: Path) -> None:
     evaluator = load_evaluator_module()
     payload = {

@@ -1,0 +1,60 @@
+{
+  "status": "improved",
+  "total": 54,
+  "baseline_passed": 51,
+  "candidate_passed": 52,
+  "net_gain": 1,
+  "selection_changed_count": 3,
+  "outcome_changed_count": 1,
+  "unchanged_outcome_flip_count": 0,
+  "changed_selection_improvement_count": 1,
+  "changed_selection_regression_count": 0,
+  "changed_or_outcome_different": [
+    {
+      "question_id": "2837",
+      "question_title": "minimum-operations-to-make-the-integer-zero",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 3,
+      "selection_changed": true,
+      "outcome_changed": false,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": true,
+      "candidate_behavior_success_rate": 1.0,
+      "candidate_behavior_consensus_margin_vs_public": 6
+    },
+    {
+      "question_id": "2848",
+      "question_title": "special-permutations",
+      "baseline_pass": true,
+      "candidate_pass": true,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 1,
+      "selection_changed": true,
+      "outcome_changed": false,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": true,
+      "candidate_behavior_success_rate": 1.0,
+      "candidate_behavior_consensus_margin_vs_public": 2
+    },
+    {
+      "question_id": "2854",
+      "question_title": "decremental-string-concatenation",
+      "baseline_pass": false,
+      "candidate_pass": true,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 1,
+      "selection_changed": true,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": true,
+      "candidate_behavior_success_rate": 0.9166666666666666,
+      "candidate_behavior_consensus_margin_vs_public": 1
+    }
+  ],
+  "unchanged_outcome_flips": []
+}

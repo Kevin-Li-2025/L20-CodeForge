@@ -194,6 +194,8 @@ On the 54 tasks with parsed behavior inputs:
 
 - Reused public-test selection: `51/54`, pass@1 `0.9444`.
 - Public score plus generated behavior consensus: `52/54`, pass@1 `0.9630`.
+- Conservative public-pass behavior override with consensus margin `1`:
+  `52/54`, pass@1 `0.9630`.
 - Net targeted gain: `+1` task.
 
 The selector changed three tasks. Two remained hidden-pass cases with a
@@ -201,6 +203,14 @@ different selected candidate (`2837`, `2848`), and one changed a hidden failure
 into a pass (`2854`, `decremental-string-concatenation`). This is the first
 positive signal that candidate-aware generated tests can add useful selection
 information beyond public tests.
+
+The conservative override policy is now implemented in
+`scripts/evaluate_lcb_generations.py` as
+`--behavior-selection-policy conservative-public-pass`. The stricter replay
+required the replacement candidate to pass public tests, have at least `6`
+generated behavior tests, reach behavior success rate `>=0.9`, and beat the
+public-selected candidate by at least `1` behavior-consensus point. The three
+overrides still survived that filter, including the real `2854` improvement.
 
 A full-suite hybrid replay replaced those 54 records in the prior public
 selection payload and produced `377/1055` in one run. That number is not adopted
@@ -210,14 +220,18 @@ passed again in an immediate two-task recheck. Until full-suite evaluation has a
 retry-stabilized path, the stable full score remains the prior public-selection
 result, `378/1055`.
 
+`scripts/compare_lcb_selection_runs.py` now provides an explicit audit gate for
+this situation. It marks the 54-task conservative replay as `improved` and the
+full hybrid replay as `unstable_replay`, because `abc363_c` and `abc378_e` had
+unchanged selected code but different hidden outcomes.
+
 The next gate is therefore conservative:
 
 - Retry or majority-recheck unchanged selected code when hidden outcome flips
   across runs.
-- Use generated behavior tests only for strong overrides among public-passing
-  candidates.
-- Re-run full hybrid evaluation after stabilizing the evaluator, then refresh
-  the generalization scorecard before reporting any new headline score.
+- Apply the conservative override policy to full-suite replay.
+- Refresh the generalization scorecard only after the stabilized replay has no
+  unchanged-code outcome flips.
 
 ## Research Update: High-Leverage Next Step
 
