@@ -139,3 +139,18 @@ def test_validate_resume_records_rejects_partial_samples() -> None:
         assert "fewer than 2 samples" in str(exc)
     else:
         raise AssertionError("expected ValueError for partial resume record")
+
+
+def test_validate_resume_records_allows_partial_extension() -> None:
+    runner = load_runner_module()
+
+    records = [{"question_id": "abc", "raw_outputs": ["a"], "code_list": ["A"]}]
+
+    resumed = runner.validate_resume_records(
+        records,
+        n_samples=2,
+        allow_partial=True,
+    )
+
+    assert resumed["abc"]["raw_outputs"] == ["a"]
+    assert resumed["abc"]["code_list"] == ["A"]

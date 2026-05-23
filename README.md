@@ -208,6 +208,11 @@ Current generated-test probe:
   high-signal negative result: expected-output verification needs calibration,
   a stronger verifier, or a learned/RLVR verifier before it should touch the
   headline `378/1055` run.
+- The next active improvement path is S* lite scaling: extend the saved full
+  `n=4` pool to `n=8`/`n=16`, add public-test repair only on public-failing
+  candidates, and keep hidden tests reserved for final replay. The LCB runner
+  now supports `--allow-partial-resume`, so the L20 can reuse existing samples
+  and generate only missing completions when expanding a pool.
 
 Generalization gate:
 

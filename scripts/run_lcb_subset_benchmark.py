@@ -213,6 +213,7 @@ def load_generation_records(path: Path) -> list[dict[str, Any]]:
 def validate_resume_records(
     records: list[dict[str, Any]],
     n_samples: int,
+    allow_partial: bool = False,
 ) -> dict[str, dict[str, Any]]:
     resumed: dict[str, dict[str, Any]] = {}
     for record in records:
@@ -223,13 +224,14 @@ def validate_resume_records(
             raise ValueError("resume generation record is missing question_id")
         if question_id in resumed:
             raise ValueError(f"duplicate resume generation record for {question_id}")
-        if len(code_list) < n_samples or len(raw_outputs) < n_samples:
+        available_samples = min(len(code_list), len(raw_outputs))
+        if available_samples < n_samples and not allow_partial:
             raise ValueError(
                 f"resume generation record for {question_id} has fewer than "
                 f"{n_samples} samples"
             )
-        record["code_list"] = code_list[:n_samples]
-        record["raw_outputs"] = raw_outputs[:n_samples]
+        record["code_list"] = code_list[: min(available_samples, n_samples)]
+        record["raw_outputs"] = raw_outputs[: min(available_samples, n_samples)]
         resumed[question_id] = record
     return resumed
 
@@ -424,30 +426,51 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         bf16=not args.no_bf16,
     )
     existing_records = load_generation_records(generations_path) if args.resume else []
-    resumed_records = validate_resume_records(existing_records, args.n_samples)
+    resumed_records = validate_resume_records(
+        existing_records,
+        args.n_samples,
+        allow_partial=args.allow_partial_resume,
+    )
     generation_records: list[dict[str, Any]] = []
     generated_this_run = 0
+    samples_generated_this_run = 0
     for index, problem in enumerate(problems, start=1):
         existing_record = resumed_records.get(problem.question_id)
-        if existing_record is not None:
+        existing_sample_count = (
+            len(existing_record.get("code_list", [])) if existing_record else 0
+        )
+        if existing_record is not None and existing_sample_count >= args.n_samples:
             print(
                 f"[{index}/{len(problems)}] resuming {problem.question_id} "
                 f"{problem.question_title}"
             )
             generation_records.append(existing_record)
             continue
-        print(f"[{index}/{len(problems)}] generating {problem.question_id} {problem.question_title}")
+        existing_raw_outputs = (
+            list(existing_record.get("raw_outputs", [])) if existing_record else []
+        )
+        existing_code_outputs = (
+            list(existing_record.get("code_list", [])) if existing_record else []
+        )
+        missing_samples = args.n_samples - len(existing_code_outputs)
+        action = "extending" if existing_record is not None else "generating"
+        print(
+            f"[{index}/{len(problems)}] {action} {problem.question_id} "
+            f"{problem.question_title} missing_samples={missing_samples}"
+        )
         raw_outputs, code_outputs = generate_problem_outputs(
             model=model,
             tokenizer=tokenizer,
             problem=problem,
-            n_samples=args.n_samples,
+            n_samples=missing_samples,
             sample_batch_size=args.sample_batch_size,
             temperature=args.temperature,
             top_p=args.top_p,
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
         )
+        raw_outputs = existing_raw_outputs + raw_outputs
+        code_outputs = existing_code_outputs + code_outputs
         generation_records.append(
             {
                 "question_id": problem.question_id,
@@ -461,6 +484,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             }
         )
         generated_this_run += 1
+        samples_generated_this_run += missing_samples
         generations_path.write_text(
             json.dumps(generation_records, indent=2, ensure_ascii=True) + "\n",
             encoding="utf-8",
@@ -494,8 +518,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "bf16": not args.no_bf16,
             "generation_seconds": generation_seconds,
             "resume": args.resume,
+            "allow_partial_resume": args.allow_partial_resume,
             "resumed_count": len(existing_records),
             "generated_this_run": generated_this_run,
+            "samples_generated_this_run": samples_generated_this_run,
             "evaluation_seconds": 0.0,
             "metrics": None,
             "passed_at_1_count": None,
@@ -610,8 +636,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "bf16": not args.no_bf16,
         "generation_seconds": generation_seconds,
         "resume": args.resume,
+        "allow_partial_resume": args.allow_partial_resume,
         "resumed_count": len(existing_records),
         "generated_this_run": generated_this_run,
+        "samples_generated_this_run": samples_generated_this_run,
         "public_selection_seconds": public_selection_seconds,
         "evaluation_seconds": eval_seconds,
         "metrics": make_json_safe(metrics),
@@ -685,6 +713,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-bf16", action="store_true")
     parser.add_argument("--generate-only", action="store_true")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument(
+        "--allow-partial-resume",
+        action="store_true",
+        help=(
+            "When --resume is set, allow existing generation records with fewer "
+            "than --n-samples and generate only the missing samples. This is used "
+            "to extend an n=4 run to n=8/n=16 without regenerating prior samples."
+        ),
+    )
     parser.add_argument("--overwrite", action="store_true")
     parser.add_argument("--debug", action="store_true")
     return parser

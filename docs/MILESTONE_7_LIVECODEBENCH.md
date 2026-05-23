@@ -305,14 +305,37 @@ presented as progress.
 
 ## Next Experiments
 
-1. Run a small model on the prompt bank to generate differential behavior
-   inputs for public-score-tied tasks.
-2. Re-run behavior selection with `--behavior-inputs` on the stratified 60 slice,
-   then on the full 1,055-task suite if the slice improves.
-3. Use public/generated-test pass rates to build preference pairs for a small
-   reward model or LoRA verifier before any broad SFT.
-4. Add repair prompts for candidates that fail public tests; keep this separate
-   from hidden evaluation.
-5. Record pass@1, public-pass rate, generated-test discrimination rate,
-   hidden-pass rate, wall time, and hashes so improvements are attributable to
-   algorithmic test-time compute rather than hidden leakage.
+The next active line is an S* lite scaling run. It deliberately separates
+public-side construction from hidden-test measurement:
+
+1. Extend the full `n=4` pool to `n=8` without regenerating prior samples.
+2. Recompute public-test selection and compare `n=4` versus `n=8` on full
+   LiveCodeBench `release_v6`.
+3. Only if `n=8` improves the public oracle and hidden replay, extend to `n=16`
+   or add public-test repair for public-failing candidates.
+4. Keep expected-output verifier selection out of the headline until a verifier
+   calibration set proves it is better than public-test selection.
+5. Update the EvalPlus + LiveCodeBench generalization scorecard before claiming
+   a real improvement.
+
+The generation script now supports partial resume for this path:
+
+```bash
+python scripts/run_lcb_subset_benchmark.py \
+  --lcb-repo /path/to/LiveCodeBench \
+  --parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_full_generate_only \
+  --model /path/to/Qwen2.5-Coder-7B-Instruct \
+  --n-samples 8 \
+  --sample-batch-size 2 \
+  --temperature 0.8 \
+  --top-p 0.95 \
+  --max-new-tokens 2048 \
+  --generate-only \
+  --resume \
+  --allow-partial-resume
+```
+
+To reuse the existing `n=4` pool, initialize the `n=8` output directory with
+the old `generations.json` and then run the command above. The script will keep
+the first four samples and generate only the missing four samples per task.
