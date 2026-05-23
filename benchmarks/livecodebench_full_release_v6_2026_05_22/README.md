@@ -10,6 +10,7 @@ official LiveCodeBench evaluator.
 | Model | Adapter | Decode | Samples | Tasks | Passed | pass@1 |
 | --- | --- | --- | ---: | ---: | ---: | ---: |
 | `Qwen2.5-Coder-7B-Instruct` | none | greedy, `temperature=0` | 1 | 1,055 | 297 | 0.2815 |
+| `Qwen2.5-Coder-7B-Instruct` | none | `temperature=0.8`, public-test selection | 4 | 1,055 | 378 | 0.3583 |
 
 This is not an official leaderboard submission. It is a reproducible local
 checkpoint for a resource-constrained single-L20 setup. The official
@@ -26,8 +27,10 @@ run intentionally uses greedy `n=1` to establish a low-cost full-suite floor.
   `4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd`.
 - Prompt/public-only parquet SHA-256:
   `6a067f9b0762a2df9cad3e269872e189ce2d4f6ece7d8356a6f5d63cacdb5a96`.
-- Saved generations SHA-256:
+- Greedy saved generations SHA-256:
   `9d70473c14b20e6d3c514ff64d6f3525f870e5f25d18b55bd0ac83722912d3c5`.
+- `n=4` saved generations SHA-256:
+  `3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d`.
 
 The full hidden-test JSONL is not committed because it is 4.2GB. The committed
 artifacts include saved generations, evaluator outputs, and compact summaries.
@@ -75,7 +78,38 @@ python scripts/evaluate_lcb_generations.py \
   --max-samples 1 \
   --num-process-evaluate 8 \
   --timeout 8
+
+python scripts/run_lcb_subset_benchmark.py \
+  --lcb-repo /path/to/LiveCodeBench \
+  --lcb-commit 28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24 \
+  --parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only \
+  --model /path/to/Qwen2.5-Coder-7B-Instruct \
+  --n-samples 4 \
+  --temperature 0.8 \
+  --top-p 0.95 \
+  --max-new-tokens 2048 \
+  --generate-only \
+  --resume
+
+python scripts/evaluate_lcb_generations.py \
+  --lcb-repo /path/to/LiveCodeBench \
+  --lcb-commit 28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24 \
+  --full-jsonl /path/to/release_v6_test_full.jsonl \
+  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval \
+  --k 1 \
+  --max-samples 4 \
+  --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
+  --public-select-tie-breaker shortest \
+  --num-process-evaluate 8 \
+  --timeout 8
 ```
+
+Use `--public-select` instead of `--public-selection .../public_selection.json`
+for a fresh run. This checkpoint reused the saved public-selection payload
+after an interrupted hidden-test evaluation, avoiding a second 4,220-candidate
+public-test pass.
 
 ## Breakdown
 
@@ -106,9 +140,51 @@ where the L20-constrained strategy should focus next.
 1. The model is usable on easy tasks but collapses on hard tasks.
 2. Wrong answers dominate failures, so better reasoning/repair matters more
    than only optimizing runtime.
-3. The earlier subset showed public-test selection can add large gains. The
-   next full-suite experiment should run `n=4` or `n=8` generation with
-   public-test selection and compare hidden pass@1 against this 0.2815 floor.
+3. Full `n=4` public-test selection improves the hidden score from `0.2815`
+   to `0.3583`, so the next gains should come from producing better candidates
+   and repairing public-test failures, not from switching away from selection.
+
+## Full `n=4` Public Selection
+
+The full `n=4` run scales the stratified probe to all 1,055 tasks. For each
+task, four candidates were generated at `temperature=0.8`, `top_p=0.95`.
+Candidates were graded on public tests; the selected candidate was the shortest
+public-passing solution, or the shortest best-scoring solution if none passed.
+
+| Run | Passed | Total | Score |
+| --- | ---: | ---: | ---: |
+| Greedy baseline | 297 | 1,055 | 0.2815 |
+| `temperature=0.8`, `n=4`, public-test selection | 378 | 1,055 | 0.3583 |
+
+The absolute gain is `+81` solved tasks, or `+7.68` pass@1 points. Public tests
+selected a public-passing candidate on `546/1055` tasks, but only `378/1055`
+passed hidden tests. That gap is useful: public tests are a strong but noisy
+selector, and a second verifier/repair stage should target the 168
+public-pass-hidden-fail cases.
+
+Breakdown for the selected full run:
+
+| Slice | Passed | Total | pass@1 |
+| --- | ---: | ---: | ---: |
+| Easy | 251 | 322 | 0.7795 |
+| Medium | 110 | 383 | 0.2872 |
+| Hard | 17 | 350 | 0.0486 |
+| AtCoder | 183 | 602 | 0.3040 |
+| Codeforces | 5 | 9 | 0.5556 |
+| LeetCode | 190 | 444 | 0.4279 |
+
+Failure classes after public selection:
+
+| Class | Count |
+| --- | ---: |
+| Wrong answer | 478 |
+| Runtime error | 80 |
+| Time limit exceeded | 119 |
+
+Primary artifact:
+
+- `full_n4_public_select_summary.json`: compact full-run score, gain, hashes,
+  public-selection counts, and breakdowns.
 
 ## Stratified `n=4` Public-Selection Probe
 

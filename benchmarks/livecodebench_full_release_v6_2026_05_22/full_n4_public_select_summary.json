@@ -1,0 +1,132 @@
+{
+  "benchmark": "livecodebench/code_generation_lite release_v6",
+  "lcb_repo_commit": "28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24",
+  "tasks": 1055,
+  "model": "Qwen2.5-Coder-7B-Instruct",
+  "adapter": null,
+  "decode": {
+    "temperature": 0.8,
+    "top_p": 0.95,
+    "n_samples": 4,
+    "max_new_tokens": 2048,
+    "selection": "public_tests",
+    "tie_breaker": "shortest"
+  },
+  "score": {
+    "passed": 378,
+    "total": 1055,
+    "pass_at_1": 0.3582938388625592
+  },
+  "baseline_greedy": {
+    "passed": 297,
+    "total": 1055,
+    "pass_at_1": 0.28151658767772514
+  },
+  "absolute_gain_vs_greedy": 0.07677725118483408,
+  "relative_gain_vs_greedy": 0.2727272727272725,
+  "public_selection": {
+    "selected_public_pass_count": 546,
+    "public_oracle_pass_count": 546,
+    "public_metric_pass_at_1": 0.3490521327014218,
+    "selected_public_score_counts": {
+      "0.0": 357,
+      "0.5": 117,
+      "0.6666666666666666": 33,
+      "0.75": 2,
+      "1.0": 546
+    },
+    "selected_index_counts": {
+      "0": 283,
+      "1": 262,
+      "2": 260,
+      "3": 250
+    },
+    "source": "saved public_selection.json reused for hidden evaluation after interruption"
+  },
+  "timing_seconds": {
+    "generation": 34489.714,
+    "hidden_evaluation": 706.327,
+    "public_selection_recorded_in_report": 0.0
+  },
+  "hashes": {
+    "full_jsonl_sha256": "4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd",
+    "generations_sha256": "3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d"
+  },
+  "breakdown": {
+    "difficulty": {
+      "easy": {
+        "passed": 251,
+        "total": 322,
+        "score": 0.7795031055900621
+      },
+      "hard": {
+        "passed": 17,
+        "total": 350,
+        "score": 0.04857142857142857
+      },
+      "medium": {
+        "passed": 110,
+        "total": 383,
+        "score": 0.28720626631853785
+      }
+    },
+    "platform": {
+      "atcoder": {
+        "passed": 183,
+        "total": 602,
+        "score": 0.30398671096345514
+      },
+      "codeforces": {
+        "passed": 5,
+        "total": 9,
+        "score": 0.5555555555555556
+      },
+      "leetcode": {
+        "passed": 190,
+        "total": 444,
+        "score": 0.42792792792792794
+      }
+    }
+  },
+  "baseline_breakdown": {
+    "difficulty": {
+      "easy": {
+        "passed": 206,
+        "total": 322,
+        "score": 0.639751552795031
+      },
+      "hard": {
+        "passed": 9,
+        "total": 350,
+        "score": 0.025714285714285714
+      },
+      "medium": {
+        "passed": 82,
+        "total": 383,
+        "score": 0.21409921671018275
+      }
+    },
+    "platform": {
+      "atcoder": {
+        "passed": 146,
+        "total": 602,
+        "score": 0.2425249169435216
+      },
+      "codeforces": {
+        "passed": 2,
+        "total": 9,
+        "score": 0.2222222222222222
+      },
+      "leetcode": {
+        "passed": 149,
+        "total": 444,
+        "score": 0.3355855855855856
+      }
+    }
+  },
+  "failure_counts": {
+    "runtime_error": 80,
+    "wrong_answer": 478,
+    "time_limit_exceeded": 119
+  }
+}

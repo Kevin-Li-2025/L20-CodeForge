@@ -115,14 +115,46 @@ By difficulty:
 This is a good sign for the L20 strategy. Sampling plus public-test selection
 found real hidden-test improvements, and most remaining misses came from not
 having a correct candidate rather than selecting the wrong candidate. The next
-high-value benchmark is full `n=4` public selection over all 1,055 tasks.
+high-value benchmark was full `n=4` public selection over all 1,055 tasks.
+
+## Full `n=4` Public-Selection Result
+
+The full `n=4` run is now recorded under
+`benchmarks/livecodebench_full_release_v6_2026_05_22/`.
+
+- Scope: all 1,055 `release_v6` tasks.
+- Model: `Qwen2.5-Coder-7B-Instruct`, 4-bit NF4, bf16 compute, no adapter.
+- Decode: `temperature=0.8`, `top_p=0.95`, `n=4`, `max_new_tokens=2048`.
+- Selection: public-test score, tie-broken by shortest selected code.
+- Result: `378/1055`, pass@1 `0.3583`.
+- Gain over greedy full baseline: `+81` tasks, `+0.0768` absolute pass@1.
+- Generation runtime: `34489.714s`.
+- Hidden evaluation runtime after reusing saved public selection: `706.327s`.
+- Saved generations SHA-256:
+  `3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d`.
+
+Breakdown:
+
+- Easy: `251/322`, pass@1 `0.7795`.
+- Medium: `110/383`, pass@1 `0.2872`.
+- Hard: `17/350`, pass@1 `0.0486`.
+- AtCoder: `183/602`, pass@1 `0.3040`.
+- LeetCode: `190/444`, pass@1 `0.4279`.
+
+Public tests selected a public-passing candidate on `546/1055` tasks, but only
+`378/1055` of those selected programs passed hidden tests. That is a clear
+engineering signal: public-test selection is worth keeping, but public tests
+alone are too weak as the final verifier. The next step should target
+public-pass-hidden-fail cases with repair, additional generated tests, or a
+second candidate-ranking signal.
 
 ## Next Experiments
 
 1. Add lightweight repair prompts for candidates that fail public tests.
 2. Add a second selector signal, such as shortest-public-pass plus diversity or
    multi-candidate consensus on public tests.
-3. Scale the same `n=4` protocol to the full 1,055-problem LCB set.
+3. Mine the public-pass-hidden-fail cases for synthetic adversarial tests and
+   verifier features.
 4. Record pass@1, public-pass rate, hidden-pass rate, wall time, and tokens so
    improvements are attributable to algorithmic test-time compute, not hidden
    leakage.

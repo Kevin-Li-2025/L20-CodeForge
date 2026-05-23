@@ -129,6 +129,41 @@ def build_public_selection_records(
     return selected_generations, records
 
 
+def load_public_selection_payload(public_selection_path: Path) -> dict[str, Any]:
+    payload = json.loads(public_selection_path.read_text(encoding="utf-8"))
+    records = payload.get("records")
+    if not isinstance(records, list):
+        raise ValueError("public selection payload must contain a records list")
+    return payload
+
+
+def apply_public_selection_records(
+    problems: list[Any],
+    generations: list[list[str]],
+    raw_outputs: list[list[str]],
+    selection_records: list[dict[str, Any]],
+) -> tuple[list[list[str]], list[list[str]], list[dict[str, Any]]]:
+    records_by_id = {record["question_id"]: record for record in selection_records}
+    selected_generations: list[list[str]] = []
+    selected_raw_outputs: list[list[str]] = []
+    aligned_records: list[dict[str, Any]] = []
+    for problem, code_outputs, raw_output_list in zip(problems, generations, raw_outputs):
+        record = records_by_id.get(problem.question_id)
+        if record is None:
+            raise ValueError(f"missing public selection for question_id={problem.question_id}")
+        selected_index = int(record["selected_index"])
+        if selected_index < 0 or selected_index >= len(code_outputs):
+            raise ValueError(
+                f"selected_index={selected_index} out of range for question_id={problem.question_id}"
+            )
+        selected_generations.append([code_outputs[selected_index]])
+        selected_raw_outputs.append(
+            [raw_output_list[selected_index] if selected_index < len(raw_output_list) else ""]
+        )
+        aligned_records.append(record)
+    return selected_generations, selected_raw_outputs, aligned_records
+
+
 def load_lcb_modules(lcb_repo: Path) -> tuple[Any, Any]:
     sys.path.insert(0, str(lcb_repo))
     from lcb_runner.benchmarks.code_generation import CodeGenerationProblem
@@ -153,6 +188,9 @@ def load_generations(generations_path: Path) -> dict[str, dict[str, Any]]:
 
 
 def evaluate(args: argparse.Namespace) -> dict[str, Any]:
+    if args.public_select and args.public_selection:
+        raise ValueError("--public-select and --public-selection are mutually exclusive")
+
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     lcb_repo = Path(args.lcb_repo)
@@ -188,7 +226,23 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     public_selection_metadata: Any | None = None
     final_generations = generations
     final_raw_outputs = raw_outputs
-    if args.public_select:
+    public_selection_source = None
+    if args.public_selection:
+        public_selection_source = str(Path(args.public_selection))
+        public_selection_payload = load_public_selection_payload(Path(args.public_selection))
+        public_selection_metrics = make_json_safe(public_selection_payload.get("metrics"))
+        public_selection_metadata = sanitize_lcb_metadata(public_selection_payload.get("metadata"))
+        (
+            final_generations,
+            final_raw_outputs,
+            public_selection_records,
+        ) = apply_public_selection_records(
+            selected_problems,
+            generations,
+            raw_outputs,
+            public_selection_payload["records"],
+        )
+    elif args.public_select:
         public_started = time.monotonic()
         public_samples = [get_public_evaluation_sample(problem) for problem in selected_problems]
         public_metrics, public_results, public_metadata = codegen_metrics(
@@ -262,21 +316,26 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         "generations": str(generations_path),
         "generations_sha256": sha256_file(generations_path),
         "tasks_evaluated": len(selected_problems),
-        "selection": "public_tests" if args.public_select else "none",
-        "public_select_tie_breaker": args.public_select_tie_breaker
+        "selection": "public_tests"
         if args.public_select
+        else "public_tests_reused"
+        if args.public_selection
+        else "none",
+        "public_selection_source": public_selection_source,
+        "public_select_tie_breaker": args.public_select_tie_breaker
+        if args.public_select or args.public_selection
         else None,
         "public_selection_seconds": public_selection_seconds,
         "public_selection_metrics": public_selection_metrics,
         "public_selected_public_pass_count": sum(
             record["selected_public_score"] == 1.0 for record in public_selection_records
         )
-        if args.public_select
+        if args.public_select or args.public_selection
         else None,
         "public_oracle_pass_count": sum(
             record["public_oracle_pass"] for record in public_selection_records
         )
-        if args.public_select
+        if args.public_select or args.public_selection
         else None,
         "k": args.k,
         "max_samples": args.max_samples,
@@ -311,6 +370,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--k", type=int, nargs="+", default=[1])
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--public-select", action="store_true")
+    parser.add_argument(
+        "--public-selection",
+        help="Reuse a saved public_selection.json payload instead of re-evaluating public tests.",
+    )
     parser.add_argument(
         "--public-select-tie-breaker",
         choices=["first", "shortest", "longest"],

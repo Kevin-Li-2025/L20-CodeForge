@@ -43,6 +43,26 @@ def test_evaluator_public_selection_records_single_candidate() -> None:
     assert records[0]["public_oracle_pass"] is True
 
 
+def test_evaluator_applies_saved_public_selection_by_question_id() -> None:
+    evaluator = load_evaluator_module()
+    problem_a = type("Problem", (), {"question_id": "a"})()
+    problem_b = type("Problem", (), {"question_id": "b"})()
+
+    selected, raw_outputs, records = evaluator.apply_public_selection_records(
+        problems=[problem_a, problem_b],
+        generations=[["a0", "a1"], ["b0", "b1"]],
+        raw_outputs=[["ra0", "ra1"], ["rb0", "rb1"]],
+        selection_records=[
+            {"question_id": "b", "selected_index": 0},
+            {"question_id": "a", "selected_index": 1},
+        ],
+    )
+
+    assert selected == [["a1"], ["b0"]]
+    assert raw_outputs == [["ra1"], ["rb0"]]
+    assert [record["question_id"] for record in records] == ["a", "b"]
+
+
 def test_evaluator_sanitizes_hidden_payloads() -> None:
     evaluator = load_evaluator_module()
     payload = {
