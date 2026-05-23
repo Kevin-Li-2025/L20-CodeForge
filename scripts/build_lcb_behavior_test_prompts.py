@@ -40,27 +40,75 @@ def load_problem_records(full_jsonl: Path, lcb_repo: Path, question_ids: set[str
     }
 
 
+def public_signal_features(record: dict[str, Any]) -> dict[str, Any]:
+    scores = [float(score) for score in record.get("public_scores", [])]
+    best_score = max(scores) if scores else 0.0
+    return {
+        "best_public_score": best_score,
+        "best_public_tie_count": sum(score == best_score for score in scores),
+        "public_pass_count": sum(score == 1.0 for score in scores),
+        "partial_public_score_count": sum(0.0 < score < 1.0 for score in scores),
+        "nonzero_public_score_count": sum(score > 0.0 for score in scores),
+        "public_score_sum": round(sum(scores), 6),
+    }
+
+
+def target_priority_key(
+    record: dict[str, Any],
+    original_index: int,
+    target_priority: str,
+) -> tuple[Any, ...]:
+    features = public_signal_features(record)
+    if target_priority == "input-order":
+        return (original_index,)
+    if target_priority == "public-ambiguity":
+        return (
+            -features["best_public_score"],
+            -features["best_public_tie_count"],
+            -features["public_pass_count"],
+            -features["partial_public_score_count"],
+            original_index,
+        )
+    if target_priority == "public-fragility":
+        return (
+            -features["best_public_score"],
+            features["public_pass_count"],
+            -features["partial_public_score_count"],
+            features["public_score_sum"],
+            original_index,
+        )
+    raise ValueError(
+        "target_priority must be one of: input-order, public-ambiguity, public-fragility"
+    )
+
+
 def select_target_records(
     records: list[dict[str, Any]],
     min_public_score: float,
     include_non_ties: bool,
     limit: int | None,
+    target_priority: str = "input-order",
 ) -> list[dict[str, Any]]:
-    selected: list[dict[str, Any]] = []
-    for record in records:
-        scores = [float(score) for score in record.get("public_scores", [])]
-        if not scores:
+    selected: list[tuple[int, dict[str, Any]]] = []
+    for original_index, record in enumerate(records):
+        features = public_signal_features(record)
+        if not record.get("public_scores"):
             continue
-        best_score = max(scores)
-        if best_score < min_public_score:
+        if features["best_public_score"] < min_public_score:
             continue
-        tied = [index for index, score in enumerate(scores) if score == best_score]
-        if not include_non_ties and len(tied) < 2:
+        if not include_non_ties and features["best_public_tie_count"] < 2:
             continue
-        selected.append(record)
-        if limit is not None and len(selected) >= limit:
-            break
-    return selected
+        selected.append((original_index, record))
+    selected.sort(
+        key=lambda item: target_priority_key(
+            record=item[1],
+            original_index=item[0],
+            target_priority=target_priority,
+        )
+    )
+    if limit is not None:
+        selected = selected[:limit]
+    return [record for _, record in selected]
 
 
 def public_test_payload(problem: Any, max_public_tests: int) -> list[dict[str, str]]:
@@ -213,6 +261,7 @@ def build_prompt_records(args: argparse.Namespace) -> list[dict[str, Any]]:
         min_public_score=args.min_public_score,
         include_non_ties=args.include_non_ties,
         limit=args.limit,
+        target_priority=args.target_priority,
     )
     generations = load_generations(Path(args.generations))
     problems_by_id = load_problem_records(
@@ -253,6 +302,8 @@ def build_prompt_records(args: argparse.Namespace) -> list[dict[str, Any]]:
                 "platform": enum_value(getattr(problem, "platform", "")),
                 "func_name": problem.metadata.get("func_name"),
                 "public_scores": public_scores,
+                "public_signal_features": public_signal_features(record),
+                "target_priority": args.target_priority,
                 "candidate_indices": candidate_indices,
                 "prompt_sha256_16": stable_hash(prompt),
                 "prompt": prompt,
@@ -274,6 +325,16 @@ def main() -> None:
     parser.add_argument("--max-samples", type=int)
     parser.add_argument("--min-public-score", type=float, default=1.0)
     parser.add_argument("--include-non-ties", action="store_true")
+    parser.add_argument(
+        "--target-priority",
+        choices=["input-order", "public-ambiguity", "public-fragility"],
+        default="input-order",
+        help=(
+            "Ordering for the finite prompt budget. public-fragility prioritizes "
+            "public-passing ties with fewer public-passing candidates and more "
+            "partial public failures; it uses public scores only."
+        ),
+    )
     parser.add_argument("--max-code-chars", type=int, default=5000)
     parser.add_argument("--max-public-tests", type=int, default=3)
     parser.add_argument("--llm-output-jsonl")
@@ -327,6 +388,7 @@ def main() -> None:
         "targeting": {
             "min_public_score": args.min_public_score,
             "include_non_ties": args.include_non_ties,
+            "target_priority": args.target_priority,
             "limit": args.limit,
         },
     }

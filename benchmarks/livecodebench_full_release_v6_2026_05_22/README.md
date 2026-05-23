@@ -212,6 +212,25 @@ candidate. This is the strongest current evidence that the next full run should
 scale `n=4` public-test selection to all 1,055 tasks before spending time on
 weight updates.
 
+## Target Priority Analysis
+
+The first generated behavior-test probe used the prompt builder's original
+input-order target list. A retrospective target-priority analysis now compares
+public-signal-only ordering policies for the next generated-test batch:
+
+| Priority | 64-prompt public-pass/hidden-fail targets | Rate |
+| --- | ---: | ---: |
+| Input order | 3/64 | 0.0469 |
+| Public ambiguity | 2/64 | 0.0312 |
+| Public fragility | 20/64 | 0.3125 |
+
+`public-fragility` uses only public scores: it prioritizes public-passing ties
+with fewer public-passing candidates and more partial public failures. Hidden
+outcomes are used only to audit target density after the fact, not to build
+prompts or select candidates. This is the recommended next behavior-test
+generation targeter because it spends the same L20 inference budget on much
+more likely verifier-failure cases.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.

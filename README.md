@@ -132,6 +132,7 @@ python scripts/build_lcb_behavior_test_prompts.py \
   --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
   --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64 \
   --limit 64 \
+  --target-priority public-fragility \
   --max-samples 4
 ```
 
@@ -168,6 +169,11 @@ Current generated-test probe:
 - Post-hoc recheck of the two unchanged-code full hybrid flips gives a
   stabilized audit count of `379/1055`; this stays separate from the headline
   score until retry logic is built into the evaluator path.
+- `target_priority_analysis_2026_05_23` adds a public-signal-only targeter for
+  the next behavior-test batch. At the same 64-prompt budget, the new
+  `public-fragility` ordering raises retrospective public-pass/hidden-fail
+  target density from `3/64` to `20/64` without using hidden labels for prompt
+  construction or candidate selection.
 
 Generalization gate:
 
