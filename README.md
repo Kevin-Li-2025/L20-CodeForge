@@ -196,6 +196,11 @@ Current generated-test probe:
   stabilized-neutral at `68/112`. A support-cluster selector made one neutral
   override, so the remaining bottleneck is expected-output verification rather
   than input-only candidate clustering.
+- `qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154` turns those
+  154 differential inputs into multiple-choice expected-output verifier
+  prompts. The verifier sees the problem, public examples, one input, and
+  deduplicated candidate output options; it must choose an option or `NONE`.
+  This is the next L20 inference batch before another hidden replay.
 
 Generalization gate:
 

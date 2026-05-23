@@ -280,6 +280,14 @@ only one neutral override. Both replays stabilized to `68/112`, so this is a
 verifier-signal improvement but not a benchmark-score improvement. The next
 step is expected-output verification or a learned pairwise tester.
 
+That expected-output stage is now scaffolded under
+`qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/`. It converts
+the `154` adaptive differential inputs into multiple-choice verifier prompts by
+executing the candidate pool and deduplicating successful outputs into labeled
+options. A verifier model can now choose `A/B/C/.../NONE`, after which
+`scripts/select_lcb_expected_verifier_candidates.py` turns the choices into a
+conservative selection payload for hidden replay.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.

@@ -1,0 +1,7530 @@
+{
+  "metadata": {
+    "source": "lcb_expected_output_choice_verifier_v1",
+    "prompt_count": 154,
+    "candidate_output_records": 154,
+    "skipped_less_than_min_options": 0,
+    "seconds": 57.393,
+    "hidden_expected_outputs_used": false,
+    "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154/prompts.jsonl",
+    "behavior_inputs": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_adaptive_differential_fuzz_targets112_probe/behavior_inputs.json",
+    "behavior_inputs_sha256": "0498ca596edaf9a3ccbdcde0bb6260fa8309aff597dc8665b98f0a8b7dd974a0",
+    "generations": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility/generations_subset.json",
+    "generations_sha256": "9ca254264a27303ee9d0a6fa6d44baa5e25cd98b593e7d3b7179156e360e7184",
+    "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json",
+    "public_selection_sha256": "df415885f08a42557bdc94ed4855a58fd227c41ce35603e2750e5963dbc71009"
+  },
+  "candidate_outputs": [
+    {
+      "question_id": "1873_A",
+      "input_index": 0,
+      "input_sha256_16": "7956da028a9b697f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:01ba4719c80b6fe9",
+          "value": "\n",
+          "display": "\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 1,
+      "input_sha256_16": "dd40b46566831477",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "YES\n"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "YES\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:a115e91c2e84c307",
+          "value": "YES\n",
+          "display": "YES\n",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 2,
+      "input_sha256_16": "9e53d5e830e7a98a",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:01ba4719c80b6fe9",
+          "value": "\n",
+          "display": "\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 3,
+      "input_sha256_16": "d5a89324a0420d5a",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "YES\nYES\n"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:8:4779aa236e87b3bc",
+          "value": "YES\nYES\n",
+          "display": "YES\nYES\n",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 4,
+      "input_sha256_16": "031f05204103dc8f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\n"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:f2937434705c4e76",
+          "value": "YES\nYES\nYES\n",
+          "display": "YES\nYES\nYES\n",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 5,
+      "input_sha256_16": "503932c46ef65ccb",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\n"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:15:76962b57e86ca0ff",
+          "value": "YES\nYES\nYES\nNO\n",
+          "display": "YES\nYES\nYES\nNO\n",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "1873_A",
+      "input_index": 6,
+      "input_sha256_16": "b081ce7438cf97cd",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nYES\n"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n"
+        },
+        {
+          "status": "ERR",
+          "error": "ValueError"
+        },
+        {
+          "status": "OK",
+          "value": "YES\nYES\nYES\nNO\nNO\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:19:829fbbbf4d32dde8",
+          "value": "YES\nYES\nYES\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nYES\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:22:65126ba7d30f49ff",
+          "value": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "display": "YES\nYES\nYES\nNO\nNO\nYES\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:18:c1a3f1600c5c607a",
+          "value": "YES\nYES\nYES\nNO\nNO\n",
+          "display": "YES\nYES\nYES\nNO\nNO\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2848",
+      "input_index": 0,
+      "input_sha256_16": "4f53cda18c2baa0c",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2854",
+      "input_index": 0,
+      "input_sha256_16": "107059265b7af831",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": Infinity
+        },
+        {
+          "status": "OK",
+          "value": 4
+        },
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 6
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:8:d0067cad9a63e081",
+          "value": Infinity,
+          "display": "Infinity",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:4b227777d4dd1fc6",
+          "value": 4,
+          "display": "4",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:e7f6c011776e8db7",
+          "value": 6,
+          "display": "6",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2854",
+      "input_index": 1,
+      "input_sha256_16": "3e40395a2dac572e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 3
+        },
+        {
+          "status": "OK",
+          "value": 2
+        },
+        {
+          "status": "OK",
+          "value": 3
+        },
+        {
+          "status": "OK",
+          "value": 3
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:4e07408562bedb8b",
+          "value": 3,
+          "display": "3",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:d4735e3a265e16ee",
+          "value": 2,
+          "display": "2",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2868",
+      "input_index": 0,
+      "input_sha256_16": "9acc9f9089fc08d8",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 9
+        },
+        {
+          "status": "OK",
+          "value": 8
+        },
+        {
+          "status": "OK",
+          "value": 7
+        },
+        {
+          "status": "ERR",
+          "error": "ModuleNotFoundError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:19581e27de7ced00",
+          "value": 9,
+          "display": "9",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:2c624232cdd22177",
+          "value": 8,
+          "display": "8",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:7902699be42c8a8e",
+          "value": 7,
+          "display": "7",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2868",
+      "input_index": 1,
+      "input_sha256_16": "0d518e6daa19a943",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 7
+        },
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 4
+        },
+        {
+          "status": "ERR",
+          "error": "ModuleNotFoundError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:7902699be42c8a8e",
+          "value": 7,
+          "display": "7",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:e7f6c011776e8db7",
+          "value": 6,
+          "display": "6",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:4b227777d4dd1fc6",
+          "value": 4,
+          "display": "4",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "2868",
+      "input_index": 2,
+      "input_sha256_16": "36a52c1ae6010124",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "OK",
+          "value": 4
+        },
+        {
+          "status": "OK",
+          "value": 3
+        },
+        {
+          "status": "ERR",
+          "error": "ModuleNotFoundError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:ef2d127de37b942b",
+          "value": 5,
+          "display": "5",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:4b227777d4dd1fc6",
+          "value": 4,
+          "display": "4",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:4e07408562bedb8b",
+          "value": 3,
+          "display": "3",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3297",
+      "input_index": 0,
+      "input_sha256_16": "9ab46db51d1e6ca5",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": 1
+        },
+        {
+          "status": "OK",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3297",
+      "input_index": 1,
+      "input_sha256_16": "cc3d3cdd9fe49ea5",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": 1
+        },
+        {
+          "status": "OK",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3297",
+      "input_index": 2,
+      "input_sha256_16": "8411b88c2235b193",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": -7
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": 7
+        },
+        {
+          "status": "OK",
+          "value": -6
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:a770d3270c9dcded",
+          "value": -7,
+          "display": "-7",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:7902699be42c8a8e",
+          "value": 7,
+          "display": "7",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:03b26944890929ff",
+          "value": -6,
+          "display": "-6",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3297",
+      "input_index": 3,
+      "input_sha256_16": "cf732cc1bcac5669",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": 1
+        },
+        {
+          "status": "OK",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3344",
+      "input_index": 0,
+      "input_sha256_16": "c76114a3f99f1d7d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": Infinity
+        },
+        {
+          "status": "OK",
+          "value": Infinity
+        },
+        {
+          "status": "OK",
+          "value": -Infinity
+        },
+        {
+          "status": "OK",
+          "value": 0
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:8:d0067cad9a63e081",
+          "value": Infinity,
+          "display": "Infinity",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:9:c64ddf11bcd45660",
+          "value": -Infinity,
+          "display": "-Infinity",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3344",
+      "input_index": 1,
+      "input_sha256_16": "5cbac499fd8bfedb",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": Infinity
+        },
+        {
+          "status": "OK",
+          "value": Infinity
+        },
+        {
+          "status": "OK",
+          "value": -Infinity
+        },
+        {
+          "status": "OK",
+          "value": 0
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:8:d0067cad9a63e081",
+          "value": Infinity,
+          "display": "Infinity",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:9:c64ddf11bcd45660",
+          "value": -Infinity,
+          "display": "-Infinity",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3356",
+      "input_index": 0,
+      "input_sha256_16": "f37b2fdc8c9d95d0",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "b",
+            "c"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "b",
+            ""
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "a",
+            "a",
+            "c"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:18:2fd636c2e627ac90",
+          "value": [
+            "",
+            "",
+            "b",
+            "c"
+          ],
+          "display": "[\"\", \"\", \"b\", \"c\"]",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:17:a28524ac0d0d74a1",
+          "value": [
+            "",
+            "",
+            "b",
+            ""
+          ],
+          "display": "[\"\", \"\", \"b\", \"\"]",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:19:4fd1139839b912f2",
+          "value": [
+            "",
+            "a",
+            "a",
+            "c"
+          ],
+          "display": "[\"\", \"a\", \"a\", \"c\"]",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3356",
+      "input_index": 1,
+      "input_sha256_16": "1c863f3eee9f9be7",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": [
+            "c",
+            "d"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "b",
+            "d"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "ab",
+            "ad"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "a"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:10:56a09ea07553e4a0",
+          "value": [
+            "c",
+            "d"
+          ],
+          "display": "[\"c\", \"d\"]",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:10:1a96332afc51e158",
+          "value": [
+            "b",
+            "d"
+          ],
+          "display": "[\"b\", \"d\"]",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:12:7f717a826d4ba559",
+          "value": [
+            "ab",
+            "ad"
+          ],
+          "display": "[\"ab\", \"ad\"]",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:10:586c47673192ab73",
+          "value": [
+            "a",
+            "a"
+          ],
+          "display": "[\"a\", \"a\"]",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3356",
+      "input_index": 2,
+      "input_sha256_16": "33500446404ff00e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "abcd",
+            "abcd"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "abcd",
+            "abcd"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "b",
+            "a",
+            "a"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:24:976ded671d72bba5",
+          "value": [
+            "",
+            "",
+            "abcd",
+            "abcd"
+          ],
+          "display": "[\"\", \"\", \"abcd\", \"abcd\"]",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:16:f2836aba2b60cd64",
+          "value": [
+            "",
+            "",
+            "",
+            ""
+          ],
+          "display": "[\"\", \"\", \"\", \"\"]",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:20:8225218e11a98de6",
+          "value": [
+            "a",
+            "b",
+            "a",
+            "a"
+          ],
+          "display": "[\"a\", \"b\", \"a\", \"a\"]",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3356",
+      "input_index": 3,
+      "input_sha256_16": "bec03b65d31c3376",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "d"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "d"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "bcd"
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:10:11ebc0ddec3dcde4",
+          "value": [
+            "a",
+            "d"
+          ],
+          "display": "[\"a\", \"d\"]",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:a052677ffd09abd0",
+          "value": [
+            "a",
+            "bcd"
+          ],
+          "display": "[\"a\", \"bcd\"]",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:10:3554d2b8a1e34099",
+          "value": [
+            "a",
+            "b"
+          ],
+          "display": "[\"a\", \"b\"]",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3363",
+      "input_index": 0,
+      "input_sha256_16": "c13c5e45b9900cfb",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "ModuleNotFoundError"
+        },
+        {
+          "status": "OK",
+          "value": [
+            1,
+            1,
+            3,
+            3
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            1,
+            1,
+            0,
+            3
+          ]
+        },
+        {
+          "status": "ERR",
+          "error": "KeyError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:4013631fe68c6370",
+          "value": [
+            1,
+            1,
+            3,
+            3
+          ],
+          "display": "[1, 1, 3, 3]",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:9c8c3559845238fe",
+          "value": [
+            1,
+            1,
+            0,
+            3
+          ],
+          "display": "[1, 1, 0, 3]",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3363",
+      "input_index": 1,
+      "input_sha256_16": "57d83f183565e6a2",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "ModuleNotFoundError"
+        },
+        {
+          "status": "OK",
+          "value": [
+            1,
+            -1,
+            2
+          ]
+        },
+        {
+          "status": "OK",
+          "value": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "status": "ERR",
+          "error": "KeyError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:10:ea3c8774fed69523",
+          "value": [
+            1,
+            -1,
+            2
+          ],
+          "display": "[1, -1, 2]",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:9:7fcc04283f610cd6",
+          "value": [
+            1,
+            0,
+            2
+          ],
+          "display": "[1, 0, 2]",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 0,
+      "input_sha256_16": "106061815dc0f7a5",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "OK",
+          "value": 10
+        },
+        {
+          "status": "OK",
+          "value": 23
+        },
+        {
+          "status": "OK",
+          "value": 14
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:ef2d127de37b942b",
+          "value": 5,
+          "display": "5",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4a44dc15364204a8",
+          "value": 10,
+          "display": "10",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:535fa30d7e25dd8a",
+          "value": 23,
+          "display": "23",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:2:8527a891e2241369",
+          "value": 14,
+          "display": "14",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 1,
+      "input_sha256_16": "ef4538b849c243de",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 7
+        },
+        {
+          "status": "OK",
+          "value": 14
+        },
+        {
+          "status": "OK",
+          "value": 118
+        },
+        {
+          "status": "OK",
+          "value": 9
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:7902699be42c8a8e",
+          "value": 7,
+          "display": "7",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:8527a891e2241369",
+          "value": 14,
+          "display": "14",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:85daaf6f7055cd57",
+          "value": 118,
+          "display": "118",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:1:19581e27de7ced00",
+          "value": 9,
+          "display": "9",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 2,
+      "input_sha256_16": "3372e0efc9576b62",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 4
+        },
+        {
+          "status": "OK",
+          "value": 8
+        },
+        {
+          "status": "OK",
+          "value": 52
+        },
+        {
+          "status": "OK",
+          "value": 6
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:4b227777d4dd1fc6",
+          "value": 4,
+          "display": "4",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:2c624232cdd22177",
+          "value": 8,
+          "display": "8",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:41cfc0d1f2d127b0",
+          "value": 52,
+          "display": "52",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:1:e7f6c011776e8db7",
+          "value": 6,
+          "display": "6",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 3,
+      "input_sha256_16": "44b9e464f1363453",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "OK",
+          "value": 10
+        },
+        {
+          "status": "OK",
+          "value": 24
+        },
+        {
+          "status": "OK",
+          "value": 8
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:ef2d127de37b942b",
+          "value": 5,
+          "display": "5",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4a44dc15364204a8",
+          "value": 10,
+          "display": "10",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:c2356069e9d1e79c",
+          "value": 24,
+          "display": "24",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:1:2c624232cdd22177",
+          "value": 8,
+          "display": "8",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 4,
+      "input_sha256_16": "7557d03709515e3f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "ERR",
+          "error": "IndexError"
+        },
+        {
+          "status": "OK",
+          "value": 23
+        },
+        {
+          "status": "OK",
+          "value": 8
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:ef2d127de37b942b",
+          "value": 5,
+          "display": "5",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:535fa30d7e25dd8a",
+          "value": 23,
+          "display": "23",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:2c624232cdd22177",
+          "value": 8,
+          "display": "8",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 5,
+      "input_sha256_16": "04f3669ce256b703",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 9
+        },
+        {
+          "status": "OK",
+          "value": 12
+        },
+        {
+          "status": "OK",
+          "value": 114
+        },
+        {
+          "status": "OK",
+          "value": 51
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:19581e27de7ced00",
+          "value": 9,
+          "display": "9",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:6b51d431df5d7f14",
+          "value": 12,
+          "display": "12",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:9f1f9dce319c4700",
+          "value": 114,
+          "display": "114",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:2:031b4af5197ec30a",
+          "value": 51,
+          "display": "51",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3416",
+      "input_index": 6,
+      "input_sha256_16": "0ef8e84719b89651",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 60
+        },
+        {
+          "status": "OK",
+          "value": 90
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:e7f6c011776e8db7",
+          "value": 6,
+          "display": "6",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:39fa9ec190eee7b6",
+          "value": 60,
+          "display": "60",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:69f59c273b6e669a",
+          "value": 90,
+          "display": "90",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3423",
+      "input_index": 0,
+      "input_sha256_16": "613592dc4b2e7148",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 8
+        },
+        {
+          "status": "OK",
+          "value": 3
+        },
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "ERR",
+          "error": "IndexError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:2c624232cdd22177",
+          "value": 8,
+          "display": "8",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:4e07408562bedb8b",
+          "value": 3,
+          "display": "3",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3423",
+      "input_index": 1,
+      "input_sha256_16": "963d40f8b86b9e68",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 26
+        },
+        {
+          "status": "OK",
+          "value": 21
+        },
+        {
+          "status": "OK",
+          "value": 18
+        },
+        {
+          "status": "ERR",
+          "error": "IndexError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:5f9c4ab08cac7457",
+          "value": 26,
+          "display": "26",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:6f4b6612125fb3a0",
+          "value": 21,
+          "display": "21",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4ec9599fc203d176",
+          "value": 18,
+          "display": "18",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3423",
+      "input_index": 2,
+      "input_sha256_16": "0cbffa877875d628",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 21
+        },
+        {
+          "status": "OK",
+          "value": 18
+        },
+        {
+          "status": "OK",
+          "value": 18
+        },
+        {
+          "status": "ERR",
+          "error": "IndexError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:6f4b6612125fb3a0",
+          "value": 21,
+          "display": "21",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4ec9599fc203d176",
+          "value": 18,
+          "display": "18",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3450",
+      "input_index": 0,
+      "input_sha256_16": "59a024c92790fc9f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": -5
+        },
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "OK",
+          "value": 5
+        },
+        {
+          "status": "OK",
+          "value": 1
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:37aa1ccf80e48183",
+          "value": -5,
+          "display": "-5",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:ef2d127de37b942b",
+          "value": 5,
+          "display": "5",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3450",
+      "input_index": 1,
+      "input_sha256_16": "06d136252184b5ff",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": -6
+        },
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 6
+        },
+        {
+          "status": "OK",
+          "value": 0
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:03b26944890929ff",
+          "value": -6,
+          "display": "-6",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:e7f6c011776e8db7",
+          "value": 6,
+          "display": "6",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3478",
+      "input_index": 0,
+      "input_sha256_16": "8a9aa12280f6ca65",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": true
+        },
+        {
+          "status": "OK",
+          "value": true
+        },
+        {
+          "status": "OK",
+          "value": false
+        },
+        {
+          "status": "OK",
+          "value": false
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:b5bea41b6c623f7c",
+          "value": true,
+          "display": "true",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:fcbcf165908dd18a",
+          "value": false,
+          "display": "false",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3478",
+      "input_index": 1,
+      "input_sha256_16": "9629667393f7d1eb",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": false
+        },
+        {
+          "status": "OK",
+          "value": true
+        },
+        {
+          "status": "OK",
+          "value": true
+        },
+        {
+          "status": "OK",
+          "value": false
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:fcbcf165908dd18a",
+          "value": false,
+          "display": "false",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:b5bea41b6c623f7c",
+          "value": true,
+          "display": "true",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3478",
+      "input_index": 2,
+      "input_sha256_16": "4dcecfa46a34ba96",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": false
+        },
+        {
+          "status": "OK",
+          "value": false
+        },
+        {
+          "status": "OK",
+          "value": true
+        },
+        {
+          "status": "OK",
+          "value": false
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:fcbcf165908dd18a",
+          "value": false,
+          "display": "false",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:b5bea41b6c623f7c",
+          "value": true,
+          "display": "true",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3579",
+      "input_index": 0,
+      "input_sha256_16": "d520590c6bcf63a9",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 29
+        },
+        {
+          "status": "OK",
+          "value": 30
+        },
+        {
+          "status": "OK",
+          "value": 30
+        },
+        {
+          "status": "OK",
+          "value": 29
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:35135aaa6cc23891",
+          "value": 29,
+          "display": "29",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:624b60c58c9d8bfb",
+          "value": 30,
+          "display": "30",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3579",
+      "input_index": 1,
+      "input_sha256_16": "9fb23ae4f81c8cce",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 1058
+        },
+        {
+          "status": "OK",
+          "value": 1296
+        },
+        {
+          "status": "OK",
+          "value": 1296
+        },
+        {
+          "status": "OK",
+          "value": 1058
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:fb5316204aa75301",
+          "value": 1058,
+          "display": "1058",
+          "candidate_indices": [
+            0,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:f7961248034a58c4",
+          "value": 1296,
+          "display": "1296",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3653",
+      "input_index": 0,
+      "input_sha256_16": "648c5fe636fb6d27",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": -Infinity
+        },
+        {
+          "status": "OK",
+          "value": -1
+        },
+        {
+          "status": "OK",
+          "value": -Infinity
+        },
+        {
+          "status": "OK",
+          "value": -Infinity
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:9:c64ddf11bcd45660",
+          "value": -Infinity,
+          "display": "-Infinity",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1bad6b8cf97131fc",
+          "value": -1,
+          "display": "-1",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3702",
+      "input_index": 0,
+      "input_sha256_16": "038966de9f6b9a90",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 1
+        },
+        {
+          "status": "OK",
+          "value": 1
+        },
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": 0
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:6b86b273ff34fce1",
+          "value": 1,
+          "display": "1",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "3817",
+      "input_index": 0,
+      "input_sha256_16": "07c259e119946146",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": 0
+        },
+        {
+          "status": "OK",
+          "value": -1
+        },
+        {
+          "status": "OK",
+          "value": 0
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:1:5feceb66ffc86f38",
+          "value": 0,
+          "display": "0",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1bad6b8cf97131fc",
+          "value": -1,
+          "display": "-1",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 0,
+      "input_sha256_16": "e48ff4b76c74c136",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 1,
+      "input_sha256_16": "59e59d741f5cc4be",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 2,
+      "input_sha256_16": "b5dcec72b3a6688b",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 3,
+      "input_sha256_16": "bbe5bcd0cd5adc34",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 4,
+      "input_sha256_16": "06a7a376abdde1f1",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 5,
+      "input_sha256_16": "b061f924b950d0ea",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 6,
+      "input_sha256_16": "7d451f678c00cc8d",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc311_a",
+      "input_index": 7,
+      "input_sha256_16": "e30cd40b1310f16f",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "inf\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:d574121d0bbf2735",
+          "value": "inf\n",
+          "display": "inf\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 0,
+      "input_sha256_16": "e545c039cfd63427",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 1,
+      "input_sha256_16": "861f7e79e9b812ca",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 2,
+      "input_sha256_16": "287fcfd62ed09f9b",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "6\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:06e9d52c1720fca4",
+          "value": "6\n",
+          "display": "6\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 3,
+      "input_sha256_16": "c34eab959bbcfe98",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "14\n"
+        },
+        {
+          "status": "OK",
+          "value": "15\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:9a92adbc0cee38ef",
+          "value": "14\n",
+          "display": "14\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:238903180cc104ec",
+          "value": "15\n",
+          "display": "15\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "D",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 4,
+      "input_sha256_16": "f3b39af38425dfd2",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "14\n"
+        },
+        {
+          "status": "OK",
+          "value": "18\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:9a92adbc0cee38ef",
+          "value": "14\n",
+          "display": "14\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:7ee29791fc17e986",
+          "value": "18\n",
+          "display": "18\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 5,
+      "input_sha256_16": "7767d294d7057623",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "17\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:54183f4323f377b7",
+          "value": "17\n",
+          "display": "17\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 6,
+      "input_sha256_16": "39f31eda73d26d7c",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "17\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:54183f4323f377b7",
+          "value": "17\n",
+          "display": "17\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc315_c",
+      "input_index": 7,
+      "input_sha256_16": "94ee115274f79b62",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "15\n"
+        },
+        {
+          "status": "OK",
+          "value": "17\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:238903180cc104ec",
+          "value": "15\n",
+          "display": "15\n",
+          "candidate_indices": [
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:54183f4323f377b7",
+          "value": "17\n",
+          "display": "17\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc348_c",
+      "input_index": 0,
+      "input_sha256_16": "c24101ab73c13ca1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "82\n"
+        },
+        {
+          "status": "OK",
+          "value": "100\n"
+        },
+        {
+          "status": "OK",
+          "value": "100\n"
+        },
+        {
+          "status": "OK",
+          "value": "35\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:6950980e3aca96f4",
+          "value": "82\n",
+          "display": "82\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:eea8254c7500ba3d",
+          "value": "100\n",
+          "display": "100\n",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:90d7ec0f0acef104",
+          "value": "35\n",
+          "display": "35\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc348_c",
+      "input_index": 1,
+      "input_sha256_16": "a48b990acfe04a61",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "82\n"
+        },
+        {
+          "status": "OK",
+          "value": "100\n"
+        },
+        {
+          "status": "OK",
+          "value": "100\n"
+        },
+        {
+          "status": "OK",
+          "value": "17\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:6950980e3aca96f4",
+          "value": "82\n",
+          "display": "82\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:eea8254c7500ba3d",
+          "value": "100\n",
+          "display": "100\n",
+          "candidate_indices": [
+            1,
+            2
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:54183f4323f377b7",
+          "value": "17\n",
+          "display": "17\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc352_a",
+      "input_index": 0,
+      "input_sha256_16": "92aa4496dc38c096",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc354_a",
+      "input_index": 0,
+      "input_sha256_16": "ee3aa64bb94a5084",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 0,
+      "input_sha256_16": "f4a8ae8e74ddfb89",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 1,
+      "input_sha256_16": "858d60e9521eb723",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 2,
+      "input_sha256_16": "665ae877edd92e75",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 3,
+      "input_sha256_16": "ece3d232c1ca9ef8",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 4,
+      "input_sha256_16": "34b914ae86f8b512",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 5,
+      "input_sha256_16": "94694e403180f50e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 6,
+      "input_sha256_16": "784cfeeb6a02dfb6",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc355_a",
+      "input_index": 7,
+      "input_sha256_16": "3aebd7327cb0c84b",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 0,
+      "input_sha256_16": "928d07621d86d99e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "4\n8\n14\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:7:78eb16dc82b1ef33",
+          "value": "4\n8\n14\n",
+          "display": "4\n8\n14\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 1,
+      "input_sha256_16": "de8018906ac79e05",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "4\n8\n14\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:7:78eb16dc82b1ef33",
+          "value": "4\n8\n14\n",
+          "display": "4\n8\n14\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 2,
+      "input_sha256_16": "ac9f141770eb609e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n8\n14\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:7:78eb16dc82b1ef33",
+          "value": "4\n8\n14\n",
+          "display": "4\n8\n14\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 3,
+      "input_sha256_16": "e8cd4dc25a52c5ab",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "4\n8\n"
+        },
+        {
+          "status": "OK",
+          "value": "8\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n8\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n8\n14\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:c88e9279d54a278e",
+          "value": "4\n8\n",
+          "display": "4\n8\n",
+          "candidate_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:aa67a169b0bba217",
+          "value": "8\n",
+          "display": "8\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:7:78eb16dc82b1ef33",
+          "value": "4\n8\n14\n",
+          "display": "4\n8\n14\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 4,
+      "input_sha256_16": "ae9d010c767ec445",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "4\n7\n10\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:7:7eff725a17c5cf44",
+          "value": "4\n7\n10\n",
+          "display": "4\n7\n10\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 5,
+      "input_sha256_16": "312d7f4e8d8415a2",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": ""
+        },
+        {
+          "status": "OK",
+          "value": "4\n7\n10\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:0:e3b0c44298fc1c14",
+          "value": "",
+          "display": "",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:7:7eff725a17c5cf44",
+          "value": "4\n7\n10\n",
+          "display": "4\n7\n10\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 6,
+      "input_sha256_16": "6270514689e6ff3c",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n7\n10\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:7:7eff725a17c5cf44",
+          "value": "4\n7\n10\n",
+          "display": "4\n7\n10\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc358_b",
+      "input_index": 7,
+      "input_sha256_16": "f9d59a25a44920a1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "4\n7\n"
+        },
+        {
+          "status": "OK",
+          "value": "6\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n7\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n7\n10\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:19255ef711e15278",
+          "value": "4\n7\n",
+          "display": "4\n7\n",
+          "candidate_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:06e9d52c1720fca4",
+          "value": "6\n",
+          "display": "6\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:7:7eff725a17c5cf44",
+          "value": "4\n7\n10\n",
+          "display": "4\n7\n10\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 0,
+      "input_sha256_16": "8477f22e13006ed1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 1,
+      "input_sha256_16": "06daed02f2e1f78c",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 2,
+      "input_sha256_16": "f2d88b6a301726c4",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 3,
+      "input_sha256_16": "e4b82c1ad56e92f7",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 4,
+      "input_sha256_16": "95efb73c8290bb72",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 5,
+      "input_sha256_16": "6f3711e72e9d34fc",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 6,
+      "input_sha256_16": "f4e373a6e50f893a",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "64\n"
+        },
+        {
+          "status": "OK",
+          "value": "30\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        },
+        {
+          "status": "OK",
+          "value": "30\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:913f5d1da2feaf4d",
+          "value": "64\n",
+          "display": "64\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:f4ccd05b3271c386",
+          "value": "30\n",
+          "display": "30\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc363_c",
+      "input_index": 7,
+      "input_sha256_16": "5b455b103b2fe124",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "64\n"
+        },
+        {
+          "status": "OK",
+          "value": "30\n"
+        },
+        {
+          "status": "OK",
+          "value": "16\n"
+        },
+        {
+          "status": "OK",
+          "value": "30\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:913f5d1da2feaf4d",
+          "value": "64\n",
+          "display": "64\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:f4ccd05b3271c386",
+          "value": "30\n",
+          "display": "30\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:3:e6c21e8d260fe718",
+          "value": "16\n",
+          "display": "16\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 0,
+      "input_sha256_16": "b45ef3326ef90cfa",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 1,
+      "input_sha256_16": "4d20fd239382763a",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 2,
+      "input_sha256_16": "1c10e7074bcd3dd7",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 3,
+      "input_sha256_16": "2830661aed7bb176",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 4,
+      "input_sha256_16": "ffd27d665b9bc24e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 5,
+      "input_sha256_16": "9f97bacbc7d10c13",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 6,
+      "input_sha256_16": "efea7869feba2ced",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc366_a",
+      "input_index": 7,
+      "input_sha256_16": "008062623c93da69",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc367_b",
+      "input_index": 0,
+      "input_sha256_16": "5717e7c840171019",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1.0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:5717e7c840171019",
+          "value": "1.0\n",
+          "display": "1.0\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc367_b",
+      "input_index": 1,
+      "input_sha256_16": "dab730c4b2e63d42",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "12\n"
+        },
+        {
+          "status": "OK",
+          "value": "12.0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        },
+        {
+          "status": "ERR",
+          "error": "NameError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:a1fb50e6c86fae16",
+          "value": "12\n",
+          "display": "12\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:dab730c4b2e63d42",
+          "value": "12.0\n",
+          "display": "12.0\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 0,
+      "input_sha256_16": "e393bdd572b4ad5e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 1,
+      "input_sha256_16": "1cd3b95e0891d9d1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            0,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 2,
+      "input_sha256_16": "6d86ae2b0e3927ba",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 3,
+      "input_sha256_16": "ce49cfbc73eacde1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 4,
+      "input_sha256_16": "bd9f8eb77db9dfb3",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 5,
+      "input_sha256_16": "d7dd68821174119b",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 6,
+      "input_sha256_16": "60991bb7763d890c",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc368_f",
+      "input_index": 7,
+      "input_sha256_16": "6659aa1c54ac77b0",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Anna\n"
+        },
+        {
+          "status": "OK",
+          "value": "Bruno\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:5:ac0a3e06d3718b4f",
+          "value": "Anna\n",
+          "display": "Anna\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:2397e9bd1e4eb7ee",
+          "value": "Bruno\n",
+          "display": "Bruno\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 0,
+      "input_sha256_16": "6e593326f44a1606",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 1,
+      "input_sha256_16": "6506c5a6299ddab0",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 2,
+      "input_sha256_16": "ce294156e6cb4c1d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 3,
+      "input_sha256_16": "691099ae85713aee",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 4,
+      "input_sha256_16": "8e84203019e88034",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 5,
+      "input_sha256_16": "3c33e20a78947a39",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 6,
+      "input_sha256_16": "a8a57d1c88f7fe8d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc381_a",
+      "input_index": 7,
+      "input_sha256_16": "5a561bcfe2daa858",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "input_index": 0,
+      "input_sha256_16": "b9f6657a234db77b",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "input_index": 1,
+      "input_sha256_16": "07ddeb13098b1dd9",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "input_index": 2,
+      "input_sha256_16": "186b556929f92399",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "input_index": 3,
+      "input_sha256_16": "e319045b6cb714e5",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc385_a",
+      "input_index": 4,
+      "input_sha256_16": "0ecc8c8d3c1a6769",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 0,
+      "input_sha256_16": "e590651521190507",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 1,
+      "input_sha256_16": "d14ddd1b5df6d388",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 2,
+      "input_sha256_16": "dc66cbc302c70b7d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 3,
+      "input_sha256_16": "57096deb14a7749a",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 4,
+      "input_sha256_16": "0ffeabed38c1905e",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc388_f",
+      "input_index": 5,
+      "input_sha256_16": "7482d090dcb11b5f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "Yes\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        },
+        {
+          "status": "OK",
+          "value": "No\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:31375587f8bedb1f",
+          "value": "No\n",
+          "display": "No\n",
+          "candidate_indices": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:4:927580bf287560d4",
+          "value": "Yes\n",
+          "display": "Yes\n",
+          "candidate_indices": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 0,
+      "input_sha256_16": "5feceb66ffc86f38",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 1,
+      "input_sha256_16": "1bad6b8cf97131fc",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 2,
+      "input_sha256_16": "4e07408562bedb8b",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 3,
+      "input_sha256_16": "4a44dc15364204a8",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 4,
+      "input_sha256_16": "52a5d4a071d82cae",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "12\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:a1fb50e6c86fae16",
+          "value": "12\n",
+          "display": "12\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 5,
+      "input_sha256_16": "4b227777d4dd1fc6",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc389_b",
+      "input_index": 6,
+      "input_sha256_16": "fdf86ecc0c16a8d1",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "19\n"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        },
+        {
+          "status": "OK",
+          "value": "None\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:3:a9742eb8ee320e00",
+          "value": "19\n",
+          "display": "19\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:5:af5d8a21858f4280",
+          "value": "None\n",
+          "display": "None\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 0,
+      "input_sha256_16": "0f3be39ccf69ec81",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 1,
+      "input_sha256_16": "cd836f6886b0f105",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 2,
+      "input_sha256_16": "5a5bd3988310d75f",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 3,
+      "input_sha256_16": "274430d586e55481",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 4,
+      "input_sha256_16": "bfbc01ca2fca7f42",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 5,
+      "input_sha256_16": "36f6537d6b9faeab",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "2\n"
+        },
+        {
+          "status": "OK",
+          "value": "3\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:53c234e5e8472b6a",
+          "value": "2\n",
+          "display": "2\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:1121cfccd5913f0a",
+          "value": "3\n",
+          "display": "3\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 6,
+      "input_sha256_16": "7dae99167cbacb8d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "5\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:f0b5c2c2211c8d67",
+          "value": "5\n",
+          "display": "5\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc392_g",
+      "input_index": 7,
+      "input_sha256_16": "97eb90381a838b9d",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n"
+        },
+        {
+          "status": "OK",
+          "value": "5\n"
+        },
+        {
+          "status": "ERR",
+          "error": "timeout"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:9a271f2a916b0b6e",
+          "value": "0\n",
+          "display": "0\n",
+          "candidate_indices": [
+            0,
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:2:f0b5c2c2211c8d67",
+          "value": "5\n",
+          "display": "5\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "input_index": 0,
+      "input_sha256_16": "7fd0477c9c9a6557",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "input_index": 1,
+      "input_sha256_16": "b73e35c796d47a89",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "input_index": 2,
+      "input_sha256_16": "fa9a0e42995b75f2",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "input_index": 3,
+      "input_sha256_16": "bf1b73ee1a98cf72",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc395_c",
+      "input_index": 4,
+      "input_sha256_16": "b025c47e860d3e73",
+      "candidate_results": [
+        {
+          "status": "OK",
+          "value": "1\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        },
+        {
+          "status": "OK",
+          "value": "4\n"
+        },
+        {
+          "status": "OK",
+          "value": "-1\n"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:2:4355a46b19d348dc",
+          "value": "1\n",
+          "display": "1\n",
+          "candidate_indices": [
+            0
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:3:ee3aa64bb94a5084",
+          "value": "-1\n",
+          "display": "-1\n",
+          "candidate_indices": [
+            1,
+            3
+          ]
+        },
+        {
+          "label": "C",
+          "normalized_output": "OK:2:7de1555df0c27003",
+          "value": "4\n",
+          "display": "4\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 0,
+      "input_sha256_16": "b74192422ba91ac9",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n1\n1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:9b6d15646946d177",
+          "value": "3\n1\n1\n",
+          "display": "3\n1\n1\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:f456c1ffc6a33cd5",
+          "value": "0\n0\n0\n",
+          "display": "0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 1,
+      "input_sha256_16": "db384297bff53e41",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n1\n1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:9b6d15646946d177",
+          "value": "3\n1\n1\n",
+          "display": "3\n1\n1\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:f456c1ffc6a33cd5",
+          "value": "0\n0\n0\n",
+          "display": "0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 2,
+      "input_sha256_16": "f3a9d61d1059cff0",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n1\n1\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:9b6d15646946d177",
+          "value": "3\n1\n1\n",
+          "display": "3\n1\n1\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:f456c1ffc6a33cd5",
+          "value": "0\n0\n0\n",
+          "display": "0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 3,
+      "input_sha256_16": "ed52ba2563b44fe4",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "3\n1\n1\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n0\n1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:6:9b6d15646946d177",
+          "value": "3\n1\n1\n",
+          "display": "3\n1\n1\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:6:a714acf0208a1a2e",
+          "value": "1\n0\n1\n",
+          "display": "1\n0\n1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 4,
+      "input_sha256_16": "20783bc6763f801f",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "7\n3\n3\n1\n1\n5\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:39b5f9a477a790a7",
+          "value": "7\n3\n3\n1\n1\n5\n",
+          "display": "7\n3\n3\n1\n1\n5\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:acb88cc45a983fc5",
+          "value": "0\n0\n0\n0\n0\n0\n",
+          "display": "0\n0\n0\n0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 5,
+      "input_sha256_16": "09bcf1cf133f8148",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "7\n3\n3\n1\n1\n5\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:39b5f9a477a790a7",
+          "value": "7\n3\n3\n1\n1\n5\n",
+          "display": "7\n3\n3\n1\n1\n5\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:acb88cc45a983fc5",
+          "value": "0\n0\n0\n0\n0\n0\n",
+          "display": "0\n0\n0\n0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 6,
+      "input_sha256_16": "5afd7555e1fb0e7c",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "7\n3\n3\n1\n1\n5\n"
+        },
+        {
+          "status": "OK",
+          "value": "0\n0\n0\n0\n0\n0\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:39b5f9a477a790a7",
+          "value": "7\n3\n3\n1\n1\n5\n",
+          "display": "7\n3\n3\n1\n1\n5\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:acb88cc45a983fc5",
+          "value": "0\n0\n0\n0\n0\n0\n",
+          "display": "0\n0\n0\n0\n0\n0\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "question_id": "abc396_f",
+      "input_index": 7,
+      "input_sha256_16": "264dad0494ae82fa",
+      "candidate_results": [
+        {
+          "status": "ERR",
+          "error": "TypeError"
+        },
+        {
+          "status": "OK",
+          "value": "7\n3\n3\n1\n1\n5\n"
+        },
+        {
+          "status": "OK",
+          "value": "1\n0\n0\n1\n1\n1\n"
+        },
+        {
+          "status": "ERR",
+          "error": "SyntaxError"
+        }
+      ],
+      "options": [
+        {
+          "label": "A",
+          "normalized_output": "OK:12:39b5f9a477a790a7",
+          "value": "7\n3\n3\n1\n1\n5\n",
+          "display": "7\n3\n3\n1\n1\n5\n",
+          "candidate_indices": [
+            1
+          ]
+        },
+        {
+          "label": "B",
+          "normalized_output": "OK:12:171b1e1e1bfa5952",
+          "value": "1\n0\n0\n1\n1\n1\n",
+          "display": "1\n0\n0\n1\n1\n1\n",
+          "candidate_indices": [
+            2
+          ]
+        }
+      ]
+    }
+  ]
+}

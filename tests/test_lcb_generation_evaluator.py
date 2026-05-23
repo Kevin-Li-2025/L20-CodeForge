@@ -42,6 +42,40 @@ def load_adaptive_differential_module():
     return module
 
 
+def load_expected_verifier_module():
+    script = (
+        Path(__file__).parents[1]
+        / "scripts"
+        / "build_lcb_expected_output_verifier_prompts.py"
+    )
+    spec = importlib.util.spec_from_file_location(
+        "build_lcb_expected_output_verifier_prompts",
+        script,
+    )
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_expected_selector_module():
+    script = (
+        Path(__file__).parents[1]
+        / "scripts"
+        / "select_lcb_expected_verifier_candidates.py"
+    )
+    spec = importlib.util.spec_from_file_location(
+        "select_lcb_expected_verifier_candidates",
+        script,
+    )
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -400,6 +434,99 @@ def test_adaptive_differential_chooses_only_public_pass_differences() -> None:
 
     assert inputs == ["b"]
     assert indices == [1]
+
+
+def test_expected_verifier_builds_deduplicated_output_options() -> None:
+    verifier = load_expected_verifier_module()
+
+    options = verifier.build_output_options(
+        [
+            {"status": "OK", "value": "4\n"},
+            {"status": "OK", "value": "5\n"},
+            {"status": "OK", "value": "4\n"},
+            {"status": "ERR", "error": "timeout"},
+        ],
+        max_option_chars=100,
+    )
+
+    assert [option["label"] for option in options] == ["A", "B"]
+    assert options[0]["candidate_indices"] == [0, 2]
+    assert options[1]["candidate_indices"] == [1]
+
+
+def test_expected_verifier_parses_choice_payloads() -> None:
+    verifier = load_expected_verifier_module()
+
+    parsed = verifier.parse_choice_payload(
+        '```json\n{"choice": "option b", "confidence": 1.7, "reason": "x"}\n```'
+    )
+
+    assert parsed == {"choice": "B", "confidence": 1.0, "reason": "x"}
+
+
+def test_expected_verifier_selector_requires_confidence_margin() -> None:
+    selector = load_expected_selector_module()
+    public_payload = {
+        "records": [
+            {
+                "question_id": "task",
+                "selected_index": 0,
+                "public_scores": [1.0, 1.0, 0.0],
+                "selected_public_score": 1.0,
+            }
+        ]
+    }
+    candidate_payload = {
+        "candidate_outputs": [
+            {
+                "question_id": "task",
+                "input_index": 0,
+                "options": [
+                    {"label": "A", "candidate_indices": [0]},
+                    {"label": "B", "candidate_indices": [1, 2]},
+                ],
+            },
+            {
+                "question_id": "task",
+                "input_index": 1,
+                "options": [
+                    {"label": "A", "candidate_indices": [0]},
+                    {"label": "B", "candidate_indices": [1]},
+                ],
+            },
+        ]
+    }
+    choices = {
+        "records": [
+            {
+                "record_id": selector.prompt_id("task", 0),
+                "question_id": "task",
+                "input_index": 0,
+                "choice": "B",
+                "confidence": 0.7,
+            },
+            {
+                "record_id": selector.prompt_id("task", 1),
+                "question_id": "task",
+                "input_index": 1,
+                "choice": "B",
+                "confidence": 0.8,
+            },
+        ]
+    }
+
+    selected = selector.build_expected_verifier_selection(
+        public_payload,
+        candidate_payload,
+        choices,
+        min_choice_count=2,
+        min_confidence_margin=1.0,
+    )
+
+    record = selected["records"][0]
+    assert record["selected_index"] == 1
+    assert record["override_from_public"] is True
+    assert record["verifier_confidence_margin_vs_public"] == 1.5
 
 
 def test_evaluator_sanitizes_hidden_payloads() -> None:
