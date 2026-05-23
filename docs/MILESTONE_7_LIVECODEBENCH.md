@@ -212,6 +212,9 @@ The project now has the start of this path:
 - `scripts/build_lcb_behavior_test_prompts.py` builds candidate-aware prompts
   for public-score-tied tasks and can parse LLM JSON outputs into evaluator-ready
   `behavior_inputs.json`.
+- `scripts/generate_lcb_behavior_tests.py` runs those prompts through a local
+  Transformers model with resumable JSONL output and writes evaluator-ready
+  `behavior_inputs.json`.
 
 This keeps the verifier honest: generated tests provide inputs only. Candidate
 outputs are compared by execution agreement, and hidden tests are used only for

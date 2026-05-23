@@ -15,6 +15,16 @@ def load_evaluator_module():
     return module
 
 
+def load_behavior_generator_module():
+    script = Path(__file__).parents[1] / "scripts" / "generate_lcb_behavior_tests.py"
+    spec = importlib.util.spec_from_file_location("generate_lcb_behavior_tests", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -172,3 +182,34 @@ def test_evaluator_sanitizes_hidden_payloads() -> None:
     sanitized = evaluator.sanitize_lcb_metadata([json.dumps(payload)])
 
     assert sanitized == [{"error_code": -2, "error_message": "Wrong"}]
+
+
+def test_behavior_generator_parses_llm_outputs() -> None:
+    generator = load_behavior_generator_module()
+
+    records = generator.parse_behavior_inputs_from_outputs(
+        [
+            {
+                "question_id": "a",
+                "raw_output": '```json\n{"inputs": ["1\\n2", "", "3"]}\n```',
+            },
+            {"question_id": "b", "raw_output": "not json"},
+        ],
+        max_inputs=2,
+        max_input_chars=20,
+    )
+
+    assert records == [
+        {
+            "question_id": "a",
+            "inputs": ["1\n2", "3"],
+            "n_inputs": 2,
+            "source": "local_model_candidate_aware_differential_v1",
+        },
+        {
+            "question_id": "b",
+            "inputs": [],
+            "n_inputs": 0,
+            "source": "local_model_candidate_aware_differential_v1",
+        },
+    ]

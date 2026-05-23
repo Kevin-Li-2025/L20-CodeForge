@@ -139,6 +139,20 @@ After a local model fills the generated-test prompts, parse them to
 `behavior_inputs.json` and pass that file to `scripts/evaluate_lcb_generations.py`
 with `--behavior-inputs` and `--behavior-public-scores`.
 
+For a local Transformers generation pass:
+
+```bash
+python scripts/generate_lcb_behavior_tests.py \
+  --prompts benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64/prompts.jsonl \
+  --output-dir artifacts/lcb_behavior_tests/qwen25_coder_7b_prompts64 \
+  --model /path/to/Qwen2.5-Coder-7B-Instruct \
+  --limit 64 \
+  --resume
+```
+
+The generated `behavior_inputs.json` is then used only as extra public-side
+candidate discrimination; hidden tests remain reserved for final measurement.
+
 Agent trajectory bridge:
 
 ```bash
