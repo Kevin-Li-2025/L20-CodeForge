@@ -258,6 +258,17 @@ outcome. The raw loss was due to the two known unchanged-code flaky tasks,
 keeps the main full-suite score at `378/1055` and argues against a full merged
 replay until the verifier has a stronger expected-output or margin signal.
 
+A stricter differential-medoid replay was added after this result. It clusters
+public-passing candidates only on generated behavior tests where their outputs
+actually differ, then requires a positive cluster margin before overriding the
+public-selected candidate. On the same `112` targets it made `0` overrides and
+stabilized to the same `68/112` as public selection. The diagnostic failure mode
+is precise: `89/112` targets had no valid differential generated tests among
+public-passing candidates, and all `112/112` targets had zero differential
+cluster margin. The next useful improvement is therefore adaptive pairwise test
+synthesis or expected-output verification, not simply adding more ordinary
+generated inputs.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.

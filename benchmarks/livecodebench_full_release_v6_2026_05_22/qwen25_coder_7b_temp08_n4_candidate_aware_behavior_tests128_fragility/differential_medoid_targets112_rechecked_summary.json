@@ -1,0 +1,62 @@
+{
+  "status": "stabilized_neutral",
+  "raw_status": "unstable_replay",
+  "total": 112,
+  "baseline_passed": 68,
+  "candidate_passed": 66,
+  "net_gain": -2,
+  "stabilized_candidate_passed": 68,
+  "stabilized_net_gain": 0,
+  "selection_changed_count": 0,
+  "outcome_changed_count": 2,
+  "unchanged_outcome_flip_count": 2,
+  "rechecked_unchanged_outcome_flip_count": 2,
+  "unresolved_unchanged_outcome_flip_count": 0,
+  "changed_selection_improvement_count": 0,
+  "changed_selection_regression_count": 0,
+  "changed_or_outcome_different": [
+    {
+      "question_id": "abc363_c",
+      "question_title": "Avoid K Palindrome 2",
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "candidate_recheck_pass": true,
+      "stabilized_candidate_pass": true,
+      "baseline_selected_index": 1,
+      "candidate_selected_index": 1,
+      "selection_changed": false,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": 1.0,
+      "candidate_behavior_consensus_margin_vs_public": 0
+    },
+    {
+      "question_id": "abc378_e",
+      "question_title": "Mod Sigma Problem",
+      "baseline_pass": true,
+      "candidate_pass": false,
+      "candidate_recheck_pass": true,
+      "stabilized_candidate_pass": true,
+      "baseline_selected_index": 3,
+      "candidate_selected_index": 3,
+      "selection_changed": false,
+      "outcome_changed": true,
+      "baseline_selected_public_score": 1.0,
+      "candidate_selected_public_score": 1.0,
+      "candidate_override_from_public": false,
+      "candidate_behavior_success_rate": 1.0,
+      "candidate_behavior_consensus_margin_vs_public": 0
+    }
+  ],
+  "unchanged_outcome_flips": [
+    "abc363_c",
+    "abc378_e"
+  ],
+  "rechecked_unchanged_outcome_flips": [
+    "abc363_c",
+    "abc378_e"
+  ],
+  "unresolved_unchanged_outcome_flips": []
+}

@@ -183,6 +183,12 @@ Current generated-test probe:
   known unchanged-code flaky tasks, and rechecked audit `68/112`. The selector
   made four public-pass overrides but did not change hidden outcomes, so the
   full-suite headline remains `378/1055`.
+- A stricter `conservative-differential-medoid` selector was added for the same
+  112-target batch. It made `0` overrides and stabilized to `68/112`, exposing
+  the real bottleneck: `89/112` targets had no valid generated behavior tests
+  that differentiated public-passing candidates. The next verifier step should
+  synthesize adaptive pairwise distinguishing inputs or add expected-output
+  verification before another full merged replay.
 
 Generalization gate:
 

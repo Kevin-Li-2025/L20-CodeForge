@@ -28,10 +28,9 @@ to `20/64`.
 ## Status
 
 This batch has generated input-only behavior tests and has now been measured on
-the `112` parsed target tasks with the conservative public-pass behavior
-selector.
+the `112` parsed target tasks with two conservative selectors.
 
-Targeted hidden-test result:
+Conservative public-pass selector result:
 
 | Run | Passed | Total | Status |
 | --- | ---: | ---: | --- |
@@ -44,8 +43,31 @@ raw `-2` came from the same two unchanged-code flaky tasks already seen in the
 prior full hybrid audit (`abc363_c`, `abc378_e`); the existing recheck payload
 stabilizes both back to pass.
 
+Conservative differential-medoid selector result:
+
+| Run | Passed | Total | Status |
+| --- | ---: | ---: | --- |
+| Public-selection baseline on same target IDs | 68 | 112 | baseline |
+| Differential-medoid selector, raw replay | 66 | 112 | unstable replay |
+| Differential-medoid selector, rechecked audit | 68 | 112 | stabilized neutral |
+
+This selector only considers candidates that pass public tests, looks for
+generated behavior tests where public-passing candidates produce different
+outputs, clusters candidates by those differential-output signatures, and only
+overrides the public-selected candidate when the behavior cluster margin is
+strong enough. On this batch it made `0` overrides. The diagnostic distribution
+is the important result:
+
+- `89/112` targets had `0` valid differential behavior tests among
+  public-passing candidates.
+- `112/112` targets had differential cluster margin `0` against the public
+  selection.
+- Raw replay again lost only the unchanged-code flaky tasks `abc363_c` and
+  `abc378_e`; recheck stabilizes the result back to `68/112`.
+
 This is therefore not a new headline LiveCodeBench score. The useful result is
 negative: generated input-only consensus is not yet strong enough on this
-high-risk batch to beat public selection. The next measurement should either
-tighten the override margin or add an expected-output/verifier stage before a
+high-risk batch to beat public selection, and ordinary extra inputs rarely
+separate the public-passing candidate set. The next measurement should use
+adaptive pairwise input synthesis or an expected-output/verifier stage before a
 full merged replay.

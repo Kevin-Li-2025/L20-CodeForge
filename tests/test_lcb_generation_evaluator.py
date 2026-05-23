@@ -184,6 +184,83 @@ def test_evaluator_conservative_behavior_policy_rejects_weak_behavior_signal() -
     assert selected == 0
 
 
+def test_evaluator_differential_medoid_uses_public_pass_clusters() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_differential_medoid_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 1.0, 0.0],
+        code_outputs=["long public code", "ok", "other cluster", "bad"],
+        behavior_outputs=[
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:ccc", "OK:1:ddd"],
+            ["OK:1:aaa", "OK:1:bbb"],
+        ],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 1
+
+
+def test_evaluator_differential_medoid_handles_missing_behavior_outputs() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_differential_medoid_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 1.0],
+        code_outputs=["public", "candidate", "missing behavior result"],
+        behavior_outputs=[
+            ["OK:1:aaa"],
+            ["OK:1:bbb"],
+        ],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 0
+
+
+def test_evaluator_conservative_differential_medoid_requires_cluster_margin() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_differential_medoid_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 1.0],
+        code_outputs=["public", "cluster peer", "other"],
+        behavior_outputs=[
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:ccc", "OK:1:ddd"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_cluster_margin=1,
+        min_differential_tests=2,
+    )
+
+    assert selected == 0
+
+
+def test_evaluator_conservative_differential_medoid_allows_strong_override() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_conservative_differential_medoid_selected_index_from_scores(
+        public_scores=[1.0, 1.0, 1.0, 1.0],
+        code_outputs=["public", "cluster peer a", "x", "cluster peer b"],
+        behavior_outputs=[
+            ["OK:1:aaa", "OK:1:bbb"],
+            ["OK:1:ccc", "OK:1:ddd"],
+            ["OK:1:xxx", "OK:1:yyy"],
+            ["OK:1:ccc", "OK:1:ddd"],
+        ],
+        tie_breaker="shortest",
+        min_behavior_tests=2,
+        min_behavior_success_rate=1.0,
+        min_behavior_cluster_margin=1,
+        min_differential_tests=2,
+    )
+
+    assert selected == 1
+
+
 def test_evaluator_loads_external_behavior_inputs(tmp_path: Path) -> None:
     evaluator = load_evaluator_module()
     payload = {
