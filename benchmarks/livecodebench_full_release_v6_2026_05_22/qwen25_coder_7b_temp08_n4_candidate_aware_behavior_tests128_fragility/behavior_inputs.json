@@ -1,0 +1,1927 @@
+{
+  "records": [
+    {
+      "question_id": "2955",
+      "inputs": [
+        "0",
+        "10",
+        "11",
+        "14",
+        "16",
+        "19",
+        "25",
+        "34",
+        "95",
+        "100"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3570",
+      "inputs": [
+        "\"aaaaa\"\n0",
+        "\"abcde\"\n1",
+        "\"bcdefg\"\n0",
+        "\"aeioua\"\n1",
+        "\"abcdefghijklmnopqrstuvwxyz\"\n1",
+        "\"zzzzz\"\n0",
+        "\"aaeiou\"\n1",
+        "\"aeioua\"\n2",
+        "\"aeioua\"\n0",
+        "\"aeioua\"\n5"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3625",
+      "inputs": [
+        "10",
+        "9",
+        "8",
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "11"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc365_c",
+      "inputs": [
+        "1 1\n1",
+        "2 1\n1 1",
+        "2 2\n1 2",
+        "2 3\n1 2",
+        "3 1\n1 1 1",
+        "3 2\n1 1 1",
+        "3 3\n1 1 1",
+        "10 100\n1 1 1 1 1 1 1 1 1 1",
+        "10 100\n1 2 3 4 5 6 7 8 9 10",
+        "10 100\n10 9 8 7 6 5 4 3 2 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc368_f",
+      "inputs": [
+        "1\n2",
+        "2\n2 2",
+        "2\n3 3",
+        "3\n2 2 2",
+        "3\n3 3 3",
+        "4\n2 2 2 2",
+        "4\n3 3 3 3",
+        "5\n2 2 2 2 2",
+        "5\n3 3 3 3 3",
+        "10\n2 2 2 2 2 2 2 2 2 2"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc374_b",
+      "inputs": [
+        "a\nb",
+        "aa\naaa",
+        "aaa\naa",
+        "z\ny",
+        "xy\nyz",
+        "yz\nxy",
+        "abc\nabcd",
+        "abcd\nabc",
+        "abcde\nabcdf",
+        "abcdf\nabcde",
+        "aaaaa\naaaaa"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc385_a",
+      "inputs": [
+        "1 1 1000",
+        "999 1 1",
+        "500 500 500",
+        "1000 1000 1000",
+        "1 2 3",
+        "2 3 5",
+        "7 14 21",
+        "1000 1000 1",
+        "1 1 2",
+        "2 2 3"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc386_e",
+      "inputs": [
+        "1 1\n0",
+        "2 1\n0 1",
+        "2 2\n0 1",
+        "3 1\n0 1 2",
+        "3 2\n0 1 2",
+        "3 3\n0 1 2",
+        "4 1\n0 1 2 3",
+        "4 2\n0 1 2 3",
+        "4 3\n0 1 2 3",
+        "4 4\n0 1 2 3",
+        "10 1\n0 1 2 3 4 5 6 7 8 9"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3104",
+      "inputs": [
+        "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+        "[1, 1, 2, 2, 3, 3, 4, 4, 5, 5]",
+        "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]",
+        "[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]",
+        "[1, 2, 2, 3, 3, 4, 4, 5, 5, 6]",
+        "[6, 5, 4, 3, 2, 1, 0, 1, 2, 3]",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 2]",
+        "[2, 2, 2, 2, 2, 2, 2, 2, 2, 1]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3244",
+      "inputs": [
+        "[1]",
+        "[2, 2]",
+        "[3, 3, 3]",
+        "[4, 4, 4, 4]",
+        "[5, 5, 5, 5, 5]",
+        "[6, 6, 6, 6, 6, 6]",
+        "[7, 7, 7, 7, 7, 7, 7]",
+        "[8, 8, 8, 8, 8, 8, 8, 8]",
+        "[9, 9, 9, 9, 9, 9, 9, 9, 9]",
+        "[10, 10, 10, 10, 10, 10, 10, 10, 10, 10]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3567",
+      "inputs": [
+        "\"1956-07-04\"",
+        "\"2000-12-31\"",
+        "\"1900-02-28\"",
+        "\"2100-01-01\"",
+        "\"1984-04-15\"",
+        "\"2023-03-14\"",
+        "\"1999-12-31\"",
+        "\"2020-02-29\"",
+        "\"1970-01-01\"",
+        "\"2099-12-31\"",
+        "\"2022-02-28\"",
+        "\"2021-02-28\""
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3817",
+      "inputs": [
+        "1\n1\n1",
+        "1\n1\n2",
+        "2\n2\n8",
+        "2\n2\n7",
+        "3\n3\n26",
+        "3\n3\n25",
+        "1000\n1000\n999999999",
+        "1000\n1000\n1000000000",
+        "1000\n1\n999999999",
+        "1\n1000\n999999999"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc330_c",
+      "inputs": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "10",
+        "100",
+        "1000",
+        "10000",
+        "100000",
+        "1000000"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc342_b",
+      "inputs": [
+        "1\n1\n1",
+        "2\n1 2\n2\n1 2",
+        "2\n2 1\n2\n1 2",
+        "3\n1 3 2\n3\n1 2\n1 3\n2 3",
+        "3\n3 2 1\n3\n1 2\n1 3\n2 3",
+        "4\n1 2 3 4\n4\n1 2\n1 3\n1 4\n2 3\n2 4\n3 4",
+        "4\n4 3 2 1\n4\n1 2\n1 3\n1 4\n2 3\n2 4\n3 4",
+        "5\n1 2 3 4 5\n5\n1 2\n1 3\n1 4\n1 5\n2 3\n2 4\n2 5\n3 4\n3 5\n4 5",
+        "5\n5 4 3 2 1\n5\n1 2\n1 3\n1 4\n1 5\n2 3\n2 4\n2 5\n3 4\n3 5\n4 5",
+        "10\n1 2 3 4 5 6 7 8 9 10\n10\n1 2\n1 3\n1 4\n1 5\n1 6\n1 7\n1 8\n1 9\n1 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc378_e",
+      "inputs": [
+        "1 1\n0",
+        "2 2\n1 1",
+        "2 2\n1 0",
+        "3 3\n1 2 3",
+        "3 3\n2 2 2",
+        "4 4\n1 2 3 4",
+        "4 4\n4 3 2 1",
+        "5 5\n1 2 3 4 5",
+        "5 5\n5 4 3 2 1",
+        "10 10\n1 1 1 1 1 1 1 1 1 1",
+        "10 10\n9 9 9 9 9 9 9 9 9 9"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc386_f",
+      "inputs": [
+        "20\nabcdefghijklmnopqrstuvwxyz\nzyxwvutsrqponmlkjihgfedcba",
+        "1\na\nb",
+        "1\nb\na",
+        "1\naa\nab",
+        "1\nab\nba",
+        "1\naba\nbab",
+        "1\nbaba\nabab",
+        "1\nabab\nbaba",
+        "1\nabbab\nbbaba",
+        "1\nbbbaba\nabbbab"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc389_b",
+      "inputs": [
+        "2",
+        "1",
+        "3!",
+        "1000000000000000000",
+        "18446744073709551615",
+        "2^64",
+        "2^63 * 2^63",
+        "2^63 * 2^63 * 2^63",
+        "2^63 * 2^63 * 2^63 * 2^63",
+        "2^63 * 2^63 * 2^63 * 2^63 * 2^63",
+        "2^63 * 2^63 * 2^63 * 2^63 * 2^63 * 2^63"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc392_b",
+      "inputs": [
+        "10 1\n1",
+        "10 10\n1 2 3 4 5 6 7 8 9 10",
+        "5 2\n1 3",
+        "5 2\n3 5",
+        "1000 1\n1",
+        "1000 1000\n1 2 3 ... 999 1000",
+        "1000 1\n1000",
+        "1000 1000\n2 3 4 ... 999 1000",
+        "1000 1\n500",
+        "1000 1000\n1 2 3 ... 499 501 ... 999 1000"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2854",
+      "inputs": [
+        "[\"zz\", \"yz\", \"zx\"]",
+        "[\"abc\", \"bcd\", \"cda\"]",
+        "[\"xy\", \"yx\", \"zy\", \"yx\"]",
+        "[\"a\", \"b\", \"c\", \"d\"]",
+        "[\"aaaa\", \"bbbb\", \"cccc\"]",
+        "[\"abc\", \"def\", \"ghi\", \"jkl\"]",
+        "[\"z\", \"y\", \"x\", \"w\", \"v\"]",
+        "[\"abcd\", \"dcba\", \"bacd\", \"dbca\"]",
+        "[\"a\", \"a\", \"a\", \"a\", \"a\"]",
+        "[\"abcdefghijklmnopqrstuvwxyz\", \"zyxwvutsrqponmlkjihgfedcba\"]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3478",
+      "inputs": [
+        "10\n10\n[[5, 5, 4]]",
+        "10\n10\n[[5, 5, 5]]",
+        "10\n10\n[[5, 5, 6]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 1]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 2]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 3]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 4]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 5]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 6]]",
+        "10\n10\n[[1, 1, 1], [9, 9, 7]]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc309_a",
+      "inputs": [
+        "1 2",
+        "2 3",
+        "3 4",
+        "4 5",
+        "5 6",
+        "6 7",
+        "7 8",
+        "8 9",
+        "9 1",
+        "1 3",
+        "3 5",
+        "5 7"
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc334_b",
+      "inputs": [
+        "0 1 -1000000000000000000 1000000000000000000",
+        "1000000000000000000 1 -1000000000000000000 1000000000000000000",
+        "-1000000000000000000 -1 -1000000000000000000 1000000000000000000",
+        "0 1000000000 0 1000000000",
+        "0 1000000000 1000000000 0",
+        "0 1000000000 0 1",
+        "0 1000000000 1 0",
+        "0 1000000000 1 1",
+        "0 1000000000 1000000000 1000000000",
+        "-1000000000000000000 1000000000 -1000000000000000000 1000000000000000000",
+        "1000000000000000000 -1000000000 -1000000000000000000 1000000000000000000"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc363_c",
+      "inputs": [
+        "2 2\nab",
+        "4 2\ncddc",
+        "6 3\nabcdef",
+        "7 4\nghijklm",
+        "8 5\nnopqrst",
+        "9 6\nuvwxyza",
+        "10 7\nbcdefghj",
+        "10 8\nabcdefgh",
+        "10 9\nabcdefg",
+        "10 10\nabcdefghi"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc376_d",
+      "inputs": [
+        "2 1\n1 2",
+        "2 2\n1 2\n2 1",
+        "3 3\n1 2\n2 3\n3 1",
+        "3 2\n1 2\n2 3",
+        "4 4\n1 2\n2 3\n3 4\n4 1",
+        "4 3\n1 2\n2 3\n3 4",
+        "5 5\n1 2\n2 3\n3 4\n4 5\n5 1",
+        "5 4\n1 2\n2 3\n3 4\n4 5",
+        "10 9\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10",
+        "10 10\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n10 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "1873_A",
+      "inputs": [
+        "1\nabc",
+        "1\nacb",
+        "1\nbac",
+        "1\nbca",
+        "1\ncab",
+        "1\ncba",
+        "2\nabc\nacb",
+        "2\nacb\nbac",
+        "2\nbac\nbca",
+        "2\nbca\ncab",
+        "2\ncab\ncba",
+        "3\nabc\nacb\nbac"
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "1883_B",
+      "inputs": [
+        "1\n1 0\na\n1\n2 1\nab\n1\n3 2\nabc\n1\n6 2\nbacacd\n1\n6 2\nfagbza\n1\n6 2\nzwaafa\n1\n7 2\ntaagaak\n1\n14 3\nttrraakkttoorr\n1\n5 3\ndebdb\n1\n5 4\necadc\n1\n5 3\ndebca\n1\n5 3\nabaac"
+      ],
+      "n_inputs": 1,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2828",
+      "inputs": [
+        "\"aaaaa\"",
+        "\"zzzzz\"",
+        "\"aabbcc\"",
+        "\"zzzz\"",
+        "\"aaaz\"",
+        "\"zzza\"",
+        "\"aaa\"",
+        "\"zzz\"",
+        "\"a\"",
+        "\"z\"",
+        "\"abcdefghijklmnopqrstuvwxyz\"",
+        "\"zyxwvutsrqponmlkjihgfedcba\""
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2848",
+      "inputs": [
+        "[2, 3, 5, 10]",
+        "[1, 2, 3, 4, 5]",
+        "[10, 20, 30, 40, 50]",
+        "[1, 2, 4, 8, 16, 32]",
+        "[1, 3, 9, 27, 81]",
+        "[2, 4, 8, 16, 32, 64]",
+        "[1, 5, 25, 125, 625]",
+        "[2, 6, 18, 54, 162]",
+        "[1, 7, 49, 343, 2401]",
+        "[2, 10, 50, 250, 1250]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2868",
+      "inputs": [
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "[10, 12, 14, 16, 18, 20, 22, 24, 26, 28]",
+        "[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]",
+        "[1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]",
+        "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 2]",
+        "[2, 2, 2, 2, 2, 2, 2, 2, 2, 1]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2877",
+      "inputs": [
+        "\"aaaaa\"\n\"aaaaa\"\n\"aaaaa\"",
+        "\"abc\"\n\"def\"\n\"ghi\"",
+        "\"aaa\"\n\"bbb\"\n\"ccc\"",
+        "\"abc\"\n\"cba\"\n\"bac\""
+      ],
+      "n_inputs": 4,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2919",
+      "inputs": [
+        "[1000000000, 1000000000, 1000000000, 1000000000, 1000000000]",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "[1000000000, 1]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]",
+        "[1000000000, 1000000000, 1000000000, 1000000000, 1000000000, 1]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]",
+        "[1000000000, 1000000000, 1000000000, 1000000000, 1000000000, 1, 1]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3153",
+      "inputs": [
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n5",
+        "[1024, 2048, 4096, 8192, 16384]\n3",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]\n10",
+        "[1000000000, 1000000000, 1000000000, 1000000000, 1000000000]\n5",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n6",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\n7",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]\n8",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]\n9",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n10",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]\n11"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3172",
+      "inputs": [
+        "1\n1",
+        "2\n2",
+        "3\n3",
+        "1000\n1000",
+        "1000\n1",
+        "1000\n2",
+        "1000\n3",
+        "1000\n4",
+        "1000\n5",
+        "1000\n6",
+        "1000\n7",
+        "1000\n8"
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3192",
+      "inputs": [
+        "0\n0\n50",
+        "1\n1\n50",
+        "2\n2\n50",
+        "3\n3\n50",
+        "4\n4\n50",
+        "5\n5\n50",
+        "6\n6\n50",
+        "7\n7\n50",
+        "8\n8\n50",
+        "9\n9\n50"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3297",
+      "inputs": [
+        "\"a\"\n1",
+        "\"aa\"\n1",
+        "\"aaa\"\n1",
+        "\"aaaa\"\n1",
+        "\"abcabcabc\"\n3",
+        "\"abcdefg\"\n2",
+        "\"abcdefghi\"\n3",
+        "\"abcdefghij\"\n4",
+        "\"abcdefghijklmnopqrstuvwxyz\"\n26",
+        "\"zyxwvutsrqponmlkjihgfedcba\"\n26"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3344",
+      "inputs": [
+        "[[1,1],[2,2],[3,3],[4,4],[5,5]]",
+        "[[1,1],[2,3],[4,5],[6,7],[8,9]]",
+        "[[1,1],[1,2],[2,1],[2,2],[3,3]]",
+        "[[1,1],[1,100000000],[100000000,1],[100000000,100000000]]",
+        "[[1,1],[1,1],[1,1],[2,2],[2,2]]",
+        "[[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]]",
+        "[[1,1],[1,1],[1,1],[1,1],[1,1],[2,2]]",
+        "[[1,1],[1,1],[1,1],[1,1],[2,2],[2,2]]",
+        "[[1,1],[1,1],[1,1],[2,2],[2,2],[2,2]]",
+        "[[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[1,1]]",
+        "[[1,1],[1,1],[1,1],[1,1],[1,1],[1,1],[2,2],[2,2]]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3354",
+      "inputs": [
+        "\"????\"",
+        "\"a???\"",
+        "\"??b?\"",
+        "\"???c\"",
+        "\"abcd?e\"",
+        "\"abcde?\"",
+        "\"abcdef?\"",
+        "\"abcdefg?\"",
+        "\"abcdefgh?\"",
+        "\"abcdefghi?\"",
+        "\"abcdefghij?\""
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3356",
+      "inputs": [
+        "[\"aaaaa\", \"aaaaa\", \"aaaaa\"]",
+        "[\"abcde\", \"fghij\", \"klmno\"]",
+        "[\"aa\", \"bb\", \"cc\"]",
+        "[\"abc\", \"def\", \"ghi\", \"jkl\"]",
+        "[\"aaa\", \"bbb\", \"ccc\", \"ddd\"]",
+        "[\"abc\", \"abc\", \"abc\"]",
+        "[\"abcd\", \"bcde\", \"cdef\"]",
+        "[\"abc\", \"def\", \"ghi\", \"abc\"]",
+        "[\"abc\", \"def\", \"ghi\", \"def\"]",
+        "[\"abc\", \"def\", \"ghi\", \"ghi\"]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3363",
+      "inputs": [
+        "[1, 2, 3, 4, 5]\n[1, 1, 1, 1, 1]",
+        "[1, 1, 1, 1, 1]\n[-1, -1, -1, -1, -1]",
+        "[1, 2, 3, 4, 5]\n[1, -1, 1, -1, 1]",
+        "[1, 2, 3, 4, 5]\n[1, 2, 3, 4, 5]",
+        "[1, 2, 3, 4, 5]\n[-1, -2, -3, -4, -5]",
+        "[1, 2, 3, 4, 5]\n[-1, -1, -1, -1, -1]"
+      ],
+      "n_inputs": 6,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3374",
+      "inputs": [
+        "[0, 0, 0, 0]",
+        "[1, 1, 1, 1]",
+        "[0, 1, 0, 1, 0, 1]",
+        "[1, 0, 1, 0, 1, 0, 1]",
+        "[0, 1, 1, 0, 1, 0, 1]",
+        "[1, 0, 1, 1, 0, 1, 0]",
+        "[0, 0, 1, 1, 0, 0, 1]",
+        "[1, 1, 0, 0, 1, 1, 0]",
+        "[0, 1, 0, 1, 0, 1, 0]",
+        "[1, 0, 1, 0, 1, 0, 1, 0]",
+        "[0, 0, 0, 1, 1, 1, 0, 0]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3408",
+      "inputs": [
+        "\"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\"",
+        "\"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\"",
+        "\"\"",
+        "\"A\"",
+        "\"a\"",
+        "\"AA\"",
+        "\"aa\"",
+        "\"AB\"",
+        "\"ab\"",
+        "\"AaBb\"",
+        "\"abAB\""
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3413",
+      "inputs": [
+        "[1, 2, 3, 4, 5]\n1",
+        "[10, 20, 30, 40, 50]\n2",
+        "[50, 40, 30, 20, 10]\n1",
+        "[1, 1000000, 2, 3, 4, 5, 6, 7, 8, 9]\n1",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n2",
+        "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]\n1",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n1",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]\n1",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]\n1"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3416",
+      "inputs": [
+        "[123456789, 987654321]",
+        "[111111111, 222222222]",
+        "[123, 456, 789, 123]",
+        "[100, 200, 300, 400]",
+        "[999, 999, 999, 999]",
+        "[12345, 54321, 12345, 54321]",
+        "[11111, 22222, 33333, 44444, 55555]",
+        "[123456789, 987654321, 123456789]",
+        "[111111111, 222222222, 333333333]",
+        "[123, 456, 789, 123, 456]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3422",
+      "inputs": [
+        "1\n1",
+        "2\n2",
+        "1000\n1000",
+        "2\n1",
+        "1\n1000",
+        "1000\n1",
+        "5\n1",
+        "1\n5",
+        "2\n5",
+        "5\n2"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3423",
+      "inputs": [
+        "[1, 2, 3, 4, 5]\n[[0, 10], [1, 10], [2, 10], [3, 10], [4, 10]]",
+        "[1, 2, 3, 4, 5]\n[[0, -10], [1, -10], [2, -10], [3, -10], [4, -10]]",
+        "[1, 2, 3, 4, 5]\n[[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]]",
+        "[1, 2, 3, 4, 5]\n[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]",
+        "[1, 2, 3, 4, 5]\n[[0, -1], [1, -2], [2, -3], [3, -4], [4, -5]]",
+        "[1, 2, 3, 4, 5]\n[[0, 100000], [1, 100000], [2, 100000], [3, 100000], [4, 100000]]",
+        "[1, 2, 3, 4, 5]\n[[0, -100000], [1, -100000], [2, -100000], [3, -100000], [4, -100000]]",
+        "[1, 2, 3, 4, 5]\n[[0, 1000000000], [1, 1000000000], [2, 1000000000], [3, 1000000000], [4, 1000000000]]",
+        "[1, 2, 3, 4, 5]\n[[0, -1000000000], [1, -1000000000], [2, -1000000000], [3, -1000000000], [4, -1000000000]]",
+        "[1, 2, 3, 4, 5]\n[[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [0, 6]]",
+        "[1, 2, 3, 4, 5]\n[[0, -1], [1, -2], [2, -3], [3, -4], [4, -5], [0, -6]]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3430",
+      "inputs": [
+        "1\n[[1, 1]]",
+        "100\n[[1, 50], [51, 100]]",
+        "100\n[[1, 100]]",
+        "100\n[[1, 50], [51, 100], [25, 75]]",
+        "100\n[[1, 25], [26, 50], [51, 75], [76, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100], [1, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100], [1, 100], [1, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100]]",
+        "100\n[[1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100], [1, 100]]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3517",
+      "inputs": [
+        "5\n[[2, 4], [0, 2], [0, 4]]",
+        "4\n[[0, 3], [0, 2]]",
+        "6\n[[1, 3], [2, 4], [3, 5]]",
+        "7\n[[1, 4], [2, 5], [3, 6]]",
+        "8\n[[1, 5], [2, 6], [3, 7]]",
+        "9\n[[1, 6], [2, 7], [3, 8]]",
+        "10\n[[1, 7], [2, 8], [3, 9]]",
+        "11\n[[1, 8], [2, 9], [3, 10]]",
+        "12\n[[1, 9], [2, 10], [3, 11]]",
+        "13\n[[1, 10], [2, 11], [3, 12]]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3526",
+      "inputs": [
+        "[[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]",
+        "[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]",
+        "[[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1]]",
+        "[[1, 1, 1, 1], [1, 0, 0, 1], [1, 0, 0, 1], [1, 1, 1, 1]]",
+        "[[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0]]",
+        "[[1, 1, 1, 1], [1, 1, 1, 1], [0, 0, 0, 0], [0, 0, 0, 0]]",
+        "[[0, 0, 0, 0], [0, 0, 0, 0], [1, 1, 1, 1], [1, 1, 1, 1]]",
+        "[[1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0], [0, 1, 0, 1], [1, 0, 1, 0]]",
+        "[[0, 0, 0, 0], [0, 1, 1, 0], [0, 1, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]]",
+        "[[1, 1, 1, 1], [1, 0, 0, 1], [1, 0, 0, 1], [1, 1, 1, 1], [1, 1, 1, 1]]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3579",
+      "inputs": [
+        "[1, 127, 64]",
+        "[1, 127, 32]",
+        "[1, 127, 16]",
+        "[1, 127, 8]",
+        "[1, 127, 4]",
+        "[1, 127, 2]",
+        "[1, 127, 1]",
+        "[127, 64, 32]",
+        "[127, 64, 16]",
+        "[127, 64, 8]",
+        "[127, 64, 4]",
+        "[127, 64, 2]"
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3612",
+      "inputs": [
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n2",
+        "[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]\n2",
+        "[1, 2, 2, 3, 4, 5]\n2",
+        "[1, 2, 3, 3, 4, 5]\n2",
+        "[1, 2, 3, 4, 5, 5]\n2",
+        "[1, 2, 3, 4, 5, 6, 6]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 7]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 8]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 9]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n2"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3653",
+      "inputs": [
+        "[1, 2, 3, 4, 5]\n2",
+        "[10, -2, 3, -4, 5, -6]\n3",
+        "[-1, -2, -3, -4, -5, -6]\n2",
+        "[0, 0, 0, 0, 0, 0]\n1",
+        "[1, -1, 1, -1, 1, -1]\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n5",
+        "[-10, -20, -30, -40, -50]\n10",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]\n11",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]\n12",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]\n13"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3680",
+      "inputs": [
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n10",
+        "[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]\n100",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 100]\n100",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 1000]\n1000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10000]\n10000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 100000]\n100000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 1000000]\n1000000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10000000]\n10000000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 100000000]\n100000000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 1000000000]\n1000000000",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10000000000]\n10000000000"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3702",
+      "inputs": [
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "[2, 2, 2, 2, 2, 2, 2, 2, 2, 2]",
+        "[3, 3, 3, 3, 3, 3, 3, 3, 3, 3]",
+        "[4, 4, 4, 4, 4, 4, 4, 4, 4, 4]",
+        "[5, 5, 5, 5, 5, 5, 5, 5, 5, 5]",
+        "[6, 6, 6, 6, 6, 6, 6, 6, 6, 6]",
+        "[7, 7, 7, 7, 7, 7, 7, 7, 7, 7]",
+        "[8, 8, 8, 8, 8, 8, 8, 8, 8, 8]",
+        "[9, 9, 9, 9, 9, 9, 9, 9, 9, 9]",
+        "[10, 10, 10, 10, 10, 10, 10, 10, 10, 10]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3708",
+      "inputs": [
+        "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]",
+        "[[10, 20, 30], [40, 50, 60], [70, 80, 90]]",
+        "[[1, 2], [3, 4], [5, 6], [7, 8]]",
+        "[[2, 1], [2, 1], [2, 1], [2, 1]]",
+        "[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]",
+        "[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]",
+        "[[1], [2], [3], [4]]",
+        "[[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]]",
+        "[[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]",
+        "[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16], [17, 18, 19, 20]]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3801",
+      "inputs": [
+        "1\n999999999",
+        "1000000000\n999999999",
+        "1\n1",
+        "2\n2",
+        "10\n100",
+        "99\n100",
+        "100\n1000",
+        "1000\n10000",
+        "10000\n100000",
+        "100000\n1000000"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3811",
+      "inputs": [
+        "\"aaa\"",
+        "\"zzz\"",
+        "\"zyxwvutsrqponmlkjihgfedcba\"",
+        "\"abcdefghijklmnopqrstuvwxyz\"",
+        "\"bcdefghijklmnopqrstuvwxyza\"",
+        "\"!@#$%^&*()_+\"",
+        "\"1234567890\"",
+        "\"\"",
+        "\"a\"",
+        "\"zz\"",
+        "\"az\"",
+        "\"za\""
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc303_c",
+      "inputs": [
+        "1 1 1 1\nR\n0 0",
+        "2 2 1 1\nRR\n0 0\n1 0",
+        "2 2 2 2\nLU\n0 0\n1 0",
+        "3 3 3 3\nRUL\n0 0\n1 0\n-1 0",
+        "4 4 4 4\nRULD\n0 0\n1 0\n-1 0\n0 1",
+        "5 5 5 5\nRULLD\n0 0\n1 0\n-1 0\n0 1\n0 -1",
+        "6 6 6 6\nRULLDR\n0 0\n1 0\n-1 0\n0 1\n0 -1\n-1 -1",
+        "7 7 7 7\nRULLDRU\n0 0\n1 0\n-1 0\n0 1\n0 -1\n-1 -1\n1 1",
+        "8 8 8 8\nRULLDRUR\n0 0\n1 0\n-1 0\n0 1\n0 -1\n-1 -1\n1 1\n-1 1",
+        "9 9 9 9\nRULLDRURD\n0 0\n1 0\n-1 0\n0 1\n0 -1\n-1 -1\n1 1\n-1 1\n0 0",
+        "10 10 10 10\nRULLDRURDL\n0 0\n1 0\n-1 0\n0 1\n0 -1\n-1 -1\n1 1\n-1 1\n0 0\n0 1"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc305_c",
+      "inputs": [
+        "2 2\n..\n..",
+        "3 3\n...\n...\n...",
+        "4 4\n....\n....\n....\n....",
+        "2 3\n#..\n...",
+        "3 2\n#.\n..\n..",
+        "4 4\n#...\n#...\n#...\n#...",
+        "5 5\n.....\n.....\n.....\n.....\n....."
+      ],
+      "n_inputs": 7,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc306_e",
+      "inputs": [
+        "5 3 5\n1 10\n2 20\n3 30\n4 40\n5 50",
+        "10 5 10\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 1 10\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 10 1\n1 100",
+        "10 5 1\n1 100",
+        "10 10 1\n1 1",
+        "10 5 1\n1 1",
+        "1 1 1\n1 1",
+        "1 1 1\n1 0",
+        "1 1 1\n1 -1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc311_a",
+      "inputs": [
+        "6\nABCABC",
+        "7\nABCCBA",
+        "8\nAAABBBCCC",
+        "9\nAABBBCCCC",
+        "10\nAABBBCCCCCC",
+        "11\nAABBBCCCCDDD",
+        "12\nAABBBCCCCDDDEEE",
+        "13\nAABBBCCCCDDDEEEFFF",
+        "14\nAABBBCCCCDDDEEEFFFF",
+        "15\nAABBBCCCCDDDEEEFFFFGGG"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc315_c",
+      "inputs": [
+        "2\n1 2\n2 4",
+        "3\n1 2\n2 4\n3 6",
+        "3\n3 6\n2 4\n1 2",
+        "4\n1 2\n2 4\n3 6\n4 8",
+        "4\n4 8\n3 6\n2 4\n1 2",
+        "5\n1 2\n2 4\n3 6\n4 8\n5 10",
+        "5\n5 10\n4 8\n3 6\n2 4\n1 2",
+        "10\n1 2\n2 4\n3 6\n4 8\n5 10\n6 12\n7 14\n8 16\n9 18\n10 20",
+        "10\n10 20\n9 18\n8 16\n7 14\n6 12\n5 10\n4 8\n3 6\n2 4",
+        "3\n1 2\n1 2\n1 2"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc318_b",
+      "inputs": [
+        "2\n0 100 0 100\n0 100 0 99",
+        "2\n0 100 0 100\n0 99 0 100",
+        "2\n0 100 0 100\n99 100 0 100",
+        "2\n0 100 0 100\n0 100 99 100",
+        "2\n0 100 0 100\n0 100 0 100\n0 100 0 100",
+        "2\n0 100 0 100\n100 200 0 100",
+        "2\n0 100 0 100\n-100 -50 0 100",
+        "2\n0 100 0 100\n0 100 0 -50",
+        "2\n0 100 0 100\n0 100 100 150",
+        "2\n0 100 0 100\n0 100 0 100\n0 100 100 100"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc322_c",
+      "inputs": [
+        "1 1\n1",
+        "2 1\n2",
+        "2 2\n1 2",
+        "3 1\n3",
+        "3 3\n1 2 3",
+        "4 2\n2 4",
+        "5 3\n1 3 5",
+        "6 4\n1 3 5 6",
+        "10 5\n2 4 6 8 10",
+        "20 10\n1 3 5 7 9 11 13 15 17 19"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc323_b",
+      "inputs": [
+        "2\n-o\n-o",
+        "2\n-o\n--",
+        "2\n--\no-",
+        "2\n--\n--",
+        "3\n-oo\n-oo\n-oo",
+        "3\n-oo\n-oo\n-ox",
+        "3\n-oo\n-oo\n-xx",
+        "4\n-oox\n-oox\n-oox\n-oox"
+      ],
+      "n_inputs": 8,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc324_e",
+      "inputs": [
+        "5 abc\nabc\nbc\nca\nacb",
+        "10 aaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa",
+        "10 zzz\nzzz\nzzz\nzzz\nzzz\nzzz\nzzz\nzzz\nzzz\nzzz",
+        "10 aaa\nbbb\nccc\nddd\neee\nfff\nggg\nhhh\niii\njjj",
+        "10 aaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa\nzzz",
+        "10 aaa\naaa\naaa\naaa\naaa\naaa\naaa\naaa\nzzz\naaa",
+        "10 aaa\naaa\naaa\naaa\naaa\naaa\naaa\nzzz\naaa\naaa",
+        "10 aaa\naaa\naaa\naaa\naaa\naaa\nzzz\naaa\naaa\naaa",
+        "10 aaa\naaa\naaa\naaa\naaa\nzzz\naaa\naaa\naaa\naaa",
+        "10 aaa\naaa\naaa\naaa\nzzz\naaa\naaa\naaa\naaa\naaa"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc325_e",
+      "inputs": [
+        "2 1 1 1\n0 1\n1 0",
+        "3 1 1 1\n0 1 2\n1 0 1\n2 1 0",
+        "4 1 1 1\n0 1 2 3\n1 0 1 2\n2 1 0 1\n3 2 1 0",
+        "5 1 1 1\n0 1 2 3 4\n1 0 1 2 3\n2 1 0 1 2\n3 2 1 0 1\n4 3 2 1 0",
+        "2 1000000 1000000 1000000\n0 1\n1 0",
+        "3 1000000 1000000 1000000\n0 10 1\n10 0 10\n1 10 0",
+        "4 1000000 1000000 1000000\n0 10 20 30\n10 0 10 20\n20 10 0 10\n30 20 10 0",
+        "5 1000000 1000000 1000000\n0 10 20 30 40\n10 0 10 20 30\n20 10 0 10 20\n30 20 10 0 10\n40 30 20 10 0",
+        "2 1 1 1\n0 1\n1 1",
+        "3 1 1 1\n0 1 2\n1 2 0\n2 0 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc329_b",
+      "inputs": [
+        "3\n1 1 1",
+        "2\n100 99",
+        "2\n99 100",
+        "5\n1 2 3 4 5",
+        "5\n5 4 3 2 1",
+        "10\n1 2 3 4 5 6 7 8 9 10",
+        "10\n10 9 8 7 6 5 4 3 2 1",
+        "5\n10 10 10 10 9",
+        "5\n9 9 9 9 10",
+        "10\n1 1 1 1 1 1 1 1 1 2"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc332_b",
+      "inputs": [
+        "100 100 200",
+        "99 100 200",
+        "1 1 2",
+        "2 1 2",
+        "3 1 2",
+        "4 1 2",
+        "5 1 2",
+        "6 1 2",
+        "7 1 2",
+        "8 1 2",
+        "9 1 2"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc348_c",
+      "inputs": [
+        "2\n100 1\n100 1",
+        "3\n1 1\n2 2\n3 3",
+        "5\n1 1\n2 2\n3 3\n4 4\n5 5",
+        "1\n100 1",
+        "2\n1 1\n100 1",
+        "2\n100 1\n1 1",
+        "3\n1 1\n2 2\n1 1",
+        "3\n1 1\n2 2\n2 1",
+        "3\n1 1\n2 2\n2 2",
+        "10\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc349_c",
+      "inputs": [
+        "a\nABC",
+        "abc\nXYZ",
+        "xyz\nXXX",
+        "aaa\nAAA",
+        "zzz\nZZZ",
+        "abcdefg\nABD",
+        "hijklmn\nHJK",
+        "nopqrst\nNOP",
+        "uvwxyza\nUVW",
+        "bcdefghij\nBCD"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc352_b",
+      "inputs": [
+        "a\nb",
+        "z\naz",
+        "xy\nyx",
+        "abc\ndefg",
+        "abc\ndefgh",
+        "abc\ndefghi",
+        "abc\ndefghij",
+        "abc\ndefghijk",
+        "abc\ndefghijkl",
+        "abc\ndefghijklm",
+        "abc\ndefghijklmn"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc353_d",
+      "inputs": [
+        "2\n1 998244352",
+        "4\n1 2 3 4",
+        "2\n998244352 1",
+        "3\n1000000000 1000000000 1000000000",
+        "5\n1 2 3 4 5",
+        "2\n1 1",
+        "3\n10 10 10",
+        "2\n999999999 999999999",
+        "4\n1 1 1 1",
+        "2\n1000000000 1000000000"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc354_a",
+      "inputs": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "100"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc355_a",
+      "inputs": [
+        "1 1",
+        "2 2",
+        "3 3",
+        "1 3",
+        "2 1",
+        "3 2",
+        "1 2",
+        "2 3",
+        "3 1"
+      ],
+      "n_inputs": 9,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc358_b",
+      "inputs": [
+        "1 1\n0",
+        "2 1\n0 1",
+        "2 1\n1 0",
+        "2 2\n0 2",
+        "2 2\n2 0",
+        "3 1\n0 1 2",
+        "3 1\n2 1 0",
+        "3 2\n0 2 4",
+        "3 2\n4 2 0",
+        "10 1\n1 2 3 4 5 6 7 8 9 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc360_b",
+      "inputs": [
+        "abcdefghijklmnopqrstuvwxyz a",
+        "abcde fghijklmnopqrstuvwxyz",
+        "a bcd efg hijklmn opqrstuv wxyz",
+        "abcd efgh ijkl mnop qrst uvwx yz",
+        "abcdefghij klmnopqrstuvwxy z",
+        "abcdefg hijklmno pqrstuv wxyz",
+        "abcde fghi jklmno pqrs tuvw xyz",
+        "abcdefghijk lmnopqrstuv wxyz",
+        "abcdefghijklm nopqrstuv wxyz",
+        "abcdefghijkl noqrstuv wxyz"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc363_b",
+      "inputs": [
+        "1 100 1\n1",
+        "100 1 100\n100 100 100 100 100 100 100 100 100 100",
+        "100 100 1\n1 2 3 4 5 6 7 8 9 100",
+        "100 1 100\n1 2 3 4 5 6 7 8 9 10",
+        "100 100 1\n100 100 100 100 100 100 100 100 100 99",
+        "100 100 1\n99 100 100 100 100 100 100 100 100 100",
+        "100 1 100\n100 100 100 100 100 100 100 100 100 99"
+      ],
+      "n_inputs": 7,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc365_e",
+      "inputs": [
+        "4\n1 1 1 1",
+        "5\n2 2 2 2 2",
+        "6\n1 2 3 4 5 6",
+        "7\n1 2 3 4 5 6 7",
+        "8\n1 2 3 4 5 6 7 8",
+        "9\n1 2 3 4 5 6 7 8 9",
+        "10\n1 2 3 4 5 6 7 8 9 10",
+        "20\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20",
+        "100\n1 2 3 4 5 6 7 8 9 10 ... 91 92 93 94 95 96 97 98 99 100",
+        "200\n1 2 3 4 5 6 7 8 9 10 ... 191 192 193 194 195 196 197 198 199 200"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc367_b",
+      "inputs": [
+        "0.000",
+        "0.001",
+        "0.999",
+        "1.000",
+        "1.001",
+        "99.999",
+        "100.000",
+        "0.500",
+        "0.501",
+        "0.9999",
+        "1.0001",
+        "99.9999"
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc370_d",
+      "inputs": [
+        "1 1 1\n1 1",
+        "2 2 2\n1 1\n2 2",
+        "3 3 3\n1 1\n2 2\n3 3",
+        "4 4 4\n1 1\n2 2\n3 3\n4 4",
+        "5 5 5\n1 1\n2 2\n3 3\n4 4\n5 5",
+        "6 6 6\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6",
+        "7 7 7\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7",
+        "8 8 8\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8",
+        "9 9 9\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9",
+        "10 10 10\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc371_d",
+      "inputs": [
+        "2\n-1000000000 1000000000\n1 1\n1\n-1000000000 1000000000",
+        "2\n-1000000000 1000000000\n1 1\n1\n-1000000000 -1000000000",
+        "2\n-1000000000 1000000000\n1 1\n1\n1000000000 1000000000",
+        "2\n-1000000000 1000000000\n1 1\n1\n-1000000000 1000000001"
+      ],
+      "n_inputs": 4,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc372_d",
+      "inputs": [
+        "1\n1",
+        "2\n1 2",
+        "2\n2 1",
+        "3\n1 2 3",
+        "3\n3 2 1",
+        "4\n1 2 3 4",
+        "4\n4 3 2 1",
+        "5\n1 2 3 4 5",
+        "5\n5 4 3 2 1",
+        "10\n1 2 3 4 5 6 7 8 9 10",
+        "10\n10 9 8 7 6 5 4 3 2 1"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc378_b",
+      "inputs": [
+        "1\n100 1\n1\n100",
+        "2\n2 1\n3 2\n2\n1 1\n2 1",
+        "3\n2 1\n3 2\n5 3\n3\n1 1\n2 2\n3 3",
+        "2\n10 5\n20 10\n2\n1 1\n2 1",
+        "3\n1 0\n2 1\n3 2\n3\n1 1\n2 2\n3 3",
+        "2\n1000000000 1\n1000000000 1\n1\n1000000000",
+        "2\n1 1\n1000000000 1\n1\n1000000000",
+        "2\n1000000000 1\n1 1000000000\n1\n1000000000"
+      ],
+      "n_inputs": 8,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc381_b",
+      "inputs": [
+        "aa",
+        "bb",
+        "cc",
+        "abcd",
+        "abcde",
+        "abcdef",
+        "aabbccdd",
+        "aabbccddee",
+        "aabbccddeeff",
+        "aabbccddeeffg",
+        "aabbccddeeffgh"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc382_a",
+      "inputs": [
+        "1 1\n@",
+        "2 1\n..",
+        "2 1\n.@",
+        "3 2\n@@.",
+        "4 3\n@@@.",
+        "5 4\n@@@@.",
+        "6 5\n@@@@@.",
+        "7 6\n@@@@@@.",
+        "8 7\n@@@@@@@.",
+        "9 8\n@@@@@@@@."
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc382_c",
+      "inputs": [
+        "1 1\n1\n1",
+        "2 2\n1 2\n2 1",
+        "2 2\n2 1\n1 2",
+        "2 2\n1 2\n1 2",
+        "2 2\n2 1\n2 1",
+        "2 2\n1 1\n2 2",
+        "2 2\n2 2\n1 1",
+        "2 2\n1 1\n1 1",
+        "2 2\n2 2\n2 2"
+      ],
+      "n_inputs": 9,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc383_a",
+      "inputs": [
+        "1\n100 100",
+        "2\n1 1\n2 1",
+        "2\n1 1\n100 1",
+        "2\n100 1\n1 1",
+        "3\n1 1\n2 1\n3 1",
+        "3\n1 1\n3 1\n2 1",
+        "3\n1 1\n2 2\n3 1",
+        "3\n1 1\n2 1\n3 2",
+        "4\n1 1\n2 1\n3 1\n4 1",
+        "4\n1 1\n2 2\n3 1\n4 1",
+        "4\n1 1\n2 1\n3 2\n4 1"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc388_f",
+      "inputs": [
+        "100 1 1 20\n50 50",
+        "100 1 20 20\n50 50",
+        "100 2 1 20\n50 50\n90 90",
+        "100 2 20 20\n50 50\n90 90",
+        "100 1 1 20\n1 1",
+        "100 1 20 20\n1 1",
+        "100 2 1 20\n1 1\n90 90",
+        "100 2 20 20\n1 1\n90 90",
+        "100 1 1 20\n1 100",
+        "100 1 20 20\n1 100"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc392_g",
+      "inputs": [
+        "3\n1 2 3",
+        "4\n1 2 3 4",
+        "6\n1 3 5 7 9 11",
+        "8\n1 3 5 7 9 11 13 15",
+        "10\n1 2 3 4 5 6 7 8 9 10",
+        "10\n10 20 30 40 50 60 70 80 90 100",
+        "10\n1 1000000 2 999999 3 999998 4 999997 5 999996",
+        "10\n1 2 3 4 5 6 7 8 9 1000000",
+        "10\n1000000 2 3 4 5 6 7 8 9 10"
+      ],
+      "n_inputs": 9,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc393_e",
+      "inputs": [
+        "10 1\n1 2 3 4 5 6 7 8 9 10",
+        "10 2\n1 2 3 4 5 6 7 8 9 10",
+        "10 3\n1 2 3 4 5 6 7 8 9 10",
+        "10 4\n1 2 3 4 5 6 7 8 9 10",
+        "10 5\n1 2 3 4 5 6 7 8 9 10",
+        "10 6\n1 2 3 4 5 6 7 8 9 10",
+        "10 7\n1 2 3 4 5 6 7 8 9 10",
+        "10 8\n1 2 3 4 5 6 7 8 9 10",
+        "10 9\n1 2 3 4 5 6 7 8 9 10",
+        "10 10\n1 2 3 4 5 6 7 8 9 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc395_c",
+      "inputs": [
+        "1\n1",
+        "2\n1 2",
+        "2\n2 1",
+        "3\n1 2 1",
+        "3\n2 1 2",
+        "4\n1 2 3 1",
+        "4\n1 2 3 2",
+        "5\n1 2 3 4 1",
+        "5\n1 2 3 4 2",
+        "10\n1 2 3 4 5 6 7 8 9 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc396_f",
+      "inputs": [
+        "1 1\n0",
+        "2 2\n0 0",
+        "2 2\n1 1",
+        "2 2\n0 1",
+        "3 3\n0 0 0",
+        "3 3\n1 1 1",
+        "3 3\n0 1 2",
+        "3 3\n2 1 0",
+        "4 4\n0 0 0 0",
+        "4 4\n1 1 1 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc398_d",
+      "inputs": [
+        "1 0 0\nN",
+        "2 0 0\nNW",
+        "3 0 0\nNWE",
+        "4 0 0\nNWEW",
+        "5 0 0\nNWEWE",
+        "6 0 0\nNWEWES",
+        "7 0 0\nNWEWESW",
+        "8 0 0\nNWEWESWE",
+        "9 0 0\nNWEWESWES",
+        "10 0 0\nNWEWESWESW"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc400_a",
+      "inputs": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "8",
+        "9",
+        "16",
+        "25",
+        "36",
+        "400"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "arc181_d",
+      "inputs": [
+        "2\n1 2\n1\n2",
+        "3\n3 1 2\n1\n2",
+        "3\n1 3 2\n1\n2",
+        "4\n1 3 2 4\n1\n2",
+        "4\n1 3 2 4\n1\n3",
+        "5\n1 3 2 4 5\n1\n2",
+        "5\n1 3 2 4 5\n1\n3",
+        "10\n1 3 5 7 9 2 4 6 8 10\n1\n2",
+        "10\n1 3 5 7 9 2 4 6 8 10\n1\n3",
+        "10\n1 3 5 7 9 2 4 6 8 10\n1\n5"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "arc192_a",
+      "inputs": [
+        "4\n0 0 0 0",
+        "6\n0 1 0 1 0 1",
+        "7\n0 1 0 1 0 1 0",
+        "8\n0 1 0 1 0 1 0 1",
+        "9\n0 1 0 1 0 1 0 1 0",
+        "10\n0 1 0 1 0 1 0 1 0 1",
+        "11\n0 1 0 1 0 1 0 1 0 1 0",
+        "12\n0 1 0 1 0 1 0 1 0 1 0 1",
+        "13\n0 1 0 1 0 1 0 1 0 1 0 1 0",
+        "14\n0 1 0 1 0 1 0 1 0 1 0 1 0 1"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2892",
+      "inputs": [
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10]",
+        "[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]",
+        "[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 18]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2902",
+      "inputs": [
+        "[9999, 9999]",
+        "[1000, 9999]",
+        "[1234, 4321, 2134, 3412]",
+        "[1111, 2222, 3333, 4444]",
+        "[123, 321, 213, 312, 132, 231]",
+        "[1, 1, 1, 1, 1, 1]",
+        "[1234, 4321, 2134, 3412, 1111, 2222]",
+        "[1000, 9999, 1000, 9999]",
+        "[1234, 4321, 2134, 3412, 1111, 2222, 3333, 4444]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
+        "[1000, 9999, 1000, 9999, 1000, 9999]"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "2999",
+      "inputs": [
+        "\"abcd\"\n\"cdab\"",
+        "\"abcd\"\n\"dacb\"",
+        "\"aabb\"\n\"bbaa\"",
+        "\"xyyx\"\n\"yxyx\"",
+        "\"zzzz\"\n\"zzzz\"",
+        "\"qrst\"\n\"tsrq\"",
+        "\"wxyz\"\n\"yzwx\"",
+        "\"mnop\"\n\"ponm\"",
+        "\"qrst\"\n\"rstq\"",
+        "\"vwxy\"\n\"ywvx\"",
+        "\"pqrs\"\n\"srqp\"",
+        "\"tuvw\"\n\"vuts\""
+      ],
+      "n_inputs": 12,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3171",
+      "inputs": [
+        "[0, 0, 0, 0, 0]\n[0, 0, 0, 0, 0]",
+        "[1, 2, 3, 4, 5]\n[5, 4, 3, 2, 1]",
+        "[1, 2, 3, 4, 5]\n[0, 0, 0, 0, 0]",
+        "[0, 0, 0, 0, 0]\n[1, 2, 3, 4, 5]",
+        "[1, 2, 3, 4, 5]\n[1, 2, 3, 4, 0]",
+        "[1, 2, 3, 4, 0]\n[1, 2, 3, 4, 5]",
+        "[1, 2, 3, 4, 0]\n[1, 2, 3, 0, 5]",
+        "[1, 2, 3, 0, 5]\n[1, 2, 3, 4, 0]",
+        "[1, 2, 3, 0, 5]\n[1, 2, 0, 4, 5]",
+        "[1, 2, 0, 4, 5]\n[1, 2, 3, 0, 5]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3229",
+      "inputs": [
+        "[1, 2, 3, 4, 5]",
+        "[10, 12, 13, 14, 15]",
+        "[22, 33, 22, 33, 22]",
+        "[1, 1, 1, 1, 1]",
+        "[9, 8, 7, 6, 5]",
+        "[100, 200, 300, 400, 500]",
+        "[1, 1000000000, 1]",
+        "[123456789, 987654321, 123456789]",
+        "[111111111, 222222222, 333333333]",
+        "[999999999, 999999998, 999999997]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3450",
+      "inputs": [
+        "2\n1",
+        "2\n2",
+        "3\n1",
+        "3\n2",
+        "3\n3",
+        "4\n1",
+        "4\n2",
+        "4\n3",
+        "4\n4",
+        "5\n1",
+        "5\n2"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3463",
+      "inputs": [
+        "[1, 0, 1, 0, 1, 0, 1, 0, 1, 0]",
+        "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+        "[1, 1, 0, 0, 1, 1, 0, 0, 1, 1]",
+        "[0, 1, 0, 1, 0, 1, 0, 1, 0, 1]",
+        "[1, 0, 1, 0, 1, 0, 1, 0, 1, 1]",
+        "[0, 1, 0, 1, 0, 1, 0, 1, 0, 0]",
+        "[1, 1, 1, 0, 0, 0, 1, 1, 1, 0]",
+        "[0, 0, 1, 1, 0, 0, 1, 1, 0, 0]",
+        "[1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]",
+        "[0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3507",
+      "inputs": [
+        "1\n10",
+        "10\n100",
+        "100\n1000",
+        "1000\n10000",
+        "10000\n100000",
+        "100000\n1000000",
+        "1000000\n10000000",
+        "10000000\n100000000",
+        "100000000\n1000000000",
+        "1\n2",
+        "2\n3"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "3644",
+      "inputs": [
+        "[0, 0, 0, 0, 0]\n1\n5",
+        "[1, 2, 3, -6, 4]\n2\n4",
+        "[-1, -2, -3, 7, -8, 9]\n3\n5",
+        "[1000, -1000, 1000, -1000, 1000]\n2\n4",
+        "[1, -1, 1, -1, 1]\n3\n3",
+        "[-1, 1, -1, 1, -1]\n2\n2",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n5\n5",
+        "[-1, -2, -3, -4, -5, -6, -7, -8, -9, -10]\n1\n1",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n10\n10",
+        "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]\n1\n10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc352_a",
+      "inputs": [
+        "3 1 3 2",
+        "100 1 100 1",
+        "100 100 1 1",
+        "5 2 4 3",
+        "5 4 2 3",
+        "10 5 5 5",
+        "10 5 6 5",
+        "10 5 5 6",
+        "10 1 10 1",
+        "10 10 1 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc366_a",
+      "inputs": [
+        "1 0 0",
+        "1 1 0",
+        "1 0 1",
+        "2 1 1",
+        "3 2 1",
+        "3 1 2",
+        "5 3 2",
+        "5 2 3",
+        "99 49 49",
+        "99 50 49",
+        "99 49 50"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc366_f",
+      "inputs": [
+        "2 2\n1 1\n2 2",
+        "5 1\n1 1\n2 2\n3 3\n4 4\n5 5",
+        "10 2\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 10\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 1\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "2 1\n1 1\n2 2",
+        "10 5\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 9\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 10\n50 0\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "10 10\n1 50\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc368_b",
+      "inputs": [
+        "5\n1 1 1 1 1",
+        "6\n2 2 2 2 2 2",
+        "7\n1 2 3 4 5 6 7",
+        "8\n100 99 98 97 96 95 94 93",
+        "9\n1 1 1 1 1 1 1 1 1",
+        "10\n50 50 50 50 50 50 50 50 50 50",
+        "2\n100 1",
+        "3\n1 100 100",
+        "4\n1 1 1 100",
+        "5\n1 1 1 1 100"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc381_a",
+      "inputs": [
+        "1\n1",
+        "2\n12",
+        "3\n112",
+        "4\n1112",
+        "5\n11112",
+        "6\n111112",
+        "7\n1111112",
+        "8\n11111112",
+        "9\n111111112",
+        "10\n1111111112",
+        "11\n11111111112"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc398_a",
+      "inputs": [
+        "1",
+        "2",
+        "3",
+        "5",
+        "6",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "100"
+      ],
+      "n_inputs": 11,
+      "source": "local_model_candidate_aware_differential_v1"
+    },
+    {
+      "question_id": "abc304_c",
+      "inputs": [
+        "2 1\n0 0\n1 1",
+        "5 2\n0 0\n1 1\n2 2\n3 3\n4 4",
+        "6 3\n0 0\n3 4\n6 8\n9 12\n12 16",
+        "7 1\n0 0\n-1 0\n0 -1\n1 0\n0 1\n-1 1",
+        "8 5\n0 0\n10 0\n0 10\n10 10\n5 5\n0 5\n5 0",
+        "9 1\n0 0\n-1000 -1000\n1000 1000\n-1000 1000\n1000 -1000\n0 1000\n0 -1000",
+        "10 2\n0 0\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8",
+        "11 3\n0 0\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9",
+        "12 4\n0 0\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10",
+        "13 5\n0 0\n1 1\n2 2\n3 3\n4 4\n5 5\n6 6\n7 7\n8 8\n9 9\n10 10\n11 11"
+      ],
+      "n_inputs": 10,
+      "source": "local_model_candidate_aware_differential_v1"
+    }
+  ],
+  "metadata": {
+    "source": "local_model_candidate_aware_differential_v1",
+    "model": "Qwen2.5-Coder-7B-Instruct",
+    "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts128_fragility/prompts.jsonl",
+    "prompts_sha256": "4431efe0284f3fb3d1ee5b6fe8152a8ba508009015078c8efcade59cf9699595",
+    "records_total": 128,
+    "records_nonempty": 112,
+    "inputs_total": 1130
+  }
+}

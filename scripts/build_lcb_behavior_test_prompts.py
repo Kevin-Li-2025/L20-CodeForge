@@ -23,6 +23,29 @@ def enum_value(value: Any) -> Any:
     return getattr(value, "value", value)
 
 
+class PublicTestCase:
+    def __init__(self, input_text: str, output_text: str) -> None:
+        self.input = input_text
+        self.output = output_text
+
+
+class PromptPublicProblem:
+    def __init__(self, record: dict[str, Any]) -> None:
+        self.question_id = str(record["question_id"])
+        self.question_title = str(record.get("question_title") or "")
+        self.question_content = str(record.get("question_content") or "")
+        self.difficulty = record.get("difficulty") or ""
+        self.platform = record.get("platform") or ""
+        metadata = record.get("metadata") or {}
+        if isinstance(metadata, str):
+            metadata = json.loads(metadata) if metadata.strip() else {}
+        self.metadata = metadata if isinstance(metadata, dict) else {}
+        self.public_test_cases = [
+            PublicTestCase(str(test.get("input") or ""), str(test.get("output") or ""))
+            for test in parse_public_test_cases(record.get("public_test_cases"))
+        ]
+
+
 def stable_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8", errors="replace")).hexdigest()[:16]
 
@@ -38,6 +61,32 @@ def load_problem_records(full_jsonl: Path, lcb_repo: Path, question_ids: set[str
         problem.question_id: problem
         for problem in load_full_jsonl(full_jsonl, lcb_repo, question_ids)
     }
+
+
+def parse_public_test_cases(value: Any) -> list[dict[str, Any]]:
+    if isinstance(value, str):
+        try:
+            value = json.loads(value)
+        except json.JSONDecodeError:
+            return []
+    if not isinstance(value, list):
+        return []
+    return [item for item in value if isinstance(item, dict)]
+
+
+def load_problem_records_from_prompt_public_parquet(
+    parquet_path: Path,
+    question_ids: set[str],
+) -> dict[str, PromptPublicProblem]:
+    import pandas as pd
+
+    df = pd.read_parquet(parquet_path)
+    problems: dict[str, PromptPublicProblem] = {}
+    for row in df.to_dict(orient="records"):
+        question_id = row.get("question_id")
+        if isinstance(question_id, str) and question_id in question_ids:
+            problems[question_id] = PromptPublicProblem(row)
+    return problems
 
 
 def public_signal_features(record: dict[str, Any]) -> dict[str, Any]:
@@ -255,6 +304,8 @@ def parse_llm_outputs(
 
 
 def build_prompt_records(args: argparse.Namespace) -> list[dict[str, Any]]:
+    if bool(args.full_jsonl) == bool(args.prompt_public_parquet):
+        raise ValueError("provide exactly one of --full-jsonl or --prompt-public-parquet")
     selection_payload = load_public_selection_payload(Path(args.public_selection))
     target_records = select_target_records(
         selection_payload["records"],
@@ -264,11 +315,18 @@ def build_prompt_records(args: argparse.Namespace) -> list[dict[str, Any]]:
         target_priority=args.target_priority,
     )
     generations = load_generations(Path(args.generations))
-    problems_by_id = load_problem_records(
-        Path(args.full_jsonl),
-        Path(args.lcb_repo),
-        {record["question_id"] for record in target_records},
-    )
+    target_question_ids = {record["question_id"] for record in target_records}
+    if args.full_jsonl:
+        problems_by_id = load_problem_records(
+            Path(args.full_jsonl),
+            Path(args.lcb_repo),
+            target_question_ids,
+        )
+    else:
+        problems_by_id = load_problem_records_from_prompt_public_parquet(
+            Path(args.prompt_public_parquet),
+            target_question_ids,
+        )
     prompt_records = []
     for record in target_records:
         question_id = record["question_id"]
@@ -317,7 +375,14 @@ def main() -> None:
         description="Build candidate-aware LCB behavior-test prompts and parse LLM outputs."
     )
     parser.add_argument("--lcb-repo", required=True)
-    parser.add_argument("--full-jsonl", required=True)
+    parser.add_argument("--full-jsonl")
+    parser.add_argument(
+        "--prompt-public-parquet",
+        help=(
+            "Prompt/public-only parquet fallback for building behavior-test prompts "
+            "when hidden/full JSONL is unavailable."
+        ),
+    )
     parser.add_argument("--generations", required=True)
     parser.add_argument("--public-selection", required=True)
     parser.add_argument("--output-dir", required=True)
@@ -380,7 +445,13 @@ def main() -> None:
         "parsed_behavior_input_count": len(parsed_records),
         "lcb_repo": args.lcb_repo,
         "full_jsonl": args.full_jsonl,
-        "full_jsonl_sha256": sha256_file(Path(args.full_jsonl)),
+        "full_jsonl_sha256": sha256_file(Path(args.full_jsonl))
+        if args.full_jsonl
+        else None,
+        "prompt_public_parquet": args.prompt_public_parquet,
+        "prompt_public_parquet_sha256": sha256_file(Path(args.prompt_public_parquet))
+        if args.prompt_public_parquet
+        else None,
         "generations": args.generations,
         "generations_sha256": sha256_file(Path(args.generations)),
         "public_selection": args.public_selection,

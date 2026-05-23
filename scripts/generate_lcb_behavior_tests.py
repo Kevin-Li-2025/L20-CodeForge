@@ -45,6 +45,11 @@ def load_existing_outputs(path: Path) -> dict[str, dict[str, Any]]:
     return records
 
 
+def display_model_name(model_name_or_path: str) -> str:
+    path = Path(model_name_or_path)
+    return path.name if path.exists() else model_name_or_path
+
+
 def parse_behavior_inputs_from_outputs(
     output_records: list[dict[str, Any]],
     max_inputs: int,
@@ -85,7 +90,7 @@ def write_behavior_inputs(
                 "records": nonempty,
                 "metadata": {
                     "source": "local_model_candidate_aware_differential_v1",
-                    "model": model,
+                    "model": display_model_name(model),
                     "prompts": str(prompts_path),
                     "prompts_sha256": sha256_file(prompts_path),
                     "records_total": len(parsed_records),
@@ -220,7 +225,7 @@ def main() -> None:
             "prompts_sha256": sha256_file(prompts_path),
             "prompt_count": len(prompt_records),
             "already_generated": len(existing),
-            "model": args.model,
+            "model": display_model_name(args.model),
             "dry_run": True,
         }
         (output_dir / "manifest.json").write_text(
@@ -279,10 +284,10 @@ def main() -> None:
     manifest = {
         "prompts": str(prompts_path),
         "prompts_sha256": sha256_file(prompts_path),
-        "outputs": str(outputs_path),
-        "behavior_inputs": str(behavior_inputs_path),
-        "model": args.model,
-        "prompt_count": len(prompt_records),
+            "outputs": str(outputs_path),
+            "behavior_inputs": str(behavior_inputs_path),
+            "model": display_model_name(args.model),
+            "prompt_count": len(prompt_records),
         "generated_records": len(output_records),
         "nonempty_behavior_records": sum(bool(record["inputs"]) for record in parsed_records),
         "behavior_inputs_total": sum(record["n_inputs"] for record in parsed_records),

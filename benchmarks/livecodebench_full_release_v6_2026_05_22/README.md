@@ -231,6 +231,19 @@ prompts or select candidates. This is the recommended next behavior-test
 generation targeter because it spends the same L20 inference budget on much
 more likely verifier-failure cases.
 
+The first expanded batch using this targeter is recorded under
+`qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility/`:
+
+- Prompt records: `128`.
+- Generated records: `128`.
+- Parsed non-empty behavior-test records: `112`.
+- Parsed behavior inputs: `1130`.
+- Generation wall time: `1227.057s`.
+
+This is still an input-only verifier artifact, not a new headline benchmark
+score. The next score update requires conservative selector replay plus
+retry-stabilized hidden-test evaluation.
+
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.

@@ -1,0 +1,20 @@
+{
+  "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts128_fragility/prompts.jsonl",
+  "prompt_count": 128,
+  "parsed_behavior_input_count": 0,
+  "lcb_repo": "LiveCodeBench",
+  "full_jsonl": null,
+  "full_jsonl_sha256": null,
+  "prompt_public_parquet": "data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet",
+  "prompt_public_parquet_sha256": "6a067f9b0762a2df9cad3e269872e189ce2d4f6ece7d8356a6f5d63cacdb5a96",
+  "generations": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json",
+  "generations_sha256": "3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d",
+  "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json",
+  "public_selection_sha256": "df415885f08a42557bdc94ed4855a58fd227c41ce35603e2750e5963dbc71009",
+  "targeting": {
+    "min_public_score": 1.0,
+    "include_non_ties": false,
+    "target_priority": "public-fragility",
+    "limit": 128
+  }
+}

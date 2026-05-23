@@ -1,0 +1,12 @@
+{
+  "prompts": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts128_fragility/prompts.jsonl",
+  "prompts_sha256": "4431efe0284f3fb3d1ee5b6fe8152a8ba508009015078c8efcade59cf9699595",
+  "outputs": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility/llm_outputs.jsonl",
+  "behavior_inputs": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility/behavior_inputs.json",
+  "model": "Qwen2.5-Coder-7B-Instruct",
+  "prompt_count": 128,
+  "generated_records": 128,
+  "nonempty_behavior_records": 112,
+  "behavior_inputs_total": 1130,
+  "seconds": 1227.057
+}

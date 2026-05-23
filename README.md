@@ -127,7 +127,7 @@ LiveCodeBench verifier loop:
 ```bash
 python scripts/build_lcb_behavior_test_prompts.py \
   --lcb-repo /tmp/LiveCodeBench \
-  --full-jsonl /tmp/lcb_data/full_release_v6/release_v6_test_full.jsonl \
+  --prompt-public-parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
   --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
   --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
   --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64 \
@@ -174,6 +174,10 @@ Current generated-test probe:
   `public-fragility` ordering raises retrospective public-pass/hidden-fail
   target density from `3/64` to `20/64` without using hidden labels for prompt
   construction or candidate selection.
+- `qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility`
+  records the first expanded `public-fragility` generation run: `128` prompt
+  records, `112` parsed non-empty behavior-test records, and `1130` generated
+  input-only behavior tests in `1227.057s`.
 
 Generalization gate:
 

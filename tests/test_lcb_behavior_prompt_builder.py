@@ -29,6 +29,27 @@ def test_public_signal_features_counts_fragility() -> None:
     assert features["public_score_sum"] == 2.5
 
 
+def test_prompt_public_problem_parses_parquet_row_shape() -> None:
+    builder = load_prompt_builder_module()
+
+    problem = builder.PromptPublicProblem(
+        {
+            "question_id": "abc001_a",
+            "question_title": "Title",
+            "question_content": "Statement",
+            "difficulty": "easy",
+            "platform": "atcoder",
+            "metadata": '{"func_name": "solve"}',
+            "public_test_cases": '[{"input": "1\\n", "output": "2\\n"}]',
+        }
+    )
+
+    assert problem.question_id == "abc001_a"
+    assert problem.metadata == {"func_name": "solve"}
+    assert problem.public_test_cases[0].input == "1\n"
+    assert problem.public_test_cases[0].output == "2\n"
+
+
 def test_select_target_records_keeps_default_input_order() -> None:
     builder = load_prompt_builder_module()
     records = [
