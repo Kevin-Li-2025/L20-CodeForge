@@ -592,6 +592,27 @@ Result:
 - Candidate health was `16/20 = 80.0%` syntax-valid and `20/20` with entrypoint.
 - Interpretation: recursive public-feedback repair shows overfitting risk after one round. The first feedback round is useful, but a second round should not be treated as a generalization improvement unless it also passes hidden replay or a stricter cross-check.
 
+### adaptive differential cross-check on feedback candidates
+
+Path:
+
+- First feedback differential inputs: `benchmarks/livecodebench_full_release_v6_2026_05_24/adaptive_differential_public_feedback_control12_fail10_2026_05_24/behavior_inputs.json`
+- First feedback diagnostics: `benchmarks/livecodebench_full_release_v6_2026_05_24/adaptive_differential_public_feedback_control12_fail10_2026_05_24/diagnostics.json`
+- Second feedback differential inputs: `benchmarks/livecodebench_full_release_v6_2026_05_24/adaptive_differential_public_feedback_round2_control12_fail8_2026_05_24/behavior_inputs.json`
+- Second feedback diagnostics: `benchmarks/livecodebench_full_release_v6_2026_05_24/adaptive_differential_public_feedback_round2_control12_fail8_2026_05_24/diagnostics.json`
+
+Protocol:
+
+- Ran `scripts/build_lcb_adaptive_differential_inputs.py` on both public-feedback candidate pools.
+- Generated mutated inputs only from visible public inputs, then kept only inputs that distinguish public-passing candidates.
+- Did not use hidden expected outputs.
+
+Result:
+
+- First feedback fail10 pool: `0` differential records; only `3639` had two public-passing candidates, and `38` candidate inputs failed to distinguish them.
+- Second feedback fail8 pool: `0` differential records; no task had two public-passing candidates, so there was no candidate-pair cross-check available.
+- Interpretation: candidate-aware differential checks cannot rescue this stage because the candidate pool rarely contains multiple public-passing alternatives. The next useful cross-check needs either independent generated tests with expected-output verification or a stronger candidate generator that produces diverse public-passing options.
+
 ## Current Interpretation
 
 Good signal:
@@ -642,6 +663,7 @@ Bad/limiting signal:
 - Multi-source code-only repair did not improve the fail10 slice; execution feedback, not another ungrounded repair sample, was the ingredient that produced new passes.
 - Public-feedback repair is still only `2/10` on the fail10 slice and costs `1061s`, so it should be routed selectively to tasks with syntax-valid candidates rather than applied to every benchmark task.
 - A second public-feedback round created one public-passing candidate but zero hidden passes, so recursive public-test repair should be capped or cross-validated rather than repeated blindly.
+- Adaptive differential fuzzing found no usable candidate-pair tests on the feedback pools, mostly because the pool lacks multiple public-passing alternatives.
 
 ## Next Run
 
@@ -665,3 +687,4 @@ Purpose:
 - Next control experiment should extend public-only repair with more source candidates or a generated algorithm-prefix step, while keeping the same control12 gate and public-only selection protocol.
 - Do not continue recursive public-feedback repair on the same fail8 slice without a stronger cross-check; the second round produced public-only overfit signal.
 - Next improvement should use broader generated tests, differential behavior checks, or mined verified algorithm-prefix data before another repair loop.
+- Because candidate-pair differential checks had no leverage here, prioritize expected-output verification for generated inputs or mined algorithm-prefix traces over another candidate-consensus selector.

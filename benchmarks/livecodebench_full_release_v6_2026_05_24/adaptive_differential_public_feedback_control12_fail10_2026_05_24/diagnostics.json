@@ -1,0 +1,88 @@
+{
+  "source": "adaptive_differential_fuzz_v1",
+  "records": 0,
+  "tasks_considered": 10,
+  "tasks_with_differential_inputs": 0,
+  "candidate_inputs_tried_total": 38,
+  "differential_inputs_total": 0,
+  "seconds": 14.946,
+  "diagnostics": [
+    {
+      "question_id": "3475",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [
+        1
+      ],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "3639",
+      "question_title": "zero-array-transformation-i",
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "candidate_inputs_tried": 38,
+      "differential_inputs": 0,
+      "selected_candidate_input_indices": [],
+      "status": "no_differential_inputs"
+    },
+    {
+      "question_id": "3657",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "3751",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "3786",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "abc320_c",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "abc364_c",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "abc370_d",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "abc375_c",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    },
+    {
+      "question_id": "abc400_d",
+      "status": "skipped_less_than_two_public_pass",
+      "public_pass_indices": [],
+      "candidate_inputs_tried": 0,
+      "differential_inputs": 0
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "records": [],
+  "metadata": {
+    "source": "adaptive_differential_fuzz_v1",
+    "lcb_repo": "/home/hhai/LiveCodeBench",
+    "full_jsonl": "data/raw/livecodebench/full_release_v6/release_v6_test_full.jsonl",
+    "full_jsonl_sha256": null,
+    "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1/generations.json",
+    "generations_sha256": "2dbc6e72a38be2466de47a3b8dc093100e53c44ebd8ca1118da4096aa81ad1cf",
+    "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1_eval/public_selection.json",
+    "public_selection_sha256": "3da42e8d96097bdaf42fa2831c3a6cef9dd9c495c8c163e58b50be7e6c435765",
+    "max_samples": 4,
+    "max_candidate_inputs": 64,
+    "max_output_inputs": 12,
+    "seed": 20260523,
+    "hidden_expected_outputs_used": false
+  }
+}
