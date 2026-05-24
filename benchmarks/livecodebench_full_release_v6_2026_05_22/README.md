@@ -11,6 +11,7 @@ official LiveCodeBench evaluator.
 | --- | --- | --- | ---: | ---: | ---: | ---: |
 | `Qwen2.5-Coder-7B-Instruct` | none | greedy, `temperature=0` | 1 | 1,055 | 297 | 0.2815 |
 | `Qwen2.5-Coder-7B-Instruct` | none | `temperature=0.8`, public-test selection | 4 | 1,055 | 378 | 0.3583 |
+| `Qwen2.5-Coder-7B-Instruct` | none | `temperature=0.8`, public-test selection | 8 | 1,055 | 403 | 0.3820 |
 
 This is not an official leaderboard submission. It is a reproducible local
 checkpoint for a resource-constrained single-L20 setup. The official
@@ -31,6 +32,8 @@ run intentionally uses greedy `n=1` to establish a low-cost full-suite floor.
   `9d70473c14b20e6d3c514ff64d6f3525f870e5f25d18b55bd0ac83722912d3c5`.
 - `n=4` saved generations SHA-256:
   `3293b100575d483dfa33e79a75f3048d1edfa4c62847150f5e4f19ae480d0b0d`.
+- `n=8` saved generations SHA-256:
+  `0950cbbbfcbed6d716b2c9b556e7e9aa3626211381a95e4c6e4a367bdd95df57`.
 
 The full hidden-test JSONL is not committed because it is 4.2GB. The committed
 artifacts include saved generations, evaluator outputs, and compact summaries.
@@ -104,6 +107,35 @@ python scripts/evaluate_lcb_generations.py \
   --public-select-tie-breaker shortest \
   --num-process-evaluate 8 \
   --timeout 8
+
+python scripts/run_lcb_subset_benchmark.py \
+  --lcb-repo /path/to/LiveCodeBench \
+  --lcb-commit 28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24 \
+  --parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_full_generate_only \
+  --model /path/to/Qwen2.5-Coder-7B-Instruct \
+  --n-samples 8 \
+  --sample-batch-size 2 \
+  --temperature 0.8 \
+  --top-p 0.95 \
+  --max-new-tokens 2048 \
+  --generate-only \
+  --resume \
+  --resume-from-generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
+  --allow-partial-resume
+
+python scripts/evaluate_lcb_selection_chunks.py \
+  --lcb-repo /path/to/LiveCodeBench \
+  --lcb-commit 28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24 \
+  --full-jsonl /path/to/release_v6_test_full.jsonl \
+  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_full_generate_only/generations.json \
+  --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_public_select_full_eval/public_selection.json \
+  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_public_select_full_eval \
+  --max-samples 8 \
+  --chunk-size 128 \
+  --chunk-wall-timeout 60 \
+  --num-process-evaluate 8 \
+  --timeout 8
 ```
 
 Use `--public-select` instead of `--public-selection .../public_selection.json`
@@ -140,8 +172,8 @@ where the L20-constrained strategy should focus next.
 1. The model is usable on easy tasks but collapses on hard tasks.
 2. Wrong answers dominate failures, so better reasoning/repair matters more
    than only optimizing runtime.
-3. Full `n=4` public-test selection improves the hidden score from `0.2815`
-   to `0.3583`, so the next gains should come from producing better candidates
+3. Full `n=8` public-test selection improves the hidden score from `0.2815`
+   to `0.3820`, so the next gains should come from producing better candidates
    and repairing public-test failures, not from switching away from selection.
 
 ## Full `n=4` Public Selection
@@ -185,6 +217,54 @@ Primary artifact:
 
 - `full_n4_public_select_summary.json`: compact full-run score, gain, hashes,
   public-selection counts, and breakdowns.
+
+## Full `n=8` Public Selection
+
+The full `n=8` run extends the saved `n=4` pool by generating four additional
+samples per task on the remote L20. It reuses the same public-test selector:
+choose the shortest public-passing candidate, or the shortest best public-score
+candidate when no candidate fully passes public tests.
+
+| Run | Passed | Total | Score |
+| --- | ---: | ---: | ---: |
+| Greedy baseline | 297 | 1,055 | 0.2815 |
+| `temperature=0.8`, `n=4`, public-test selection | 378 | 1,055 | 0.3583 |
+| `temperature=0.8`, `n=8`, public-test selection | 403 | 1,055 | 0.3820 |
+
+The `n=8` absolute gain is `+106` solved tasks versus greedy, or `+10.05`
+pass@1 points. Versus `n=4`, it adds `+25` solved tasks, or `+2.37` pass@1
+points. Public tests selected a public-passing candidate on `618/1055` tasks,
+up from `546/1055` for `n=4`, while hidden tests accepted `403/1055`.
+
+The hidden replay used `scripts/evaluate_lcb_selection_chunks.py`, a resumable
+chunked wrapper around the official LiveCodeBench evaluator. One pathological
+single-problem worker failure was conservatively counted as a failed task
+(`3637`) rather than omitted.
+
+Breakdown for the selected full `n=8` run:
+
+| Slice | Passed | Total | pass@1 |
+| --- | ---: | ---: | ---: |
+| Easy | 260 | 322 | 0.8075 |
+| Medium | 124 | 383 | 0.3238 |
+| Hard | 19 | 350 | 0.0543 |
+| AtCoder | 199 | 602 | 0.3306 |
+| Codeforces | 5 | 9 | 0.5556 |
+| LeetCode | 199 | 444 | 0.4482 |
+
+Failure classes after `n=8` public selection:
+
+| Class | Count |
+| --- | ---: |
+| Wrong answer | 438 |
+| Runtime error | 66 |
+| Time limit exceeded | 147 |
+| Fatal chunk failure, counted as failed | 1 |
+
+Primary artifact:
+
+- `full_n8_public_select_summary.json`: compact full-run score, incremental
+  gain, hashes, public-selection counts, chunked replay notes, and breakdowns.
 
 ## Stratified `n=4` Public-Selection Probe
 

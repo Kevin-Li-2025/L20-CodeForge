@@ -1,0 +1,66 @@
+{
+  "start_index": 359,
+  "end_index": 360,
+  "question_ids": [
+    "3638"
+  ],
+  "evaluation_seconds": 0.293,
+  "metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        true,
+        false
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "minimum-operations-to-make-character-frequencies-equal",
+      "question_content": "You are given a string s.\nA string t is called good if all characters of t occur the same number of times.\nYou can perform the following operations any number of times:\n\nDelete a character from s.\nInsert a character in s.\nChange a character in s to its next letter in the alphabet.\n\nNote that you cannot change 'z' to 'a' using the third operation.\nReturn the minimum number of operations required to make s good.\n \nExample 1:\n\nInput: s = \"acab\"\nOutput: 1\nExplanation:\nWe can make s good by deleting one occurrence of character 'a'.\n\nExample 2:\n\nInput: s = \"wddw\"\nOutput: 0\nExplanation:\nWe do not need to perform any operations since s is initially good.\n\nExample 3:\n\nInput: s = \"aaabc\"\nOutput: 2\nExplanation:\nWe can make s good by applying these operations:\n\nChange one occurrence of 'a' to 'b'\nInsert one occurrence of 'c' into s\n\n\n \nConstraints:\n\n3 <= s.length <= 2 * 10^4\ns contains only lowercase English letters.",
+      "platform": "leetcode",
+      "question_id": "3638",
+      "contest_id": "weekly-contest-428",
+      "contest_date": "2024-12-14T18:30:00",
+      "starter_code": "class Solution:\n    def makeStringGood(self, s: str) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nfrom collections import Counter\n\nclass Solution:\n    def makeStringGood(self, s: str) -> int:\n        char_count = Counter(s)\n        used_counts = set()\n        operations = 0\n        \n        for count in char_count.values():\n            new_count = count\n            while new_count in used_counts:\n                new_count -= 1\n                operations += 1\n            if new_count > 0:\n                used_counts.add(new_count)\n        \n        return operations\n```"
+      ],
+      "code_list": [
+        "from collections import Counter\n\nclass Solution:\n    def makeStringGood(self, s: str) -> int:\n        char_count = Counter(s)\n        used_counts = set()\n        operations = 0\n        \n        for count in char_count.values():\n            new_count = count\n            while new_count in used_counts:\n                new_count -= 1\n                operations += 1\n            if new_count > 0:\n                used_counts.add(new_count)\n        \n        return operations"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    }
+  ],
+  "fatal": false
+}

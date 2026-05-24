@@ -1,0 +1,426 @@
+{
+  "start_index": 360,
+  "end_index": 368,
+  "question_ids": [
+    "3639",
+    "3644",
+    "3646",
+    "3647",
+    "3648",
+    "3649",
+    "3651",
+    "3653"
+  ],
+  "evaluation_seconds": 10.932,
+  "metrics": {
+    "pass@1": 0.25,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 1.0,
+        "7": 0.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        false
+      ]
+    ],
+    "1": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "2": [
+      [
+        false
+      ]
+    ],
+    "3": [
+      [
+        true,
+        false
+      ]
+    ],
+    "4": [
+      [
+        false
+      ]
+    ],
+    "5": [
+      [
+        true,
+        true,
+        false
+      ]
+    ],
+    "6": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "7": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ],
+    [
+      true
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      true
+    ],
+    [
+      false
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "zero-array-transformation-i",
+      "question_content": "You are given an integer array nums of length n and a 2D array queries, where queries[i] = [l_i, r_i].\nFor each queries[i]:\n\nSelect a subset of indices within the range [l_i, r_i] in nums.\nDecrement the values at the selected indices by 1.\n\nA Zero Array is an array where all elements are equal to 0.\nReturn true if it is possible to transform nums into a Zero Array after processing all the queries sequentially, otherwise return false.\n \nExample 1:\n\nInput: nums = [1,0,1], queries = [[0,2]]\nOutput: true\nExplanation:\n\nFor i = 0:\n\nSelect the subset of indices as [0, 2] and decrement the values at these indices by 1.\nThe array will become [0, 0, 0], which is a Zero Array.\n\n\n\n\nExample 2:\n\nInput: nums = [4,3,2,1], queries = [[1,3],[0,2]]\nOutput: false\nExplanation:\n\nFor i = 0:\n\nSelect the subset of indices as [1, 2, 3] and decrement the values at these indices by 1.\nThe array will become [4, 2, 1, 0].\n\n\nFor i = 1:\n\nSelect the subset of indices as [0, 1, 2] and decrement the values at these indices by 1.\nThe array will become [3, 1, 0, 0], which is not a Zero Array.\n\n\n\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i] <= 10^5\n1 <= queries.length <= 10^5\nqueries[i].length == 2\n0 <= l_i <= r_i < nums.length",
+      "platform": "leetcode",
+      "question_id": "3639",
+      "contest_id": "weekly-contest-424",
+      "contest_date": "2024-11-16T18:30:00",
+      "starter_code": "class Solution:\n    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:\n        prefix_sums = [0] * (len(nums) + 1)\n        \n        for l, r in queries:\n            prefix_sums[l] += 1\n            prefix_sums[r + 1] -= 1\n        \n        current_sum = 0\n        for num in prefix_sums[:-1]:\n            current_sum += num\n            if current_sum > 0:\n                return False\n        \n        return True\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:\n        prefix_sums = [0] * (len(nums) + 1)\n        \n        for l, r in queries:\n            prefix_sums[l] += 1\n            prefix_sums[r + 1] -= 1\n        \n        current_sum = 0\n        for num in prefix_sums[:-1]:\n            current_sum += num\n            if current_sum > 0:\n                return False\n        \n        return True"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "minimum-positive-sum-subarray",
+      "question_content": "You are given an integer array nums and two integers l and r. Your task is to find the minimum sum of a subarray whose size is between l and r (inclusive) and whose sum is greater than 0.\nReturn the minimum sum of such a subarray. If no such subarray exists, return -1.\nA subarray is a contiguous non-empty sequence of elements within an array.\n \nExample 1:\n\nInput: nums = [3, -2, 1, 4], l = 2, r = 3\nOutput: 1\nExplanation:\nThe subarrays of length between l = 2 and r = 3 where the sum is greater than 0 are:\n\n[3, -2] with a sum of 1\n[1, 4] with a sum of 5\n[3, -2, 1] with a sum of 2\n[-2, 1, 4] with a sum of 3\n\nOut of these, the subarray [3, -2] has a sum of 1, which is the smallest positive sum. Hence, the answer is 1.\n\nExample 2:\n\nInput: nums = [-2, 2, -3, 1], l = 2, r = 3\nOutput: -1\nExplanation:\nThere is no subarray of length between l and r that has a sum greater than 0. So, the answer is -1.\n\nExample 3:\n\nInput: nums = [1, 2, 3, 4], l = 2, r = 4\nOutput: 3\nExplanation:\nThe subarray [1, 2] has a length of 2 and the minimum sum greater than 0. So, the answer is 3.\n\n \nConstraints:\n\n1 <= nums.length <= 100\n1 <= l <= r <= nums.length\n-1000 <= nums[i] <= 1000",
+      "platform": "leetcode",
+      "question_id": "3644",
+      "contest_id": "weekly-contest-425",
+      "contest_date": "2024-11-23T18:30:00",
+      "starter_code": "class Solution:\n    def minimumSumSubarray(self, nums: List[int], l: int, r: int) -> int:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nclass Solution:\n    def minimumSumSubarray(self, nums: List[int], l: int, r: int) -> int:\n        min_sum = float('inf')\n        for i in range(len(nums)):\n            current_sum = 0\n            for j in range(i, len(nums)):\n                current_sum += nums[j]\n                if l <= j - i + 1 <= r and current_sum > 0:\n                    min_sum = min(min_sum, current_sum)\n        return min_sum if min_sum != float('inf') else -1\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def minimumSumSubarray(self, nums: List[int], l: int, r: int) -> int:\n        min_sum = float('inf')\n        for i in range(len(nums)):\n            current_sum = 0\n            for j in range(i, len(nums)):\n                current_sum += nums[j]\n                if l <= j - i + 1 <= r and current_sum > 0:\n                    min_sum = min(min_sum, current_sum)\n        return min_sum if min_sum != float('inf') else -1"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    },
+    {
+      "question_title": "sum-of-good-subsequences",
+      "question_content": "You are given an integer array nums. A good subsequence is defined as a subsequence of nums where the absolute difference between any two consecutive elements in the subsequence is exactly 1.\nReturn the sum of all possible good subsequences of nums.\nSince the answer may be very large, return it modulo 10^9 + 7.\nNote that a subsequence of size 1 is considered good by definition.\n \nExample 1:\n\nInput: nums = [1,2,1]\nOutput: 14\nExplanation:\n\nGood subsequences are: [1], [2], [1], [1,2], [2,1], [1,2,1].\nThe sum of elements in these subsequences is 14.\n\n\nExample 2:\n\nInput: nums = [3,4,5]\nOutput: 40\nExplanation:\n\nGood subsequences are: [3], [4], [5], [3,4], [4,5], [3,4,5].\nThe sum of elements in these subsequences is 40.\n\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i] <= 10^5",
+      "platform": "leetcode",
+      "question_id": "3646",
+      "contest_id": "weekly-contest-423",
+      "contest_date": "2024-11-09T18:30:00",
+      "starter_code": "class Solution:\n    def sumOfGoodSubsequences(self, nums: List[int]) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nclass Solution:\n    def sumOfGoodSubsequences(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        dp = {}\n        for num in sorted(nums):\n            dp[num] = (num * 2 + dp.get(num - 1, 0)) % MOD\n        return sum(dp.values()) % MOD\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def sumOfGoodSubsequences(self, nums: List[int]) -> int:\n        MOD = 10**9 + 7\n        dp = {}\n        for num in sorted(nums):\n            dp[num] = (num * 2 + dp.get(num - 1, 0)) % MOD\n        return sum(dp.values()) % MOD"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "zero-array-transformation-iii",
+      "question_content": "You are given an integer array nums of length n and a 2D array queries where queries[i] = [l_i, r_i].\nEach queries[i] represents the following action on nums:\n\nDecrement the value at each index in the range [l_i, r_i] in nums by at most 1.\nThe amount by which the value is decremented can be chosen independently for each index.\n\nA Zero Array is an array with all its elements equal to 0.\nReturn the maximum number of elements that can be removed from queries, such that nums can still be converted to a zero array using the remaining queries. If it is not possible to convert nums to a zero array, return -1.\n \nExample 1:\n\nInput: nums = [2,0,2], queries = [[0,2],[0,2],[1,1]]\nOutput: 1\nExplanation:\nAfter removing queries[2], nums can still be converted to a zero array.\n\nUsing queries[0], decrement nums[0] and nums[2] by 1 and nums[1] by 0.\nUsing queries[1], decrement nums[0] and nums[2] by 1 and nums[1] by 0.\n\n\nExample 2:\n\nInput: nums = [1,1,1,1], queries = [[1,3],[0,2],[1,3],[1,2]]\nOutput: 2\nExplanation:\nWe can remove queries[2] and queries[3].\n\nExample 3:\n\nInput: nums = [1,2,3,4], queries = [[0,3]]\nOutput: -1\nExplanation:\nnums cannot be converted to a zero array even after using all the queries.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n0 <= nums[i] <= 10^5\n1 <= queries.length <= 10^5\nqueries[i].length == 2\n0 <= l_i <= r_i < nums.length",
+      "platform": "leetcode",
+      "question_id": "3647",
+      "contest_id": "biweekly-contest-144",
+      "contest_date": "2024-11-23T06:30:00",
+      "starter_code": "class Solution:\n    def maxRemoval(self, nums: List[int], queries: List[List[int]]) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxRemoval(self, nums: List[int], queries: List[List[int]]) -> int:\n        # Sort queries by their range length in descending order\n        queries.sort(key=lambda q: q[1] - q[0], reverse=True)\n        \n        # Create a list to track the remaining values in nums\n        remaining = nums[:]\n        \n        # Function to apply a query to the remaining values\n        def apply_query(l, r):\n            for i in range(l, r + 1):\n                if remaining[i] > 0:\n                    remaining[i] -= 1\n        \n        # Apply queries and count how many can be used\n        used_queries = 0\n        for l, r in queries:\n            apply_query(l, r)\n            if sum(remaining) == 0:\n                break\n            used_queries += 1\n        \n        # Check if the entire array can be made zero\n        if sum(remaining) == 0:\n            return used_queries\n        else:\n            return -1\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxRemoval(self, nums: List[int], queries: List[List[int]]) -> int:\n        # Sort queries by their range length in descending order\n        queries.sort(key=lambda q: q[1] - q[0], reverse=True)\n        \n        # Create a list to track the remaining values in nums\n        remaining = nums[:]\n        \n        # Function to apply a query to the remaining values\n        def apply_query(l, r):\n            for i in range(l, r + 1):\n                if remaining[i] > 0:\n                    remaining[i] -= 1\n        \n        # Apply queries and count how many can be used\n        used_queries = 0\n        for l, r in queries:\n            apply_query(l, r)\n            if sum(remaining) == 0:\n                break\n            used_queries += 1\n        \n        # Check if the entire array can be made zero\n        if sum(remaining) == 0:\n            return used_queries\n        else:\n            return -1"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "find-the-maximum-number-of-fruits-collected",
+      "question_content": "There is a game dungeon comprised of n x n rooms arranged in a grid.\nYou are given a 2D array fruits of size n x n, where fruits[i][j] represents the number of fruits in the room (i, j). Three children will play in the game dungeon, with initial positions at the corner rooms (0, 0), (0, n - 1), and (n - 1, 0).\nThe children will make exactly n - 1 moves according to the following rules to reach the room (n - 1, n - 1):\n\nThe child starting from (0, 0) must move from their current room (i, j) to one of the rooms (i + 1, j + 1), (i + 1, j), and (i, j + 1) if the target room exists.\nThe child starting from (0, n - 1) must move from their current room (i, j) to one of the rooms (i + 1, j - 1), (i + 1, j), and (i + 1, j + 1) if the target room exists.\nThe child starting from (n - 1, 0) must move from their current room (i, j) to one of the rooms (i - 1, j + 1), (i, j + 1), and (i + 1, j + 1) if the target room exists.\n\nWhen a child enters a room, they will collect all the fruits there. If two or more children enter the same room, only one child will collect the fruits, and the room will be emptied after they leave.\nReturn the maximum number of fruits the children can collect from the dungeon.\n \nExample 1:\n\nInput: fruits = [[1,2,3,4],[5,6,8,7],[9,10,11,12],[13,14,15,16]]\nOutput: 100\nExplanation:\n\nIn this example:\n\nThe 1^st child (green) moves on the path (0,0) -> (1,1) -> (2,2) -> (3, 3).\nThe 2^nd child (red) moves on the path (0,3) -> (1,2) -> (2,3) -> (3, 3).\nThe 3^rd child (blue) moves on the path (3,0) -> (3,1) -> (3,2) -> (3, 3).\n\nIn total they collect 1 + 6 + 11 + 16 + 4 + 8 + 12 + 13 + 14 + 15 = 100 fruits.\n\nExample 2:\n\nInput: fruits = [[1,1],[1,1]]\nOutput: 4\nExplanation:\nIn this example:\n\nThe 1^st child moves on the path (0,0) -> (1,1).\nThe 2^nd child moves on the path (0,1) -> (1,1).\nThe 3^rd child moves on the path (1,0) -> (1,1).\n\nIn total they collect 1 + 1 + 1 + 1 = 4 fruits.\n\n \nConstraints:\n\n2 <= n == fruits.length == fruits[i].length <= 1000\n0 <= fruits[i][j] <= 1000",
+      "platform": "leetcode",
+      "question_id": "3648",
+      "contest_id": "biweekly-contest-144",
+      "contest_date": "2024-11-23T06:30:00",
+      "starter_code": "class Solution:\n    def maxCollectedFruits(self, fruits: List[List[int]]) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxCollectedFruits(self, fruits: List[List[int]]) -> int:\n        n = len(fruits)\n        dp = [[[float('-inf')] * n for _ in range(n)] for _ in range(3)]\n        \n        dp[0][0][0] = fruits[0][0]\n        dp[1][0][n-1] = fruits[0][n-1]\n        dp[2][n-1][0] = fruits[n-1][0]\n        \n        for i in range(1, n):\n            for j in range(n):\n                if j < n-1:\n                    dp[0][i][j+1] = max(dp[0][i][j], dp[0][i-1][j]) + fruits[i][j+1]\n                    dp[1][i][j-1] = max(dp[1][i][j], dp[1][i-1][j]) + fruits[i][j-1]\n                    dp[2][i][j+1] = max(dp[2][i][j], dp[2][i-1][j]) + fruits[i][j+1]\n        \n        return max(max(max(row[-1]) for row in dp) for _ in range(3))\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxCollectedFruits(self, fruits: List[List[int]]) -> int:\n        n = len(fruits)\n        dp = [[[float('-inf')] * n for _ in range(n)] for _ in range(3)]\n        \n        dp[0][0][0] = fruits[0][0]\n        dp[1][0][n-1] = fruits[0][n-1]\n        dp[2][n-1][0] = fruits[n-1][0]\n        \n        for i in range(1, n):\n            for j in range(n):\n                if j < n-1:\n                    dp[0][i][j+1] = max(dp[0][i][j], dp[0][i-1][j]) + fruits[i][j+1]\n                    dp[1][i][j-1] = max(dp[1][i][j], dp[1][i-1][j]) + fruits[i][j-1]\n                    dp[2][i][j+1] = max(dp[2][i][j], dp[2][i-1][j]) + fruits[i][j+1]\n        \n        return max(max(max(row[-1]) for row in dp) for _ in range(3))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "minimum-time-to-break-locks-i",
+      "question_content": "Bob is stuck in a dungeon and must break n locks, each requiring some amount of energy to break. The required energy for each lock is stored in an array called strength where strength[i] indicates the energy needed to break the i^th lock.\nTo break a lock, Bob uses a sword with the following characteristics:\n\nThe initial energy of the sword is 0.\nThe initial factor X by which the energy of the sword increases is 1.\nEvery minute, the energy of the sword increases by the current factor X.\nTo break the i^th lock, the energy of the sword must reach at least strength[i].\nAfter breaking a lock, the energy of the sword resets to 0, and the factor X increases by a given value K.\n\nYour task is to determine the minimum time in minutes required for Bob to break all n locks and escape the dungeon.\nReturn the minimum time required for Bob to break all n locks.\n \nExample 1:\n\nInput: strength = [3,4,1], K = 1\nOutput: 4\nExplanation:\n\n\n\nTime\nEnergy\nX\nAction\nUpdated X\n\n\n0\n0\n1\nNothing\n1\n\n\n1\n1\n1\nBreak 3^rd Lock\n2\n\n\n2\n2\n2\nNothing\n2\n\n\n3\n4\n2\nBreak 2^nd Lock\n3\n\n\n4\n3\n3\nBreak 1^st Lock\n3\n\n\n\nThe locks cannot be broken in less than 4 minutes; thus, the answer is 4.\n\nExample 2:\n\nInput: strength = [2,5,4], K = 2\nOutput: 5\nExplanation:\n\n\n\nTime\nEnergy\nX\nAction\nUpdated X\n\n\n0\n0\n1\nNothing\n1\n\n\n1\n1\n1\nNothing\n1\n\n\n2\n2\n1\nBreak 1^st Lock\n3\n\n\n3\n3\n3\nNothing\n3\n\n\n4\n6\n3\nBreak 2^n^d Lock\n5\n\n\n5\n5\n5\nBreak 3^r^d Lock\n7\n\n\n\nThe locks cannot be broken in less than 5 minutes; thus, the answer is 5.\n\n \nConstraints:\n\nn == strength.length\n1 <= n <= 8\n1 <= K <= 10\n1 <= strength[i] <= 10^6",
+      "platform": "leetcode",
+      "question_id": "3649",
+      "contest_id": "biweekly-contest-145",
+      "contest_date": "2024-12-07T06:30:00",
+      "starter_code": "class Solution:\n    def findMinimumTime(self, strength: List[int], K: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def findMinimumTime(self, strength: List[int], K: int) -> int:\n        from bisect import bisect_left\n        \n        def can_break_all_locks(time):\n            total_energy = 0\n            factor = 1\n            for i in range(len(strength)):\n                if time < strength[i]:\n                    return False\n                total_energy += (time - strength[i])\n                if total_energy >= factor * (i + 1):\n                    factor += K\n            return True\n        \n        left, right = max(strength), sum(strength)\n        while left < right:\n            mid = (left + right) // 2\n            if can_break_all_locks(mid):\n                right = mid\n            else:\n                left = mid + 1\n        return left\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def findMinimumTime(self, strength: List[int], K: int) -> int:\n        from bisect import bisect_left\n        \n        def can_break_all_locks(time):\n            total_energy = 0\n            factor = 1\n            for i in range(len(strength)):\n                if time < strength[i]:\n                    return False\n                total_energy += (time - strength[i])\n                if total_energy >= factor * (i + 1):\n                    factor += K\n            return True\n        \n        left, right = max(strength), sum(strength)\n        while left < right:\n            mid = (left + right) // 2\n            if can_break_all_locks(mid):\n                right = mid\n            else:\n                left = mid + 1\n        return left"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "transformed-array",
+      "question_content": "You are given an integer array nums that represents a circular array. Your task is to create a new array result of the same size, following these rules:\nFor each index i (where 0 <= i < nums.length), perform the following independent actions:\n\n\nIf nums[i] > 0: Start at index i and move nums[i] steps to the right in the circular array. Set result[i] to the value of the index where you land.\nIf nums[i] < 0: Start at index i and move abs(nums[i]) steps to the left in the circular array. Set result[i] to the value of the index where you land.\nIf nums[i] == 0: Set result[i] to nums[i].\n\nReturn the new array result.\nNote: Since nums is circular, moving past the last element wraps around to the beginning, and moving before the first element wraps back to the end.\n \nExample 1:\n\nInput: nums = [3,-2,1,1]\nOutput: [1,1,1,3]\nExplanation:\n\nFor nums[0] that is equal to 3, If we move 3 steps to right, we reach nums[3]. So result[0] should be 1.\nFor nums[1] that is equal to -2, If we move 2 steps to left, we reach nums[3]. So result[1] should be 1.\nFor nums[2] that is equal to 1, If we move 1 step to right, we reach nums[3]. So result[2] should be 1.\nFor nums[3] that is equal to 1, If we move 1 step to right, we reach nums[0]. So result[3] should be 3.\n\n\nExample 2:\n\nInput: nums = [-1,4,-1]\nOutput: [-1,-1,4]\nExplanation:\n\nFor nums[0] that is equal to -1, If we move 1 step to left, we reach nums[2]. So result[0] should be -1.\nFor nums[1] that is equal to 4, If we move 4 steps to right, we reach nums[2]. So result[1] should be -1.\nFor nums[2] that is equal to -1, If we move 1 step to left, we reach nums[1]. So result[2] should be 4.\n\n\n \nConstraints:\n\n1 <= nums.length <= 100\n-100 <= nums[i] <= 100",
+      "platform": "leetcode",
+      "question_id": "3651",
+      "contest_id": "weekly-contest-427",
+      "contest_date": "2024-12-07T18:30:00",
+      "starter_code": "class Solution:\n    def constructTransformedArray(self, nums: List[int]) -> List[int]:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def constructTransformedArray(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        result = [0] * n\n        \n        for i in range(n):\n            if nums[i] > 0:\n                steps = nums[i]\n                result[i] = nums[(i + steps) % n]\n            elif nums[i] < 0:\n                steps = abs(nums[i])\n                result[i] = nums[(i - steps) % n]\n            else:\n                result[i] = nums[i]\n        \n        return result\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def constructTransformedArray(self, nums: List[int]) -> List[int]:\n        n = len(nums)\n        result = [0] * n\n        \n        for i in range(n):\n            if nums[i] > 0:\n                steps = nums[i]\n                result[i] = nums[(i + steps) % n]\n            elif nums[i] < 0:\n                steps = abs(nums[i])\n                result[i] = nums[(i - steps) % n]\n            else:\n                result[i] = nums[i]\n        \n        return result"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    },
+    {
+      "question_title": "maximum-subarray-sum-with-length-divisible-by-k",
+      "question_content": "You are given an array of integers nums and an integer k.\nReturn the maximum sum of a subarray of nums, such that the size of the subarray is divisible by k.\n \nExample 1:\n\nInput: nums = [1,2], k = 1\nOutput: 3\nExplanation:\nThe subarray [1, 2] with sum 3 has length equal to 2 which is divisible by 1.\n\nExample 2:\n\nInput: nums = [-1,-2,-3,-4,-5], k = 4\nOutput: -10\nExplanation:\nThe maximum sum subarray is [-1, -2, -3, -4] which has length equal to 4 which is divisible by 4.\n\nExample 3:\n\nInput: nums = [-5,1,2,-3,4], k = 2\nOutput: 4\nExplanation:\nThe maximum sum subarray is [1, 2, -3, 4] which has length equal to 4 which is divisible by 2.\n\n \nConstraints:\n\n1 <= k <= nums.length <= 2 * 10^5\n-10^9 <= nums[i] <= 10^9",
+      "platform": "leetcode",
+      "question_id": "3653",
+      "contest_id": "weekly-contest-427",
+      "contest_date": "2024-12-07T18:30:00",
+      "starter_code": "class Solution:\n    def maxSubarraySum(self, nums: List[int], k: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def maxSubarraySum(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        max_sum = float('-inf')\n        \n        for start in range(n):\n            current_sum = 0\n            for end in range(start, n):\n                current_sum += nums[end]\n                if (end - start + 1) % k == 0:\n                    max_sum = max(max_sum, current_sum)\n        \n        return max_sum\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def maxSubarraySum(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        max_sum = float('-inf')\n        \n        for start in range(n):\n            current_sum = 0\n            for end in range(start, n):\n                current_sum += nums[end]\n                if (end - start + 1) % k == 0:\n                    max_sum = max(max_sum, current_sum)\n        \n        return max_sum"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    }
+  ],
+  "fatal": false
+}

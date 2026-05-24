@@ -76,6 +76,16 @@ def load_expected_selector_module():
     return module
 
 
+def load_chunk_evaluator_module():
+    script = Path(__file__).parents[1] / "scripts" / "evaluate_lcb_selection_chunks.py"
+    spec = importlib.util.spec_from_file_location("evaluate_lcb_selection_chunks", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -122,6 +132,43 @@ def test_evaluator_applies_saved_public_selection_by_question_id() -> None:
     assert selected == [["a1"], ["b0"]]
     assert raw_outputs == [["ra1"], ["rb0"]]
     assert [record["question_id"] for record in records] == ["a", "b"]
+
+
+def test_chunk_evaluator_metrics_from_pass_lists() -> None:
+    chunk_evaluator = load_chunk_evaluator_module()
+
+    metrics = chunk_evaluator.metrics_from_pass_lists([[True], [False], []])
+
+    assert metrics["pass@1"] == 1 / 3
+    assert metrics["detail"]["pass@1"] == {"0": 1.0, "1": 0.0, "2": 0.0}
+
+
+def test_chunk_evaluator_remaps_results_by_chunk_start() -> None:
+    chunk_evaluator = load_chunk_evaluator_module()
+
+    results, metadata, pass_lists, eval_all = chunk_evaluator.remap_results(
+        [
+            {
+                "start_index": 2,
+                "results": {"0": [[False]], "1": [[True, True]]},
+                "metadata": [[{"error_code": "x"}], [{}]],
+                "pass_lists": [[False], [True]],
+                "eval_all": [{"question_id": "c"}, {"question_id": "d"}],
+            },
+            {
+                "start_index": 0,
+                "results": {"0": [[True]], "1": [[False]]},
+                "metadata": [[{}], [{}]],
+                "pass_lists": [[True], [False]],
+                "eval_all": [{"question_id": "a"}, {"question_id": "b"}],
+            },
+        ]
+    )
+
+    assert results == {0: [[True]], 1: [[False]], 2: [[False]], 3: [[True, True]]}
+    assert pass_lists == [[True], [False], [False], [True]]
+    assert [item[0].get("error_code") for item in metadata] == [None, None, "x", None]
+    assert [item["question_id"] for item in eval_all] == ["a", "b", "c", "d"]
 
 
 def test_evaluator_behavior_selection_uses_consensus_after_public_score() -> None:

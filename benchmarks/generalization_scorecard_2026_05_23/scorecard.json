@@ -4,51 +4,51 @@
   "livecodebench": {
     "overall": {
       "baseline_passed": 297,
-      "candidate_passed": 378,
+      "candidate_passed": 403,
       "total": 1055,
       "baseline_pass_at_1": 0.28151658767772514,
-      "candidate_pass_at_1": 0.3582938388625592,
-      "delta": 0.076777,
-      "relative_gain": 0.272727
+      "candidate_pass_at_1": 0.3819905213270142,
+      "delta": 0.100474,
+      "relative_gain": 0.356902
     },
     "difficulty": [
       {
         "slice": "easy",
         "baseline_passed": 206,
-        "candidate_passed": 251,
+        "candidate_passed": 260,
         "total": 322,
         "baseline_pass_at_1": 0.639751552795031,
-        "candidate_pass_at_1": 0.7795031055900621,
-        "delta": 0.139752
+        "candidate_pass_at_1": 0.8074534161490683,
+        "delta": 0.167702
       },
       {
         "slice": "hard",
         "baseline_passed": 9,
-        "candidate_passed": 17,
+        "candidate_passed": 19,
         "total": 350,
         "baseline_pass_at_1": 0.025714285714285714,
-        "candidate_pass_at_1": 0.04857142857142857,
-        "delta": 0.022857
+        "candidate_pass_at_1": 0.054285714285714284,
+        "delta": 0.028571
       },
       {
         "slice": "medium",
         "baseline_passed": 82,
-        "candidate_passed": 110,
+        "candidate_passed": 124,
         "total": 383,
         "baseline_pass_at_1": 0.21409921671018275,
-        "candidate_pass_at_1": 0.28720626631853785,
-        "delta": 0.073107
+        "candidate_pass_at_1": 0.3237597911227154,
+        "delta": 0.109661
       }
     ],
     "platform": [
       {
         "slice": "atcoder",
         "baseline_passed": 146,
-        "candidate_passed": 183,
+        "candidate_passed": 199,
         "total": 602,
         "baseline_pass_at_1": 0.2425249169435216,
-        "candidate_pass_at_1": 0.30398671096345514,
-        "delta": 0.061462
+        "candidate_pass_at_1": 0.33056478405315615,
+        "delta": 0.08804
       },
       {
         "slice": "codeforces",
@@ -62,11 +62,11 @@
       {
         "slice": "leetcode",
         "baseline_passed": 149,
-        "candidate_passed": 190,
+        "candidate_passed": 199,
         "total": 444,
         "baseline_pass_at_1": 0.3355855855855856,
-        "candidate_pass_at_1": 0.42792792792792794,
-        "delta": 0.092342
+        "candidate_pass_at_1": 0.44819819819819817,
+        "delta": 0.112613
       }
     ]
   },
@@ -109,31 +109,31 @@
     "checks": [
       {
         "name": "lcb_overall_improves",
-        "value": 0.076777,
+        "value": 0.100474,
         "threshold": 0.0,
         "passed": true
       },
       {
         "name": "lcb_difficulty_easy_not_regressed",
-        "value": 0.139752,
+        "value": 0.167702,
         "threshold": -0.005,
         "passed": true
       },
       {
         "name": "lcb_difficulty_hard_not_regressed",
-        "value": 0.022857,
+        "value": 0.028571,
         "threshold": -0.005,
         "passed": true
       },
       {
         "name": "lcb_difficulty_medium_not_regressed",
-        "value": 0.073107,
+        "value": 0.109661,
         "threshold": -0.005,
         "passed": true
       },
       {
         "name": "lcb_platform_atcoder_not_regressed",
-        "value": 0.061462,
+        "value": 0.08804,
         "threshold": -0.005,
         "passed": true
       },
@@ -145,7 +145,7 @@
       },
       {
         "name": "lcb_platform_leetcode_not_regressed",
-        "value": 0.092342,
+        "value": 0.112613,
         "threshold": -0.005,
         "passed": true
       },
@@ -164,7 +164,7 @@
     ]
   },
   "inputs": {
-    "lcb_summary": "benchmarks/livecodebench_full_release_v6_2026_05_22/full_n4_public_select_summary.json",
+    "lcb_summary": "benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json",
     "evalplus_summary": "benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv"
   },
   "thresholds": {

@@ -1,0 +1,137 @@
+{
+  "start_index": 356,
+  "end_index": 358,
+  "question_ids": [
+    "3634",
+    "3636"
+  ],
+  "evaluation_seconds": 8.331,
+  "metrics": {
+    "pass@1": 0.5,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 1.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "1": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {}
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ],
+    [
+      true
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "find-mirror-score-of-a-string",
+      "question_content": "You are given a string s.\nWe define the mirror of a letter in the English alphabet as its corresponding letter when the alphabet is reversed. For example, the mirror of 'a' is 'z', and the mirror of 'y' is 'b'.\nInitially, all characters in the string s are unmarked.\nYou start with a score of 0, and you perform the following process on the string s:\n\nIterate through the string from left to right.\nAt each index i, find the closest unmarked index j such that j < i and s[j] is the mirror of s[i]. Then, mark both indices i and j, and add the value i - j to the total score.\nIf no such index j exists for the index i, move on to the next index without making any changes.\n\nReturn the total score at the end of the process.\n \nExample 1:\n\nInput: s = \"aczzx\"\nOutput: 5\nExplanation:\n\ni = 0. There is no index j that satisfies the conditions, so we skip.\ni = 1. There is no index j that satisfies the conditions, so we skip.\ni = 2. The closest index j that satisfies the conditions is j = 0, so we mark both indices 0 and 2, and then add 2 - 0 = 2 to the score.\ni = 3. There is no index j that satisfies the conditions, so we skip.\ni = 4. The closest index j that satisfies the conditions is j = 1, so we mark both indices 1 and 4, and then add 4 - 1 = 3 to the score.\n\n\nExample 2:\n\nInput: s = \"abcdef\"\nOutput: 0\nExplanation:\nFor each index i, there is no index j that satisfies the conditions.\n\n \nConstraints:\n\n1 <= s.length <= 10^5\ns consists only of lowercase English letters.",
+      "platform": "leetcode",
+      "question_id": "3634",
+      "contest_id": "weekly-contest-431",
+      "contest_date": "2025-01-04T18:30:00",
+      "starter_code": "class Solution:\n    def calculateScore(self, s: str) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def calculateScore(self, s: str) -> int:\n        n = len(s)\n        score = 0\n        marked = [False] * n\n        \n        for i in range(n):\n            if not marked[i]:\n                mirror_char = chr(ord('a') + ord('z') - ord(s[i]))\n                j = i - 1\n                while j >= 0:\n                    if s[j] == mirror_char and not marked[j]:\n                        score += i - j\n                        marked[i] = True\n                        marked[j] = True\n                        break\n                    j -= 1\n        \n        return score\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def calculateScore(self, s: str) -> int:\n        n = len(s)\n        score = 0\n        marked = [False] * n\n        \n        for i in range(n):\n            if not marked[i]:\n                mirror_char = chr(ord('a') + ord('z') - ord(s[i]))\n                j = i - 1\n                while j >= 0:\n                    if s[j] == mirror_char and not marked[j]:\n                        score += i - j\n                        marked[i] = True\n                        marked[j] = True\n                        break\n                    j -= 1\n        \n        return score"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "check-balanced-string",
+      "question_content": "You are given a string num consisting of only digits. A string of digits is called balanced if the sum of the digits at even indices is equal to the sum of digits at odd indices.\nReturn true if num is balanced, otherwise return false.\n \nExample 1:\n\nInput: num = \"1234\"\nOutput: false\nExplanation:\n\nThe sum of digits at even indices is 1 + 3 == 4, and the sum of digits at odd indices is 2 + 4 == 6.\nSince 4 is not equal to 6, num is not balanced.\n\n\nExample 2:\n\nInput: num = \"24123\"\nOutput: true\nExplanation:\n\nThe sum of digits at even indices is 2 + 1 + 3 == 6, and the sum of digits at odd indices is 4 + 2 == 6.\nSince both are equal the num is balanced.\n\n\n \nConstraints:\n\n2 <= num.length <= 100\nnum consists of digits only",
+      "platform": "leetcode",
+      "question_id": "3636",
+      "contest_id": "weekly-contest-422",
+      "contest_date": "2024-11-02T19:30:00",
+      "starter_code": "class Solution:\n    def isBalanced(self, num: str) -> bool:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nclass Solution:\n    def isBalanced(self, num: str) -> bool:\n        even_sum = sum(int(num[i]) for i in range(0, len(num), 2))\n        odd_sum = sum(int(num[i]) for i in range(1, len(num), 2))\n        return even_sum == odd_sum\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def isBalanced(self, num: str) -> bool:\n        even_sum = sum(int(num[i]) for i in range(0, len(num), 2))\n        odd_sum = sum(int(num[i]) for i in range(1, len(num), 2))\n        return even_sum == odd_sum"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    }
+  ],
+  "fatal": false
+}

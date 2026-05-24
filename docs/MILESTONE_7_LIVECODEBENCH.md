@@ -288,12 +288,12 @@ The project now records a cross-benchmark generalization scorecard under
 
 Current gate status: `PASS`.
 
-- Full LiveCodeBench `release_v6`: `297/1055` greedy to `378/1055` with `n=4`
-  public-test selection, `+0.0768` pass@1.
-- LiveCodeBench difficulty splits all improved: easy `+0.1398`, medium
-  `+0.0731`, hard `+0.0229`.
-- LiveCodeBench platform splits all improved: AtCoder `+0.0615`, Codeforces
-  `+0.3333`, LeetCode `+0.0923`.
+- Full LiveCodeBench `release_v6`: `297/1055` greedy to `403/1055` with `n=8`
+  public-test selection, `+0.1005` pass@1.
+- LiveCodeBench difficulty splits all improved: easy `+0.1677`, medium
+  `+0.1097`, hard `+0.0286`.
+- LiveCodeBench platform splits all improved: AtCoder `+0.0880`, Codeforces
+  `+0.3333`, LeetCode `+0.1126`.
 - EvalPlus holdouts also improved relative to greedy: HumanEval+ `+0.079`,
   MBPP+ `+0.095`.
 
@@ -305,14 +305,21 @@ presented as progress.
 
 ## Next Experiments
 
-The next active line is an S* lite scaling run. It deliberately separates
-public-side construction from hidden-test measurement:
+The S* lite scaling run has now completed for `n=8`. It deliberately separated
+public-side construction from hidden-test measurement and used a chunked hidden
+replay wrapper so pathological generated programs cannot abort the full suite.
+The current headline is `403/1055` (`0.3820`) on full `release_v6`, with one
+single-problem worker fatal conservatively counted as failed.
 
-1. Extend the full `n=4` pool to `n=8` without regenerating prior samples.
-2. Recompute public-test selection and compare `n=4` versus `n=8` on full
-   LiveCodeBench `release_v6`.
-3. Only if `n=8` improves the public oracle and hidden replay, extend to `n=16`
-   or add public-test repair for public-failing candidates.
+The next active line should keep the same separation:
+
+1. Use the `n=8` public-selection failure set to target public-failing and
+   public-pass-hidden-fail candidates separately.
+2. Add a repair/generation pass for public-failing candidates before spending
+   budget on blind `n=16`; public tests accepted only `618/1055` selected
+   candidates, so there is still large public-side headroom.
+3. If the repair pass improves both public oracle and held-out hidden replay,
+   extend to `n=16` with partial resume.
 4. Keep expected-output verifier selection out of the headline until a verifier
    calibration set proves it is better than public-test selection.
 5. Update the EvalPlus + LiveCodeBench generalization scorecard before claiming

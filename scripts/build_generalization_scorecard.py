@@ -281,7 +281,7 @@ def main() -> None:
         "--lcb-summary",
         default=(
             "benchmarks/livecodebench_full_release_v6_2026_05_22/"
-            "full_n4_public_select_summary.json"
+            "full_n8_public_select_summary.json"
         ),
     )
     parser.add_argument(

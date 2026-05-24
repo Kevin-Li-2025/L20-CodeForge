@@ -8,13 +8,13 @@ Gate status: `PASS`
 
 | slice | greedy passed | candidate passed | total | greedy | candidate | delta |
 | --- | --- | --- | --- | --- | --- | --- |
-| overall | 297 | 378 | 1055 | 0.2815 | 0.3583 | +0.0768 |
-| difficulty:easy | 206 | 251 | 322 | 0.6398 | 0.7795 | +0.1398 |
-| difficulty:hard | 9 | 17 | 350 | 0.0257 | 0.0486 | +0.0229 |
-| difficulty:medium | 82 | 110 | 383 | 0.2141 | 0.2872 | +0.0731 |
-| platform:atcoder | 146 | 183 | 602 | 0.2425 | 0.3040 | +0.0615 |
+| overall | 297 | 403 | 1055 | 0.2815 | 0.3820 | +0.1005 |
+| difficulty:easy | 206 | 260 | 322 | 0.6398 | 0.8075 | +0.1677 |
+| difficulty:hard | 9 | 19 | 350 | 0.0257 | 0.0543 | +0.0286 |
+| difficulty:medium | 82 | 124 | 383 | 0.2141 | 0.3238 | +0.1097 |
+| platform:atcoder | 146 | 199 | 602 | 0.2425 | 0.3306 | +0.0880 |
 | platform:codeforces | 2 | 5 | 9 | 0.2222 | 0.5556 | +0.3333 |
-| platform:leetcode | 149 | 190 | 444 | 0.3356 | 0.4279 | +0.0923 |
+| platform:leetcode | 149 | 199 | 444 | 0.3356 | 0.4482 | +0.1126 |
 
 ## EvalPlus Holdout
 

@@ -118,9 +118,9 @@ Milestone notes:
   samples, official reports, rechecks, hashes, and a summary table.
 - `benchmarks/livecodebench_full_release_v6_2026_05_22/`: full 1,055-task
   LiveCodeBench `release_v6` greedy baseline with saved generations, hidden-test
-  evaluator outputs, hashes, and breakdowns. It also includes the `n=4`
-  public-test selection result and a candidate-aware behavior-test prompt bank
-  for the next verifier loop.
+  evaluator outputs, hashes, and breakdowns. It also includes the `n=4` and
+  `n=8` public-test selection results, plus a candidate-aware behavior-test
+  prompt bank for the next verifier loop.
 
 LiveCodeBench verifier loop:
 

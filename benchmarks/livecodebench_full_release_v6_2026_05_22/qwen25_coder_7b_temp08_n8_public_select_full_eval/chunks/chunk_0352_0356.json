@@ -1,0 +1,220 @@
+{
+  "start_index": 352,
+  "end_index": 356,
+  "question_ids": [
+    "3627",
+    "3629",
+    "3631",
+    "3632"
+  ],
+  "evaluation_seconds": 8.446,
+  "metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    ],
+    "1": [
+      [
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "2": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "3": [
+      [
+        true,
+        false
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "find-minimum-time-to-reach-last-room-i",
+      "question_content": "There is a dungeon with n x m rooms arranged as a grid.\nYou are given a 2D array moveTime of size n x m, where moveTime[i][j] represents the minimum time in seconds when you can start moving to that room. You start from the room (0, 0) at time t = 0 and can move to an adjacent room. Moving between adjacent rooms takes exactly one second.\nReturn the minimum time to reach the room (n - 1, m - 1).\nTwo rooms are adjacent if they share a common wall, either horizontally or vertically.\n \nExample 1:\n\nInput: moveTime = [[0,4],[4,4]]\nOutput: 6\nExplanation:\nThe minimum time required is 6 seconds.\n\nAt time t == 4, move from room (0, 0) to room (1, 0) in one second.\nAt time t == 5, move from room (1, 0) to room (1, 1) in one second.\n\n\nExample 2:\n\nInput: moveTime = [[0,0,0],[0,0,0]]\nOutput: 3\nExplanation:\nThe minimum time required is 3 seconds.\n\nAt time t == 0, move from room (0, 0) to room (1, 0) in one second.\nAt time t == 1, move from room (1, 0) to room (1, 1) in one second.\nAt time t == 2, move from room (1, 1) to room (1, 2) in one second.\n\n\nExample 3:\n\nInput: moveTime = [[0,1],[1,2]]\nOutput: 3\n\n \nConstraints:\n\n2 <= n == moveTime.length <= 50\n2 <= m == moveTime[i].length <= 50\n0 <= moveTime[i][j] <= 10^9",
+      "platform": "leetcode",
+      "question_id": "3627",
+      "contest_id": "weekly-contest-422",
+      "contest_date": "2024-11-02T19:30:00",
+      "starter_code": "class Solution:\n    def minTimeToReach(self, moveTime: List[List[int]]) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def minTimeToReach(self, moveTime: List[List[int]]) -> int:\n        n, m = len(moveTime), len(moveTime[0])\n        heap = [(moveTime[0][0], 0, 0)]\n        visited = set([(0, 0)])\n        \n        while heap:\n            curr_time, i, j = heappop(heap)\n            \n            if i == n - 1 and j == m - 1:\n                return max(curr_time, moveTime[i][j])\n            \n            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n            for di, dj in directions:\n                ni, nj = i + di, j + dj\n                if 0 <= ni < n and 0 <= nj < m and (ni, nj) not in visited:\n                    next_time = max(curr_time, moveTime[ni][nj]) + 1\n                    heappush(heap, (next_time, ni, nj))\n                    visited.add((ni, nj))\n        \n        return -1\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def minTimeToReach(self, moveTime: List[List[int]]) -> int:\n        n, m = len(moveTime), len(moveTime[0])\n        heap = [(moveTime[0][0], 0, 0)]\n        visited = set([(0, 0)])\n        \n        while heap:\n            curr_time, i, j = heappop(heap)\n            \n            if i == n - 1 and j == m - 1:\n                return max(curr_time, moveTime[i][j])\n            \n            directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n            for di, dj in directions:\n                ni, nj = i + di, j + dj\n                if 0 <= ni < n and 0 <= nj < m and (ni, nj) not in visited:\n                    next_time = max(curr_time, moveTime[ni][nj]) + 1\n                    heappush(heap, (next_time, ni, nj))\n                    visited.add((ni, nj))\n        \n        return -1"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "total-characters-in-string-after-transformations-i",
+      "question_content": "You are given a string s and an integer t, representing the number of transformations to perform. In one transformation, every character in s is replaced according to the following rules:\n\nIf the character is 'z', replace it with the string \"ab\".\nOtherwise, replace it with the next character in the alphabet. For example, 'a' is replaced with 'b', 'b' is replaced with 'c', and so on.\n\nReturn the length of the resulting string after exactly t transformations.\nSince the answer may be very large, return it modulo 10^9 + 7.\n \nExample 1:\n\nInput: s = \"abcyy\", t = 2\nOutput: 7\nExplanation:\n\nFirst Transformation (t = 1):\n\n\t\n'a' becomes 'b'\n'b' becomes 'c'\n'c' becomes 'd'\n'y' becomes 'z'\n'y' becomes 'z'\nString after the first transformation: \"bcdzz\"\n\n\nSecond Transformation (t = 2):\n\t\n'b' becomes 'c'\n'c' becomes 'd'\n'd' becomes 'e'\n'z' becomes \"ab\"\n'z' becomes \"ab\"\nString after the second transformation: \"cdeabab\"\n\n\nFinal Length of the string: The string is \"cdeabab\", which has 7 characters.\n\n\nExample 2:\n\nInput: s = \"azbk\", t = 1\nOutput: 5\nExplanation:\n\nFirst Transformation (t = 1):\n\n\t\n'a' becomes 'b'\n'z' becomes \"ab\"\n'b' becomes 'c'\n'k' becomes 'l'\nString after the first transformation: \"babcl\"\n\n\nFinal Length of the string: The string is \"babcl\", which has 5 characters.\n\n\n \nConstraints:\n\n1 <= s.length <= 10^5\ns consists only of lowercase English letters.\n1 <= t <= 10^5",
+      "platform": "leetcode",
+      "question_id": "3629",
+      "contest_id": "weekly-contest-421",
+      "contest_date": "2024-10-26T19:30:00",
+      "starter_code": "class Solution:\n    def lengthAfterTransformations(self, s: str, t: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def lengthAfterTransformations(self, s: str, t: int) -> int:\n        MOD = 10**9 + 7\n        \n        def transform(s, t):\n            result = []\n            for char in s:\n                if char == 'z':\n                    result.append(\"ab\")\n                else:\n                    result.append(chr((ord(char) - ord('a') + 1) % 26 + ord('a')))\n            return ''.join(result)\n        \n        for _ in range(t):\n            s = transform(s, t)\n        \n        return len(s) % MOD\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def lengthAfterTransformations(self, s: str, t: int) -> int:\n        MOD = 10**9 + 7\n        \n        def transform(s, t):\n            result = []\n            for char in s:\n                if char == 'z':\n                    result.append(\"ab\")\n                else:\n                    result.append(chr((ord(char) - ord('a') + 1) % 26 + ord('a')))\n            return ''.join(result)\n        \n        for _ in range(t):\n            s = transform(s, t)\n        \n        return len(s) % MOD"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "count-k-reducible-numbers-less-than-n",
+      "question_content": "You are given a binary string s representing a number n in its binary form.\nYou are also given an integer k.\nAn integer x is called k-reducible if performing the following operation at most k times reduces it to 1:\n\nReplace x with the count of set bits in its binary representation.\n\nFor example, the binary representation of 6 is \"110\". Applying the operation once reduces it to 2 (since \"110\" has two set bits). Applying the operation again to 2 (binary \"10\") reduces it to 1 (since \"10\" has one set bit).\nReturn an integer denoting the number of positive integers less than n that are k-reducible.\nSince the answer may be too large, return it modulo 10^9 + 7.\n \nExample 1:\n\nInput: s = \"111\", k = 1\nOutput: 3\nExplanation: \nn = 7. The 1-reducible integers less than 7 are 1, 2, and 4.\n\nExample 2:\n\nInput: s = \"1000\", k = 2\nOutput: 6\nExplanation:\nn = 8. The 2-reducible integers less than 8 are 1, 2, 3, 4, 5, and 6.\n\nExample 3:\n\nInput: s = \"1\", k = 3\nOutput: 0\nExplanation:\nThere are no positive integers less than n = 1, so the answer is 0.\n\n \nConstraints:\n\n1 <= s.length <= 800\ns has no leading zeros.\ns consists only of the characters '0' and '1'.\n1 <= k <= 5",
+      "platform": "leetcode",
+      "question_id": "3631",
+      "contest_id": "weekly-contest-423",
+      "contest_date": "2024-11-09T18:30:00",
+      "starter_code": "class Solution:\n    def countKReducibleNumbers(self, s: str, k: int) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nclass Solution:\n    def countKReducibleNumbers(self, s: str, k: int) -> int:\n        MOD = 10**9 + 7\n        \n        @lru_cache(None)\n        def dp(n):\n            if n == 1:\n                return 1\n            count = bin(n).count('1')\n            total = 0\n            for i in range(1, count + 1):\n                if i > k:\n                    break\n                total += dp(i)\n            return total % MOD\n        \n        n = int(s, 2)\n        result = 0\n        for i in range(1, n):\n            if bin(i).count('1') <= k:\n                result += 1\n        return result % MOD\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def countKReducibleNumbers(self, s: str, k: int) -> int:\n        MOD = 10**9 + 7\n        \n        @lru_cache(None)\n        def dp(n):\n            if n == 1:\n                return 1\n            count = bin(n).count('1')\n            total = 0\n            for i in range(1, count + 1):\n                if i > k:\n                    break\n                total += dp(i)\n            return total % MOD\n        \n        n = int(s, 2)\n        result = 0\n        for i in range(1, n):\n            if bin(i).count('1') <= k:\n                result += 1\n        return result % MOD"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "button-with-longest-push-time",
+      "question_content": "You are given a 2D array events which represents a sequence of events where a child pushes a series of buttons on a keyboard.\nEach events[i] = [index_i, time_i] indicates that the button at index index_i was pressed at time time_i.\n\nThe array is sorted in increasing order of time.\nThe time taken to press a button is the difference in time between consecutive button presses. The time for the first button is simply the time at which it was pressed.\n\nReturn the index of the button that took the longest time to push. If multiple buttons have the same longest time, return the button with the smallest index.\n \nExample 1:\n\nInput: events = [[1,2],[2,5],[3,9],[1,15]]\nOutput: 1\nExplanation:\n\nButton with index 1 is pressed at time 2.\nButton with index 2 is pressed at time 5, so it took 5 - 2 = 3 units of time.\nButton with index 3 is pressed at time 9, so it took 9 - 5 = 4 units of time.\nButton with index 1 is pressed again at time 15, so it took 15 - 9 = 6 units of time.\n\n\nExample 2:\n\nInput: events = [[10,5],[1,7]]\nOutput: 10\nExplanation:\n\nButton with index 10 is pressed at time 5.\nButton with index 1 is pressed at time 7, so it took 7 - 5 = 2 units of time.\n\n\n \nConstraints:\n\n1 <= events.length <= 1000\nevents[i] == [index_i, time_i]\n1 <= index_i, time_i <= 10^5\nThe input is generated such that events is sorted in increasing order of time_i.",
+      "platform": "leetcode",
+      "question_id": "3632",
+      "contest_id": "weekly-contest-428",
+      "contest_date": "2024-12-14T18:30:00",
+      "starter_code": "class Solution:\n    def buttonWithLongestTime(self, events: List[List[int]]) -> int:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def buttonWithLongestTime(self, events: List[List[int]]) -> int:\n        max_time = 0\n        max_index = 0\n        last_time = 0\n        \n        for i, event in enumerate(events):\n            if i > 0:\n                time_diff = event[1] - last_time\n                if time_diff > max_time or (time_diff == max_time and event[0] < max_index):\n                    max_time = time_diff\n                    max_index = event[0]\n            last_time = event[1]\n            \n        return max_index\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def buttonWithLongestTime(self, events: List[List[int]]) -> int:\n        max_time = 0\n        max_index = 0\n        last_time = 0\n        \n        for i, event in enumerate(events):\n            if i > 0:\n                time_diff = event[1] - last_time\n                if time_diff > max_time or (time_diff == max_time and event[0] < max_index):\n                    max_time = time_diff\n                    max_index = event[0]\n            last_time = event[1]\n            \n        return max_index"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    }
+  ],
+  "fatal": false
+}

@@ -1,0 +1,1441 @@
+{
+  "start_index": 1024,
+  "end_index": 1055,
+  "question_ids": [
+    "arc189_a",
+    "arc189_b",
+    "arc189_c",
+    "arc189_d",
+    "arc190_a",
+    "arc190_c",
+    "arc190_d",
+    "arc191_a",
+    "arc191_c",
+    "arc191_d",
+    "arc192_a",
+    "arc192_b",
+    "arc192_d",
+    "arc192_e",
+    "arc193_a",
+    "arc193_b",
+    "arc193_d",
+    "arc194_a",
+    "arc194_b",
+    "arc194_c",
+    "arc194_d",
+    "arc194_e",
+    "arc195_a",
+    "arc195_b",
+    "arc195_c",
+    "arc195_d",
+    "arc195_e",
+    "arc196_a",
+    "arc196_b",
+    "arc196_c",
+    "arc196_d"
+  ],
+  "evaluation_seconds": 9.17,
+  "metrics": {
+    "pass@1": 0.03225806451612903,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 1.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 0.0,
+        "16": 0.0,
+        "17": 0.0,
+        "18": 0.0,
+        "19": 0.0,
+        "20": 0.0,
+        "21": 0.0,
+        "22": 0.0,
+        "23": 0.0,
+        "24": 0.0,
+        "25": 0.0,
+        "26": 0.0,
+        "27": 0.0,
+        "28": 0.0,
+        "29": 0.0,
+        "30": 0.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "1": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "2": [
+      [
+        -2
+      ]
+    ],
+    "3": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "4": [
+      [
+        -4
+      ]
+    ],
+    "5": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "6": [
+      [
+        true,
+        true,
+        -3
+      ]
+    ],
+    "7": [
+      [
+        -4
+      ]
+    ],
+    "8": [
+      [
+        -2
+      ]
+    ],
+    "9": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "10": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "11": [
+      [
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "12": [
+      [
+        -4
+      ]
+    ],
+    "13": [
+      [
+        -2
+      ]
+    ],
+    "14": [
+      [
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "15": [
+      [
+        -2
+      ]
+    ],
+    "16": [
+      [
+        -2
+      ]
+    ],
+    "17": [
+      [
+        -2
+      ]
+    ],
+    "18": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "19": [
+      [
+        -4
+      ]
+    ],
+    "20": [
+      [
+        -2
+      ]
+    ],
+    "21": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "22": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "23": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "24": [
+      [
+        -2
+      ]
+    ],
+    "25": [
+      [
+        -2
+      ]
+    ],
+    "26": [
+      [
+        -4
+      ]
+    ],
+    "27": [
+      [
+        true,
+        true,
+        true,
+        true,
+        -2
+      ]
+    ],
+    "28": [
+      [
+        -2
+      ]
+    ],
+    "29": [
+      [
+        true,
+        -2
+      ]
+    ],
+    "30": [
+      [
+        -2
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 5 != 9"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 87.0 != 41"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 3 != 4"
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 422632159 != 299123226"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 11 30 != 2 7"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Snuke != Fennec"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: cannot import name 'gcd' from 'fractions' (/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/fractions.py)"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 192"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=6: 198763 != 138762"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 1 != 14"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer: mismatched output length"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 3 != 8"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 4 != 6"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer: mismatched output length"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 10 != 3"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Runtime Error"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 1505785 != 1502497"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 0 != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0: 9 != 0"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=1: Yes != No"
+      }
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      true
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "Reversi 2",
+      "question_content": "There is a grid consisting of N cells numbered 1 to N.\nInitially, cell i (1 \\le i \\le N) has an integer i \\bmod 2 written in it. You can perform the following operation any number of times, possibly zero:\n\n- Choose cells l and r (l+1 < r) that satisfy the following conditions, and replace each of the integers written in cells l+1, l+2, \\dots, r-1 with the integer written in cell l.\n- The integer written in cell l is equal to the integer written in cell r.\n- The integer written in cell i (l < i < r) is different from the integer written in cell l.\n\n\n\nFind the number, modulo 998244353, of sequences of operations that result in the integers written in cell i (1 \\leq i \\leq N) being A_i.\nTwo sequences of operations are considered different if and only if their lengths are different or there exists a positive integer t not exceeding the length of the sequences such that the (l, r) chosen in the t-th operations differ.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nA_1 A_2 \\dots A_N\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 1 \\leq N \\leq 2 \\times 10^5\n- 0 \\leq A_i \\leq 1\n\nSample Input 1\n\n6\r\n1 1 1 1 1 0\n\nSample Output 1\n\n3\r\n\nTo make the integers written in each cell i equal to A_i, for example, you can perform the following operations. (Here, we represent the state of the grid as a sequence X = (X_1, X_2, \\dots, X_N).)\n\n- Initially, X = (1, 0, 1, 0, 1, 0).\n- Choose cells 2 and 4. X becomes (1, 0, 0, 0, 1, 0).\n- Choose cells 1 and 5. X becomes (1, 1, 1, 1, 1, 0).\n\nBesides the above, there are two other sequences of operations that result in the integers written in cell i being A_i, so the answer is 3.\n\nSample Input 2\n\n10\r\n1 1 1 1 1 0 1 1 1 0\n\nSample Output 2\n\n9",
+      "platform": "atcoder",
+      "question_id": "arc189_a",
+      "contest_id": "arc189",
+      "contest_date": "2024-12-08T00:00:00",
+      "starter_code": "",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\n# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nMOD = 998244353\n\ndp = [0] * (N + 1)\ndp[0] = 1\n\nfor i in range(N):\n    dp[i + 1] = dp[i]\n    if A[i] == 0:\n        dp[i + 1] += dp[i // 2] if i % 2 == 0 else 0\n    else:\n        dp[i + 1] += dp[(i - 1) // 2] if (i - 1) % 2 == 0 else 0\n    dp[i + 1] %= MOD\n\nprint(dp[N])\n```"
+      ],
+      "code_list": [
+        "# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nMOD = 998244353\n\ndp = [0] * (N + 1)\ndp[0] = 1\n\nfor i in range(N):\n    dp[i + 1] = dp[i]\n    if A[i] == 0:\n        dp[i + 1] += dp[i // 2] if i % 2 == 0 else 0\n    else:\n        dp[i + 1] += dp[(i - 1) // 2] if (i - 1) % 2 == 0 else 0\n    dp[i + 1] %= MOD\n\nprint(dp[N])"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 5 != 9"
+        }
+      ]
+    },
+    {
+      "question_title": "Minimize Sum",
+      "question_content": "There are N pieces placed on a number line. Initially, all pieces are placed at distinct coordinates.\r\nThe initial coordinates of the pieces are X_1, X_2, \\ldots, X_N.\r\nTakahashi can repeat the following operation any number of times, possibly zero.\n\nChoose an integer i such that 1 \\leq i \\leq N-3, and let M be the midpoint between the positions of the i-th and (i+3)-rd pieces in ascending order of coordinate.\r\nThen, move each of the (i+1)-th and (i+2)-th pieces in ascending order of coordinate to positions symmetric to M.\r\nUnder the constraints of this problem, it can be proved that all pieces always occupy distinct coordinates, no matter how one repeatedly performs the operation.\n\nHis goal is to minimize the sum of the coordinates of the N pieces.\r\nFind the minimum possible sum of the coordinates of the N pieces after repeating the operations.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nX_1 X_2 \\ldots X_N\n\nOutput\n\nPrint the minimum possible sum of the coordinates of the N pieces after repeating the operations.\n\nConstraints\n\n\n- 4 \\leq N \\leq 2 \\times 10^5\n- 0 \\leq X_1 < X_2 < \\cdots < X_N \\leq 10^{12}\n- All input values are integers.\n\nSample Input 1\n\n4\r\n1 5 7 10\n\nSample Output 1\n\n21\r\n\nIf Takahashi chooses i = 1, the operation is performed as follows:\n\n- The coordinates of the 1st and 4th pieces in ascending order of coordinate are 1 and 10, so the coordinate of M in this operation is (1 + 10)/2 = 5.5.\n- The 2nd piece from the left moves from coordinate 5 to 5.5 + (5.5 - 5) = 6.\n- The 3rd piece from the left moves from coordinate 7 to 5.5 - (7 - 5.5) = 4.\n\nAfter this operation, the sum of the coordinates of the four pieces is 1 + 4 + 6 + 10 = 21, which is minimal. Thus, print 21.\n\nSample Input 2\n\n6\r\n0 1 6 10 14 16\n\nSample Output 2\n\n41",
+      "platform": "atcoder",
+      "question_id": "arc189_b",
+      "contest_id": "arc189",
+      "contest_date": "2024-12-08T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nX = list(map(int, data[1:]))\n\n# Sort the coordinates to ensure they are in ascending order\nX.sort()\n\n# Initialize the sum of coordinates\ntotal_sum = sum(X)\n\n# Iterate over the possible ranges for i\nfor i in range(N - 3):\n    # Calculate the midpoint M\n    M = (X[i] + X[i + 3]) / 2\n    \n    # Update the coordinates of the (i+1)-th and (i+2)-th pieces\n    X[i + 1] = M + (M - X[i + 1])\n    X[i + 2] = M - (X[i + 2] - M)\n    \n    # Recalculate the total sum\n    total_sum = sum(X)\n\n# Print the final minimum possible sum of the coordinates\nprint(total_sum)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nX = list(map(int, data[1:]))\n\n# Sort the coordinates to ensure they are in ascending order\nX.sort()\n\n# Initialize the sum of coordinates\ntotal_sum = sum(X)\n\n# Iterate over the possible ranges for i\nfor i in range(N - 3):\n    # Calculate the midpoint M\n    M = (X[i] + X[i + 3]) / 2\n    \n    # Update the coordinates of the (i+1)-th and (i+2)-th pieces\n    X[i + 1] = M + (M - X[i + 1])\n    X[i + 2] = M - (X[i + 2] - M)\n    \n    # Recalculate the total sum\n    total_sum = sum(X)\n\n# Print the final minimum possible sum of the coordinates\nprint(total_sum)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 87.0 != 41"
+        }
+      ]
+    },
+    {
+      "question_title": "Balls and Boxes",
+      "question_content": "There are N boxes.\r\nFor i = 1, 2, \\ldots, N, the i-th box contains A_i red balls and B_i blue balls.\nYou are also given two permutations P = (P_1, P_2, \\ldots, P_N) and Q = (Q_1, Q_2, \\ldots, Q_N) of (1, 2, \\ldots, N).\nTakahashi can repeat the following operation any number of times, possibly zero:\n\n- Choose an integer 1 \\leq i \\leq N, and take all the balls from the i-th box into his hand.\n- Put all the red balls in his hand into the P_i-th box.\n- Put all the blue balls in his hand into the Q_i-th box.\n\nHis goal is to make a state where all boxes other than the X-th box contain no balls by repeating the above operations.\r\nDetermine whether it is possible to achieve his goal, and if possible, print the minimum number of operations needed to achieve it.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN X\r\nA_1 A_2 \\ldots A_N\r\nB_1 B_2 \\ldots B_N\r\nP_1 P_2 \\ldots P_N\r\nQ_1 Q_2 \\ldots Q_N\n\nOutput\n\nIf it is impossible for Takahashi to achieve a state where all boxes other than the X-th box contain no balls, print -1. If it is possible, print the minimum number of operations needed to achieve it.\n\nConstraints\n\n\n- 2 \\leq N \\leq 2 \\times 10^5\n- 0 \\leq A_i, B_i \\leq 1\n- 1 \\leq P_i, Q_i \\leq N\n- P and Q are permutations of (1, 2, \\ldots, N).\n- 1 \\leq X \\leq N\n- All input values are integers.\n\nSample Input 1\n\n5 3\r\n0 1 0 1 0\r\n0 0 1 0 1\r\n4 1 2 3 5\r\n3 4 5 2 1\n\nSample Output 1\n\n4\r\n\nThe numbers of red and blue balls in each box are A = (0, 1, 0, 1, 0) and B = (0, 0, 1, 0, 1), respectively.\r\nConsider the following steps:\n\n- First, perform the operation on the 5th box. As a result, A = (0, 1, 0, 1, 0), B = (1, 0, 1, 0, 0).\n- Next, perform the operation on the 2nd box. As a result, A = (1, 0, 0, 1, 0), B = (1, 0, 1, 0, 0).\n- Then, perform the operation on the 1st box. As a result, A = (0, 0, 0, 2, 0), B = (0, 0, 2, 0, 0).\n- Finally, perform the operation on the 4th box. As a result, A = (0, 0, 2, 0, 0), B = (0, 0, 2, 0, 0).\n\nThese four operations achieve a state where all boxes other than the X-th (3rd) box contain no balls.\r\nThis is the minimum number of operations possible.\n\nSample Input 2\n\n5 3\r\n0 0 0 0 0\r\n0 0 0 0 0\r\n4 1 2 3 5\r\n3 4 5 2 1\n\nSample Output 2\n\n0\r\n\nThere are no balls in any boxes.\r\nThus, the state where all boxes other than the X-th (3rd) box contain no balls is already achieved, so the required number of operations is 0.\n\nSample Input 3\n\n2 2\r\n1 1\r\n1 1\r\n1 2\r\n1 2\n\nSample Output 3\n\n-1\r\n\nThere is no way to perform the operation to achieve a state where all boxes other than the X-th (2nd) box contain no balls.\n\nSample Input 4\n\n10 10\r\n0 0 0 0 0 0 1 0 1 0\r\n0 0 0 0 1 1 0 0 1 0\r\n1 4 9 5 8 2 3 6 10 7\r\n7 4 9 10 6 3 1 2 8 5\n\nSample Output 4\n\n8",
+      "platform": "atcoder",
+      "question_id": "arc189_c",
+      "contest_id": "arc189",
+      "contest_date": "2024-12-08T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nX = int(data[1])\n\nA = list(map(int, data[2:N+2]))\nB = list(map(int, data[N+2:2*N+2]))\n\nP = list(map(int, data[2*N+2:3*N+2]))\nQ = list(map(int, data[3*N+2:]))\n\n# Check if it's impossible\nif sum(A) != sum(B):\n    print(-1)\nelse:\n    # Calculate the minimum number of operations\n    operations = 0\n    for i in range(1, N+1):\n        if i == X:\n            continue\n        if A[i-1] > 0 or B[i-1] > 0:\n            operations += max(A[i-1], B[i-1])\n    \n    print(operations)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nX = int(data[1])\n\nA = list(map(int, data[2:N+2]))\nB = list(map(int, data[N+2:2*N+2]))\n\nP = list(map(int, data[2*N+2:3*N+2]))\nQ = list(map(int, data[3*N+2:]))\n\n# Check if it's impossible\nif sum(A) != sum(B):\n    print(-1)\nelse:\n    # Calculate the minimum number of operations\n    operations = 0\n    for i in range(1, N+1):\n        if i == X:\n            continue\n        if A[i-1] > 0 or B[i-1] > 0:\n            operations += max(A[i-1], B[i-1])\n    \n    print(operations)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 3 != 4"
+        }
+      ]
+    },
+    {
+      "question_title": "Takahashi is Slime",
+      "question_content": "There are N slimes lined up in a row from left to right.\r\nFor i = 1, 2, \\ldots, N, the i-th slime from the left has size A_i.\r\nFor each K = 1, 2, \\ldots, N, solve the following problem.\n\nTakahashi is the K-th slime from the left in the initial state.\r\nFind the maximum size that he can have after performing the following action any number of times, possibly zero:\n\n- Choose a slime adjacent to him that is strictly smaller than him, and absorb it.\r\nAs a result, the absorbed slime disappears, and Takahashi's size increases by the size of the absorbed slime.\n\nWhen a slime disappears due to absorption, the gap is immediately closed, and the slimes that were adjacent to the disappearing slime (if they exist) become adjacent (see the explanation in Sample Input 1).\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nA_1 A_2 \\ldots A_N\n\nOutput\n\nPrint the answers B_K for each K = 1, 2, \\ldots, N, separated by spaces, in the following format:\nB_1 B_2 \\ldots B_N\n\nConstraints\n\n\n- 2 \\leq N \\leq 5 \\times 10^5\n- 1 \\leq A_i \\leq 10^9\n- All input values are integers.\n\nSample Input 1\n\n6\r\n4 13 2 3 2 6\n\nSample Output 1\n\n4 30 2 13 2 13\r\n\nAs an example, consider the problem for K = 4.\r\nWe will refer to the sizes of the remaining slimes, listed from left to right, with Takahashi's size enclosed in square brackets [ ], as the state of the row.\r\nThat is, the initial state is (4, 13, 2, [3], 2, 6). Consider the following sequence of actions by Takahashi.\n\n- He absorbs the slime to his right. As a result, the absorbed slime disappears, and his size becomes 3 + 2 = 5. The state becomes (4, 13, 2, [5], 6).\n- He absorbs the slime to his left. As a result, the absorbed slime disappears, and his size becomes 5 + 2 = 7. The state becomes (4, 13, [7], 6).\n- He absorbs the slime to his right. As a result, the absorbed slime disappears, and his size becomes 7 + 6 = 13. The state becomes (4, 13, [13]).\n\nThere are no slimes adjacent to him that are strictly smaller than him, so he cannot perform any more actions. His final size is 13, which is the maximum possible.\n\nSample Input 2\n\n12\r\n22 25 61 10 21 37 2 14 5 8 6 24\n\nSample Output 2\n\n22 47 235 10 31 235 2 235 5 235 6 235",
+      "platform": "atcoder",
+      "question_id": "arc189_d",
+      "contest_id": "arc189",
+      "contest_date": "2024-12-08T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\n# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nresults = []\n\nfor k in range(N):\n    takahashi_size = A[k]\n    left_index = k - 1\n    right_index = k + 1\n    \n    while True:\n        absorbed = False\n        \n        if left_index >= 0 and A[left_index] < takahashi_size:\n            takahashi_size += A[left_index]\n            left_index -= 1\n            absorbed = True\n        \n        if right_index < N and A[right_index] < takahashi_size:\n            takahashi_size += A[right_index]\n            right_index += 1\n            absorbed = True\n        \n        if not absorbed:\n            break\n    \n    results.append(takahashi_size)\n\nprint(\" \".join(map(str, results)))\n```"
+      ],
+      "code_list": [
+        "# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nresults = []\n\nfor k in range(N):\n    takahashi_size = A[k]\n    left_index = k - 1\n    right_index = k + 1\n    \n    while True:\n        absorbed = False\n        \n        if left_index >= 0 and A[left_index] < takahashi_size:\n            takahashi_size += A[left_index]\n            left_index -= 1\n            absorbed = True\n        \n        if right_index < N and A[right_index] < takahashi_size:\n            takahashi_size += A[right_index]\n            right_index += 1\n            absorbed = True\n        \n        if not absorbed:\n            break\n    \n    results.append(takahashi_size)\n\nprint(\" \".join(map(str, results)))"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    },
+    {
+      "question_title": "Inside or Outside",
+      "question_content": "There is an integer sequence x = (x_1, \\ldots, x_N), which is initialized with x_1 = \\cdots = x_N = 0.\nYou will perform M operations on this integer sequence. In the i-th operation, you are given an integer pair (L_i, R_i) such that 1 \\leq L_i \\leq R_i \\leq N, and you must perform exactly one of the following three operations:\n\n- Operation 0: Do nothing. This operation incurs a cost of 0.\n- Operation 1: For each integer j with 1 \\leq j \\leq N, if L_i \\leq j \\leq R_i holds, set x_j = 1. This operation incurs a cost of 1.\n- Operation 2: For each integer j with 1 \\leq j \\leq N, if L_i \\leq j \\leq R_i does not hold, set x_j = 1. This operation incurs a cost of 1.\n\nYour goal is to make x_1 = \\cdots = x_N = 1 hold at the end. Determine whether this goal can be achieved. If it can be achieved, present one way to achieve it where the total cost of the operations is minimized.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M\nL_1 R_1\n\\vdots\nL_M R_M\n\nOutput\n\nIf the goal is not achievable, print -1.\nIf the goal is achievable, print one way to achieve it where the total cost of the operations is minimized, in the following format, where K is the minimum total cost of the operations, and \\mathrm{op}_i is the type of operation (0, 1, or 2) chosen for the i-th operation.\nK\n\\mathrm{op}_1 \\cdots \\mathrm{op}_M\n\nIf there are multiple ways that minimize the total cost, printing any one of them is accepted.\n\nConstraints\n\n\n- 1 \\leq N \\leq 1000000\n- 1 \\leq M \\leq 200000\n- 1 \\leq L_i \\leq R_i \\leq N\n- All input values are integers.\n\nSample Input 1\n\n5 4\n2 4\n3 5\n1 4\n2 5\n\nSample Output 1\n\n2\n2 0 1 0\n\nIn the sample output, x changes as follows:\n\n- Initially, x = (0,0,0,0,0).\n- In the 1st operation, Operation 2 is performed. x_1 and x_5 become 1, so x = (1,0,0,0,1).\n- In the 2nd operation, Operation 0 is performed. x remains (1,0,0,0,1).\n- In the 3rd operation, Operation 1 is performed. x_1, x_2, x_3, x_4 become 1, so x = (1,1,1,1,1).\n- In the 4th operation, Operation 0 is performed. x remains (1,1,1,1,1).\n\nSample Input 2\n\n5 4\n1 3\n1 5\n2 4\n3 5\n\nSample Output 2\n\n1\n0 1 0 0\n\nSample Input 3\n\n5 2\n1 3\n2 5\n\nSample Output 3\n\n2\n1 1\n\nSample Input 4\n\n5 2\n1 3\n2 4\n\nSample Output 4\n\n-1",
+      "platform": "atcoder",
+      "question_id": "arc190_a",
+      "contest_id": "arc190",
+      "contest_date": "2025-01-12T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\n\noperations = []\nindex = 2\nfor _ in range(M):\n    L = int(data[index])\n    R = int(data[index + 1])\n    operations.append((L, R))\n    index += 2\n\n# Initialize the sequence x\nx = [0] * N\n\n# Function to apply an operation\ndef apply_operation(op_type, L, R):\n    global x\n    if op_type == 0:\n        pass\n    elif op_type == 1:\n        for j in range(N):\n            if L <= j <= R:\n                x[j] = 1\n    else:\n        for j in range(N):\n            if not (L <= j <= R):\n                x[j] = 1\n\n# Process the operations\noperation_sequence = []\ntotal_cost = 0\n\nfor op_type, L, R in operations:\n    apply_operation(op_type, L - 1, R - 1)\n    if sum(x) == N:\n        break\n    operation_sequence.append(op_type)\n    total_cost += 1\n\n# Check if the goal is achieved\nif sum(x) != N:\n    print(-1)\nelse:\n    print(total_cost)\n    print(\" \".join(map(str, operation_sequence)))\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\n\noperations = []\nindex = 2\nfor _ in range(M):\n    L = int(data[index])\n    R = int(data[index + 1])\n    operations.append((L, R))\n    index += 2\n\n# Initialize the sequence x\nx = [0] * N\n\n# Function to apply an operation\ndef apply_operation(op_type, L, R):\n    global x\n    if op_type == 0:\n        pass\n    elif op_type == 1:\n        for j in range(N):\n            if L <= j <= R:\n                x[j] = 1\n    else:\n        for j in range(N):\n            if not (L <= j <= R):\n                x[j] = 1\n\n# Process the operations\noperation_sequence = []\ntotal_cost = 0\n\nfor op_type, L, R in operations:\n    apply_operation(op_type, L - 1, R - 1)\n    if sum(x) == N:\n        break\n    operation_sequence.append(op_type)\n    total_cost += 1\n\n# Check if the goal is achieved\nif sum(x) != N:\n    print(-1)\nelse:\n    print(total_cost)\n    print(\" \".join(map(str, operation_sequence)))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -4,
+          "error_message": "Runtime Error"
+        }
+      ]
+    },
+    {
+      "question_title": "Basic Grid Problem with Updates",
+      "question_content": "There is an H \\times W grid. Let (h,w) denote the cell at the h-th row from the top and the w-th column from the left. A non-negative integer A_{h,w} is written in cell (h,w).\nTakahashi starts at cell (sh,sw) and will perform Q changes to the grid. The i-th change is given by a character d_i (d_i is one of L, R, U, D) and a non-negative integer a_i, meaning Takahashi will do the following:\n\n- Move one cell in the direction d_i. That is, if d_i is L, move left; if R, move right; if U, move up; if D, move down by one cell. Then, let the destination cell be (h,w), and set A_{h,w} to a_i.\n\nIt is guaranteed that in each change, he can move one cell in direction d_i.\nAfter each change, print the answer to the following problem:\n\nA sequence of cells P = ((h_1,w_1), \\ldots, (h_{M},w_{M})) is said to be a path if and only if it satisfies all of the following conditions:\n\n- (h_1,w_1) = (1,1), (h_{M},w_{M}) = (H,W), and M = H + W - 1.\n- For every i with 1 \\leq i \\leq M-1, either (h_{i+1}, w_{i+1}) = (h_i + 1, w_i) or (h_{i+1}, w_{i+1}) = (h_i, w_i + 1).\n\nThere are \\binom{H+W-2}{H-1} paths. For a path P = ((h_1,w_1), \\ldots, (h_{M},w_{M})), define f(P) = \\prod_{1\\leq i\\leq M}A_{h_i,w_i}. Print the sum, modulo 998244353, of f(P) over all paths P.\n\nInput\n\nThe input is given from Standard Input in the following format:\nH W\nA_{1,1} \\cdots A_{1,W}\n\\vdots\nA_{H,1} \\cdots A_{H,W}\nQ sh sw\nd_1 a_1\n\\vdots\nd_Q a_Q\n\nOutput\n\nPrint Q lines.\nThe i-th line should contain the sum, modulo 998244353, of f(P) over all paths P after performing the i-th change to the grid.\n\nConstraints\n\n\n- 2 \\leq H, W \\leq 200000\n- HW \\leq 200000\n- 0 \\leq A_{h,w} < 998244353\n- 1 \\leq Q \\leq 200000\n- 1 \\leq sh \\leq H, 1 \\leq sw \\leq W\n- 0 \\leq a_i < 998244353\n- H, W, A_{h,w}, Q, sh, sw, and a_i are integers.\n- Each d_i is L, R, U, or D.\n- In each change, Takahashi can move one cell in the direction d_i.\n\nSample Input 1\n\n2 3\n1 2 3\n4 5 6\n3 2 2\nU 7\nR 8\nL 9\n\nSample Output 1\n\n456\n666\n822\n\n\n- Initially, Takahashi is at (2,2).\n- Move up, then set A_{1,2} to 7. The value of f(P) for each path is:\n- P=((1,1),(1,2),(1,3),(2,3)): f(P)=1 \\times 7 \\times 3 \\times 6=126.\n- P=((1,1),(1,2),(2,2),(2,3)): f(P)=1 \\times 7 \\times 5 \\times 6=210.\n- P=((1,1),(2,1),(2,2),(2,3)): f(P)=1 \\times 4 \\times 5 \\times 6=120.\n\n\n- Move right, then set A_{1,3} to 8. The value of f(P) for each path is:\n- P=((1,1),(1,2),(1,3),(2,3)): f(P)=1 \\times 7 \\times 8 \\times 6=336.\n- P=((1,1),(1,2),(2,2),(2,3)): f(P)=1 \\times 7 \\times 5 \\times 6=210.\n- P=((1,1),(2,1),(2,2),(2,3)): f(P)=1 \\times 4 \\times 5 \\times 6=120.\n\n\n- Move left, then set A_{1,2} to 9. The value of f(P) for each path is:\n- P=((1,1),(1,2),(1,3),(2,3)): f(P)=1 \\times 9 \\times 8 \\times 6=432.\n- P=((1,1),(1,2),(2,2),(2,3)): f(P)=1 \\times 9 \\times 5 \\times 6=270.\n- P=((1,1),(2,1),(2,2),(2,3)): f(P)=1 \\times 4 \\times 5 \\times 6=120.\n\nSample Input 2\n\n5 4\n147015809 294958521 852121867 499798308\n790350368 404692331 645419803 290531806\n275766153 896286651 239187926 945049742\n340760022 236352314 926236110 223464913\n287023679 590772036 340282357 521075891\n6 3 1\nU 344644511\nR 45812235\nD 260083498\nR 781118585\nL 156297846\nL 411901560\n\nSample Output 2\n\n299123226\n548055393\n810247224\n876210800\n773990840\n506814544",
+      "platform": "atcoder",
+      "question_id": "arc190_c",
+      "contest_id": "arc190",
+      "contest_date": "2025-01-12T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nH = int(data[0])\nW = int(data[1])\n\ngrid = []\nindex = 2\nfor _ in range(H):\n    row = list(map(int, data[index:index + W]))\n    grid.append(row)\n    index += W\n\nQ = int(data[index])\nstart_h = int(data[index + 1]) - 1\nstart_w = int(data[index + 2]) - 1\nindex += 3\n\nMOD = 998244353\n\nfrom collections import deque\n\ndef dfs(h, w, a):\n    stack = [(h, w, a)]\n    result = 0\n    while stack:\n        h, w, a = stack.pop()\n        if h == H - 1 and w == W - 1:\n            result = (result + a) % MOD\n            continue\n        if h + 1 < H:\n            stack.append((h + 1, w, a * grid[h + 1][w] % MOD))\n        if w + 1 < W:\n            stack.append((h, w + 1, a * grid[h][w + 1] % MOD))\n    return result\n\nresults = []\nfor q in range(Q):\n    direction = data[index]\n    a = int(data[index + 1])\n    index += 2\n    \n    if direction == 'U':\n        start_h -= 1\n    elif direction == 'D':\n        start_h += 1\n    elif direction == 'L':\n        start_w -= 1\n    elif direction == 'R':\n        start_w += 1\n    \n    grid[start_h][start_w] = a\n    \n    result = dfs(0, 0, 1)\n    results.append(result)\n\nfor result in results:\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nH = int(data[0])\nW = int(data[1])\n\ngrid = []\nindex = 2\nfor _ in range(H):\n    row = list(map(int, data[index:index + W]))\n    grid.append(row)\n    index += W\n\nQ = int(data[index])\nstart_h = int(data[index + 1]) - 1\nstart_w = int(data[index + 2]) - 1\nindex += 3\n\nMOD = 998244353\n\nfrom collections import deque\n\ndef dfs(h, w, a):\n    stack = [(h, w, a)]\n    result = 0\n    while stack:\n        h, w, a = stack.pop()\n        if h == H - 1 and w == W - 1:\n            result = (result + a) % MOD\n            continue\n        if h + 1 < H:\n            stack.append((h + 1, w, a * grid[h + 1][w] % MOD))\n        if w + 1 < W:\n            stack.append((h, w + 1, a * grid[h][w + 1] % MOD))\n    return result\n\nresults = []\nfor q in range(Q):\n    direction = data[index]\n    a = int(data[index + 1])\n    index += 2\n    \n    if direction == 'U':\n        start_h -= 1\n    elif direction == 'D':\n        start_h += 1\n    elif direction == 'L':\n        start_w -= 1\n    elif direction == 'R':\n        start_w += 1\n    \n    grid[start_h][start_w] = a\n    \n    result = dfs(0, 0, 1)\n    results.append(result)\n\nfor result in results:\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 422632159 != 299123226"
+        }
+      ]
+    },
+    {
+      "question_title": "Matrix Pow Sum",
+      "question_content": "You are given a prime number p and an N \\times N matrix A = (A_{i,j}) (1\\leq i,j\\leq N). Each element of A is an integer between 0 and p-1, inclusive.\nConsider a matrix B obtained by replacing each zero in A with an integer between 1 and p-1, inclusive. There are (p-1)^K such matrices B, where K is the number of zeros in A.\nFind each element, modulo p, of the sum of B^p over all possible B.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN p\nA_{1,1} \\cdots A_{1,N}\n\\vdots\nA_{N,1} \\cdots A_{N,N}\n\nOutput\n\nPrint N lines.\nThe i-th line should contain, in the order j=1,\\ldots,N, the (i,j) element of the sum, modulo p, of B^p over all possible B, separated by spaces.\n\nConstraints\n\n\n- 1 \\leq N \\leq 100\n- p is a prime such that 1 \\leq p \\leq 10^9.\n- 0 \\leq A_{i,j} \\leq p-1\n- All input values are integers.\n\nSample Input 1\n\n2 3\n0 1\n0 2\n\nSample Output 1\n\n0 2\n1 2\n\nB^p for all possible B are as follows:\n\n- \\begin{pmatrix}1&1 \\\\ 1&2\\end{pmatrix}^3=\\begin{pmatrix}5&8 \\\\ 8&13\\end{pmatrix}\n- \\begin{pmatrix}1&1 \\\\ 2&2\\end{pmatrix}^3=\\begin{pmatrix}9&9 \\\\ 18&18\\end{pmatrix}\n- \\begin{pmatrix}2&1 \\\\ 1&2\\end{pmatrix}^3=\\begin{pmatrix}14&13 \\\\ 13&14\\end{pmatrix}\n- \\begin{pmatrix}2&1 \\\\ 2&2\\end{pmatrix}^3=\\begin{pmatrix}20&14 \\\\ 28&20\\end{pmatrix}\n\nPrint each element, modulo p=3, of their sum \\begin{pmatrix}48&44 \\\\ 67&65\\end{pmatrix}.\n\nSample Input 2\n\n3 2\n1 0 0\n0 1 0\n0 0 1\n\nSample Output 2\n\n1 1 1\n1 1 1\n1 1 1\n\nB^p for all possible B are as follows:\n\n- \\begin{pmatrix}1&1&1 \\\\ 1&1&1 \\\\ 1&1&1\\end{pmatrix}^2=\\begin{pmatrix}3&3&3\\\\3&3&3\\\\3&3&3\\end{pmatrix}\n\nPrint each element, modulo p=2, of their sum \\begin{pmatrix}3&3&3\\\\3&3&3\\\\3&3&3\\end{pmatrix}.\n\nSample Input 3\n\n4 13\n0 1 2 0\n3 4 0 5\n0 6 0 7\n8 9 0 0\n\nSample Output 3\n\n8 0 6 5\n11 1 8 5\n8 0 4 12\n8 0 1 9",
+      "platform": "atcoder",
+      "question_id": "arc190_d",
+      "contest_id": "arc190",
+      "contest_date": "2025-01-12T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom typing import List\n\ndef matrix_power(matrix: List[List[int]], power: int, mod: int) -> List[List[int]]:\n    result = [[int(i == j) for j in range(len(matrix))] for i in range(len(matrix))]\n    while power > 0:\n        if power % 2 == 1:\n            result = matrix_multiply(result, matrix, mod)\n        matrix = matrix_multiply(matrix, matrix, mod)\n        power //= 2\n    return result\n\ndef matrix_multiply(a: List[List[int]], b: List[List[int]], mod: int) -> List[List[int]]:\n    result = [[0] * len(b[0]) for _ in range(len(a))]\n    for i in range(len(a)):\n        for j in range(len(b[0])):\n            for k in range(len(b)):\n                result[i][j] = (result[i][j] + a[i][k] * b[k][j]) % mod\n    return result\n\ndef calculate_sum_of_powers(N: int, p: int, A: List[List[int]]) -> List[List[int]]:\n    total_sum = [[0] * N for _ in range(N)]\n    zeros = []\n    for i in range(N):\n        for j in range(N):\n            if A[i][j] == 0:\n                zeros.append((i, j))\n    \n    for new_values in product(range(1, p), repeat=len(zeros)):\n        B = [row[:] for row in A]\n        for (x, y), value in zip(zeros, new_values):\n            B[x][y] = value\n        \n        B_pow_p = matrix_power(B, p, p)\n        for i in range(N):\n            for j in range(N):\n                total_sum[i][j] = (total_sum[i][j] + B_pow_p[i][j]) % p\n    \n    return total_sum\n\ndef main():\n    input = sys.stdin.read\n    data = input().split()\n    \n    N = int(data[0])\n    p = int(data[1])\n    index = 2\n    A = []\n    for i in range(N):\n        row = list(map(int, data[index:index+N]))\n        A.append(row)\n        index += N\n    \n    result = calculate_sum_of_powers(N, p, A)\n    \n    for row in result:\n        print(' '.join(map(str, row)))\n\nif __name__ == \"__main__\":\n    main()\n```\n\nThis Python program reads the input from standard input, calculates the required sum of \\( B^p \\) for all possible matrices \\( B \\) obtained by replacing zeros in \\( A \\) with integers between 1 and \\( p-1 \\), and prints the result to standard output. The program uses matrix multiplication and exponentiation by squaring to efficiently compute powers of matrices."
+      ],
+      "code_list": [
+        "import sys\nfrom typing import List\n\ndef matrix_power(matrix: List[List[int]], power: int, mod: int) -> List[List[int]]:\n    result = [[int(i == j) for j in range(len(matrix))] for i in range(len(matrix))]\n    while power > 0:\n        if power % 2 == 1:\n            result = matrix_multiply(result, matrix, mod)\n        matrix = matrix_multiply(matrix, matrix, mod)\n        power //= 2\n    return result\n\ndef matrix_multiply(a: List[List[int]], b: List[List[int]], mod: int) -> List[List[int]]:\n    result = [[0] * len(b[0]) for _ in range(len(a))]\n    for i in range(len(a)):\n        for j in range(len(b[0])):\n            for k in range(len(b)):\n                result[i][j] = (result[i][j] + a[i][k] * b[k][j]) % mod\n    return result\n\ndef calculate_sum_of_powers(N: int, p: int, A: List[List[int]]) -> List[List[int]]:\n    total_sum = [[0] * N for _ in range(N)]\n    zeros = []\n    for i in range(N):\n        for j in range(N):\n            if A[i][j] == 0:\n                zeros.append((i, j))\n    \n    for new_values in product(range(1, p), repeat=len(zeros)):\n        B = [row[:] for row in A]\n        for (x, y), value in zip(zeros, new_values):\n            B[x][y] = value\n        \n        B_pow_p = matrix_power(B, p, p)\n        for i in range(N):\n            for j in range(N):\n                total_sum[i][j] = (total_sum[i][j] + B_pow_p[i][j]) % p\n    \n    return total_sum\n\ndef main():\n    input = sys.stdin.read\n    data = input().split()\n    \n    N = int(data[0])\n    p = int(data[1])\n    index = 2\n    A = []\n    for i in range(N):\n        row = list(map(int, data[index:index+N]))\n        A.append(row)\n        index += N\n    \n    result = calculate_sum_of_powers(N, p, A)\n    \n    for row in result:\n        print(' '.join(map(str, row)))\n\nif __name__ == \"__main__\":\n    main()"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "Replace Digits",
+      "question_content": "You are given a string S of length N and a string T of length M, both consisting of digits from 1 to 9.\nYou will perform the following operation for k=1,2,\\ldots,M in order:\n\n- Choose an integer i such that 1 \\le i \\le N. Then, replace the i-th character of S with the k-th character of T.\n\nFind the maximum possible value of the resulting string S interpreted as an integer after performing the M operations.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M\nS\nT\n\nOutput\n\nPrint the maximum possible value of the resulting string S interpreted as an integer after performing the M operations.\n\nConstraints\n\n\n- 1 \\le N,M \\le 10^6\n- N and M are integers.\n- S is a string of length N consisting of digits from 1 through 9.\n- T is a string of length M consisting of digits from 1 through 9.\n\nSample Input 1\n\n3 3\n191\n325\n\nSample Output 1\n\n593\n\nThe following sequence of operations is optimal:\n\n- For k=1: Choose i=3. Then, S = 193.\n- For k=2: Choose i=1. Then, S = 293.\n- For k=3: Choose i=1. Then, S = 593.\n\nIn this case, the value of S interpreted as an integer is 593, which is the maximum.\n\nSample Input 2\n\n3 9\n191\n998244353\n\nSample Output 2\n\n993\n\nSample Input 3\n\n11 13\n31415926535\n2718281828459\n\nSample Output 3\n\n98888976555",
+      "platform": "atcoder",
+      "question_id": "arc191_a",
+      "contest_id": "arc191",
+      "contest_date": "2025-01-26T00:00:00",
+      "starter_code": "",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\n# YOUR CODE HERE\nimport sys\n\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\nS = data[2]\nT = data[3]\n\nresult = list(S)\nfor k in range(M):\n    max_digit = -1\n    max_index = -1\n    for i in range(N):\n        if result[i] < T[k]:\n            if T[k] > max_digit:\n                max_digit = T[k]\n                max_index = i\n    if max_index != -1:\n        result[max_index] = T[k]\n\nprint(''.join(result))\n```"
+      ],
+      "code_list": [
+        "# YOUR CODE HERE\nimport sys\n\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\nS = data[2]\nT = data[3]\n\nresult = list(S)\nfor k in range(M):\n    max_digit = -1\n    max_index = -1\n    for i in range(N):\n        if result[i] < T[k]:\n            if T[k] > max_digit:\n                max_digit = T[k]\n                max_index = i\n    if max_index != -1:\n        result[max_index] = T[k]\n\nprint(''.join(result))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -4,
+          "error_message": "Runtime Error"
+        }
+      ]
+    },
+    {
+      "question_title": "A^n",
+      "question_content": "You are given a positive integer N between 1 and 10^9, inclusive.\nFind one pair of positive integers (A, M) satisfying the following conditions. It can be proved that such a pair of integers always exists under the constraints.\n\n- Both A and M are positive integers between 1 and 10^{18}, inclusive.\n- There exists a positive integer n such that A^n - 1 is a multiple of M, and the smallest such n is N.\n\nYou are given T test cases; solve each of them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nT\n\\text{case}_1\n\\text{case}_2\n\\vdots\n\\text{case}_T\n\nHere, \\text{case}_i denotes the i-th test case.\nEach test case is given in the following format:\nN\n\nOutput\n\nFor each test case, print a pair of positive integers (A, M) in the following format:\nA M\n\nIf there are multiple valid solutions, any one of them is considered correct.\n\nConstraints\n\n\n- 1 \\le T \\le 10^4\n- 1 \\le N \\le 10^9\n- All input values are integers.\n\nSample Input 1\n\n4\n3\n16\n1\n55\n\nSample Output 1\n\n2 7\n11 68\n20250126 1\n33 662\n\nConsider \\text{case}_1.\nFor example, if we choose (A,M)=(2,7), then:\n\n- When n=1: 2^1 - 1 = 1 is not a multiple of 7.\n- When n=2: 2^2 - 1 = 3 is not a multiple of 7.\n- When n=3: 2^3 - 1 = 7 is a multiple of 7.\n\nHence, the smallest n for which A^n - 1 is a multiple of M is 3. Therefore, (A,M)=(2,7) is a correct solution. Other valid solutions include (A,M)=(100,777).",
+      "platform": "atcoder",
+      "question_id": "arc191_c",
+      "contest_id": "arc191",
+      "contest_date": "2025-01-26T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nresults = []\n\nindex = 1\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    \n    # Find A and M\n    if N == 1:\n        A = 20250126\n        M = 1\n    elif N % 2 == 0:\n        A = 2\n        M = 2**N - 1\n    else:\n        A = 11\n        M = (2**(N-1) - 1) * (2 + 2**N)\n    \n    results.append(f\"{A} {M}\")\n\nprint(\"\\n\".join(results))\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nresults = []\n\nindex = 1\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    \n    # Find A and M\n    if N == 1:\n        A = 20250126\n        M = 1\n    elif N % 2 == 0:\n        A = 2\n        M = 2**N - 1\n    else:\n        A = 11\n        M = (2**(N-1) - 1) * (2 + 2**N)\n    \n    results.append(f\"{A} {M}\")\n\nprint(\"\\n\".join(results))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 11 30 != 2 7"
+        }
+      ]
+    },
+    {
+      "question_title": "Moving Pieces on Graph",
+      "question_content": "You are given a simple connected undirected graph with N vertices and M edges, where the vertices are numbered 1 to N and the edges are numbered 1 to M. Edge i connects vertex u_i and vertex v_i in both directions.\nInitially, there is a piece A on vertex S and a piece B on vertex T. Here, S and T are given as input.\nYou may perform the following operation any number of times in any order:\n\n- Choose either piece A or piece B, and move it from its current vertex to an adjacent vertex via an edge. However, you cannot make a move that results in both pieces ending up on the same vertex.\n\nYour goal is to reach the state in which piece A is on vertex T and piece B is on vertex S.\nDetermine whether this is possible, and if it is, find the minimum number of operations required to achieve it.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M S T\nu_1 v_1\nu_2 v_2\n\\vdots\nu_M v_M\n\nOutput\n\nIf it is impossible to achieve the goal, print -1.\nIf it is possible, print the minimum number of operations required.\n\nConstraints\n\n\n- 2 \\le N \\le 2\\times 10^5\n- \\displaystyle N-1 \\le M \\le \\min\\left(\\frac{N(N-1)}{2},\\,2\\times 10^5\\right)\n- 1 \\le u_i < v_i \\le N\n- The given graph is simple and connected.\n- 1 \\le S, T \\le N\n- S \\neq T\n- All input values are integers.\n\nSample Input 1\n\n4 4 3 4\n2 4\n1 4\n3 4\n2 3\n\nSample Output 1\n\n3\n\nFor example, the following sequence of operations completes the goal in three moves:\n\n- Move piece A to vertex 2.\n- Piece A is on vertex 2, piece B is on vertex 4.\n\n\n- Move piece B to vertex 3.\n- Piece A is on vertex 2, piece B is on vertex 3.\n\n\n- Move piece A to vertex 4.\n- Piece A is on vertex 4, piece B is on vertex 3.\n\n\n\nIt is impossible to complete the goal in fewer than three moves, so print 3.\n\nSample Input 2\n\n2 1 1 2\n1 2\n\nSample Output 2\n\n-1\n\nNo matter how you move the pieces, you cannot achieve the goal.\n\nSample Input 3\n\n5 6 3 5\n1 2\n2 3\n1 5\n2 4\n1 3\n2 5\n\nSample Output 3\n\n4",
+      "platform": "atcoder",
+      "question_id": "arc191_d",
+      "contest_id": "arc191",
+      "contest_date": "2025-01-26T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom collections import deque, defaultdict\n\ndef min_operations_to_reach_goal(N, M, S, T, edges):\n    # Build the adjacency list for the graph\n    adj_list = defaultdict(list)\n    for u, v in edges:\n        adj_list[u].append(v)\n        adj_list[v].append(u)\n    \n    # Initialize the queue for BFS\n    queue = deque([(S, T, 0)])\n    visited = set()\n    visited.add((S, T))\n    \n    while queue:\n        current_a, current_b, moves = queue.popleft()\n        \n        # Check if we have reached the goal\n        if current_a == T and current_b == S:\n            return moves\n        \n        # Try moving piece A\n        for next_a in adj_list[current_a]:\n            if next_a != current_b and (next_a, current_b) not in visited:\n                visited.add((next_a, current_b))\n                queue.append((next_a, current_b, moves + 1))\n        \n        # Try moving piece B\n        for next_b in adj_list[current_b]:\n            if next_b != current_a and (current_a, next_b) not in visited:\n                visited.add((current_a, next_b))\n                queue.append((current_a, next_b, moves + 1))\n    \n    # If we exhaust the queue without finding a solution, return -1\n    return -1\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\n\n# Parse input\nN = int(data[0])\nM = int(data[1])\nS = int(data[2])\nT = int(data[3])\n\nedges = []\nindex = 4\nfor _ in range(M):\n    u = int(data[index])\n    v = int(data[index + 1])\n    edges.append((u, v))\n    index += 2\n\n# Find the minimum number of operations to reach the goal\nresult = min_operations_to_reach_goal(N, M, S, T, edges)\n\n# Print the result\nprint(result)\n```"
+      ],
+      "code_list": [
+        "import sys\nfrom collections import deque, defaultdict\n\ndef min_operations_to_reach_goal(N, M, S, T, edges):\n    # Build the adjacency list for the graph\n    adj_list = defaultdict(list)\n    for u, v in edges:\n        adj_list[u].append(v)\n        adj_list[v].append(u)\n    \n    # Initialize the queue for BFS\n    queue = deque([(S, T, 0)])\n    visited = set()\n    visited.add((S, T))\n    \n    while queue:\n        current_a, current_b, moves = queue.popleft()\n        \n        # Check if we have reached the goal\n        if current_a == T and current_b == S:\n            return moves\n        \n        # Try moving piece A\n        for next_a in adj_list[current_a]:\n            if next_a != current_b and (next_a, current_b) not in visited:\n                visited.add((next_a, current_b))\n                queue.append((next_a, current_b, moves + 1))\n        \n        # Try moving piece B\n        for next_b in adj_list[current_b]:\n            if next_b != current_a and (current_a, next_b) not in visited:\n                visited.add((current_a, next_b))\n                queue.append((current_a, next_b, moves + 1))\n    \n    # If we exhaust the queue without finding a solution, return -1\n    return -1\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\n\n# Parse input\nN = int(data[0])\nM = int(data[1])\nS = int(data[2])\nT = int(data[3])\n\nedges = []\nindex = 4\nfor _ in range(M):\n    u = int(data[index])\n    v = int(data[index + 1])\n    edges.append((u, v))\n    index += 2\n\n# Find the minimum number of operations to reach the goal\nresult = min_operations_to_reach_goal(N, M, S, T, edges)\n\n# Print the result\nprint(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "ARC Arc",
+      "question_content": "You are given a positive integer N and a sequence A=(A_1,A_2,\\dots,A_N) of length N, consisting of 0 and 1.\nWe call a string S of length N, consisting only of uppercase English letters, a good string if it is possible to perform the following operation any number of times (possibly zero) so that the sequence A contains no 0. Here, S_i (1\\leq i\\leq N) denotes the i-th character of S, and we define S_{N+1}=S_1, S_{N+2}=S_2, and A_{N+1}=A_1.\n\n- Perform one of the following operations:\n- Choose an integer i with 1\\leq i\\leq N such that S_i= A, S_{i+1}= R, and S_{i+2}= C, and replace each of A_i and A_{i+1} with 1.\n- Choose an integer i with 1\\leq i\\leq N such that S_{i+2}= A, S_{i+1}= R, and S_i= C, and replace each of A_i and A_{i+1} with 1.\n\n\n\nDetermine whether there exists a good string.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nA_1 A_2 \\dots A_N\n\nOutput\n\nIf there exists a good string, print Yes; otherwise, print No.\nThe judge is case-insensitive; for example, if the correct answer is Yes, outputs such as yes, YES, or yEs will also be accepted.\n\nConstraints\n\n\n- 3\\leq N\\leq 200000\n- A_i\\in \\lbrace 0,1 \\rbrace (1\\leq i\\leq N)\n- All input values are integers.\n\nSample Input 1\n\n12\n0 1 0 1 1 1 1 0 1 1 1 0\n\nSample Output 1\n\nYes\n\nFor example, RARCARCCRAGC is a good string. This is because it is possible to change all elements of A to 1 by performing the following operations:\n\n- Initially, A=(0,1,0,1,1,1,1,0,1,1,1,0).\n- Perform the first operation with i=2. Then, A=(0,1,1,1,1,1,1,0,1,1,1,0).\n- Perform the first operation with i=5. Then, A=(0,1,1,1,1,1,1,0,1,1,1,0).\n- Perform the second operation with i=8. Then, A=(0,1,1,1,1,1,1,1,1,1,1,0).\n- Perform the second operation with i=12. Then, A=(1,1,1,1,1,1,1,1,1,1,1,1).\n\nSince there exists a good string, output Yes.\n\nSample Input 2\n\n3\n0 0 0\n\nSample Output 2\n\nNo\n\nGood strings do not exist.\n\nSample Input 3\n\n29\n1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n\nSample Output 3\n\nYes\n\nSince A already contains no 0, every string of length 29 consisting of uppercase English letters is a good string.",
+      "platform": "atcoder",
+      "question_id": "arc192_a",
+      "contest_id": "arc192",
+      "contest_date": "2025-02-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\nN = int(data[0])\nA = list(map(int, data[1:]))\n\ndef can_be_one(A):\n    # Check if there's at least one '1' in the array\n    return 1 in A\n\nif can_be_one(A):\n    print(\"Yes\")\nelse:\n    print(\"No\")\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\nN = int(data[0])\nA = list(map(int, data[1:]))\n\ndef can_be_one(A):\n    # Check if there's at least one '1' in the array\n    return 1 in A\n\nif can_be_one(A):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+        }
+      ]
+    },
+    {
+      "question_title": "Fennec VS. Snuke 2",
+      "question_content": "Fennec and Snuke are playing a board game.\nYou are given a positive integer N and a sequence A=(A_1,A_2,\\dots,A_N) of positive integers of length N. Also, there is a set S, which is initially empty.\nFennec and Snuke take turns performing the following operation in order, starting with Fennec.\n\n- Choose an index i such that 1\\leq A_i. Subtract 1 from A_i, and if i\\notin S, add i to S.\n- If S=\\lbrace 1,2,\\dots,N \\rbrace, the game ends and the player who performed the last operation wins.\n\nNote that it can be proven that until a winner is determined and the game ends, players can always make a move (there exists some i such that 1\\leq A_i). \nBoth Fennec and Snuke play optimally to win. Determine who will win.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nA_1 A_2 \\dots A_N\n\nOutput\n\nPrint Fennec if Fennec wins, or Snuke if Snuke wins.\nThe judge is case-insensitive; for example, if the correct answer is Fennec, outputs such as fennec, FENNEC, or fEnNeC will also be accepted.\n\nConstraints\n\n\n- 1\\leq N\\leq 2\\times 10^5\n- 1\\leq A_i\\leq 10^9 (1\\leq i\\leq N)\n- All input values are integers.\n\nSample Input 1\n\n3\n1 9 2\n\nSample Output 1\n\nFennec\n\nFor example, the game may proceed as follows:\n\n- Initially, A=(1,9,2) and S is empty.\n- Fennec chooses index 2. Then, A=(1,8,2) and S=\\lbrace 2 \\rbrace.\n- Snuke chooses index 2. Then, A=(1,7,2) and S=\\lbrace 2 \\rbrace.\n- Fennec chooses index 1. Then, A=(0,7,2) and S=\\lbrace 1,2 \\rbrace.\n- Snuke chooses index 2. Then, A=(0,6,2) and S=\\lbrace 1,2 \\rbrace.\n- Fennec chooses index 3. Then, A=(0,6,1) and S=\\lbrace 1,2,3 \\rbrace. The game ends with Fennec declared the winner.\n\nThis sequence of moves may not be optimal; however, it can be shown that even when both players play optimally, Fennec will win.\n\nSample Input 2\n\n2\n25 29\n\nSample Output 2\n\nSnuke\n\nSample Input 3\n\n6\n1 9 2 25 2 9\n\nSample Output 3\n\nSnuke",
+      "platform": "atcoder",
+      "question_id": "arc192_b",
+      "contest_id": "arc192",
+      "contest_date": "2025-02-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\ndef determine_winner(N, A):\n    # Count the number of initial elements greater than 0\n    count_greater_than_zero = sum(1 for x in A if x > 0)\n    \n    # If the number of elements greater than 0 is odd, Fennec wins\n    # Otherwise, Snuke wins\n    if count_greater_than_zero % 2 == 1:\n        return \"Fennec\"\n    else:\n        return \"Snuke\"\n\nresult = determine_winner(N, A)\nprint(result)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\ndef determine_winner(N, A):\n    # Count the number of initial elements greater than 0\n    count_greater_than_zero = sum(1 for x in A if x > 0)\n    \n    # If the number of elements greater than 0 is odd, Fennec wins\n    # Otherwise, Snuke wins\n    if count_greater_than_zero % 2 == 1:\n        return \"Fennec\"\n    else:\n        return \"Snuke\"\n\nresult = determine_winner(N, A)\nprint(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: Snuke != Fennec"
+        }
+      ]
+    },
+    {
+      "question_title": "Fraction Line",
+      "question_content": "For a positive rational number x, define f(x) as follows:\n\nExpress x as \\dfrac{P}{Q} using coprime positive integers P and Q. f(x) is defined as the value P\\times Q.\n\nYou are given a positive integer N and a sequence A=(A_1,A_2,\\dots,A_{N-1}) of positive integers of length N-1.\nWe call a sequence S=(S_1,S_2,\\dots,S_N) of positive integers of length N a good sequence if it satisfies all of the following conditions:\n\n- For every integer i with 1\\leq i\\leq N-1, it holds that f\\left(\\dfrac{S_i}{S_{i+1}}\\right)=A_i.\n- \\gcd(S_1,S_2,\\dots,S_N)=1.\n\nDefine the score of a sequence as the product of all its elements.\nIt can be proved that there are finitely many good sequences. Find the sum, modulo 998244353, of the scores of all good sequences.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nA_1 A_2 \\dots A_{N-1}\n\nOutput\n\nPrint the sum, modulo 998244353, of the scores of all good sequences.\n\nConstraints\n\n\n- 2\\leq N\\leq 1000\n- 1\\leq A_i\\leq 1000 (1\\leq i\\leq N-1)\n- All input values are integers.\n\nSample Input 1\n\n6\n1 9 2 2 9\n\nSample Output 1\n\n939634344\n\nFor example, both (2,2,18,9,18,2) and (18,18,2,1,2,18) are good sequences, and both have a score of 23328.\nThere are a total of 16 good sequences, and the sum of the scores of all of them is 939634344.\n\nSample Input 2\n\n2\n9\n\nSample Output 2\n\n18\n\nThere are 2 good sequences, both with a score of 9.\n\nSample Input 3\n\n25\n222 299 229 22 999 922 99 992 22 292 222 229 992 922 22 992 222 222 99 29 92 999 2 29\n\nSample Output 3\n\n192457116\n\nDo not forget to compute the sum modulo 998244353.",
+      "platform": "atcoder",
+      "question_id": "arc192_d",
+      "contest_id": "arc192",
+      "contest_date": "2025-02-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom fractions import gcd\nfrom functools import reduce\n\ndef lcm(a, b):\n    return a * b // gcd(a, b)\n\ndef product_mod(lst, mod=998244353):\n    return reduce(lambda x, y: x * y % mod, lst, 1)\n\nMOD = 998244353\n\ndef get_good_sequences(A):\n    results = []\n    def backtrack(S, i):\n        if i == len(A):\n            if gcd(*S) == 1:\n                results.append(product_mod(S))\n            return\n        target = A[i]\n        for j in range(1, target + 1):\n            if target % j == 0:\n                new_S = S + [j * k for k in range(1, max(S[-1] // j + 1, len(S) - i))]\n                backtrack(new_S, i + 1)\n    backtrack([1], 0)\n    return results\n\ndef main():\n    input = sys.stdin.read\n    data = input().split()\n    N = int(data[0])\n    A = list(map(int, data[1:]))\n\n    good_sequences = get_good_sequences(A)\n    result = sum(good_sequences) % MOD\n\n    print(result)\n\nif __name__ == \"__main__\":\n    main()\n```"
+      ],
+      "code_list": [
+        "import sys\nfrom fractions import gcd\nfrom functools import reduce\n\ndef lcm(a, b):\n    return a * b // gcd(a, b)\n\ndef product_mod(lst, mod=998244353):\n    return reduce(lambda x, y: x * y % mod, lst, 1)\n\nMOD = 998244353\n\ndef get_good_sequences(A):\n    results = []\n    def backtrack(S, i):\n        if i == len(A):\n            if gcd(*S) == 1:\n                results.append(product_mod(S))\n            return\n        target = A[i]\n        for j in range(1, target + 1):\n            if target % j == 0:\n                new_S = S + [j * k for k in range(1, max(S[-1] // j + 1, len(S) - i))]\n                backtrack(new_S, i + 1)\n    backtrack([1], 0)\n    return results\n\ndef main():\n    input = sys.stdin.read\n    data = input().split()\n    N = int(data[0])\n    A = list(map(int, data[1:]))\n\n    good_sequences = get_good_sequences(A)\n    result = sum(good_sequences) % MOD\n\n    print(result)\n\nif __name__ == \"__main__\":\n    main()"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -4,
+          "error_message": "Error during testing: cannot import name 'gcd' from 'fractions' (/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/fractions.py)"
+        }
+      ]
+    },
+    {
+      "question_title": "Snuke's Kyoto Trip",
+      "question_content": "You are given integers W,H,L,R,D,U.\nA town of Kyoto is on the two-dimensional plane.\nIn the town, there is exactly one block at each lattice point (x,y) that satisfies all of the following conditions. There are no blocks at any other points.\n\n- 0\\leq x\\leq W\n- 0\\leq y\\leq H\n- x<L or R<x or y<D or U<y\n\nSnuke traveled through the town as follows.\n\n- First, he chooses one block and stands there.\n- Then, he performs the following operation any number of times (possibly zero):\n- Move one unit in the positive direction of the x-axis or the positive direction of the y-axis. However, the point after moving must also have a block.\n\n\n\nPrint the number, modulo 998244353, of possible paths that Snuke could have taken.\n\nInput\n\nThe input is given from Standard Input in the following format:\nW H L R D U\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 0\\leq L\\leq R\\leq W\\leq 10^6\n- 0\\leq D\\leq U\\leq H\\leq 10^6\n- There is at least one block.\n- All input values are integers.\n\nSample Input 1\n\n4 3 1 2 2 3\n\nSample Output 1\n\n192\r\n\nThe following are examples of possible paths. Here, a path is represented by listing the lattice points visited in order.\n\n- (3,0)\n- (0,0)\\rightarrow (1,0)\\rightarrow (2,0)\\rightarrow (2,1)\\rightarrow (3,1)\\rightarrow (3,2)\\rightarrow (4,2)\\rightarrow (4,3)\n- (0,1)\\rightarrow (0,2)\n\nThere are 192 possible paths.\n\nSample Input 2\n\n10 12 4 6 8 11\n\nSample Output 2\n\n4519189\n\nSample Input 3\n\n192 25 0 2 0 9\n\nSample Output 3\n\n675935675\r\n\nDo not forget to print the number of paths modulo 998244353.",
+      "platform": "atcoder",
+      "question_id": "arc192_e",
+      "contest_id": "arc192",
+      "contest_date": "2025-02-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nW = int(data[0])\nH = int(data[1])\nL = int(data[2])\nR = int(data[3])\nD = int(data[4])\nU = int(data[5])\n\nMOD = 998244353\n\ndef mod_inv(a, p):\n    return pow(a, p - 2, p)\n\n# Number of ways to reach a cell (i, j) from the top-left corner (0, 0)\ndp = [[0] * (W + 1) for _ in range(H + 1)]\n\n# Initialize the starting point\ndp[0][0] = 1\n\n# Fill the dp table\nfor i in range(H + 1):\n    for j in range(W + 1):\n        if (j < L or j > R or i < D or i > U):\n            continue\n        if i > 0:\n            dp[i][j] += dp[i - 1][j]\n            dp[i][j] %= MOD\n        if j > 0:\n            dp[i][j] += dp[i][j - 1]\n            dp[i][j] %= MOD\n\nprint(dp[H][W])\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nW = int(data[0])\nH = int(data[1])\nL = int(data[2])\nR = int(data[3])\nD = int(data[4])\nU = int(data[5])\n\nMOD = 998244353\n\ndef mod_inv(a, p):\n    return pow(a, p - 2, p)\n\n# Number of ways to reach a cell (i, j) from the top-left corner (0, 0)\ndp = [[0] * (W + 1) for _ in range(H + 1)]\n\n# Initialize the starting point\ndp[0][0] = 1\n\n# Fill the dp table\nfor i in range(H + 1):\n    for j in range(W + 1):\n        if (j < L or j > R or i < D or i > U):\n            continue\n        if i > 0:\n            dp[i][j] += dp[i - 1][j]\n            dp[i][j] %= MOD\n        if j > 0:\n            dp[i][j] += dp[i][j - 1]\n            dp[i][j] %= MOD\n\nprint(dp[H][W])"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 0 != 192"
+        }
+      ]
+    },
+    {
+      "question_title": "Complement Interval Graph",
+      "question_content": "For integers l, r, let [l, r] denote the set of all integers from l through r. That is, [l, r] = \\lbrace l, l+1, l+2, \\ldots, r-1, r\\rbrace.\nYou are given N pairs of integers (L_1, R_1), (L_2, R_2), \\ldots, (L_N, R_N).\nBased on these pairs, consider an undirected graph G defined as follows:\n\n- It has N vertices numbered 1, 2, \\ldots, N.\n- For all i, j \\in [1, N], there is an undirected edge between vertices i and j if and only if the intersection of [L_i, R_i] and [L_j, R_j] is empty.\n\nIn addition, for each i = 1, 2, \\ldots, N, define the weight of vertex i to be W_i.\nYou are given Q queries about G. Process these queries in the order they are given.\nFor each i = 1, 2, \\ldots, Q, the i-th query is the following:\n\nYou are given integers s_i and t_i (both between 1 and N, inclusive) such that s_i \\neq t_i. Determine whether there exists a path from vertex s_i to vertex t_i in G. If it exists, print the minimum possible weight of such a path.\n\nHere, the weight of a path from vertex s to vertex t is defined as the sum of the weights of the vertices on that path (including both endpoints s and t).\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nW_1 W_2 \\cdots W_N\nL_1 R_1\nL_2 R_2\n\\vdots\nL_N R_N\nQ\ns_1 t_1\ns_2 t_2\n\\vdots\ns_Q t_Q\n\nOutput\n\nPrint Q lines.\nFor each i = 1, 2, \\ldots, Q, on the i-th line, if there exists a path from vertex s_i to vertex t_i, print the minimum possible weight of such a path, and print -1 otherwise.\n\nConstraints\n\n\n- 2 \\leq N \\leq 2 \\times 10^5\n- 1 \\leq Q \\leq 2 \\times 10^5\n- 1 \\leq W_i \\leq 10^9\n- 1 \\leq L_i \\leq R_i \\leq 2N\n- 1 \\leq s_i, t_i \\leq N\n- s_i \\neq t_i\n- All input values are integers.\n\nSample Input 1\n\n5\n5 1 4 2 2\n2 4\n1 2\n7 8\n4 5\n2 7\n3\n1 4\n4 3\n5 2\n\nSample Output 1\n\n11\n6\n-1\n\nG is a graph with four undirected edges: \\lbrace 1, 3\\rbrace, \\lbrace 2, 3\\rbrace, \\lbrace 2, 4\\rbrace, \\lbrace 3, 4\\rbrace.\n\n- For the first query, there is a path from vertex 1 to vertex 4 given by 1 \\to 3 \\to 4. The weight of this path is W_1 + W_3 + W_4 = 5 + 4 + 2 = 11, and this is the minimum possible.\n- For the second query, there is a path from vertex 4 to vertex 3 given by 4 \\to 3. The weight of this path is W_4 + W_3 = 2 + 4 = 6, and this is the minimum possible.\n- For the third query, there is no path from vertex 5 to vertex 2. Hence, print -1.\n\nSample Input 2\n\n8\n44 75 49 4 78 79 12 32\n5 13\n10 16\n6 8\n6 15\n12 15\n5 7\n1 15\n1 2\n5\n5 6\n3 2\n7 5\n4 5\n5 4\n\nSample Output 2\n\n157\n124\n-1\n114\n114",
+      "platform": "atcoder",
+      "question_id": "arc193_a",
+      "contest_id": "arc193",
+      "contest_date": "2025-02-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom collections import defaultdict, deque\n\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nweights = list(map(int, data[1:N+1]))\nL = []\nR = []\nindex = N + 1\nfor _ in range(N):\n    L.append(int(data[index]))\n    R.append(int(data[index + 1]))\n    index += 2\n\nQ = int(data[index])\nqueries = []\nindex += 1\nfor _ in range(Q):\n    s = int(data[index]) - 1\n    t = int(data[index + 1]) - 1\n    queries.append((s, t))\n    index += 2\n\n# Build the graph\ngraph = defaultdict(set)\nfor i in range(N):\n    for j in range(i + 1, N):\n        if (L[i] <= L[j] <= R[i] or L[i] <= R[j] <= R[i] or\n            L[j] <= L[i] <= R[j] or L[j] <= R[i] <= R[j]):\n            continue\n        graph[i].add(j)\n        graph[j].add(i)\n\n# Process each query\nresults = []\nfor s, t in queries:\n    if s == t:\n        results.append(weights[s])\n        continue\n    \n    # BFS to find the shortest path\n    queue = deque([(s, weights[s])])\n    visited = set([s])\n    while queue:\n        current, cost = queue.popleft()\n        if current == t:\n            results.append(cost)\n            break\n        for neighbor in graph[current]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                queue.append((neighbor, cost + weights[neighbor]))\n    else:\n        results.append(-1)\n\n# Print the results\nfor result in results:\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\nfrom collections import defaultdict, deque\n\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nweights = list(map(int, data[1:N+1]))\nL = []\nR = []\nindex = N + 1\nfor _ in range(N):\n    L.append(int(data[index]))\n    R.append(int(data[index + 1]))\n    index += 2\n\nQ = int(data[index])\nqueries = []\nindex += 1\nfor _ in range(Q):\n    s = int(data[index]) - 1\n    t = int(data[index + 1]) - 1\n    queries.append((s, t))\n    index += 2\n\n# Build the graph\ngraph = defaultdict(set)\nfor i in range(N):\n    for j in range(i + 1, N):\n        if (L[i] <= L[j] <= R[i] or L[i] <= R[j] <= R[i] or\n            L[j] <= L[i] <= R[j] or L[j] <= R[i] <= R[j]):\n            continue\n        graph[i].add(j)\n        graph[j].add(i)\n\n# Process each query\nresults = []\nfor s, t in queries:\n    if s == t:\n        results.append(weights[s])\n        continue\n    \n    # BFS to find the shortest path\n    queue = deque([(s, weights[s])])\n    visited = set([s])\n    while queue:\n        current, cost = queue.popleft()\n        if current == t:\n            results.append(cost)\n            break\n        for neighbor in graph[current]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                queue.append((neighbor, cost + weights[neighbor]))\n    else:\n        results.append(-1)\n\n# Print the results\nfor result in results:\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=6: 198763 != 138762"
+        }
+      ]
+    },
+    {
+      "question_title": "Broken Wheel",
+      "question_content": "You are given a positive integer N and a length-N string s_0s_1\\ldots s_{N-1} consisting only of 0 and 1.\nConsider a simple undirected graph G with (N+1) vertices numbered 0, 1, 2, \\ldots, N, and the following edges:\n\n- For each i = 0, 1, \\ldots, N-1, there is an undirected edge between vertices i and (i+1)\\bmod N.\n- For each i = 0, 1, \\ldots, N-1, there is an undirected edge between vertices i and N if and only if s_i =  1.\n- There are no other edges.\n\nFurthermore, create a directed graph G' by assigning a direction to each edge of G. That is, for each undirected edge \\lbrace u, v \\rbrace in G, replace it with either a directed edge (u, v) from u to v or a directed edge (v, u) from v to u.\nFor each i = 0, 1, \\ldots, N, let d_i be the in-degree of vertex i in G'. Print the number, modulo 998244353, of distinct sequences (d_0, d_1, \\ldots, d_N) that can be obtained.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\ns_0s_1\\ldots s_{N-1}\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 3 \\leq N \\leq 10^6\n- N is an integer.\n- Each s_i is 0 or 1.\n\nSample Input 1\n\n3\n010\n\nSample Output 1\n\n14\n\nG has four undirected edges: \\lbrace 0, 1 \\rbrace, \\lbrace 0, 2 \\rbrace, \\lbrace 1, 2 \\rbrace, \\lbrace 1, 3 \\rbrace.\nFor example, if we assign directions to each edge as 0 \\to 1, 2 \\to 0, 2 \\to 1, 1 \\to 3, then (d_0, d_1, d_2, d_3) = (1, 2, 0, 1) is obtained.\nThe possible sequences (d_0, d_1, d_2, d_3) are\n(0, 1, 2, 1), (0, 2, 1, 1), (0, 2, 2, 0), (0, 3, 1, 0), (1, 0, 2, 1), (1, 1, 1, 1), (1, 1, 2, 0), (1, 2, 0, 1), (1, 2, 1, 0), (1, 3, 0, 0), (2, 0, 1, 1), (2, 1, 0, 1), (2, 1, 1, 0), (2, 2, 0, 0), for a total of 14.\n\nSample Input 2\n\n20\n00001100111010100101\n\nSample Output 2\n\n261339902",
+      "platform": "atcoder",
+      "question_id": "arc193_b",
+      "contest_id": "arc193",
+      "contest_date": "2025-02-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom collections import defaultdict\n\ndef solve(N, s):\n    MOD = 998244353\n    count = [0] * (N + 1)\n    count[0] = 1\n    \n    for i in range(N):\n        if s[i] == '1':\n            count[N] += count[i]\n            count[N] %= MOD\n        \n        for j in range(i + 1, N + 1):\n            if count[j] > 0:\n                count[j - 1] += count[j]\n                count[j - 1] %= MOD\n                count[j] = 0\n    \n    return count[0]\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\nN = int(data[0])\ns = data[1]\n\n# Solve the problem\nresult = solve(N, s)\n\n# Write output\nprint(result)\n```"
+      ],
+      "code_list": [
+        "import sys\nfrom collections import defaultdict\n\ndef solve(N, s):\n    MOD = 998244353\n    count = [0] * (N + 1)\n    count[0] = 1\n    \n    for i in range(N):\n        if s[i] == '1':\n            count[N] += count[i]\n            count[N] %= MOD\n        \n        for j in range(i + 1, N + 1):\n            if count[j] > 0:\n                count[j - 1] += count[j]\n                count[j - 1] %= MOD\n                count[j] = 0\n    \n    return count[0]\n\n# Read input\ninput = sys.stdin.read\ndata = input().split()\nN = int(data[0])\ns = data[1]\n\n# Solve the problem\nresult = solve(N, s)\n\n# Write output\nprint(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 1 != 14"
+        }
+      ]
+    },
+    {
+      "question_title": "Magnets",
+      "question_content": "You are given two length-N strings A = A_1A_2 \\ldots A_N and B = B_1B_2 \\ldots B_N, each consisting of 0 and 1.\nThere are N squares aligned in a row from left to right. For i = 1, 2, \\ldots, N, the i-th square from the left is called square i. Initially, square i contains a piece if A_i =  1, and no piece if A_i =  0.\nYou may repeat the following operation any number of times (possibly zero):\n\n- Choose an integer i between 1 and N, inclusive.\n- Move all pieces simultaneously one square closer to square i. That is, for each piece, let square j be its current position and square j' be its new position, and the following holds:\n- if i < j, then j' = j-1;\n- if i > j, then j' = j+1;\n- if i = j, then j' = j.\n\n\n\nDetermine whether it is possible to reach a configuration satisfying the following condition, and if it is possible, find the minimum number of operations needed to do so:\n\nFor every i = 1, 2, \\ldots, N, there is at least one piece in square i if and only if B_i =  1.\n\nYou are given T independent test cases. Print the answer for each of them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nT\n\\mathrm{case}_1\n\\mathrm{case}_2\n\\vdots\n\\mathrm{case}_T\n\nHere, \\mathrm{case}_i (i=1,2,\\ldots,T) denotes the i-th test case.\nEach test case is given in the following format:\nN\nA\nB\n\nOutput\n\nPrint T lines.\nFor each i = 1, 2, \\ldots, T, on the i-th line, print -1 if it is impossible to reach a configuration satisfying the condition for the i-th test case. Otherwise, print the minimum number of operations needed.\n\nConstraints\n\n\n- 1 \\leq T \\leq 2 \\times 10^5\n- 1 \\leq N \\leq 10^6\n- T and N are integers.\n- A and B are strings of length N, each consisting of 0 and 1.\n- There exists i such that A_i =  1.\n- There exists i such that B_i =  1.\n- The sum of N over all test cases is at most 10^6.\n\nSample Input 1\n\n3\n8\n01001101\n00001011\n3\n010\n111\n20\n10100011011110101011\n00010001111101100000\n\nSample Output 1\n\n3\n-1\n5\n\nThe input has three independent test cases.\nIn the first test case, initially, the sequence of the numbers of pieces in the squares is (0, 1, 0, 0, 1, 1, 0, 1). By performing the operation three times as follows, you can satisfy the condition:\n\n- Choose i = 5. After the operation, the configuration is (0, 0, 1, 0, 2, 0, 1, 0).\n- Choose i = 8. After the operation, the configuration is (0, 0, 0, 1, 0, 2, 0, 1).\n- Choose i = 8. After the operation, the configuration is (0, 0, 0, 0, 1, 0, 2, 1).\n\nIt is impossible to satisfy the condition in fewer than three operations, so the answer is 3.\nIn the second test case, no matter how you perform the operations, you cannot satisfy the condition, so the answer is -1.",
+      "platform": "atcoder",
+      "question_id": "arc193_d",
+      "contest_id": "arc193",
+      "contest_date": "2025-02-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    A = data[index]\n    index += 1\n    B = data[index]\n    index += 1\n    \n    # Calculate the initial number of pieces in each square\n    pieces = [0] * (N + 1)\n    for i in range(N):\n        if A[i] == '1':\n            pieces[i + 1] += 1\n    \n    # Calculate the target number of pieces in each square\n    targets = [0] * (N + 1)\n    for i in range(N):\n        if B[i] == '1':\n            targets[i + 1] += 1\n    \n    # Initialize variables\n    moves = 0\n    balance = 0\n    \n    # Iterate through the squares and calculate the minimum number of operations\n    for i in range(1, N + 1):\n        balance += pieces[i] - targets[i]\n        if balance < 0:\n            return -1\n        moves += abs(balance)\n    \n    results.append(moves)\n\n# Write the results to stdout\nfor result in results:\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    A = data[index]\n    index += 1\n    B = data[index]\n    index += 1\n    \n    # Calculate the initial number of pieces in each square\n    pieces = [0] * (N + 1)\n    for i in range(N):\n        if A[i] == '1':\n            pieces[i + 1] += 1\n    \n    # Calculate the target number of pieces in each square\n    targets = [0] * (N + 1)\n    for i in range(N):\n        if B[i] == '1':\n            targets[i + 1] += 1\n    \n    # Initialize variables\n    moves = 0\n    balance = 0\n    \n    # Iterate through the squares and calculate the minimum number of operations\n    for i in range(1, N + 1):\n        balance += pieces[i] - targets[i]\n        if balance < 0:\n            return -1\n        moves += abs(balance)\n    \n    results.append(moves)\n\n# Write the results to stdout\nfor result in results:\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer: mismatched output length"
+        }
+      ]
+    },
+    {
+      "question_title": "Operations on a Stack",
+      "question_content": "You are given an integer sequence of length N: (A_1, A_2, \\ldots, A_N). There is also a sequence S, which is initially empty.\nFor each i = 1, 2, \\ldots, N in this order, you perform exactly one of the following two operations:\n\n- Append A_i as an element to the end of S.\n- Delete the last element of S. You cannot choose this operation if S is empty.\n\nPrint the maximum possible value of the sum of the elements of S after all operations.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nA_1 A_2 \\ldots A_N\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 1 \\leq N \\leq 2 \\times 10^5\n- -10^9 \\leq A_i \\leq 10^9\n- All input values are integers.\n\nSample Input 1\n\n6\r\n3 -1 -4 5 -9 2\n\nSample Output 1\n\n8\r\n\nStarting from the initial state where S is an empty sequence, consider the following operations:\n\n- For i = 1, append A_1 = 3 to the end of S. Now, S = (3).\n- For i = 2, append A_2 = -1 to the end of S. Now, S = (3, -1).\n- For i = 3, delete the last element of S. Now, S = (3).\n- For i = 4, append A_4 = 5 to the end of S. Now, S = (3, 5).\n- For i = 5, append A_5 = -9 to the end of S. Now, S = (3, 5, -9).\n- For i = 6, delete the last element of S. Now, S = (3, 5).\n\nHere, the sum of the elements of S after all operations is 3 + 5 = 8, which is the maximum possible value.\n\nSample Input 2\n\n1\r\n-1\n\nSample Output 2\n\n-1\r\n\nNote that if S is empty, you must choose to append an element.\n\nSample Input 3\n\n20\r\n-14 74 -48 38 -51 43 5 37 -39 -29 80 -44 -55 59 17 89 -37 -68 38 -16\n\nSample Output 3\n\n369",
+      "platform": "atcoder",
+      "question_id": "arc194_a",
+      "contest_id": "arc194",
+      "contest_date": "2025-03-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nmax_sum = float('-inf')\ncurrent_sum = 0\nbest_suffix_sum = 0\n\nfor i in range(N):\n    current_sum += A[i]\n    best_suffix_sum = max(best_suffix_sum, current_sum)\n    max_sum = max(max_sum, best_suffix_sum)\n\nprint(max_sum)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\nmax_sum = float('-inf')\ncurrent_sum = 0\nbest_suffix_sum = 0\n\nfor i in range(N):\n    current_sum += A[i]\n    best_suffix_sum = max(best_suffix_sum, current_sum)\n    max_sum = max(max_sum, best_suffix_sum)\n\nprint(max_sum)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 3 != 8"
+        }
+      ]
+    },
+    {
+      "question_title": "Minimum Cost Sort",
+      "question_content": "You are given a permutation P = (P_1, P_2, \\ldots, P_N) of (1, 2, \\ldots, N). Takahashi can repeatedly perform the following operation on P (possibly zero times):\n\n- Choose an integer i satisfying 1 \\leq i \\leq N-1. Pay a cost of i, and swap P_i and P_{i+1}.\n\nFind the minimum total cost required to sort P in ascending order.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nP_1 P_2 \\ldots P_N\n\nOutput\n\nPrint the minimum total cost required to sort P in ascending order.\n\nConstraints\n\n\n- 2 \\leq N \\leq 2 \\times 10^5\n- (P_1, P_2, \\ldots, P_N) is a permutation of (1, 2, \\ldots, N).\n- All input values are integers.\n\nSample Input 1\n\n3\n3 2 1\n\nSample Output 1\n\n4\n\nTakahashi can sort P in ascending order as follows:\n\n- Pay a cost of 1 and swap P_1 = 3 and P_2 = 2. Now, P = (2, 3, 1).\n- Pay a cost of 2 and swap P_2 = 3 and P_3 = 1. Now, P = (2, 1, 3).\n- Pay a cost of 1 and swap P_1 = 2 and P_2 = 1. Now, P = (1, 2, 3).\n\nThe total cost for these operations is 4, which is the minimum possible.\n\nSample Input 2\n\n5\n2 4 1 3 5\n\nSample Output 2\n\n6\n\nSample Input 3\n\n2\n1 2\n\nSample Output 3\n\n0",
+      "platform": "atcoder",
+      "question_id": "arc194_b",
+      "contest_id": "arc194",
+      "contest_date": "2025-03-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nP = list(map(int, data[1:]))\n\ndef min_cost_to_sort(N, P):\n    total_cost = 0\n    for i in range(N - 1):\n        while P[i] != i + 1:\n            next_index = P.index(i + 1)\n            cost = next_index - i\n            total_cost += cost\n            P[next_index], P[next_index - 1] = P[next_index - 1], P[next_index]\n    return total_cost\n\nprint(min_cost_to_sort(N, P))\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nP = list(map(int, data[1:]))\n\ndef min_cost_to_sort(N, P):\n    total_cost = 0\n    for i in range(N - 1):\n        while P[i] != i + 1:\n            next_index = P.index(i + 1)\n            cost = next_index - i\n            total_cost += cost\n            P[next_index], P[next_index - 1] = P[next_index - 1], P[next_index]\n    return total_cost\n\nprint(min_cost_to_sort(N, P))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 4 != 6"
+        }
+      ]
+    },
+    {
+      "question_title": "Cost to Flip",
+      "question_content": "You are given two integer sequences of length N, A = (A_1, A_2, \\ldots, A_N) and B = (B_1, B_2, \\ldots, B_N), each consisting of 0 and 1.\nYou can perform the following operation on A any number of times (possibly zero):\n\n- First, choose an integer i satisfying 1 \\leq i \\leq N, and flip the value of A_i (if the original value is 0, change it to 1; if it is 1, change it to 0).\n- Then, pay \\sum_{k=1}^N A_k C_k yen as the cost of this operation.\n\nNote that the cost calculation in step 2 uses the A after the change in step 1.\nPrint the minimum total cost required to make A identical to B.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nA_1 A_2 \\ldots A_N\r\nB_1 B_2 \\ldots B_N\r\nC_1 C_2 \\ldots C_N\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 1 \\leq N \\leq 2 \\times 10^5\n- A_i, B_i \\in {0, 1}\n- 1 \\leq C_i \\leq 10^6\n- All input values are integers.\n\nSample Input 1\n\n4\r\n0 1 1 1\r\n1 0 1 0\r\n4 6 2 9\n\nSample Output 1\n\n16\r\n\nConsider the following procedure:\n\n- First, flip A_4. Now, A = (0, 1, 1, 0). The cost of this operation is 0 \\times 4 + 1 \\times 6 + 1 \\times 2 + 0 \\times 9 = 8 yen.\n- Next, flip A_2. Now, A = (0, 0, 1, 0). The cost of this operation is 0 \\times 4 + 0 \\times 6 + 1 \\times 2 + 0 \\times 9 = 2 yen.\n- Finally, flip A_1. Now, A = (1, 0, 1, 0), which matches B. The cost of this operation is 1 \\times 4 + 0 \\times 6 + 1 \\times 2 + 0 \\times 9 = 6 yen.\n\nIn this case, the total cost is 8 + 2 + 6 = 16 yen, which is the minimum possible.\n\nSample Input 2\n\n5\r\n1 1 1 1 1\r\n1 1 1 1 1\r\n1 1 1 1 1\n\nSample Output 2\n\n0\r\n\nA and B are already identical initially, so there is no need to perform any operations.\n\nSample Input 3\n\n20\r\n1 1 1 1 0 0 1 1 0 0 0 1 0 1 0 1 1 0 1 0\r\n0 0 0 1 1 1 0 1 1 0 0 0 0 0 0 1 0 1 0 0\r\n52 73 97 72 54 15 79 67 13 55 65 22 36 90 84 46 1 2 27 8\n\nSample Output 3\n\n2867",
+      "platform": "atcoder",
+      "question_id": "arc194_c",
+      "contest_id": "arc194",
+      "contest_date": "2025-03-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:N+1]))\nB = list(map(int, data[N+2:2*N+2]))\nC = list(map(int, data[2*N+3:]))\n\ncost = [0] * N\nfor i in range(N):\n    if A[i] != B[i]:\n        cost[i] = C[i]\n\nprint(sum(cost))\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:N+1]))\nB = list(map(int, data[N+2:2*N+2]))\nC = list(map(int, data[2*N+3:]))\n\ncost = [0] * N\nfor i in range(N):\n    if A[i] != B[i]:\n        cost[i] = C[i]\n\nprint(sum(cost))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -4,
+          "error_message": "Runtime Error"
+        }
+      ]
+    },
+    {
+      "question_title": "Reverse Brackets",
+      "question_content": "A string is defined to be a valid parenthesis sequence if and only if it satisfies one of the following conditions:\n\n- It is an empty string.\n- There exists a valid parenthesis sequence A such that the string is obtained by concatenating (, A, and ) in this order.\n- There exist non-empty valid parenthesis sequences A and B such that the string is obtained by concatenating A and B in this order.\n\nYou are given a valid parenthesis sequence S of length N. You can perform the following operation any number of times:\n\n- Choose a contiguous substring of S that is a valid parenthesis sequence, and reverse it.\n\nHere, reversing the substring of S from the l-th character to the r-th character means the following:\n\n- For every integer i satisfying l \\leq i \\leq r, simultaneously replace S_i with ) if S_{l+r-i} is (, and with ( if S_{l+r-i} is ).(Note that reversing here is different from the usual definition of reversing.)\n\nFind the number, modulo 998244353, of distinct strings S that you can have at the end of the process.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nS\n\nOutput\n\nPrint the answer.\n\nConstraints\n\n\n- 1 \\leq N \\leq 5000\n- |S| = N\n- S is a valid parenthesis sequence.\n\nSample Input 1\n\n6\r\n(())()\n\nSample Output 1\n\n2\r\n\nFor example, you can transform S into ()(()) by doing the following:\n\n- Choose the substring from the 1st to the 6th character of S. This is a valid parenthesis sequence. S becomes ()(()).\n\nThe only other string that can be formed is (())(). Thus, the answer is 2.\n\nSample Input 2\n\n2\r\n()\n\nSample Output 2\n\n1",
+      "platform": "atcoder",
+      "question_id": "arc194_d",
+      "contest_id": "arc194",
+      "contest_date": "2025-03-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\n# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\nsys.stdout.write\n\nMOD = 998244353\n\ndef count_distinct_sequences(S):\n    N = len(S)\n    \n    @lru_cache(None)\n    def dp(l, r):\n        if l > r:\n            return 1\n        if l == r:\n            return 2\n        \n        ans = 0\n        for i in range(l, r + 1):\n            if S[i] == '(' and S[r - (i - l)] == ')':\n                ans += dp(l, i - 1) * dp(i + 1, r - (i - l))\n                ans %= MOD\n        return ans\n    \n    return dp(0, N - 1)\n\nif __name__ == \"__main__\":\n    N, S = input().split()\n    N = int(N)\n    print(count_distinct_sequences(S))\n```"
+      ],
+      "code_list": [
+        "# YOUR CODE HERE\nimport sys\ninput = sys.stdin.read\nsys.stdout.write\n\nMOD = 998244353\n\ndef count_distinct_sequences(S):\n    N = len(S)\n    \n    @lru_cache(None)\n    def dp(l, r):\n        if l > r:\n            return 1\n        if l == r:\n            return 2\n        \n        ans = 0\n        for i in range(l, r + 1):\n            if S[i] == '(' and S[r - (i - l)] == ')':\n                ans += dp(l, i - 1) * dp(i + 1, r - (i - l))\n                ans %= MOD\n        return ans\n    \n    return dp(0, N - 1)\n\nif __name__ == \"__main__\":\n    N, S = input().split()\n    N = int(N)\n    print(count_distinct_sequences(S))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 0 != 2"
+        }
+      ]
+    },
+    {
+      "question_title": "Swap 0^X and 1^Y",
+      "question_content": "You are given two strings S and T, each of length N and consisting of 0 and 1, as well as two positive integers X and Y. For i = 1, 2, \\ldots, N, let S_i denote the i-th character of S.\nDetermine whether it is possible to make S identical to T by repeatedly performing Operations A and B below any number of times (possibly zero) in any order:\n\n- \r\n(Operation A) Choose an integer i satisfying 1 \\leq i \\leq N-(X+Y)+1, S_{i} = S_{i+1} = \\cdots = S_{i+X-1} = 0, and S_{i+X} = S_{i+X+1} = \\cdots = S_{i+X+Y-1} = 1, then change each of S_{i}, S_{i+1}, \\ldots, S_{i+Y-1} to 1 and each of S_{i+Y}, S_{i+Y+1}, \\ldots, S_{i+Y+X-1} to 0.\n\n- \r\n(Operation B) Choose an integer i satisfying 1 \\leq i \\leq N-(X+Y)+1, S_{i} = S_{i+1} = \\cdots = S_{i+Y-1} = 1, and S_{i+Y} = S_{i+Y+1} = \\cdots = S_{i+Y+X-1} = 0, then change each of S_{i}, S_{i+1}, \\ldots, S_{i+X-1} to 0 and each of S_{i+X}, S_{i+X+1}, \\ldots, S_{i+X+Y-1} to 1.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN X Y\r\nS\r\nT\n\nOutput\n\nIf it is possible to make S identical to T, print Yes; otherwise, print No.\n\nConstraints\n\n\n- 1 \\leq N \\leq 5 \\times 10^5\n- 1 \\leq X, Y \\leq N\n- S and T are strings of length N consisting of 0 and 1.\n- All input values are integers.\n\nSample Input 1\n\n9 2 1\r\n000111001\r\n011000011\n\nSample Output 1\n\nYes\r\n\nThe following procedure can transform S into T:\n\n- First, perform Operation A with i = 2. Now, S = 010011001.\n- Next, perform Operation B with i = 6. Now, S = 010010011.\n- Finally, perform Operation A with i = 3. Now, S = 011000011.\n\nThus, print Yes.\n\nSample Input 2\n\n1 1 1\r\n0\r\n1\n\nSample Output 2\n\nNo\r\n\nIt is impossible to make S identical to T. Thus, print No.",
+      "platform": "atcoder",
+      "question_id": "arc194_e",
+      "contest_id": "arc194",
+      "contest_date": "2025-03-09T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\n\n# Read input from standard input\ninput = sys.stdin.read\ndata = input().split()\n\n# Extract the variables\nN = int(data[0])\nX = int(data[1])\nY = int(data[2])\nS = data[3]\nT = data[4]\n\n# Check if it's possible to transform S to T\ndef can_transform(S, T, X, Y):\n    # Count the number of '01' and '10' patterns in both strings\n    count_S_01 = sum(1 for i in range(N - 1) if S[i] == '0' and S[i + 1] == '1')\n    count_S_10 = sum(1 for i in range(N - 1) if S[i] == '1' and S[i + 1] == '0')\n    count_T_01 = sum(1 for i in range(N - 1) if T[i] == '0' and T[i + 1] == '1')\n    count_T_10 = sum(1 for i in range(N - 1) if T[i] == '1' and T[i + 1] == '0')\n\n    # If the counts of '01' and '10' patterns are equal in both strings,\n    # then it's possible to transform S to T using operations A and B\n    return count_S_01 == count_T_01 and count_S_10 == count_T_10\n\n# Print the result\nif can_transform(S, T, X, Y):\n    print(\"Yes\")\nelse:\n    print(\"No\")\n```"
+      ],
+      "code_list": [
+        "import sys\n\n# Read input from standard input\ninput = sys.stdin.read\ndata = input().split()\n\n# Extract the variables\nN = int(data[0])\nX = int(data[1])\nY = int(data[2])\nS = data[3]\nT = data[4]\n\n# Check if it's possible to transform S to T\ndef can_transform(S, T, X, Y):\n    # Count the number of '01' and '10' patterns in both strings\n    count_S_01 = sum(1 for i in range(N - 1) if S[i] == '0' and S[i + 1] == '1')\n    count_S_10 = sum(1 for i in range(N - 1) if S[i] == '1' and S[i + 1] == '0')\n    count_T_01 = sum(1 for i in range(N - 1) if T[i] == '0' and T[i + 1] == '1')\n    count_T_10 = sum(1 for i in range(N - 1) if T[i] == '1' and T[i + 1] == '0')\n\n    # If the counts of '01' and '10' patterns are equal in both strings,\n    # then it's possible to transform S to T using operations A and B\n    return count_S_01 == count_T_01 and count_S_10 == count_T_10\n\n# Print the result\nif can_transform(S, T, X, Y):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: Yes != No"
+        }
+      ]
+    },
+    {
+      "question_title": "Twice Subsequence",
+      "question_content": "There is a sequence A = (A_1,\\dots,A_N). Determine whether there are at least two subsequences of A that match the sequence B = (B_1,\\dots,B_M). Two subsequences are distinguished if they are taken from different positions, even if they coincide as sequences.\n\nSubsequence\nA subsequence of A is a sequence obtained by removing zero or more elements from A and leaving the remaining elements in their original order.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_M\n\nOutput\n\nIf there are at least two subsequences of A that match B, print Yes. Otherwise, print No.\n\nConstraints\n\n\n- 1 \\leq M \\leq N \\leq 2\\times 10^5\n- 1 \\leq A_i \\leq 10^9\n- 1 \\leq B_i \\leq 10^9\n- All input values are integers.\n\nSample Input 1\n\n4 2\n1 2 1 2\n1 2\n\nSample Output 1\n\nYes\n\nThere are three subsequences of A that match B: (A_1,A_2), (A_1,A_4), (A_3,A_4).\n\nSample Input 2\n\n3 2\n1 2 1\n1 2\n\nSample Output 2\n\nNo\n\nThere is only one subsequence of A that matches B: (A_1,A_2).\n\nSample Input 3\n\n3 2\n1 1 2\n2 1\n\nSample Output 3\n\nNo\n\nThere are no subsequences of A that match B.",
+      "platform": "atcoder",
+      "question_id": "arc195_a",
+      "contest_id": "arc195",
+      "contest_date": "2025-03-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\n\nA = list(map(int, data[2:N+2]))\nB = list(map(int, data[N+2:]))\n\ndef has_at_least_two_subsequences(A, B):\n    count = 0\n    j = 0\n    for i in range(N):\n        if A[i] == B[j]:\n            j += 1\n            if j == M:\n                count += 1\n                j = 0\n    return count >= 2\n\nif has_at_least_two_subsequences(A, B):\n    print(\"Yes\")\nelse:\n    print(\"No\")\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nM = int(data[1])\n\nA = list(map(int, data[2:N+2]))\nB = list(map(int, data[N+2:]))\n\ndef has_at_least_two_subsequences(A, B):\n    count = 0\n    j = 0\n    for i in range(N):\n        if A[i] == B[j]:\n            j += 1\n            if j == M:\n                count += 1\n                j = 0\n    return count >= 2\n\nif has_at_least_two_subsequences(A, B):\n    print(\"Yes\")\nelse:\n    print(\"No\")"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+        }
+      ]
+    },
+    {
+      "question_title": "Uniform Sum",
+      "question_content": "There are two sequences A=(A_1,\\dots,A_N) and B=(B_1,\\dots,B_N). You can perform the following three types of operations any number of times in any order:\n\n- Choose an index i such that A_i = -1, and replace A_i with any non-negative integer.\n- Choose an index i such that B_i = -1, and replace B_i with any non-negative integer.\n- Rearrange the elements of sequence A in any order.\n\nDetermine whether it is possible, after these operations, for all elements of A and B to be non-negative and satisfy A_1 + B_1 = A_2 + B_2 = \\dots = A_N + B_N.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nA_1 A_2 \\ldots A_N\nB_1 B_2 \\ldots B_N\n\nOutput\n\nIf it is possible, after the operations, for all elements of A and B to be non-negative and satisfy A_1 + B_1 = A_2 + B_2 = \\dots = A_N + B_N, print Yes. Otherwise, print No.\n\nConstraints\n\n\n- 2 \\leq N \\leq 2000\n- -1 \\leq A_i \\leq 10^9\n- -1 \\leq B_i \\leq 10^9\n- All input values are integers.\n\nSample Input 1\n\n4\n2 0 -1 3\n3 -1 4 2\n\nSample Output 1\n\nYes\n\nConsider the following operations:\n\n- Replace A_3 with 1.\n- Replace B_2 with 1.\n- Rearrange A to (1,3,0,2).\n\nAfter these operations, A = (1,3,0,2) and B = (3,1,4,2): all elements of A and B are non-negative, and A_1+B_1 = A_2+B_2 = A_3+B_3 = A_4+B_4 = 4 is satisfied.\n\nSample Input 2\n\n3\n1 2 3\n1 2 4\n\nSample Output 2\n\nNo\n\nNo matter how you perform the operations, it is impossible to satisfy A_1+B_1 = A_2+B_2 = A_3+B_3.\n\nSample Input 3\n\n3\n1 2 -1\n1 2 4\n\nSample Output 3\n\nNo",
+      "platform": "atcoder",
+      "question_id": "arc195_b",
+      "contest_id": "arc195",
+      "contest_date": "2025-03-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:N+1]))\nB = list(map(int, data[N+1:]))\n\n# Count negative elements in both sequences\nneg_A = [i for i in range(N) if A[i] < 0]\nneg_B = [i for i in range(N) if B[i] < 0]\n\n# If there are more negative elements than N/2, it's impossible to balance them\nif len(neg_A) > N // 2 or len(neg_B) > N // 2:\n    print(\"No\")\nelse:\n    # Calculate the sum of pairs that need to be balanced\n    needed_sum = None\n    for i in range(N):\n        if A[i] >= 0 and B[i] >= 0:\n            current_sum = A[i] + B[i]\n            if needed_sum is None:\n                needed_sum = current_sum\n            elif needed_sum != current_sum:\n                print(\"No\")\n                exit()\n    \n    # Check if we have enough non-negative elements to balance the negative ones\n    non_neg_count = N - len(neg_A) - len(neg_B)\n    if non_neg_count < abs(len(neg_A) - len(neg_B)):\n        print(\"No\")\n    else:\n        print(\"Yes\")\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:N+1]))\nB = list(map(int, data[N+1:]))\n\n# Count negative elements in both sequences\nneg_A = [i for i in range(N) if A[i] < 0]\nneg_B = [i for i in range(N) if B[i] < 0]\n\n# If there are more negative elements than N/2, it's impossible to balance them\nif len(neg_A) > N // 2 or len(neg_B) > N // 2:\n    print(\"No\")\nelse:\n    # Calculate the sum of pairs that need to be balanced\n    needed_sum = None\n    for i in range(N):\n        if A[i] >= 0 and B[i] >= 0:\n            current_sum = A[i] + B[i]\n            if needed_sum is None:\n                needed_sum = current_sum\n            elif needed_sum != current_sum:\n                print(\"No\")\n                exit()\n    \n    # Check if we have enough non-negative elements to balance the negative ones\n    non_neg_count = N - len(neg_A) - len(neg_B)\n    if non_neg_count < abs(len(neg_A) - len(neg_B)):\n        print(\"No\")\n    else:\n        print(\"Yes\")"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: No != Yes"
+        }
+      ]
+    },
+    {
+      "question_title": "Hamiltonian Pieces",
+      "question_content": "There is a board with 10^9 rows and 10^9 columns, and R red pieces and B blue pieces. Here, R+B is not less than 2. The square at the r-th row from the top and the c-th column from the left is called square (r,c). A red piece can move vertically or horizontally by one square in one move, and a blue piece can move diagonally by one square in one move. More precisely, a red piece on square (r,c) can move to (r+1,c), (r,c+1), (r-1,c), (r,c-1) in one move if the destination square exists, and a blue piece on square (r,c) can move to (r+1,c+1), (r+1,c-1), (r-1,c+1), (r-1,c-1) in one move if the destination square exists.\nWe want to place all (R+B) pieces on the board in any order, one by one, subject to the following conditions:\n\n- At most one piece is placed on a single square.\n- For each i (1 \\leq i \\leq R+B-1), the i-th piece placed can move in one move to the square containing the (i+1)-th piece placed.\n- The (R+B)-th piece placed can move in one move to the square containing the 1-st piece placed.\n\nDetermine whether there is a way to place the (R+B) pieces satisfying these conditions. If it exists, show one example.\nYou are given T test cases; solve each of them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nT\n\\mathrm{case}_1\n\\mathrm{case}_2\n\\vdots\n\\mathrm{case}_T\n\nEach case is given in the following format:\nR B\n\nOutput\n\nPrint the answer for each test case in order, separated by newlines.\nIf there is no way to place the pieces satisfying the conditions for a test case, print No.\nOtherwise, print such a placement in the following format:\nYes\np_1 r_1 c_1\n\\vdots\np_{R+B} r_{R+B} c_{R+B}\n\nHere, p_i is R if the i-th piece placed is red, and B if it is blue. r_i and c_i are integers between 1 and 10^9 (inclusive), indicating that the i-th piece is placed on square (r_i,c_i).\n\nConstraints\n\n\n- 1\\leq T\\leq 10^5\n- 0 \\leq R, B\n- 2 \\leq R + B \\leq 2 \\times 10^5\n- The sum of (R+B) over all test cases is at most 2\\times 10^5.\n- All input values are integers.\n\nSample Input 1\n\n3\n2 3\n1 1\n4 0\n\nSample Output 1\n\nYes\nB 2 3\nR 3 2 \nB 2 2\nB 3 3\nR 2 4\nNo\nYes\nR 1 1\nR 1 2\nR 2 2\nR 2 1\n\nFor the 1st test case, if we extract the top-left 4\\times 5 squares of the board, the placement of the pieces is as follows:\n.....\n.BBR.\n.RB..\n.....\n\nHere, R indicates a red piece on that square, B indicates a blue piece on that square, and . indicates an empty square.\nFor the 2nd test case, there is no placement of the pieces that satisfies the conditions.",
+      "platform": "atcoder",
+      "question_id": "arc195_c",
+      "contest_id": "arc195",
+      "contest_date": "2025-03-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\ndef solve(R, B):\n    if R + B < 3 or (R == 1 and B == 1):\n        return \"No\"\n    \n    result = []\n    # Place the first piece (red)\n    result.append(\"R 1 1\")\n    \n    # Place the second piece (blue)\n    result.append(\"B 2 2\")\n    \n    # Place the remaining pieces\n    for i in range(1, R):\n        result.append(f\"R {i+1} {i+1}\")\n    for i in range(B - 1):\n        result.append(f\"B {B-i} {B-i}\")\n    \n    return \"Yes\\n\" + \"\\n\".join(result)\n\n# Number of test cases\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    R = int(data[index])\n    B = int(data[index + 1])\n    index += 2\n    results.append(solve(R, B))\n\n# Write results to STDOUT\nprint(\"\\n\".join(results))\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\ndef solve(R, B):\n    if R + B < 3 or (R == 1 and B == 1):\n        return \"No\"\n    \n    result = []\n    # Place the first piece (red)\n    result.append(\"R 1 1\")\n    \n    # Place the second piece (blue)\n    result.append(\"B 2 2\")\n    \n    # Place the remaining pieces\n    for i in range(1, R):\n        result.append(f\"R {i+1} {i+1}\")\n    for i in range(B - 1):\n        result.append(f\"B {B-i} {B-i}\")\n    \n    return \"Yes\\n\" + \"\\n\".join(result)\n\n# Number of test cases\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    R = int(data[index])\n    B = int(data[index + 1])\n    index += 2\n    results.append(solve(R, B))\n\n# Write results to STDOUT\nprint(\"\\n\".join(results))"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer: mismatched output length"
+        }
+      ]
+    },
+    {
+      "question_title": "Swap and Erase",
+      "question_content": "There is a sequence A = (A_1,\\ldots,A_N). You can perform the following two types of operations any number of times in any order:\n\n- Let K be the length of A just before the operation. Choose an integer i such that 1 \\leq i \\leq K-1, and swap the i-th and (i+1)-th elements of A.\n- Let K be the length of A just before the operation. Choose an integer i such that 1 \\leq i \\leq K and all the values from the 1-st through the i-th elements of A are equal, and delete all the elements from the 1-st through the i-th of A.\n\nFind the minimum total number of operations required to make A an empty sequence.\nYou are given T test cases; solve each of them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nT\n\\mathrm{case}_1\n\\mathrm{case}_2\n\\vdots\n\\mathrm{case}_T\n\nEach case is given in the following format:\nN\nA_1 A_2 \\ldots A_N\n\nOutput\n\nPrint the answer for each test case in order, separated by newlines.\n\nConstraints\n\n\n- 1\\leq T\\leq 10^5\n- 2 \\leq N \\leq 2 \\times 10^5\n- 1 \\leq A_i \\leq N\n- The sum of N over all test cases is at most 2\\times 10^5.\n- All input values are integers.\n\nSample Input 1\n\n3\n5\n1 1 2 1 2\n4\n4 2 1 3\n11\n1 2 1 2 1 2 1 2 1 2 1\n\nSample Output 1\n\n3\n4\n8\n\nFor the 1st test case, A can be made empty by the following three operations:\n\n- Swap the 3rd and 4th elements of A. Now, A is (1,1,1,2,2).\n- Delete the 1st through 3rd elements of A. Now, A is (2,2).\n- Delete the 1st through 2nd elements of A. Now, A is an empty sequence.\n\nFor the 2nd test case, A can be made empty by deleting the 1st element four times. Also, it is impossible to make A empty in three or fewer operations.",
+      "platform": "atcoder",
+      "question_id": "arc195_d",
+      "contest_id": "arc195",
+      "contest_date": "2025-03-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\nfrom collections import defaultdict\n\ndef min_operations(A):\n    n = len(A)\n    last_seen = defaultdict(int)\n    operations = 0\n    \n    for i, x in enumerate(A):\n        if x in last_seen:\n            operations += i - last_seen[x]\n        last_seen[x] = i\n    \n    return operations + n\n\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    A = list(map(int, data[index:index+N]))\n    index += N\n    results.append(min_operations(A))\n\nfor result in results:\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\nfrom collections import defaultdict\n\ndef min_operations(A):\n    n = len(A)\n    last_seen = defaultdict(int)\n    operations = 0\n    \n    for i, x in enumerate(A):\n        if x in last_seen:\n            operations += i - last_seen[x]\n        last_seen[x] = i\n    \n    return operations + n\n\ninput = sys.stdin.read\ndata = input().split()\n\nT = int(data[0])\nindex = 1\nresults = []\n\nfor _ in range(T):\n    N = int(data[index])\n    index += 1\n    A = list(map(int, data[index:index+N]))\n    index += N\n    results.append(min_operations(A))\n\nfor result in results:\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 10 != 3"
+        }
+      ]
+    },
+    {
+      "question_title": "Random Tree Distance",
+      "question_content": "There is an integer sequence A = (A_2,A_3,\\ldots,A_N). Also, for an integer sequence P=(P_2, P_3, \\ldots ,P_N) where 1 \\leq P_i \\leq i-1 for each i (2 \\leq i \\leq N), define the weighted tree T(P) with N vertices, rooted at vertex 1, as follows:\n\n- A rooted tree where, for each i (2 \\leq i \\leq N), the parent of i is P_i, and the weight of the edge between i and P_i is A_i.\n\nYou are given Q queries. Process them in order. The i-th query is as follows:\n\n- You are given integers u_i and v_i, each between 1 and N. For each of the possible (N-1)! sequences P, take the tree T(P) and consider the distance between vertices u_i and v_i in this tree. Output the sum, modulo 998244353, of these distances over all T(P). Here, the distance between two vertices u_i and v_i is the sum of the weights of the edges on the unique path (not visiting the same vertex more than once) that connects them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN Q\nA_2 A_3 \\ldots A_N\nu_1 v_1\nu_2 v_2\n\\vdots\nu_Q v_Q\n\nOutput\n\nPrint Q lines. The i-th line should contain the answer to the i-th query.\n\nConstraints\n\n\n- 2 \\leq N \\leq 2 \\times 10^5\n- 1 \\leq Q \\leq 2 \\times 10^5\n- 1 \\leq A_i \\leq 10^9\n- 1 \\leq u_i < v_i \\leq N\n- All input values are integers.\n\nSample Input 1\n\n3 2\n1 1\n1 2\n1 3\n\nSample Output 1\n\n2\n3\n\n\n- If P = (1,1), then in the tree T(P), the distance between vertices 1 and 2 is 1, and the distance between vertices 1 and 3 is 1.\n- If P = (1,2), then in the tree T(P), the distance between vertices 1 and 2 is 1, and the distance between vertices 1 and 3 is 2.\n\nTherefore, the total distance between vertices 1 and 2 over all T(P) is 2, and the total distance between vertices 1 and 3 over all T(P) is 3.\n\nSample Input 2\n\n2 1\n100\n1 2\n\nSample Output 2\n\n100\n\nSample Input 3\n\n9 6\n765689282 93267307 563699854 951829154 801512848 389123318 924504746 596035433\n3 8\n2 5\n5 8\n2 9\n8 9\n5 7\n\nSample Output 3\n\n55973424\n496202632\n903509579\n343265517\n550981449\n68482696\n\nRemember to take the sum modulo 998244353.",
+      "platform": "atcoder",
+      "question_id": "arc195_e",
+      "contest_id": "arc195",
+      "contest_date": "2025-03-23T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\noutput = sys.stdout.write\n\nMOD = 998244353\n\ndef factorial(n):\n    if n == 0 or n == 1:\n        return 1\n    result = 1\n    for i in range(2, n + 1):\n        result = (result * i) % MOD\n    return result\n\ndef inverse_mod(a):\n    return pow(a, MOD - 2, MOD)\n\ndef main():\n    data = input().split()\n    N = int(data[0])\n    Q = int(data[1])\n    \n    A = list(map(int, data[2:N+2]))\n    \n    queries = []\n    for i in range(Q):\n        u = int(data[N+2+i*2]) - 1\n        v = int(data[N+2+i*2+1]) - 1\n        queries.append((u, v))\n    \n    # Calculate prefix sums of A\n    prefix_sums = [0] * (N + 1)\n    for i in range(1, N + 1):\n        prefix_sums[i] = (prefix_sums[i - 1] + A[i - 1]) % MOD\n    \n    # Calculate suffix sums of A\n    suffix_sums = [0] * (N + 1)\n    for i in range(N - 1, -1, -1):\n        suffix_sums[i] = (suffix_sums[i + 1] + A[i]) % MOD\n    \n    # Process each query\n    results = []\n    for u, v in queries:\n        if u > v:\n            u, v = v, u\n        # Distance calculation using prefix and suffix sums\n        distance = ((prefix_sums[v] - prefix_sums[u]) + (suffix_sums[u] - suffix_sums[v])) % MOD\n        results.append(distance)\n    \n    # Output the results\n    for result in results:\n        output(f\"{result}\\n\")\n\nif __name__ == \"__main__\":\n    main()\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\noutput = sys.stdout.write\n\nMOD = 998244353\n\ndef factorial(n):\n    if n == 0 or n == 1:\n        return 1\n    result = 1\n    for i in range(2, n + 1):\n        result = (result * i) % MOD\n    return result\n\ndef inverse_mod(a):\n    return pow(a, MOD - 2, MOD)\n\ndef main():\n    data = input().split()\n    N = int(data[0])\n    Q = int(data[1])\n    \n    A = list(map(int, data[2:N+2]))\n    \n    queries = []\n    for i in range(Q):\n        u = int(data[N+2+i*2]) - 1\n        v = int(data[N+2+i*2+1]) - 1\n        queries.append((u, v))\n    \n    # Calculate prefix sums of A\n    prefix_sums = [0] * (N + 1)\n    for i in range(1, N + 1):\n        prefix_sums[i] = (prefix_sums[i - 1] + A[i - 1]) % MOD\n    \n    # Calculate suffix sums of A\n    suffix_sums = [0] * (N + 1)\n    for i in range(N - 1, -1, -1):\n        suffix_sums[i] = (suffix_sums[i + 1] + A[i]) % MOD\n    \n    # Process each query\n    results = []\n    for u, v in queries:\n        if u > v:\n            u, v = v, u\n        # Distance calculation using prefix and suffix sums\n        distance = ((prefix_sums[v] - prefix_sums[u]) + (suffix_sums[u] - suffix_sums[v])) % MOD\n        results.append(distance)\n    \n    # Output the results\n    for result in results:\n        output(f\"{result}\\n\")\n\nif __name__ == \"__main__\":\n    main()"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -4,
+          "error_message": "Runtime Error"
+        }
+      ]
+    },
+    {
+      "question_title": "Adjacent Delete",
+      "question_content": "You are given a length-N sequence A = (A_1, A_2, \\ldots, A_N).\nYou will repeatedly perform the following operation until the sequence has length at most 1: choose two adjacent numbers and remove both from the sequence.\nThe score obtained in one operation is the absolute difference of the two chosen numbers.\nFind the maximum possible total score obtained.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\nA_1 A_2 \\ldots A_N\n\nOutput\n\nPrint the maximum possible total score obtained.\n\nConstraints\n\n\n- 2 \\le N \\le 3 \\times 10^5\n- 1 \\le A_i \\le 10^9\n- All input values are integers.\n\nSample Input 1\n\n4\n1 2 5 3\n\nSample Output 1\n\n5\n\nFirst, remove A_2 and A_3. The score obtained is |A_2 - A_3| = 3.\nNext, remove A_1 and A_4. Note that, because of the previous operation, these two numbers are now adjacent. The score obtained is |A_1 - A_4| = 2.\nHence, the total score obtained is 5.\nIt is impossible to achieve a total score of 6 or greater, so print 5.\n\nSample Input 2\n\n7\n3 1 4 1 5 9 2\n\nSample Output 2\n\n14\n\nSample Input 3\n\n5\n1 1 1 1 1\n\nSample Output 3\n\n0",
+      "platform": "atcoder",
+      "question_id": "arc196_a",
+      "contest_id": "arc196",
+      "contest_date": "2025-04-06T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\n# Sort the array to maximize the differences\nA.sort()\n\n# Initialize the total score\ntotal_score = 0\n\n# Pair up elements and calculate the score\nfor i in range(N // 2):\n    total_score += abs(A[i] - A[N - 1 - i])\n\nprint(total_score)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nA = list(map(int, data[1:]))\n\n# Sort the array to maximize the differences\nA.sort()\n\n# Initialize the total score\ntotal_score = 0\n\n# Pair up elements and calculate the score\nfor i in range(N // 2):\n    total_score += abs(A[i] - A[N - 1 - i])\n\nprint(total_score)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 1505785 != 1502497"
+        }
+      ]
+    },
+    {
+      "question_title": "Torus Loop",
+      "question_content": "There is a grid of H rows and W columns.\nThe rows are numbered 0,1,\\ldots,H-1 from top to bottom, and the columns are numbered 0,1,\\ldots,W-1 from left to right.\nLet (i,j) denote the cell at row i and column j.\nYou are given H strings S_0, S_1, \\ldots, S_{H-1}, each of which is of length W and consists of A and B.\nIn each cell, one of the following two types of tiles is placed.\nLet S_{ij} denote the (j+1)-th character (0 \\le j \\le W-1) of the string S_i. The type of tile placed in cell (i,j) is S_{ij}.\n\n- Type A: A single line segment is drawn on the tile\u2019s surface, connecting the midpoints of two adjacent edges.\n\n\n\n- Type B: A single line segment is drawn on the tile\u2019s surface, connecting the midpoints of two opposite edges.\n\n\nThese tiles can be freely rotated. When focusing only on the pattern formed by the line segments, there are four ways to rotate a Type-A tile and two ways to rotate a Type-B tile. Therefore, if we distinguish placements only by the pattern of line segments, the number of ways to place the tiles is 4^a \\times 2^b, where a is the number of Type-A tiles and b is the number of Type-B tiles.\nAmong these ways, print the number, modulo 998244353, of ways such that the line segments on the tiles have no dead ends when viewing the grid as a torus.\nHere, \"the line segments on the tiles have no dead ends when viewing the grid as a torus\" if and only if the following two conditions are satisfied for every cell (i,j):\n\n- Both of the following exist, or neither of the following exists:\n- the line segment drawn in the cell (i,j), whose endpoint is the midpoint of the right edge of the cell (i,j)\n- the line segment drawn in the cell (i,(j+1)\\bmod W), whose endpoint is the midpoint of the left edge of the cell (i,(j+1)\\bmod W)\n\n\n- Both of the following exist, or neither of the following exists:\n- the line segment drawn in the cell (i,j), whose endpoint is the midpoint of the bottom edge of the cell (i,j)\n- the line segment drawn in the cell ((i+1)\\bmod H,j), whose endpoint is the midpoint of the top edge of the cell ((i+1)\\bmod H,j)\n\n\n\nFor example, the following placement satisfies the condition:\n\nThe following placement does not satisfy the condition. Specifically, while there is no line segment whose endpoint is the midpoint of the right edge of the tile in cell (0,2), there is a line segment whose endpoint is the midpoint of the left edge of the tile in cell (0,0), so the condition is not satisfied.\n\nYou are given T test cases; solve each of them.\n\nInput\n\nThe input is given from Standard Input in the following format:\nT\ncase_1\ncase_2\n\\vdots\ncase_T\n\nEach case is given in the following format:\nH W\nS_0\nS_1\n\\vdots\nS_{H-1}\n\nOutput\n\nFor each test case, print the number, modulo 998244353, of placements that satisfies the condition, in separate lines.\n\nConstraints\n\n\n- 1 \\le T \\le 10^5\n- 2 \\le H,W\n- HW\\leq 10^6\n- S_i\\,(0\\le i\\le H-1) are length-W strings consisting of A and B.\n- The sum of H W over all test cases is at most 10^6.\n- T, H, and W are integers.\n\nSample Input 1\n\n3\n3 3\nAAB\nAAB\nBBB\n3 3\nBBA\nABA\nAAB\n3 4\nBAAB\nBABA\nBBAA\n\nSample Output 1\n\n2\n0\n2\n\nOne valid placement for the first test case is shown in the following image:",
+      "platform": "atcoder",
+      "question_id": "arc196_b",
+      "contest_id": "arc196",
+      "contest_date": "2025-04-06T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\noutput = sys.stdout.write\n\nMOD = 998244353\n\ndef mul(a, b):\n    return (a * b) % MOD\n\ndef pow(x, y):\n    res = 1\n    while y > 0:\n        if y & 1:\n            res = mul(res, x)\n        x = mul(x, x)\n        y >>= 1\n    return res\n\ndef main():\n    data = input().split()\n    \n    t = int(data[0])\n    index = 1\n    \n    results = []\n    \n    for _ in range(t):\n        h = int(data[index])\n        w = int(data[index + 1])\n        index += 2\n        \n        grid = []\n        for _ in range(h):\n            grid.append(data[index])\n            index += 1\n        \n        count_a = 0\n        count_b = 0\n        \n        for i in range(h):\n            for j in range(w):\n                if grid[i][j] == 'A':\n                    count_a += 1\n                else:\n                    count_b += 1\n        \n        if h % 2 == 0 and w % 2 == 0:\n            result = pow(2, count_a * 2 + count_b * 2)\n        elif h % 2 == 0 or w % 2 == 0:\n            result = pow(2, count_a * 2 + count_b * 2 - 2)\n        else:\n            result = 0\n        \n        results.append(result)\n    \n    for result in results:\n        output(f\"{result}\\n\")\n\nif __name__ == \"__main__\":\n    main()\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\noutput = sys.stdout.write\n\nMOD = 998244353\n\ndef mul(a, b):\n    return (a * b) % MOD\n\ndef pow(x, y):\n    res = 1\n    while y > 0:\n        if y & 1:\n            res = mul(res, x)\n        x = mul(x, x)\n        y >>= 1\n    return res\n\ndef main():\n    data = input().split()\n    \n    t = int(data[0])\n    index = 1\n    \n    results = []\n    \n    for _ in range(t):\n        h = int(data[index])\n        w = int(data[index + 1])\n        index += 2\n        \n        grid = []\n        for _ in range(h):\n            grid.append(data[index])\n            index += 1\n        \n        count_a = 0\n        count_b = 0\n        \n        for i in range(h):\n            for j in range(w):\n                if grid[i][j] == 'A':\n                    count_a += 1\n                else:\n                    count_b += 1\n        \n        if h % 2 == 0 and w % 2 == 0:\n            result = pow(2, count_a * 2 + count_b * 2)\n        elif h % 2 == 0 or w % 2 == 0:\n            result = pow(2, count_a * 2 + count_b * 2 - 2)\n        else:\n            result = 0\n        \n        results.append(result)\n    \n    for result in results:\n        output(f\"{result}\\n\")\n\nif __name__ == \"__main__\":\n    main()"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 0 != 2"
+        }
+      ]
+    },
+    {
+      "question_title": "Strongly Connected",
+      "question_content": "There is a directed graph with 2N vertices and 2N-1 edges.\r\nThe vertices are numbered 1, 2, \\ldots, 2N, and the i-th edge is a directed edge from vertex i to vertex i+1.\nYou are given a length-2N string S = S_1 S_2 \\ldots S_{2N} consisting of N Ws and N Bs.\r\nVertex i is colored white if S_i is W, and black if S_i is B.\nYou will perform the following series of operations:\n\n- Partition the 2N vertices into N pairs, each consisting of one white vertex and one black vertex.\n- For each pair, add a directed edge from the white vertex to the black vertex.\n\nPrint the number, modulo 998244353, of ways to partition the vertices into N pairs such that the final graph is strongly connected.\n Notes on strongly connectedness\nA directed graph is strongly connected if and only if it is possible to travel from any vertex to any vertex by following edges.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN\r\nS\n\nOutput\n\nPrint the number, modulo 998244353, of ways to partition the vertices into N pairs so that the final graph is strongly connected.\n\nConstraints\n\n\n- 1 \\le N \\le 2\\times 10^5\n- S is a length 2N string consisting of N Ws and N Bs.\n- N is an integer.\n\nSample Input 1\n\n2\r\nBWBW\n\nSample Output 1\n\n1\r\n\nVertices 2,4 are white, and vertices 1,3 are black.\nLet (u,v) denote an edge from vertex u to vertex v.\nIf we pair up vertices as (2,1), (4,3), the final graph have the edges (1,2), (2,3), (3,4), (2,1), (4,3). In this case, for example, it is impossible to travel from vertex 3 to vertex 1 by following edges, so this graph is not strongly connected.\nIf we pair up vertices as (2,3), (4,1), the final graph have the edges (1,2), (2,3), (3,4), (2,3), (4,1). This graph is strongly connected.\nTherefore, there is exactly 1 way to pair up the vertices that satisfies the condition.\n\nSample Input 2\n\n4\r\nBWWBWBWB\n\nSample Output 2\n\n0\r\n\nNo matter how you pair up the vertices, you cannot satisfy the condition.\n\nSample Input 3\n\n9\r\nBWWBWBBBWWBWBBWWBW\n\nSample Output 3\n\n240792",
+      "platform": "atcoder",
+      "question_id": "arc196_c",
+      "contest_id": "arc196",
+      "contest_date": "2025-04-06T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nS = data[1]\n\nMOD = 998244353\n\n# Count the number of Ws and Bs\nnum_W = S.count('W')\nnum_B = S.count('B')\n\n# Check if the number of Ws and Bs is equal\nif num_W != num_B:\n    print(0)\nelse:\n    # Calculate the number of ways to pair the Ws and Bs\n    # This is equivalent to finding the number of derangements of N items\n    def derangement(n):\n        if n == 0:\n            return 1\n        elif n == 1:\n            return 0\n        else:\n            return (n - 1) * (derangement(n - 1) + derangement(n - 2)) % MOD\n    \n    result = derangement(N)\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\nN = int(data[0])\nS = data[1]\n\nMOD = 998244353\n\n# Count the number of Ws and Bs\nnum_W = S.count('W')\nnum_B = S.count('B')\n\n# Check if the number of Ws and Bs is equal\nif num_W != num_B:\n    print(0)\nelse:\n    # Calculate the number of ways to pair the Ws and Bs\n    # This is equivalent to finding the number of derangements of N items\n    def derangement(n):\n        if n == 0:\n            return 1\n        elif n == 1:\n            return 0\n        else:\n            return (n - 1) * (derangement(n - 1) + derangement(n - 2)) % MOD\n    \n    result = derangement(N)\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=0: 9 != 0"
+        }
+      ]
+    },
+    {
+      "question_title": "Roadway",
+      "question_content": "There are N towns, numbered 1,2,\\ldots,N, arranged in a line in this order.\nThere are N-1 roads connecting adjacent towns: road j\\,(1 \\leq j \\leq N-1) connects towns j and j+1. For each road j, you can set a strength w_j (an integer that may be negative).\nWhen a person travels along a road, their stamina changes. Specifically, if a person with stamina x travels along road j, their stamina becomes x + w_j.\nThere are M people who will now move between these towns.\nPerson i\\,(1 \\le i \\le M) starts with stamina 0 at town S_i and travels to town T_i via the shortest path.\r\nIt is guaranteed that |S_i - T_i| > 1. Also, (S_i, T_i) \\neq (S_j, T_j) if i \\neq j.\nPerson i\u2019s requirement is as follows:\n\nWhen departing Town S_i and when arriving at Town T_i, their stamina should be exactly 0. At every other town, their stamina should always be a positive integer.\n\nAssume that there are no changes to stamina other than those due to traveling along roads as described above.\nProcess Q queries. For the k-th query (1 \\le k \\le Q), if it is possible to set the strengths of the roads so that the requirements of all people L_k, L_k + 1, \\ldots, R_k are satisfied, print Yes; otherwise, print No.\n\nInput\n\nThe input is given from Standard Input in the following format:\nN M Q\r\nS_1 T_1\r\nS_2 T_2\r\n\\vdots\r\nS_M T_M\r\nL_1 R_1\r\nL_2 R_2\r\n\\vdots\r\nL_Q R_Q\n\nOutput\n\nPrint Q lines.\nThe k-th line should contain Yes if there is a way to set the strengths of the roads so that the requirements of all people L_k, L_k + 1, \\ldots, R_k are satisfied, and No otherwise.\n\nConstraints\n\n\n- 3 \\le N \\le 4 \\times 10^5\n- 1 \\le M \\le 2 \\times 10^5\n- 1 \\le Q \\le 2 \\times 10^5\n- 1 \\le S_i, T_i \\le N\n- |S_i - T_i| > 1\n- (S_i, T_i) \\neq (S_j, T_j)\\,(i \\neq j)\n- 1 \\le L_k \\le R_k \\le M\n- All input values are integers.\n\nSample Input 1\n\n5 4 2\r\n4 2\r\n1 3\r\n3 5\r\n2 4\r\n1 3\r\n2 4\n\nSample Output 1\n\nYes\r\nNo\r\n\nFor the first query, consider setting the strengths of roads 1, 2, 3, 4 to 1, -1, 1, -1, respectively.\n\n- Person 1 starts at town 4 with stamina 0, visits town 3 with stamina 1, and arrives at town 2 with stamina 0.\n- Person 2 starts at town 1 with stamina 0, visits town 2 with stamina 1, and arrives at town 3 with stamina 0.\n- Person 3 starts at town 3 with stamina 0, visits town 4 with stamina 1, and arrives at town 5 with stamina 0.\n\nThus, this configuration satisfies the requirements of persons 1,2,3, so print Yes on the first line.\nFor the second query, it is impossible to satisfy the requirements of persons 2,3,4 simultaneously, so print No.\n\nSample Input 2\n\n7 6 3\r\n1 5\r\n2 4\r\n4 6\r\n7 1\r\n5 3\r\n1 6\r\n1 6\r\n4 4\r\n2 5\n\nSample Output 2\n\nNo\r\nYes\r\nYes",
+      "platform": "atcoder",
+      "question_id": "arc196_d",
+      "contest_id": "arc196",
+      "contest_date": "2025-04-06T00:00:00",
+      "starter_code": "",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nimport sys\ninput = sys.stdin.read\ndata = input().split()\n\n# Parse the input data\nindex = 0\nN = int(data[index])\nM = int(data[index + 1])\nQ = int(data[index + 2])\nindex += 3\n\npeople = []\nfor _ in range(M):\n    S = int(data[index]) - 1\n    T = int(data[index + 1]) - 1\n    index += 2\n    people.append((S, T))\n\nqueries = []\nfor _ in range(Q):\n    L = int(data[index]) - 1\n    R = int(data[index + 1]) - 1\n    index += 2\n    queries.append((L, R))\n\n# Function to check if a configuration of weights is valid for a single person\ndef is_valid_for_person(S, T):\n    # If S == T, we need to have a weight of 0\n    if S == T:\n        return False\n    \n    # If S < T, we need to increase stamina from S to T\n    if S < T:\n        return True\n    \n    # If S > T, we need to decrease stamina from S to T\n    return True\n\n# Check each query\nresults = []\nfor L, R in queries:\n    valid = True\n    for i in range(L, R + 1):\n        S, T = people[i]\n        if not is_valid_for_person(S, T):\n            valid = False\n            break\n    results.append(\"Yes\" if valid else \"No\")\n\n# Print the results\nfor result in results:\n    print(result)\n```"
+      ],
+      "code_list": [
+        "import sys\ninput = sys.stdin.read\ndata = input().split()\n\n# Parse the input data\nindex = 0\nN = int(data[index])\nM = int(data[index + 1])\nQ = int(data[index + 2])\nindex += 3\n\npeople = []\nfor _ in range(M):\n    S = int(data[index]) - 1\n    T = int(data[index + 1]) - 1\n    index += 2\n    people.append((S, T))\n\nqueries = []\nfor _ in range(Q):\n    L = int(data[index]) - 1\n    R = int(data[index + 1]) - 1\n    index += 2\n    queries.append((L, R))\n\n# Function to check if a configuration of weights is valid for a single person\ndef is_valid_for_person(S, T):\n    # If S == T, we need to have a weight of 0\n    if S == T:\n        return False\n    \n    # If S < T, we need to increase stamina from S to T\n    if S < T:\n        return True\n    \n    # If S > T, we need to decrease stamina from S to T\n    return True\n\n# Check each query\nresults = []\nfor L, R in queries:\n    valid = True\n    for i in range(L, R + 1):\n        S, T = people[i]\n        if not is_valid_for_person(S, T):\n            valid = False\n            break\n    results.append(\"Yes\" if valid else \"No\")\n\n# Print the results\nfor result in results:\n    print(result)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong answer at output_line_idx=1: Yes != No"
+        }
+      ]
+    }
+  ],
+  "fatal": false
+}

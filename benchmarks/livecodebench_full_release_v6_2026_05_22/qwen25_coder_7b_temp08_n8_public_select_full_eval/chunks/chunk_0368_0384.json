@@ -1,0 +1,792 @@
+{
+  "start_index": 368,
+  "end_index": 384,
+  "question_ids": [
+    "3654",
+    "3655",
+    "3656",
+    "3657",
+    "3658",
+    "3659",
+    "3674",
+    "3675",
+    "3676",
+    "3677",
+    "3680",
+    "3681",
+    "3682",
+    "3683",
+    "3684",
+    "3685"
+  ],
+  "evaluation_seconds": 13.743,
+  "metrics": {
+    "pass@1": 0.125,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 1.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0,
+        "12": 0.0,
+        "13": 0.0,
+        "14": 0.0,
+        "15": 1.0
+      }
+    }
+  },
+  "results": {
+    "0": [
+      [
+        true,
+        true,
+        true,
+        false
+      ]
+    ],
+    "1": [
+      [
+        false
+      ]
+    ],
+    "2": [
+      [
+        false
+      ]
+    ],
+    "3": [
+      [
+        false
+      ]
+    ],
+    "4": [
+      [
+        false
+      ]
+    ],
+    "5": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ],
+    "6": [
+      [
+        false
+      ]
+    ],
+    "7": [
+      [
+        false
+      ]
+    ],
+    "8": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false
+      ]
+    ],
+    "9": [
+      [
+        true,
+        true,
+        false
+      ]
+    ],
+    "10": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "11": [
+      [
+        true,
+        false
+      ]
+    ],
+    "12": [
+      [
+        false
+      ]
+    ],
+    "13": [
+      [
+        false
+      ]
+    ],
+    "14": [
+      [
+        false
+      ]
+    ],
+    "15": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    ]
+  },
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {}
+    ]
+  ],
+  "pass_lists": [
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      true
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      false
+    ],
+    [
+      true
+    ]
+  ],
+  "eval_all": [
+    {
+      "question_title": "minimum-array-sum",
+      "question_content": "You are given an integer array nums and three integers k, op1, and op2.\nYou can perform the following operations on nums:\n\nOperation 1: Choose an index i and divide nums[i] by 2, rounding up to the nearest whole number. You can perform this operation at most op1 times, and not more than once per index.\nOperation 2: Choose an index i and subtract k from nums[i], but only if nums[i] is greater than or equal to k. You can perform this operation at most op2 times, and not more than once per index.\n\nNote: Both operations can be applied to the same index, but at most once each.\nReturn the minimum possible sum of all elements in nums after performing any number of operations.\n \nExample 1:\n\nInput: nums = [2,8,3,19,3], k = 3, op1 = 1, op2 = 1\nOutput: 23\nExplanation:\n\nApply Operation 2 to nums[1] = 8, making nums[1] = 5.\nApply Operation 1 to nums[3] = 19, making nums[3] = 10.\nThe resulting array becomes [2, 5, 3, 10, 3], which has the minimum possible sum of 23 after applying the operations.\n\n\nExample 2:\n\nInput: nums = [2,4,3], k = 3, op1 = 2, op2 = 1\nOutput: 3\nExplanation:\n\nApply Operation 1 to nums[0] = 2, making nums[0] = 1.\nApply Operation 1 to nums[1] = 4, making nums[1] = 2.\nApply Operation 2 to nums[2] = 3, making nums[2] = 0.\nThe resulting array becomes [1, 2, 0], which has the minimum possible sum of 3 after applying the operations.\n\n\n \nConstraints:\n\n1 <= nums.length <= 100\n0 <= nums[i] <= 10^5\n0 <= k <= 10^5\n0 <= op1, op2 <= nums.length",
+      "platform": "leetcode",
+      "question_id": "3654",
+      "contest_id": "weekly-contest-425",
+      "contest_date": "2024-11-23T18:30:00",
+      "starter_code": "class Solution:\n    def minArraySum(self, nums: List[int], k: int, op1: int, op2: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def minArraySum(self, nums: List[int], k: int, op1: int, op2: int) -> int:\n        while op1 > 0 or op2 > 0:\n            # Apply Operation 1 to minimize the largest element\n            if op1 > 0:\n                max_index = nums.index(max(nums))\n                nums[max_index] = -(-nums[max_index] // 2)\n                op1 -= 1\n            \n            # Apply Operation 2 to minimize the largest element that is >= k\n            if op2 > 0 and any(x >= k for x in nums):\n                for i in range(len(nums)):\n                    if nums[i] >= k:\n                        nums[i] -= k\n                        op2 -= 1\n                        break\n        \n        return sum(nums)\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def minArraySum(self, nums: List[int], k: int, op1: int, op2: int) -> int:\n        while op1 > 0 or op2 > 0:\n            # Apply Operation 1 to minimize the largest element\n            if op1 > 0:\n                max_index = nums.index(max(nums))\n                nums[max_index] = -(-nums[max_index] // 2)\n                op1 -= 1\n            \n            # Apply Operation 2 to minimize the largest element that is >= k\n            if op2 > 0 and any(x >= k for x in nums):\n                for i in range(len(nums)):\n                    if nums[i] >= k:\n                        nums[i] -= k\n                        op2 -= 1\n                        break\n        \n        return sum(nums)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "digit-operations-to-make-two-integers-equal",
+      "question_content": "You are given two integers n and m that consist of the same number of digits.\nYou can perform the following operations any number of times:\n\nChoose any digit from n that is not 9 and increase it by 1.\nChoose any digit from n that is not 0 and decrease it by 1.\n\nThe integer n must not be a prime number at any point, including its original value and after each operation.\nThe cost of a transformation is the sum of all values that n takes throughout the operations performed.\nReturn the minimum cost to transform n into m. If it is impossible, return -1.\n \nExample 1:\n\nInput: n = 10, m = 12\nOutput: 85\nExplanation:\nWe perform the following operations:\n\nIncrease the first digit, now n = 20.\nIncrease the second digit, now n = 21.\nIncrease the second digit, now n = 22.\nDecrease the first digit, now n = 12.\n\n\nExample 2:\n\nInput: n = 4, m = 8\nOutput: -1\nExplanation:\nIt is impossible to make n equal to m.\n\nExample 3:\n\nInput: n = 6, m = 2\nOutput: -1\nExplanation: \nSince 2 is already a prime, we can't make n equal to m.\n\n \nConstraints:\n\n1 <= n, m < 10^4\nn and m consist of the same number of digits.",
+      "platform": "leetcode",
+      "question_id": "3655",
+      "contest_id": "biweekly-contest-145",
+      "contest_date": "2024-12-07T06:30:00",
+      "starter_code": "class Solution:\n    def minOperations(self, n: int, m: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom sympy import isprime\n\nclass Solution:\n    def minOperations(self, n: int, m: int) -> int:\n        if isprime(n) or isprime(m):\n            return -1\n        \n        n_str, m_str = str(n), str(m)\n        cost = 0\n        \n        for i in range(len(n_str)):\n            if n_str[i] != m_str[i]:\n                diff = abs(int(n_str[i]) - int(m_str[i]))\n                # Calculate the cost to change n to m\n                cost += diff * (i + 1)\n        \n        return cost\n```"
+      ],
+      "code_list": [
+        "from sympy import isprime\n\nclass Solution:\n    def minOperations(self, n: int, m: int) -> int:\n        if isprime(n) or isprime(m):\n            return -1\n        \n        n_str, m_str = str(n), str(m)\n        cost = 0\n        \n        for i in range(len(n_str)):\n            if n_str[i] != m_str[i]:\n                diff = abs(int(n_str[i]) - int(m_str[i]))\n                # Calculate the cost to change n to m\n                cost += diff * (i + 1)\n        \n        return cost"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "minimum-number-of-operations-to-make-elements-in-array-distinct",
+      "question_content": "You are given an integer array nums. You need to ensure that the elements in the array are distinct. To achieve this, you can perform the following operation any number of times:\n\nRemove 3 elements from the beginning of the array. If the array has fewer than 3 elements, remove all remaining elements.\n\nNote that an empty array is considered to have distinct elements. Return the minimum number of operations needed to make the elements in the array distinct.\n \nExample 1:\n\nInput: nums = [1,2,3,4,2,3,3,5,7]\nOutput: 2\nExplanation:\n\nIn the first operation, the first 3 elements are removed, resulting in the array [4, 2, 3, 3, 5, 7].\nIn the second operation, the next 3 elements are removed, resulting in the array [3, 5, 7], which has distinct elements.\n\nTherefore, the answer is 2.\n\nExample 2:\n\nInput: nums = [4,5,6,4,4]\nOutput: 2\nExplanation:\n\nIn the first operation, the first 3 elements are removed, resulting in the array [4, 4].\nIn the second operation, all remaining elements are removed, resulting in an empty array.\n\nTherefore, the answer is 2.\n\nExample 3:\n\nInput: nums = [6,7,8,9]\nOutput: 0\nExplanation:\nThe array already contains distinct elements. Therefore, the answer is 0.\n\n \nConstraints:\n\n1 <= nums.length <= 100\n1 <= nums[i] <= 100",
+      "platform": "leetcode",
+      "question_id": "3656",
+      "contest_id": "weekly-contest-429",
+      "contest_date": "2024-12-21T18:30:00",
+      "starter_code": "class Solution:\n    def minimumOperations(self, nums: List[int]) -> int:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def minimumOperations(self, nums: List[int]) -> int:\n        operations = 0\n        while len(nums) > 0:\n            if len(set(nums[:3])) == min(3, len(nums)):\n                break\n            else:\n                nums = nums[3:]\n                operations += 1\n        return operations\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def minimumOperations(self, nums: List[int]) -> int:\n        operations = 0\n        while len(nums) > 0:\n            if len(set(nums[:3])) == min(3, len(nums)):\n                break\n            else:\n                nums = nums[3:]\n                operations += 1\n        return operations"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "check-if-grid-can-be-cut-into-sections",
+      "question_content": "You are given an integer n representing the dimensions of an n x n grid, with the origin at the bottom-left corner of the grid. You are also given a 2D array of coordinates rectangles, where rectangles[i] is in the form [start_x, start_y, end_x, end_y], representing a rectangle on the grid. Each rectangle is defined as follows:\n\n(start_x, start_y): The bottom-left corner of the rectangle.\n(end_x, end_y): The top-right corner of the rectangle.\n\nNote that the rectangles do not overlap. Your task is to determine if it is possible to make either two horizontal or two vertical cuts on the grid such that:\n\nEach of the three resulting sections formed by the cuts contains at least one rectangle.\nEvery rectangle belongs to exactly one section.\n\nReturn true if such cuts can be made; otherwise, return false.\n \nExample 1:\n\nInput: n = 5, rectangles = [[1,0,5,2],[0,2,2,4],[3,2,5,3],[0,4,4,5]]\nOutput: true\nExplanation:\n\nThe grid is shown in the diagram. We can make horizontal cuts at y = 2 and y = 4. Hence, output is true.\n\nExample 2:\n\nInput: n = 4, rectangles = [[0,0,1,1],[2,0,3,4],[0,2,2,3],[3,0,4,3]]\nOutput: true\nExplanation:\n\nWe can make vertical cuts at x = 2 and x = 3. Hence, output is true.\n\nExample 3:\n\nInput: n = 4, rectangles = [[0,2,2,4],[1,0,3,2],[2,2,3,4],[3,0,4,2],[3,2,4,4]]\nOutput: false\nExplanation:\nWe cannot make two horizontal or two vertical cuts that satisfy the conditions. Hence, output is false.\n\n \nConstraints:\n\n3 <= n <= 10^9\n3 <= rectangles.length <= 10^5\n0 <= rectangles[i][0] < rectangles[i][2] <= n\n0 <= rectangles[i][1] < rectangles[i][3] <= n\nNo two rectangles overlap.",
+      "platform": "leetcode",
+      "question_id": "3657",
+      "contest_id": "biweekly-contest-146",
+      "contest_date": "2024-12-21T06:30:00",
+      "starter_code": "class Solution:\n    def checkValidCuts(self, n: int, rectangles: List[List[int]]) -> bool:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def checkValidCuts(self, n: int, rectangles: List[List[int]]) -> bool:\n        # Separate rectangles into horizontal and vertical groups based on their orientation\n        horizontal_rectangles = [(x1, x2, y1) for x1, y1, x2, y2 in rectangles if y1 == y2]\n        vertical_rectangles = [(y1, y2, x1) for x1, y1, x2, y2 in rectangles if x1 == x2]\n        \n        # Check if we have enough rectangles to make the required cuts\n        if len(horizontal_rectangles) >= 2 or len(vertical_rectangles) >= 2:\n            return True\n        \n        return False\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def checkValidCuts(self, n: int, rectangles: List[List[int]]) -> bool:\n        # Separate rectangles into horizontal and vertical groups based on their orientation\n        horizontal_rectangles = [(x1, x2, y1) for x1, y1, x2, y2 in rectangles if y1 == y2]\n        vertical_rectangles = [(y1, y2, x1) for x1, y1, x2, y2 in rectangles if x1 == x2]\n        \n        # Check if we have enough rectangles to make the required cuts\n        if len(horizontal_rectangles) >= 2 or len(vertical_rectangles) >= 2:\n            return True\n        \n        return False"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "minimize-the-maximum-adjacent-element-difference",
+      "question_content": "You are given an array of integers nums. Some values in nums are missing and are denoted by -1.\nYou can choose a pair of positive integers (x, y) exactly once and replace each missing element with either x or y.\nYou need to minimize the maximum absolute difference between adjacent elements of nums after replacements.\nReturn the minimum possible difference.\n \nExample 1:\n\nInput: nums = [1,2,-1,10,8]\nOutput: 4\nExplanation:\nBy choosing the pair as (6, 7), nums can be changed to [1, 2, 6, 10, 8].\nThe absolute differences between adjacent elements are:\n\n|1 - 2| == 1\n|2 - 6| == 4\n|6 - 10| == 4\n|10 - 8| == 2\n\n\nExample 2:\n\nInput: nums = [-1,-1,-1]\nOutput: 0\nExplanation:\nBy choosing the pair as (4, 4), nums can be changed to [4, 4, 4].\n\nExample 3:\n\nInput: nums = [-1,10,-1,8]\nOutput: 1\nExplanation:\nBy choosing the pair as (11, 9), nums can be changed to [11, 10, 9, 8].\n\n \nConstraints:\n\n2 <= nums.length <= 10^5\nnums[i] is either -1 or in the range [1, 10^9].",
+      "platform": "leetcode",
+      "question_id": "3658",
+      "contest_id": "weekly-contest-424",
+      "contest_date": "2024-11-16T18:30:00",
+      "starter_code": "class Solution:\n    def minDifference(self, nums: List[int]) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nclass Solution:\n    def minDifference(self, nums: List[int]) -> int:\n        nums = [num for num in nums if num != -1]\n        n = len(nums)\n        if n <= 3:\n            return 0\n        nums.sort()\n        ans = float('inf')\n        for i in range(4):\n            ans = min(ans, nums[n-4+i] - nums[i])\n        return ans\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def minDifference(self, nums: List[int]) -> int:\n        nums = [num for num in nums if num != -1]\n        n = len(nums)\n        if n <= 3:\n            return 0\n        nums.sort()\n        ans = float('inf')\n        for i in range(4):\n            ans = min(ans, nums[n-4+i] - nums[i])\n        return ans"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "count-paths-with-the-given-xor-value",
+      "question_content": "You are given a 2D integer array grid with size m x n. You are also given an integer k.\nYour task is to calculate the number of paths you can take from the top-left cell (0, 0) to the bottom-right cell (m - 1, n - 1) satisfying the following constraints:\n\nYou can either move to the right or down. Formally, from the cell (i, j) you may move to the cell (i, j + 1) or to the cell (i + 1, j) if the target cell exists.\nThe XOR of all the numbers on the path must be equal to k.\n\nReturn the total number of such paths.\nSince the answer can be very large, return the result modulo 10^9 + 7.\n \nExample 1:\n\nInput: grid = [[2, 1, 5], [7, 10, 0], [12, 6, 4]], k = 11\nOutput: 3\nExplanation: \nThe 3 paths are:\n\n(0, 0) \u2192 (1, 0) \u2192 (2, 0) \u2192 (2, 1) \u2192 (2, 2)\n(0, 0) \u2192 (1, 0) \u2192 (1, 1) \u2192 (1, 2) \u2192 (2, 2)\n(0, 0) \u2192 (0, 1) \u2192 (1, 1) \u2192 (2, 1) \u2192 (2, 2)\n\n\nExample 2:\n\nInput: grid = [[1, 3, 3, 3], [0, 3, 3, 2], [3, 0, 1, 1]], k = 2\nOutput: 5\nExplanation:\nThe 5 paths are:\n\n(0, 0) \u2192 (1, 0) \u2192 (2, 0) \u2192 (2, 1) \u2192 (2, 2) \u2192 (2, 3)\n(0, 0) \u2192 (1, 0) \u2192 (1, 1) \u2192 (2, 1) \u2192 (2, 2) \u2192 (2, 3)\n(0, 0) \u2192 (1, 0) \u2192 (1, 1) \u2192 (1, 2) \u2192 (1, 3) \u2192 (2, 3)\n(0, 0) \u2192 (0, 1) \u2192 (1, 1) \u2192 (1, 2) \u2192 (2, 2) \u2192 (2, 3)\n(0, 0) \u2192 (0, 1) \u2192 (0, 2) \u2192 (1, 2) \u2192 (2, 2) \u2192 (2, 3)\n\n\nExample 3:\n\nInput: grid = [[1, 1, 1, 2], [3, 0, 3, 2], [3, 0, 2, 2]], k = 10\nOutput: 0\n\n \nConstraints:\n\n1 <= m == grid.length <= 300\n1 <= n == grid[r].length <= 300\n0 <= grid[r][c] < 16\n0 <= k < 16",
+      "platform": "leetcode",
+      "question_id": "3659",
+      "contest_id": "biweekly-contest-146",
+      "contest_date": "2024-12-21T06:30:00",
+      "starter_code": "class Solution:\n    def countPathsWithXorValue(self, grid: List[List[int]], k: int) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def countPathsWithXorValue(self, grid: List[List[int]], k: int) -> int:\n        MOD = 10**9 + 7\n        m, n = len(grid), len(grid[0])\n        \n        @cache\n        def dfs(x, y, xor):\n            if x == m or y == n:\n                return 0\n            xor ^= grid[x][y]\n            if x == m - 1 and y == n - 1:\n                return 1 if xor == k else 0\n            \n            right = dfs(x, y + 1, xor)\n            down = dfs(x + 1, y, xor)\n            \n            return (right + down) % MOD\n        \n        return dfs(0, 0, 0)\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def countPathsWithXorValue(self, grid: List[List[int]], k: int) -> int:\n        MOD = 10**9 + 7\n        m, n = len(grid), len(grid[0])\n        \n        @cache\n        def dfs(x, y, xor):\n            if x == m or y == n:\n                return 0\n            xor ^= grid[x][y]\n            if x == m - 1 and y == n - 1:\n                return 1 if xor == k else 0\n            \n            right = dfs(x, y + 1, xor)\n            down = dfs(x + 1, y, xor)\n            \n            return (right + down) % MOD\n        \n        return dfs(0, 0, 0)"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    },
+    {
+      "question_title": "count-non-decreasing-subarrays-after-k-operations",
+      "question_content": "You are given an array nums of n integers and an integer k.\nFor each subarray of nums, you can apply up to k operations on it. In each operation, you increment any element of the subarray by 1.\nNote that each subarray is considered independently, meaning changes made to one subarray do not persist to another.\nReturn the number of subarrays that you can make non-decreasing \u200b\u200b\u200b\u200b\u200bafter performing at most k operations.\nAn array is said to be non-decreasing if each element is greater than or equal to its previous element, if it exists.\n \nExample 1:\n\nInput: nums = [6,3,1,2,4,4], k = 7\nOutput: 17\nExplanation:\nOut of all 21 possible subarrays of nums, only the subarrays [6, 3, 1], [6, 3, 1, 2], [6, 3, 1, 2, 4] and [6, 3, 1, 2, 4, 4] cannot be made non-decreasing after applying up to k = 7 operations. Thus, the number of non-decreasing subarrays is 21 - 4 = 17.\n\nExample 2:\n\nInput: nums = [6,3,1,3,6], k = 4\nOutput: 12\nExplanation:\nThe subarray [3, 1, 3, 6] along with all subarrays of nums with three or fewer elements, except [6, 3, 1], can be made non-decreasing after k operations. There are 5 subarrays of a single element, 4 subarrays of two elements, and 2 subarrays of three elements except [6, 3, 1], so there are 1 + 5 + 4 + 2 = 12 subarrays that can be made non-decreasing.\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9\n1 <= k <= 10^9",
+      "platform": "leetcode",
+      "question_id": "3674",
+      "contest_id": "weekly-contest-432",
+      "contest_date": "2025-01-11T18:30:00",
+      "starter_code": "class Solution:\n    def countNonDecreasingSubarrays(self, nums: List[int], k: int) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def countNonDecreasingSubarrays(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        total_subarrays = n * (n + 1) // 2\n        current_sum = 0\n        left = 0\n        result = 0\n        \n        for right in range(n):\n            current_sum += max(0, nums[right] - nums[right - 1])\n            \n            while current_sum > k:\n                current_sum -= max(0, nums[left] - nums[left - 1])\n                left += 1\n            \n            result += right - left + 1\n        \n        return total_subarrays - result\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def countNonDecreasingSubarrays(self, nums: List[int], k: int) -> int:\n        n = len(nums)\n        total_subarrays = n * (n + 1) // 2\n        current_sum = 0\n        left = 0\n        result = 0\n        \n        for right in range(n):\n            current_sum += max(0, nums[right] - nums[right - 1])\n            \n            while current_sum > k:\n                current_sum -= max(0, nums[left] - nums[left - 1])\n                left += 1\n            \n            result += right - left + 1\n        \n        return total_subarrays - result"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "maximize-sum-of-weights-after-edge-removals",
+      "question_content": "There exists an undirected tree with n nodes numbered 0 to n - 1. You are given a 2D integer array edges of length n - 1, where edges[i] = [u_i, v_i, w_i] indicates that there is an edge between nodes u_i and v_i with weight w_i in the tree.\nYour task is to remove zero or more edges such that:\n\nEach node has an edge with at most k other nodes, where k is given.\nThe sum of the weights of the remaining edges is maximized.\n\nReturn the maximum possible sum of weights for the remaining edges after making the necessary removals.\n \nExample 1:\n\nInput: edges = [[0,1,4],[0,2,2],[2,3,12],[2,4,6]], k = 2\nOutput: 22\nExplanation:\n\n\nNode 2 has edges with 3 other nodes. We remove the edge [0, 2, 2], ensuring that no node has edges with more than k = 2 nodes.\nThe sum of weights is 22, and we can't achieve a greater sum. Thus, the answer is 22.\n\n\nExample 2:\n\nInput: edges = [[0,1,5],[1,2,10],[0,3,15],[3,4,20],[3,5,5],[0,6,10]], k = 3\nOutput: 65\nExplanation:\n\nSince no node has edges connecting it to more than k = 3 nodes, we don't remove any edges.\nThe sum of weights is 65. Thus, the answer is 65.\n\n\n \nConstraints:\n\n2 <= n <= 10^5\n1 <= k <= n - 1\nedges.length == n - 1\nedges[i].length == 3\n0 <= edges[i][0] <= n - 1\n0 <= edges[i][1] <= n - 1\n1 <= edges[i][2] <= 10^6\nThe input is generated such that edges form a valid tree.",
+      "platform": "leetcode",
+      "question_id": "3675",
+      "contest_id": "weekly-contest-425",
+      "contest_date": "2024-11-23T18:30:00",
+      "starter_code": "class Solution:\n    def maximizeSumOfWeights(self, edges: List[List[int]], k: int) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nclass Solution:\n    def maximizeSumOfWeights(self, edges: List[List[int]], k: int) -> int:\n        from collections import defaultdict, deque\n        \n        # Build the graph\n        graph = defaultdict(list)\n        for u, v, w in edges:\n            graph[u].append((v, w))\n            graph[v].append((u, w))\n        \n        # Helper function to calculate the maximum sum of weights\n        def dfs(node, parent):\n            weights = []\n            for neighbor, weight in graph[node]:\n                if neighbor != parent:\n                    weights.append(dfs(neighbor, node))\n            weights.sort()\n            return sum(weights[-k:])\n        \n        # Start DFS from node 0\n        return dfs(0, -1)\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def maximizeSumOfWeights(self, edges: List[List[int]], k: int) -> int:\n        from collections import defaultdict, deque\n        \n        # Build the graph\n        graph = defaultdict(list)\n        for u, v, w in edges:\n            graph[u].append((v, w))\n            graph[v].append((u, w))\n        \n        # Helper function to calculate the maximum sum of weights\n        def dfs(node, parent):\n            weights = []\n            for neighbor, weight in graph[node]:\n                if neighbor != parent:\n                    weights.append(dfs(neighbor, node))\n            weights.sort()\n            return sum(weights[-k:])\n        \n        # Start DFS from node 0\n        return dfs(0, -1)"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "smallest-number-with-all-set-bits",
+      "question_content": "You are given a positive number n.\nReturn the smallest number x greater than or equal to n, such that the binary representation of x contains only set bits\n \nExample 1:\n\nInput: n = 5\nOutput: 7\nExplanation:\nThe binary representation of 7 is \"111\".\n\nExample 2:\n\nInput: n = 10\nOutput: 15\nExplanation:\nThe binary representation of 15 is \"1111\".\n\nExample 3:\n\nInput: n = 3\nOutput: 3\nExplanation:\nThe binary representation of 3 is \"11\".\n\n \nConstraints:\n\n1 <= n <= 1000",
+      "platform": "leetcode",
+      "question_id": "3676",
+      "contest_id": "weekly-contest-426",
+      "contest_date": "2024-11-30T18:30:00",
+      "starter_code": "class Solution:\n    def smallestNumber(self, n: int) -> int:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nclass Solution:\n    def smallestNumber(self, n: int) -> int:\n        if n & (n - 1) == 0:\n            return n\n        while n & (n + 1):\n            n += 1\n        return n\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def smallestNumber(self, n: int) -> int:\n        if n & (n - 1) == 0:\n            return n\n        while n & (n + 1):\n            n += 1\n        return n"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "maximum-amount-of-money-robot-can-earn",
+      "question_content": "You are given an m x n grid. A robot starts at the top-left corner of the grid (0, 0) and wants to reach the bottom-right corner (m - 1, n - 1). The robot can move either right or down at any point in time.\nThe grid contains a value coins[i][j] in each cell:\n\nIf coins[i][j] >= 0, the robot gains that many coins.\nIf coins[i][j] < 0, the robot encounters a robber, and the robber steals the absolute value of coins[i][j] coins.\n\nThe robot has a special ability to neutralize robbers in at most 2 cells on its path, preventing them from stealing coins in those cells.\nNote: The robot's total coins can be negative.\nReturn the maximum profit the robot can gain on the route.\n \nExample 1:\n\nInput: coins = [[0,1,-1],[1,-2,3],[2,-3,4]]\nOutput: 8\nExplanation:\nAn optimal path for maximum coins is:\n\nStart at (0, 0) with 0 coins (total coins = 0).\nMove to (0, 1), gaining 1 coin (total coins = 0 + 1 = 1).\nMove to (1, 1), where there's a robber stealing 2 coins. The robot uses one neutralization here, avoiding the robbery (total coins = 1).\nMove to (1, 2), gaining 3 coins (total coins = 1 + 3 = 4).\nMove to (2, 2), gaining 4 coins (total coins = 4 + 4 = 8).\n\n\nExample 2:\n\nInput: coins = [[10,10,10],[10,10,10]]\nOutput: 40\nExplanation:\nAn optimal path for maximum coins is:\n\nStart at (0, 0) with 10 coins (total coins = 10).\nMove to (0, 1), gaining 10 coins (total coins = 10 + 10 = 20).\nMove to (0, 2), gaining another 10 coins (total coins = 20 + 10 = 30).\nMove to (1, 2), gaining the final 10 coins (total coins = 30 + 10 = 40).\n\n\n \nConstraints:\n\nm == coins.length\nn == coins[i].length\n1 <= m, n <= 500\n-1000 <= coins[i][j] <= 1000",
+      "platform": "leetcode",
+      "question_id": "3677",
+      "contest_id": "weekly-contest-432",
+      "contest_date": "2025-01-11T18:30:00",
+      "starter_code": "class Solution:\n    def maximumAmount(self, coins: List[List[int]]) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maximumAmount(self, coins: List[List[int]]) -> int:\n        m, n = len(coins), len(coins[0])\n        dp = [[[float('-inf')] * 3 for _ in range(n)] for _ in range(m)]\n        \n        for i in range(m):\n            for j in range(n):\n                if i == 0 and j == 0:\n                    dp[i][j][0] = max(0, coins[i][j])\n                else:\n                    dp[i][j][0] = max(dp[i-1][j][k] + max(0, coins[i][j]) for k in range(3))\n                    dp[i][j][1] = max(dp[i][j-1][k] + max(0, coins[i][j]) for k in range(3))\n                    \n                    if i > 0:\n                        dp[i][j][2] = max(dp[i-1][j][0] - abs(coins[i][j]), dp[i-1][j][1] - abs(coins[i][j]), dp[i-1][j][2] - abs(coins[i][j]))\n                    if j > 0:\n                        dp[i][j][2] = max(dp[i][j][2], dp[i][j-1][0] - abs(coins[i][j]), dp[i][j-1][1] - abs(coins[i][j]), dp[i][j-1][2] - abs(coins[i][j]))\n        \n        return max(dp[m-1][n-1])\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maximumAmount(self, coins: List[List[int]]) -> int:\n        m, n = len(coins), len(coins[0])\n        dp = [[[float('-inf')] * 3 for _ in range(n)] for _ in range(m)]\n        \n        for i in range(m):\n            for j in range(n):\n                if i == 0 and j == 0:\n                    dp[i][j][0] = max(0, coins[i][j])\n                else:\n                    dp[i][j][0] = max(dp[i-1][j][k] + max(0, coins[i][j]) for k in range(3))\n                    dp[i][j][1] = max(dp[i][j-1][k] + max(0, coins[i][j]) for k in range(3))\n                    \n                    if i > 0:\n                        dp[i][j][2] = max(dp[i-1][j][0] - abs(coins[i][j]), dp[i-1][j][1] - abs(coins[i][j]), dp[i-1][j][2] - abs(coins[i][j]))\n                    if j > 0:\n                        dp[i][j][2] = max(dp[i][j][2], dp[i][j-1][0] - abs(coins[i][j]), dp[i][j-1][1] - abs(coins[i][j]), dp[i][j-1][2] - abs(coins[i][j]))\n        \n        return max(dp[m-1][n-1])"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "count-connected-components-in-lcm-graph",
+      "question_content": "You are given an array of integers nums of size n and a positive integer threshold.\nThere is a graph consisting of n nodes with the i^th node having a value of nums[i]. Two nodes i and j in the graph are connected via an undirected edge if lcm(nums[i], nums[j]) <= threshold.\nReturn the number of connected components in this graph.\nA connected component is a subgraph of a graph in which there exists a path between any two vertices, and no vertex of the subgraph shares an edge with a vertex outside of the subgraph.\nThe term lcm(a, b) denotes the least common multiple of a and b.\n \nExample 1:\n\nInput: nums = [2,4,8,3,9], threshold = 5\nOutput: 4\nExplanation: \n\n \nThe four connected components are (2, 4), (3), (8), (9).\n\nExample 2:\n\nInput: nums = [2,4,8,3,9,12], threshold = 10\nOutput: 2\nExplanation: \n\nThe two connected components are (2, 3, 4, 8, 9), and (12).\n\n \nConstraints:\n\n1 <= nums.length <= 10^5\n1 <= nums[i] <= 10^9\nAll elements of nums are unique.\n1 <= threshold <= 2 * 10^5",
+      "platform": "leetcode",
+      "question_id": "3680",
+      "contest_id": "biweekly-contest-145",
+      "contest_date": "2024-12-07T06:30:00",
+      "starter_code": "class Solution:\n    def countComponents(self, nums: List[int], threshold: int) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def countComponents(self, nums: List[int], threshold: int) -> int:\n        n = len(nums)\n        visited = [False] * n\n        \n        def dfs(node):\n            if visited[node]:\n                return\n            visited[node] = True\n            for next_node in range(n):\n                if not visited[next_node] and (nums[node] * nums[next_node]) // math.gcd(nums[node], nums[next_node]) <= threshold:\n                    dfs(next_node)\n        \n        count = 0\n        for i in range(n):\n            if not visited[i]:\n                dfs(i)\n                count += 1\n        \n        return count\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def countComponents(self, nums: List[int], threshold: int) -> int:\n        n = len(nums)\n        visited = [False] * n\n        \n        def dfs(node):\n            if visited[node]:\n                return\n            visited[node] = True\n            for next_node in range(n):\n                if not visited[next_node] and (nums[node] * nums[next_node]) // math.gcd(nums[node], nums[next_node]) <= threshold:\n                    dfs(next_node)\n        \n        count = 0\n        for i in range(n):\n            if not visited[i]:\n                dfs(i)\n                count += 1\n        \n        return count"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -3,
+          "error_message": "Time Limit Exceeded"
+        }
+      ]
+    },
+    {
+      "question_title": "maximum-area-rectangle-with-point-constraints-i",
+      "question_content": "You are given an array points where points[i] = [x_i, y_i] represents the coordinates of a point on an infinite plane.\nYour task is to find the maximum area of a rectangle that:\n\nCan be formed using four of these points as its corners.\nDoes not contain any other point inside or on its border.\nHas its edges parallel to the axes.\n\nReturn the maximum area that you can obtain or -1 if no such rectangle is possible.\n \nExample 1:\n\nInput: points = [[1,1],[1,3],[3,1],[3,3]]\nOutput: 4\nExplanation:\n\nWe can make a rectangle with these 4 points as corners and there is no other point that lies inside or on the border. Hence, the maximum possible area would be 4.\n\nExample 2:\n\nInput: points = [[1,1],[1,3],[3,1],[3,3],[2,2]]\nOutput: -1\nExplanation:\n\nThere is only one rectangle possible is with points [1,1], [1,3], [3,1] and [3,3] but [2,2] will always lie inside it. Hence, returning -1.\n\nExample 3:\n\nInput: points = [[1,1],[1,3],[3,1],[3,3],[1,2],[3,2]]\nOutput: 2\nExplanation:\n\nThe maximum area rectangle is formed by the points [1,3], [1,2], [3,2], [3,3], which has an area of 2. Additionally, the points [1,1], [1,2], [3,1], [3,2] also form a valid rectangle with the same area.\n\n \nConstraints:\n\n1 <= points.length <= 10\npoints[i].length == 2\n0 <= x_i, y_i <= 100\nAll the given points are unique.",
+      "platform": "leetcode",
+      "question_id": "3681",
+      "contest_id": "weekly-contest-427",
+      "contest_date": "2024-12-07T18:30:00",
+      "starter_code": "class Solution:\n    def maxRectangleArea(self, points: List[List[int]]) -> int:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nfrom typing import *\nfrom collections import *\n\nclass Solution:\n    def maxRectangleArea(self, points: List[List[int]]) -> int:\n        seen = set()\n        ans = -1\n        for x, y in points:\n            for px, py in seen:\n                if x != px and y != py and (x, py) in seen and (px, y) in seen:\n                    ans = max(ans, abs(x - px) * abs(y - py))\n            seen.add((x, y))\n        return ans\n```"
+      ],
+      "code_list": [
+        "from typing import *\nfrom collections import *\n\nclass Solution:\n    def maxRectangleArea(self, points: List[List[int]]) -> int:\n        seen = set()\n        ans = -1\n        for x, y in points:\n            for px, py in seen:\n                if x != px and y != py and (x, py) in seen and (px, y) in seen:\n                    ans = max(ans, abs(x - px) * abs(y - py))\n            seen.add((x, y))\n        return ans"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "count-the-number-of-arrays-with-k-matching-adjacent-elements",
+      "question_content": "You are given three integers n, m, k. A good array arr of size n is defined as follows:\n\nEach element in arr is in the inclusive range [1, m].\nExactly k indices i (where 1 <= i < n) satisfy the condition arr[i - 1] == arr[i].\n\nReturn the number of good arrays that can be formed.\nSince the answer may be very large, return it modulo 10^9 + 7.\n \nExample 1:\n\nInput: n = 3, m = 2, k = 1\nOutput: 4\nExplanation:\n\nThere are 4 good arrays. They are [1, 1, 2], [1, 2, 2], [2, 1, 1] and [2, 2, 1].\nHence, the answer is 4.\n\n\nExample 2:\n\nInput: n = 4, m = 2, k = 2\nOutput: 6\nExplanation:\n\nThe good arrays are [1, 1, 1, 2], [1, 1, 2, 2], [1, 2, 2, 2], [2, 1, 1, 1], [2, 2, 1, 1] and [2, 2, 2, 1].\nHence, the answer is 6.\n\n\nExample 3:\n\nInput: n = 5, m = 2, k = 0\nOutput: 2\nExplanation:\n\nThe good arrays are [1, 2, 1, 2, 1] and [2, 1, 2, 1, 2]. Hence, the answer is 2.\n\n\n \nConstraints:\n\n1 <= n <= 10^5\n1 <= m <= 10^5\n0 <= k <= n - 1",
+      "platform": "leetcode",
+      "question_id": "3682",
+      "contest_id": "weekly-contest-430",
+      "contest_date": "2024-12-28T18:30:00",
+      "starter_code": "class Solution:\n    def countGoodArrays(self, n: int, m: int, k: int) -> int:\n        ",
+      "difficulty": "hard",
+      "output_list": [
+        "```python\nclass Solution:\n    def countGoodArrays(self, n: int, m: int, k: int) -> int:\n        MOD = 10**9 + 7\n        \n        if k > n - 1:\n            return 0\n        \n        dp = [[0] * (k + 1) for _ in range(n + 1)]\n        for j in range(1, m + 1):\n            dp[1][0] += 1\n        \n        for i in range(2, n + 1):\n            total = sum(dp[i-1])\n            for j in range(1, min(i, k + 1)):\n                dp[i][j] = (total - dp[i-1][j-1]) * (m - 1) % MOD\n                dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD\n        \n        return sum(dp[n]) % MOD\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def countGoodArrays(self, n: int, m: int, k: int) -> int:\n        MOD = 10**9 + 7\n        \n        if k > n - 1:\n            return 0\n        \n        dp = [[0] * (k + 1) for _ in range(n + 1)]\n        for j in range(1, m + 1):\n            dp[1][0] += 1\n        \n        for i in range(2, n + 1):\n            total = sum(dp[i-1])\n            for j in range(1, min(i, k + 1)):\n                dp[i][j] = (total - dp[i-1][j-1]) * (m - 1) % MOD\n                dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD\n        \n        return sum(dp[n]) % MOD"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "find-the-lexicographically-largest-string-from-the-box-i",
+      "question_content": "You are given a string word, and an integer numFriends.\nAlice is organizing a game for her numFriends friends. There are multiple rounds in the game, where in each round:\n\nword is split into numFriends non-empty strings, such that no previous round has had the exact same split.\nAll the split words are put into a box.\n\nFind the lexicographically largest string from the box after all the rounds are finished.\n \nExample 1:\n\nInput: word = \"dbca\", numFriends = 2\nOutput: \"dbc\"\nExplanation: \nAll possible splits are:\n\n\"d\" and \"bca\".\n\"db\" and \"ca\".\n\"dbc\" and \"a\".\n\n\nExample 2:\n\nInput: word = \"gggg\", numFriends = 4\nOutput: \"g\"\nExplanation: \nThe only possible split is: \"g\", \"g\", \"g\", and \"g\".\n\n \nConstraints:\n\n1 <= word.length <= 5 * 10^3\nword consists only of lowercase English letters.\n1 <= numFriends <= word.length",
+      "platform": "leetcode",
+      "question_id": "3683",
+      "contest_id": "weekly-contest-430",
+      "contest_date": "2024-12-28T18:30:00",
+      "starter_code": "class Solution:\n    def answerString(self, word: str, numFriends: int) -> str:\n        ",
+      "difficulty": "medium",
+      "output_list": [
+        "```python\nclass Solution:\n    def answerString(self, word: str, numFriends: int) -> str:\n        return word[-numFriends:]\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def answerString(self, word: str, numFriends: int) -> str:\n        return word[-numFriends:]"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "substring-matching-pattern",
+      "question_content": "You are given a string s and a pattern string p, where p contains exactly one '*' character.\nThe '*' in p can be replaced with any sequence of zero or more characters.\nReturn true if p can be made a substring of s, and false otherwise.\nA substring is a contiguous non-empty sequence of characters within a string.\n \nExample 1:\n\nInput: s = \"leetcode\", p = \"ee*e\"\nOutput: true\nExplanation:\nBy replacing the '*' with \"tcod\", the substring \"eetcode\" matches the pattern.\n\nExample 2:\n\nInput: s = \"car\", p = \"c*v\"\nOutput: false\nExplanation:\nThere is no substring matching the pattern.\n\nExample 3:\n\nInput: s = \"luck\", p = \"u*\"\nOutput: true\nExplanation:\nThe substrings \"u\", \"uc\", and \"uck\" match the pattern.\n\n \nConstraints:\n\n1 <= s.length <= 50\n1 <= p.length <= 50 \ns contains only lowercase English letters.\np contains only lowercase English letters and exactly one '*'",
+      "platform": "leetcode",
+      "question_id": "3684",
+      "contest_id": "biweekly-contest-147",
+      "contest_date": "2025-01-04T06:30:00",
+      "starter_code": "class Solution:\n    def hasMatch(self, s: str, p: str) -> bool:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nclass Solution:\n    def hasMatch(self, s: str, p: str) -> bool:\n        # Split the pattern into two parts around the '*'\n        prefix, suffix = p.split('*')\n        \n        # Check if the prefix is at the beginning of the string\n        if not s.startswith(prefix):\n            return False\n        \n        # Check if the suffix is at the end of the string\n        if not s.endswith(suffix):\n            return False\n        \n        # If both checks pass, the pattern can match the string\n        return True\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def hasMatch(self, s: str, p: str) -> bool:\n        # Split the pattern into two parts around the '*'\n        prefix, suffix = p.split('*')\n        \n        # Check if the prefix is at the beginning of the string\n        if not s.startswith(prefix):\n            return False\n        \n        # Check if the suffix is at the end of the string\n        if not s.endswith(suffix):\n            return False\n        \n        # If both checks pass, the pattern can match the string\n        return True"
+      ],
+      "graded_list": [
+        false
+      ],
+      "pass@1": 0.0,
+      "metadata": [
+        {
+          "error_code": -2,
+          "error_message": "Wrong Answer"
+        }
+      ]
+    },
+    {
+      "question_title": "count-subarrays-of-length-three-with-a-condition",
+      "question_content": "Given an integer array nums, return the number of subarrays of length 3 such that the sum of the first and third numbers equals exactly half of the second number.\n \nExample 1:\n\nInput: nums = [1,2,1,4,1]\nOutput: 1\nExplanation:\nOnly the subarray [1,4,1] contains exactly 3 elements where the sum of the first and third numbers equals half the middle number.\n\nExample 2:\n\nInput: nums = [1,1,1]\nOutput: 0\nExplanation:\n[1,1,1] is the only subarray of length 3. However, its first and third numbers do not add to half the middle number.\n\n \nConstraints:\n\n3 <= nums.length <= 100\n-100 <= nums[i] <= 100",
+      "platform": "leetcode",
+      "question_id": "3685",
+      "contest_id": "biweekly-contest-146",
+      "contest_date": "2024-12-21T06:30:00",
+      "starter_code": "class Solution:\n    def countSubarrays(self, nums: List[int]) -> int:\n        ",
+      "difficulty": "easy",
+      "output_list": [
+        "```python\nclass Solution:\n    def countSubarrays(self, nums: List[int]) -> int:\n        count = 0\n        for i in range(len(nums) - 2):\n            if nums[i] + nums[i+2] == nums[i+1] / 2:\n                count += 1\n        return count\n```"
+      ],
+      "code_list": [
+        "class Solution:\n    def countSubarrays(self, nums: List[int]) -> int:\n        count = 0\n        for i in range(len(nums) - 2):\n            if nums[i] + nums[i+2] == nums[i+1] / 2:\n                count += 1\n        return count"
+      ],
+      "graded_list": [
+        true
+      ],
+      "pass@1": 1.0,
+      "metadata": [
+        {}
+      ]
+    }
+  ],
+  "fatal": false
+}
