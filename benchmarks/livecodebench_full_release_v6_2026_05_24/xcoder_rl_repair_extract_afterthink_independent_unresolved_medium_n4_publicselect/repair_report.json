@@ -1,0 +1,97 @@
+{
+  "input": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/generations.json",
+  "output": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/generations.json",
+  "records_seen": 2,
+  "records_repaired": 2,
+  "question_ids": null,
+  "changed_candidates": 2,
+  "syntax_ok_candidates": 2,
+  "entrypoint_candidates": 3,
+  "seconds": 0.01,
+  "records": [
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 33310,
+          "new_len": 33310,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 31861,
+          "new_len": 15,
+          "changed": true,
+          "syntax_ok": false,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 34669,
+          "new_len": 6813,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 33419,
+          "new_len": 33419,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 2,
+      "syntax_ok_candidates": 2,
+      "entrypoint_candidates": 3
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 34019,
+          "new_len": 34019,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 28420,
+          "new_len": 28420,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 27228,
+          "new_len": 27228,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 28699,
+          "new_len": 28699,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 0,
+      "entrypoint_candidates": 0
+    }
+  ]
+}

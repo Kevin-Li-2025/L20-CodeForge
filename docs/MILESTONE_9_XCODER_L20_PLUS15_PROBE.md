@@ -228,6 +228,31 @@ Result:
 - Hard 3024 strict repair: hidden `0/1`, public oracle `0/1`, unchanged from the original strict-code run.
 - The repair did identify and fix real extraction defects, especially prose retained after `</think>`, but the remaining first-12 misses are now dominated by algorithmic candidate failure rather than simple code-block extraction.
 
+### independent unresolved-medium n=4 rerun
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/public_selection.json`
+- Repaired eval report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/eval/report.json`
+- Repaired public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/eval/public_selection.json`
+
+Protocol:
+
+- Re-ran unresolved medium tasks `2828` and `3166`.
+- `n_samples=4`, max new tokens 8192, raw prompt rendering, bf16, SDPA, public-test selection.
+- Prompt suffix told the model that the previous candidate set failed public tests and asked for an independent editorial-quality solution from first principles.
+- Ran deterministic extraction repair on the saved generations and re-evaluated with public-test selection.
+
+Result:
+
+- Direct hidden eval after public selection: `0/2`.
+- Direct public oracle/pass@4: `0/2`.
+- Generation time: `1657.589s` for two medium tasks.
+- Repaired hidden eval after public selection: `0/2`.
+- Repaired public oracle/pass@4: `0/2`.
+- The suffix increased reasoning length and cost but did not create a public-passing candidate. This is a negative result against continuing long independent reruns for these two medium failures.
+
 ## Current Interpretation
 
 Good signal:
@@ -252,6 +277,7 @@ Bad/limiting signal:
 - The strict-code prompt failed to rescue `2828` and `3166`, so the remaining medium failures likely need a repair/verifier stage rather than another prompt-only rerun.
 - The strict-code prompt also failed to rescue hard `3024`, with public pass@4 still zero.
 - Deterministic extraction repair did not improve the first-12 score beyond `9/12`; next gains require new candidates, stronger public/differential tests, or targeted post-training data rather than more cleanup of the same samples.
+- A long independent-rerun suffix also failed on unresolved medium tasks with public oracle `0/2`, so the next attempt should not spend more L20 time on the same style of verbose prompt.
 
 ## Next Run
 
@@ -263,4 +289,5 @@ Purpose:
 
 - Next step is verifier-guided regeneration or targeted data construction for the three unresolved IDs: `2828`, `3166`, and `3024`.
 - Use deterministic extraction repair by default for future saved generations, but do not spend more cycles cleaning the same candidates unless a public-test signal changes.
+- Prefer short, constrained code-only candidate construction or targeted verified training examples over long free-form reasoning reruns.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.
