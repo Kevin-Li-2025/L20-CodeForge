@@ -10,6 +10,7 @@ artifacts/
 data/raw/
 data/processed/
 logs/
+paper/*.pdf
 *.safetensors
 *.pt
 *.pth
@@ -18,4 +19,3 @@ logs/
 *.ckpt
 .env
 .env.*
-

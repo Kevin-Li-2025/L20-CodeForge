@@ -15,8 +15,8 @@ Status: the repository currently demonstrates strong system-level gains on
 public benchmarks. It does not yet claim a +15 point greedy model-weight
 improvement over the base model.
 
-Core docs: [Reproducibility](REPRODUCIBILITY.md) and
-[Architecture](docs/ARCHITECTURE.md).
+Core docs: [Reproducibility](REPRODUCIBILITY.md),
+[Architecture](docs/ARCHITECTURE.md), and [paper draft](paper/README.md).
 
 ## Results
 
