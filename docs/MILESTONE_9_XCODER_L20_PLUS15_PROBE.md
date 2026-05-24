@@ -122,6 +122,27 @@ Result:
 - Generation time: `1269.858s`.
 - This invalidates the assumption that easy/medium can all run as cheap single-sample tasks; medium tasks also need candidate search or stronger extraction/prompting.
 
+### mixed12 failed-medium n=4 public selection
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/public_selection.json`
+
+Protocol:
+
+- Re-run the five failed medium tasks from the fast stage: `2779`, `2828`, `2916`, `3166`, `3240`.
+- `n_samples=4`, max new tokens 8192, stop-after-code-block, public-test selection.
+
+Result:
+
+- Hidden eval after public selection: `3/5 = 60.0%`.
+- Rescued IDs: `2779`, `2916`, `3240`.
+- Still failed IDs: `2828`, `3166`.
+- Public oracle/pass@4: `3/5 = 60.0%`.
+- Generation time: `3434.152s`.
+- Combined with the four already-passing easy/medium tasks, the first-12 easy/medium subtotal is now `7/9`.
+
 ## Current Interpretation
 
 Good signal:
@@ -130,6 +151,7 @@ Good signal:
 - bf16 is the correct L20 path: it uses roughly 15-16GB and keeps GPU utilization high; default 4-bit used roughly 6GB and was slower/less useful for this workload.
 - 8k final-code is enough for easy/medium tasks in the initial mixed sample.
 - The failed hard problem was rescued by `n=4` plus public-test selection.
+- The failed-medium rerun rescued three of five medium failures, confirming that candidate search helps beyond hard tasks.
 
 Bad/limiting signal:
 
@@ -138,15 +160,16 @@ Bad/limiting signal:
 - The scalable route has to be multi-sample search plus public/behavior/differential verification, with long budgets reserved for hard or failed cases.
 - Hard `n=4` at 16k took about 22.7 minutes for one task, so the next benchmark must be staged by difficulty.
 - Single-sample medium coverage is weak in the first mixed12 slice; only `4/9` easy/medium tasks passed.
+- Medium `n=4` at 8k is also expensive: five tasks took about 57.2 minutes and still left two failures.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect`
+- `xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect`
 
 Purpose:
 
-- Re-run the five failed medium tasks with `n=4`, 8k, stop-after-code-block, and public-test selection.
-- If public selection rescues most failures, combine passing easy/medium n=1 results, failed-medium n=4 results, and hard n=4 results into the next mixed12 score.
-- If it does not, the next priority is prompt/extraction repair plus behavior/differential verification before expanding sample size.
+- Run the two remaining hard tasks in the first-12 slice: `2879`, `3024`.
+- Use `n=4`, max new tokens 16384, stop-after-code-block, and public-test selection.
+- Combine: four easy/medium fast passes + three medium search rescues + q2784 hard rescue + remaining hard results.
