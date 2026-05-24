@@ -164,6 +164,26 @@ Result:
 - Generation time: `3155.956s`.
 - Combining staged runs gives first-12 score `9/12 = 75.0%`: four easy/medium fast-stage passes, three failed-medium search rescues, hard `2784`, and hard `2879`.
 
+### unresolved-medium strict-code n=4 public selection
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect/public_selection.json`
+
+Protocol:
+
+- Re-run unresolved medium tasks `2828` and `3166`.
+- `n_samples=4`, max new tokens 8192, stop-after-code-block, public-test selection.
+- Prompt suffix strengthened to require exactly one fenced Python code block and no other text.
+
+Result:
+
+- Hidden eval after public selection: `0/2`.
+- Public oracle/pass@4: `0/2`.
+- Generation time: `1453.078s`.
+- The stricter prompt did not solve either unresolved medium task and still produced malformed/non-code-heavy candidates. This suggests prompt-only formatting pressure is not sufficient; these failures need better candidate generation or a code-repair/verifier pass.
+
 ## Current Interpretation
 
 Good signal:
@@ -184,15 +204,15 @@ Bad/limiting signal:
 - Single-sample medium coverage is weak in the first mixed12 slice; only `4/9` easy/medium tasks passed.
 - Medium `n=4` at 8k is also expensive: five tasks took about 57.2 minutes and still left two failures.
 - Public-selection search still failed three first-12 tasks: medium `2828`, medium `3166`, and hard `3024`. These need stricter output-format control and/or better verification, not just more samples.
+- The strict-code prompt failed to rescue `2828` and `3166`, so the remaining medium failures likely need a repair/verifier stage rather than another prompt-only rerun.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect`
+- `xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect`
 
 Purpose:
 
-- Re-run unresolved medium tasks `2828` and `3166` with a stricter code-only suffix that requires the response to start with a fenced Python code block.
-- If that rescues either medium task, update the staged first-12 score above `9/12`.
-- After this run, re-run hard `3024` with the same stricter output-format prompt; its previous failures were dominated by invalid syntax / non-code characters.
+- Re-run unresolved hard task `3024` with the stricter code-only suffix.
+- If it fails, stop prompt-only retries for the first-12 slice and switch to candidate repair / verifier-assisted selection.

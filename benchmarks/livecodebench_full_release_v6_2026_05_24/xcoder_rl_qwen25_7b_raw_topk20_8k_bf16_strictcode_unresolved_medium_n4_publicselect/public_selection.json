@@ -1,0 +1,88 @@
+{
+  "metrics": {
+    "pass@1": 0.0,
+    "pass@4": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0
+      },
+      "pass@4": {
+        "0": 0.0,
+        "1": 0.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 124) (<string>, line 124)"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 93) (<string>, line 93)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 600)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 82) (<string>, line 82)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 54) (<string>, line 54)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 386)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 180) (<string>, line 180)"
+      }
+    ]
+  ]
+}
