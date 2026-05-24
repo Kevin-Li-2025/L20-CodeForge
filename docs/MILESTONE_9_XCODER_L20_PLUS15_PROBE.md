@@ -23,12 +23,14 @@ Sources:
 - Added `--prompt-suffix` for controlled prompt experiments without editing code.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
+- Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
 
 Verification:
 
 - Local: `python3 -m pytest -q` passed with `108 passed` before the final stop-control patch.
 - Local targeted after stop-control: `50 passed`.
 - Remote targeted after stop-control: ruff passed and `50 passed`.
+- Local and remote targeted after per-batch checkpointing: `51 passed`; remote ruff passed.
 
 ## Completed Probe Results
 
@@ -78,6 +80,28 @@ Result:
 - Generation time: `372.878s`.
 - The output closed code blocks, so this was not just an 8k truncation issue. Single-sample longer reasoning did not rescue the hard problem.
 
+### 16k hard n=4 public selection
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_hard2784_n4bs1_publicselect_ckpt/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_hard2784_n4bs1_publicselect_ckpt/public_selection.json`
+
+Protocol:
+
+- Same model and decoding settings.
+- Hard task: `2784 power-of-heroes`.
+- `n_samples=4`, `sample_batch_size=1`, public-test selection, max new tokens 16384.
+- `--stop-after-code-block` enabled.
+
+Result:
+
+- Hidden eval after public selection: `1/1`.
+- Public-test candidate pass distribution: one of four candidates passed public tests; selected index `1`.
+- Public selection metrics: `pass@1=0.25`, `pass@4=1.0`.
+- Generation time: `1362.501s`.
+- This is the first strong evidence that the path for hard problems is multi-sample verified search, not single-sample longer reasoning.
+
 ## Current Interpretation
 
 Good signal:
@@ -85,22 +109,23 @@ Good signal:
 - X-Coder raw-prompt protocol is materially stronger than the local Qwen2.5-Coder-7B greedy baseline on the small mixed probe.
 - bf16 is the correct L20 path: it uses roughly 15-16GB and keeps GPU utilization high; default 4-bit used roughly 6GB and was slower/less useful for this workload.
 - 8k final-code is enough for easy/medium tasks in the initial mixed sample.
+- The failed hard problem was rescued by `n=4` plus public-test selection.
 
 Bad/limiting signal:
 
 - Hard competitive-programming tasks are not solved by simply increasing a single sample from 8k to 16k.
 - Full 32k or 16k for every task is too slow on one L20.
 - The scalable route has to be multi-sample search plus public/behavior/differential verification, with long budgets reserved for hard or failed cases.
+- Hard `n=4` at 16k took about 22.7 minutes for one task, so the next benchmark must be staged by difficulty.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_hard2784_n4bs1_publicselect`
+- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_easy_medium_n1`
 
 Purpose:
 
-- Test whether `n=4`, 16k, stop-after-code-block, and public-test selection can rescue the failed hard task.
-- If it succeeds, use the same pattern for a 12-task mixed sample with 8k for easy/medium and 16k n=4 only for hard/failures.
-- If it fails, prioritize better verifiers and model-generated tests over more token budget.
-
+- Evaluate the nine easy/medium tasks in the first 12 stratified60 problems with the fast 8k single-sample protocol.
+- Then evaluate the three hard tasks with the slower 16k n=4 public-selection protocol.
+- Combine the staged results as the next credible mixed12 score.
