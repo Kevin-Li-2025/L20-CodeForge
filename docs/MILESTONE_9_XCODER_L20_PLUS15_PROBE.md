@@ -26,6 +26,8 @@ Sources:
 - Added `--static-retry-min-healthy-samples` and `--static-retry-max-extra-samples` for a public/hidden-free syntax and entrypoint retry gate.
 - Added padding/trim handling for variable candidate counts before LiveCodeBench `codegen_metrics`, because upstream metadata grouping assumes each task has the same number of candidates.
 - Added `scripts/regenerate_lcb_final_answers.py`, a second-pass regenerator that turns saved reasoning-heavy attempts into final executable code without using hidden expected outputs.
+- Extended `scripts/regenerate_lcb_final_answers.py` with optional public-test feedback injection so a repair prompt can include visible public examples and the candidate's public failure message without using hidden tests.
+- Added the same variable-candidate padding/trim protection to `scripts/evaluate_lcb_generations.py`; saved generation sets with 2/4 mixed candidates now evaluate through public selection without tripping the upstream LCB metadata assertion.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
 - Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
@@ -516,6 +518,56 @@ Result:
 - Candidate health improved to `11/12` syntax-valid and `12/12` with entrypoint.
 - Interpretation: this is the first non-hand-targeted positive signal on the medium control12 gate. A public-only second pass over failed code is not enough by itself, but it is a credible building block for automatic verified-prefix repair: generate strict code, repair from code, then use public tests to keep only real improvements.
 
+### medium control12 fail10 multi-source repair
+
+Path:
+
+- Regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4/report.json`
+- Evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4_eval/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4_eval/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4_eval/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_strict_code_repair_medium_control12_fail10_n4_2026_05_24/audit.json`
+
+Protocol:
+
+- Took the `10` still-failed tasks after the public-only second-pass repair: `3475`, `3639`, `3657`, `3751`, `3786`, `abc320_c`, `abc364_c`, `abc370_d`, `abc375_c`, `abc400_d`.
+- Reused the strict starter-prefix control12 generations as source code, with up to `2` source candidates per task and `2` repair samples per source.
+- Used compact final-code constraints: `temperature=0.35`, top-p `0.95`, top-k `20`, `max_new_tokens=1024`, raw prompt rendering, bf16 SDPA.
+
+Result:
+
+- Generated `24` repair candidates in `340.215s`.
+- Public oracle stayed `0/10`; public-selected hidden replay stayed `0/10`.
+- Candidate health was `20/24 = 83.3%` syntax-valid and `24/24` with entrypoint.
+- Interpretation: more code-only repair samples did not help when every candidate still failed visible public tests. This is a negative result against blindly increasing second-pass samples without execution feedback.
+
+### medium control12 public-feedback repair
+
+Path:
+
+- Regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_medium_control12_fail10_n1/report.json`
+- Evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_medium_control12_fail10_n1_eval/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_medium_control12_fail10_n1_eval/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_medium_control12_fail10_n1_eval/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_public_feedback_repair_medium_control12_fail10_2026_05_24/audit.json`
+
+Protocol:
+
+- Used the failed multi-source repair candidates as source code.
+- Fed each source candidate's public-test pass fraction, visible failure message, and up to three visible public examples back into the repair prompt.
+- Did not use hidden outputs or hidden test metadata.
+- Generated one repair candidate per source: `24` total candidates for the same `10` fail10 tasks.
+- Used `temperature=0.45`, top-p `0.95`, top-k `20`, `max_new_tokens=2048`, raw prompt rendering, bf16 SDPA.
+
+Result:
+
+- Generated `24` public-feedback repair candidates in `1061.029s`.
+- Public oracle improved from `0/10` to `2/10`; public-selected full replay also passed `2/10`.
+- Passing tasks: `3475` (`minimum-operations-to-make-binary-array-elements-equal-to-one-i`) and `3639` (`zero-array-transformation-i`).
+- Candidate health was `19/24 = 79.2%` syntax-valid and `24/24` with entrypoint; selected candidates had no syntax errors.
+- Combined with the previous public-only second-pass repair, the medium control12 gate is now `4/12 = 33.3%`.
+- Interpretation: public execution feedback is the first automatic method in this control12 stage that moved previously failed tasks from public oracle `0` to hidden-pass `2`. It is slower than simple repair, but the result is qualitatively better: the failure message changed model behavior on tasks where more sampling did not.
+
 ## Current Interpretation
 
 Good signal:
@@ -537,6 +589,7 @@ Good signal:
 - The best current architecture is now clearer: long reasoning/search finds ideas; a short verified code-prefix or distilled trace is needed to force executable implementation.
 - Strict starter-prefix prompting makes medium-control generation cheaper and healthier: `353s` vs `836s`, and syntax-valid rate `71.4%` vs `52.9%`.
 - Public-only second-pass repair moved the medium control12 gate from `0/12` to `2/12` while improving candidate syntax health to `11/12`.
+- Public-feedback repair moved the remaining fail10 slice from `0/10` to `2/10`, lifting the medium control12 gate to `4/12` without using hidden tests.
 
 Bad/limiting signal:
 
@@ -562,12 +615,14 @@ Bad/limiting signal:
 - A fresh medium control12 slice scored `0/12` under automatic starter-code/code-fence prefixing, so the first-12 targeted rescue currently does not transfer without a learned or generated task-specific algorithm prefix.
 - Strict output control also scored `0/12` on the same medium control12 slice. It fixes part of the format problem, but not the algorithm-selection problem.
 - Public-only second-pass repair is a real improvement but still leaves `10/12` control tasks unsolved, so it should be used as one stage in a verifier loop rather than as the final method.
+- Multi-source code-only repair did not improve the fail10 slice; execution feedback, not another ungrounded repair sample, was the ingredient that produced new passes.
+- Public-feedback repair is still only `2/10` on the fail10 slice and costs `1061s`, so it should be routed selectively to tasks with syntax-valid candidates rather than applied to every benchmark task.
 
 ## Next Run
 
 Active remote run:
 
-- None. The L20 is idle after the public-only second-pass repair evaluation.
+- None. The L20 is idle after the public-feedback repair evaluation.
 
 Purpose:
 
@@ -583,3 +638,4 @@ Purpose:
 - Use the medium control12 run as the immediate generalization gate: any automatic prefix generator or adapter should first improve public oracle above `0/12` on this slice before spending time on larger LCB runs.
 - Default future short-budget control runs to the strict suffix because it is faster and healthier, but do not expect it to improve benchmark score without additional algorithm-prefix signal.
 - Next control experiment should extend public-only repair with more source candidates or a generated algorithm-prefix step, while keeping the same control12 gate and public-only selection protocol.
+- Use public-feedback repair as the next automatic verifier-loop stage for syntax-valid public failures; then evaluate whether a second feedback round rescues the remaining `8/10` fail10 tasks or starts overfitting public examples.

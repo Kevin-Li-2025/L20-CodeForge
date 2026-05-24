@@ -1,0 +1,430 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 1,
+    "tasks": 10,
+    "candidates": 24,
+    "syntax_ok_candidates": 20,
+    "entrypoint_candidates": 24,
+    "public_oracle_pass_tasks": 0,
+    "hidden_selected_pass_tasks": 0,
+    "selected_syntax_error_tasks": 0
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.8333333333333334,
+    "entrypoint_candidate_rate": 1.0,
+    "public_oracle_task_rate": 0.0,
+    "hidden_selected_task_rate": 0.0
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4/eval/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_fail10_n4/eval/eval_all.json",
+      "totals": {
+        "tasks": 10,
+        "candidates": 24,
+        "syntax_ok_candidates": 20,
+        "entrypoint_candidates": 24,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 0
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.8333333333333334,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3475",
+          "question_title": "minimum-operations-to-make-binary-array-elements-equal-to-one-i",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3681,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3926,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3639",
+          "question_title": "zero-array-transformation-i",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3508,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3608,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3657",
+          "question_title": "check-if-grid-can-be-cut-into-sections",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3681,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 4414,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 4532,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 37",
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 4216,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 42",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3751",
+          "question_title": "maximum-frequency-after-subarray-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3681,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3910,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 3972,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 28",
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 4203,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 4 at line 27",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3786",
+          "question_title": "longest-palindromic-subsequence-after-at-most-k-operations",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3883,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3672,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc320_c",
+          "question_title": "Slot Strategy 2 (Easy)",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 6",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3779,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3468,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc364_c",
+          "question_title": "Minimum Glutton",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 2",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3968,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3796,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc370_d",
+          "question_title": "Cross Explosion",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 2",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3487,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3367,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc375_c",
+          "question_title": "Spiral Rotation",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer: mismatched output length",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3504,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3713,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc400_d",
+          "question_title": "Takahashi the Wall Breaker",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 1",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 4114,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 3767,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

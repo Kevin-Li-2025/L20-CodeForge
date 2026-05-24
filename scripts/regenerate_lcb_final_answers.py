@@ -43,6 +43,26 @@ def load_source_records(path: Path) -> dict[str, dict[str, Any]]:
     }
 
 
+def load_public_feedback_records(path: Path | None) -> dict[str, dict[str, Any]]:
+    if path is None:
+        return {}
+    payload = load_json(path)
+    feedback: dict[str, dict[str, Any]] = {}
+    records = payload.get("records") or []
+    metadata = payload.get("metadata") or []
+    if not isinstance(records, list):
+        return feedback
+    for index, record in enumerate(records):
+        if not isinstance(record, dict) or record.get("question_id") is None:
+            continue
+        task_metadata = metadata[index] if index < len(metadata) else []
+        feedback[str(record["question_id"])] = {
+            "record": record,
+            "metadata": task_metadata if isinstance(task_metadata, list) else [],
+        }
+    return feedback
+
+
 def parse_candidate_indices(value: str | None) -> list[int] | None:
     if not value:
         return None
@@ -81,10 +101,83 @@ def truncate_reasoning(text: str, max_chars: int) -> str:
     return stripped[-max_chars:].lstrip()
 
 
+def truncate_head(text: str, max_chars: int) -> str:
+    stripped = text.strip()
+    if max_chars <= 0 or len(stripped) <= max_chars:
+        return stripped
+    return stripped[:max_chars].rstrip()
+
+
+def format_public_test_cases(problem: Any, max_public_tests: int) -> str:
+    lines: list[str] = []
+    for index, test in enumerate(problem.public_test_cases[:max_public_tests], start=1):
+        lines.extend(
+            [
+                f"Public test {index} input:",
+                "```",
+                str(test.input).rstrip(),
+                "```",
+                f"Public test {index} expected output:",
+                "```",
+                str(test.output).rstrip(),
+                "```",
+            ]
+        )
+    return "\n".join(lines)
+
+
+def format_public_feedback(
+    problem: Any,
+    feedback: dict[str, Any] | None,
+    source_candidate_index: int,
+    max_public_tests: int,
+    max_chars: int,
+) -> str:
+    if not feedback:
+        return ""
+    record = feedback.get("record") or {}
+    metadata = feedback.get("metadata") or []
+    public_scores = record.get("public_scores") or []
+    score = (
+        public_scores[source_candidate_index]
+        if source_candidate_index < len(public_scores)
+        else None
+    )
+    candidate_metadata = (
+        metadata[source_candidate_index]
+        if isinstance(metadata, list) and source_candidate_index < len(metadata)
+        else {}
+    )
+    error_message = ""
+    if isinstance(candidate_metadata, dict):
+        error_message = str(candidate_metadata.get("error_message") or "")
+    parts = ["### Public-test feedback for this candidate"]
+    if score is not None:
+        parts.append(f"Public pass fraction: {score}")
+    if error_message:
+        parts.extend(["Observed public-test failure:", truncate_head(error_message, max_chars)])
+    public_tests = format_public_test_cases(problem, max_public_tests)
+    if public_tests:
+        parts.extend(
+            [
+                "Visible public examples from the benchmark:",
+                public_tests,
+            ]
+        )
+    parts.extend(
+        [
+            "Use this feedback to fix the algorithm, but do not hard-code only these examples.",
+            "The final solution must generalize to hidden tests.",
+        ]
+    )
+    return "\n".join(parts)
+
+
 def build_second_pass_prompt(
     problem: Any,
     source_text: str,
     reasoning_max_chars: int,
+    public_feedback: str = "",
 ) -> str:
     starter_code = getattr(problem, "starter_code", "") or ""
     reasoning = truncate_reasoning(source_text, reasoning_max_chars)
@@ -103,6 +196,8 @@ def build_second_pass_prompt(
                 "",
             ]
         )
+    if public_feedback:
+        prompt.extend([public_feedback, ""])
     prompt.extend(
         [
             "### Previous attempt or reasoning",
@@ -157,6 +252,8 @@ def regenerate(args: argparse.Namespace) -> dict[str, Any]:
 
     source_generations_path = Path(args.source_generations)
     source_records = load_source_records(source_generations_path)
+    public_feedback_path = Path(args.public_feedback) if args.public_feedback else None
+    public_feedback_records = load_public_feedback_records(public_feedback_path)
     candidate_indices = parse_candidate_indices(args.source_candidate_indices)
     problems = RUNNER.load_problems_from_parquet(
         parquet_path=Path(args.parquet),
@@ -201,10 +298,18 @@ def regenerate(args: argparse.Namespace) -> dict[str, Any]:
             f"{problem.question_title} source_candidates={len(source_texts)}"
         )
         for source_candidate_index, source_text in source_texts:
+            public_feedback = format_public_feedback(
+                problem=problem,
+                feedback=public_feedback_records.get(problem.question_id),
+                source_candidate_index=source_candidate_index,
+                max_public_tests=args.max_public_tests,
+                max_chars=args.feedback_max_chars,
+            )
             prompt = build_second_pass_prompt(
                 problem=problem,
                 source_text=source_text,
                 reasoning_max_chars=args.reasoning_max_chars,
+                public_feedback=public_feedback,
             )
             batch_outputs = RUNNER.generate_one_batch(
                 model=model,
@@ -262,6 +367,10 @@ def regenerate(args: argparse.Namespace) -> dict[str, Any]:
         "parquet_sha256": RUNNER.sha256_file(Path(args.parquet)),
         "source_generations": str(source_generations_path),
         "source_generations_sha256": RUNNER.sha256_file(source_generations_path),
+        "public_feedback": str(public_feedback_path) if public_feedback_path else None,
+        "public_feedback_sha256": RUNNER.sha256_file(public_feedback_path)
+        if public_feedback_path
+        else None,
         "output_generations": str(generations_path),
         "model": args.model,
         "adapter_path": args.adapter_path,
@@ -280,6 +389,8 @@ def regenerate(args: argparse.Namespace) -> dict[str, Any]:
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
         "reasoning_max_chars": args.reasoning_max_chars,
+        "max_public_tests": args.max_public_tests if public_feedback_path else None,
+        "feedback_max_chars": args.feedback_max_chars if public_feedback_path else None,
         "stop_after_code_block": args.stop_after_code_block,
         "seed": args.seed,
         "load_in_4bit": not args.no_4bit,
@@ -304,6 +415,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source-generations", required=True)
     parser.add_argument("--source-field", choices=["raw_outputs", "code_list"], default="raw_outputs")
     parser.add_argument("--source-candidate-indices")
+    parser.add_argument(
+        "--public-feedback",
+        help=(
+            "Optional public_selection.json aligned with the source generations. "
+            "Candidate public-test failures are included in the repair prompt."
+        ),
+    )
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--model", required=True)
     parser.add_argument("--adapter-path")
@@ -312,6 +430,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-source-candidates", type=int, default=1)
     parser.add_argument("--n-samples-per-source", type=int, default=1)
     parser.add_argument("--reasoning-max-chars", type=int, default=12000)
+    parser.add_argument("--max-public-tests", type=int, default=3)
+    parser.add_argument("--feedback-max-chars", type=int, default=1000)
     parser.add_argument("--temperature", type=float, default=0.2)
     parser.add_argument("--top-p", type=float, default=0.95)
     parser.add_argument("--top-k", type=int)

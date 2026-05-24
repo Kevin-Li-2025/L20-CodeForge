@@ -67,6 +67,46 @@ def candidate_pass_fraction(result: list[Any]) -> float:
     return sum(item is True for item in result) / len(result)
 
 
+def pad_generations_for_lcb_metrics(
+    generations: list[list[str]],
+) -> tuple[list[list[str]], bool]:
+    if not generations:
+        return generations, False
+    lengths = [len(items) for items in generations]
+    max_length = max(lengths)
+    if len(set(lengths)) == 1:
+        return generations, False
+    padded = [
+        items + [items[-1] if items else ""] * (max_length - len(items))
+        for items in generations
+    ]
+    return padded, True
+
+
+def trim_metric_results_to_candidate_counts(
+    results: dict[int, list[Any]],
+    candidate_counts: list[int],
+) -> dict[int, list[Any]]:
+    return {
+        index: list(results.get(index, []))[:candidate_count]
+        for index, candidate_count in enumerate(candidate_counts)
+    }
+
+
+def trim_metric_metadata_to_candidate_counts(
+    metadata: list[Any],
+    candidate_counts: list[int],
+) -> list[Any]:
+    trimmed = []
+    for index, candidate_count in enumerate(candidate_counts):
+        task_metadata = metadata[index] if index < len(metadata) else []
+        if isinstance(task_metadata, list):
+            trimmed.append(task_metadata[:candidate_count])
+        else:
+            trimmed.append(task_metadata)
+    return trimmed
+
+
 def stable_text_hash(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8", errors="replace")).hexdigest()[:16]
 
@@ -1303,6 +1343,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     final_raw_outputs = raw_outputs
     public_selection_source = None
     behavior_inputs_source = None
+    public_selection_padded_for_metrics = False
     if args.public_selection or args.behavior_selection:
         selection_path = Path(args.public_selection or args.behavior_selection)
         public_selection_source = str(selection_path)
@@ -1338,14 +1379,27 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             public_samples = [
                 get_public_evaluation_sample(problem) for problem in selected_problems
             ]
+            candidate_counts = [len(items) for items in generations]
+            public_generations_for_metrics, public_selection_padded_for_metrics = (
+                pad_generations_for_lcb_metrics(generations)
+            )
             public_metrics, public_results, public_metadata = codegen_metrics(
                 public_samples,
-                generations,
+                public_generations_for_metrics,
                 k_list=[1],
                 num_process_evaluate=args.num_process_evaluate,
                 timeout=args.public_timeout,
                 debug=args.debug,
             )
+            if public_selection_padded_for_metrics:
+                public_results = trim_metric_results_to_candidate_counts(
+                    public_results,
+                    candidate_counts,
+                )
+                public_metadata = trim_metric_metadata_to_candidate_counts(
+                    public_metadata,
+                    candidate_counts,
+                )
             public_scores_by_problem = {
                 problem_index: [
                     candidate_pass_fraction(result)
@@ -1411,6 +1465,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             json.dumps(
                 {
                     "metrics": public_selection_metrics,
+                    "padded_for_lcb_metrics": public_selection_padded_for_metrics,
                     "records": public_selection_records,
                     "metadata": public_selection_metadata,
                     "behavior": {
@@ -1435,14 +1490,27 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
     elif args.public_select:
         public_started = time.monotonic()
         public_samples = [get_public_evaluation_sample(problem) for problem in selected_problems]
+        candidate_counts = [len(items) for items in generations]
+        public_generations_for_metrics, public_selection_padded_for_metrics = (
+            pad_generations_for_lcb_metrics(generations)
+        )
         public_metrics, public_results, public_metadata = codegen_metrics(
             public_samples,
-            generations,
+            public_generations_for_metrics,
             k_list=[1],
             num_process_evaluate=args.num_process_evaluate,
             timeout=args.public_timeout,
             debug=args.debug,
         )
+        if public_selection_padded_for_metrics:
+            public_results = trim_metric_results_to_candidate_counts(
+                public_results,
+                candidate_counts,
+            )
+            public_metadata = trim_metric_metadata_to_candidate_counts(
+                public_metadata,
+                candidate_counts,
+            )
         final_generations, public_selection_records = build_public_selection_records(
             selected_problems,
             generations,
@@ -1460,6 +1528,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             json.dumps(
                 {
                     "metrics": public_selection_metrics,
+                    "padded_for_lcb_metrics": public_selection_padded_for_metrics,
                     "records": public_selection_records,
                     "metadata": public_selection_metadata,
                 },
@@ -1525,6 +1594,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         else None,
         "public_selection_seconds": public_selection_seconds,
         "public_selection_metrics": public_selection_metrics,
+        "public_selection_padded_for_lcb_metrics": public_selection_padded_for_metrics
+        if args.public_select or args.behavior_select
+        else None,
         "public_selected_public_pass_count": sum(
             record["selected_public_score"] == 1.0 for record in public_selection_records
         )

@@ -178,6 +178,27 @@ def test_final_answer_regenerator_builds_strict_prompt() -> None:
     assert prompt.endswith("### Final answer\n")
 
 
+def test_final_answer_regenerator_formats_public_feedback() -> None:
+    regenerator = load_final_answer_regenerator_module()
+    public_test = type("PublicTest", (), {"input": "1\n", "output": "2\n"})()
+    problem = type("Problem", (), {"public_test_cases": [public_test]})()
+
+    feedback = regenerator.format_public_feedback(
+        problem=problem,
+        feedback={
+            "record": {"public_scores": [0.0]},
+            "metadata": [{"error_message": "Wrong Answer"}],
+        },
+        source_candidate_index=0,
+        max_public_tests=1,
+        max_chars=100,
+    )
+
+    assert "Wrong Answer" in feedback
+    assert "Public test 1 input" in feedback
+    assert "must generalize to hidden tests" in feedback
+
+
 def test_final_answer_regenerator_selects_source_candidate_indices() -> None:
     regenerator = load_final_answer_regenerator_module()
 
@@ -205,6 +226,33 @@ def test_evaluator_public_selection_records_single_candidate() -> None:
     assert selected == [["good"]]
     assert records[0]["selected_index"] == 1
     assert records[0]["public_oracle_pass"] is True
+
+
+def test_evaluator_pads_variable_candidate_counts_for_lcb_metrics() -> None:
+    evaluator = load_evaluator_module()
+
+    padded, did_pad = evaluator.pad_generations_for_lcb_metrics(
+        [["a", "b"], ["c"], ["d", "e", "f"]]
+    )
+
+    assert did_pad is True
+    assert padded == [["a", "b", "b"], ["c", "c", "c"], ["d", "e", "f"]]
+
+
+def test_evaluator_trims_metric_payloads_after_padding() -> None:
+    evaluator = load_evaluator_module()
+
+    results = evaluator.trim_metric_results_to_candidate_counts(
+        {0: [["r0"], ["r1"], ["padded"]], 1: [["r2"], ["padded"], ["padded"]]},
+        [2, 1],
+    )
+    metadata = evaluator.trim_metric_metadata_to_candidate_counts(
+        [["m0", "m1", "padded"], ["m2", "padded", "padded"]],
+        [2, 1],
+    )
+
+    assert results == {0: [["r0"], ["r1"]], 1: [["r2"]]}
+    assert metadata == [["m0", "m1"], ["m2"]]
 
 
 def test_evaluator_public_tie_breaker_prefers_static_health() -> None:
