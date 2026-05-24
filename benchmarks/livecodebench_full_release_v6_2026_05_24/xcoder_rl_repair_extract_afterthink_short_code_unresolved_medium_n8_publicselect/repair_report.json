@@ -1,0 +1,161 @@
+{
+  "input": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect/generations.json",
+  "output": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_short_code_unresolved_medium_n8_publicselect/generations.json",
+  "records_seen": 2,
+  "records_repaired": 2,
+  "question_ids": null,
+  "changed_candidates": 0,
+  "syntax_ok_candidates": 0,
+  "entrypoint_candidates": 0,
+  "seconds": 0.008,
+  "records": [
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 7924,
+          "new_len": 7924,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 8546,
+          "new_len": 8546,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 7763,
+          "new_len": 7763,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 7428,
+          "new_len": 7428,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 4,
+          "old_len": 7460,
+          "new_len": 7460,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 5,
+          "old_len": 6460,
+          "new_len": 6460,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 6,
+          "old_len": 7971,
+          "new_len": 7971,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 7,
+          "old_len": 9142,
+          "new_len": 9142,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 0,
+      "entrypoint_candidates": 0
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 8853,
+          "new_len": 8853,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 7974,
+          "new_len": 7974,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 8703,
+          "new_len": 8703,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 8473,
+          "new_len": 8473,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 4,
+          "old_len": 8955,
+          "new_len": 8955,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 5,
+          "old_len": 8516,
+          "new_len": 8516,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 6,
+          "old_len": 8407,
+          "new_len": 8407,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 7,
+          "old_len": 7959,
+          "new_len": 7959,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 0,
+      "entrypoint_candidates": 0
+    }
+  ]
+}

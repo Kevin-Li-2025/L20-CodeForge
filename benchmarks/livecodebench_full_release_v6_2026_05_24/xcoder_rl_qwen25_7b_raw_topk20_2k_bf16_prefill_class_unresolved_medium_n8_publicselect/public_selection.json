@@ -1,0 +1,128 @@
+{
+  "metrics": {
+    "pass@1": 0.0,
+    "pass@8": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0
+      },
+      "pass@8": {
+        "0": 0.0,
+        "1": 0.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 8,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "selected_index": 7,
+      "tie_breaker": "shortest",
+      "n_candidates": 8,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ]
+  ]
+}

@@ -191,6 +191,7 @@ def test_build_generation_record_includes_partial_outputs() -> None:
     record = runner.build_generation_record(
         problem=problem,
         prompt_suffix="Return code only.",
+        response_prefix="```python\n",
         raw_outputs=["raw"],
         code_outputs=["code"],
     )
@@ -198,6 +199,7 @@ def test_build_generation_record_includes_partial_outputs() -> None:
     assert record["question_id"] == "2784"
     assert record["raw_outputs"] == ["raw"]
     assert record["code_list"] == ["code"]
+    assert record["response_prefix"] == "```python\n"
     assert record["prompt"].endswith("Return code only.\n\n")
 
 

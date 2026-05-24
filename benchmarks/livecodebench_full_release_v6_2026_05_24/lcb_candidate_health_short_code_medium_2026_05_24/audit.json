@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 1,
+    "tasks": 2,
+    "candidates": 16,
+    "syntax_ok_candidates": 0,
+    "entrypoint_candidates": 0,
+    "public_oracle_pass_tasks": 0,
+    "hidden_selected_pass_tasks": 0,
+    "selected_syntax_error_tasks": 2
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.0,
+    "entrypoint_candidate_rate": 0.0,
+    "public_oracle_task_rate": 0.0,
+    "hidden_selected_task_rate": 0.0
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 16,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 0,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 2
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 0.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 8,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 0,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 5,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: invalid syntax (<string>, line 38)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7924,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 49) at line 49",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 8546,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 7763,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 7428,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 4,
+              "length": 7460,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 5,
+              "length": 6460,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 6,
+              "length": 7971,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 17) at line 17",
+              "has_entrypoint": false
+            },
+            {
+              "index": 7,
+              "length": 9142,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 98) at line 98",
+              "has_entrypoint": false
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 8,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 0,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 7,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 8853,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 7974,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 8703,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 8473,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 4,
+              "length": 8955,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 5",
+              "has_entrypoint": false
+            },
+            {
+              "index": 5,
+              "length": 8516,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 6,
+              "length": 8407,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 7,
+              "length": 7959,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

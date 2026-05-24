@@ -21,6 +21,7 @@ Sources:
 - Added bf16 CUDA loading for non-4bit inference via `device_map=auto`.
 - Added `--attn-implementation` so benchmark reports capture SDPA/flash/eager choices.
 - Added `--prompt-suffix` for controlled prompt experiments without editing code.
+- Added `--response-prefix` for assistant-prefill experiments where the model input starts inside a Python code block and saved raw outputs are prepended with the same prefix before code extraction.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
 - Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
@@ -278,6 +279,32 @@ Result:
 - Health-aware tie-breaking changed selected candidate indices for `2828` in the independent/repaired-independent rechecks but did not change score: both remained `0/2`, public oracle `0/2`.
 - Remaining hard recheck stayed `1/2`, public oracle `1/2`; `3024` still had no public-passing candidate.
 
+### short-code and prefilled-code unresolved-medium n=8 probes
+
+Path:
+
+- Short-code run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_short_code_unresolved_medium_n8_publicselect/report.json`
+- Short-code candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_short_code_medium_2026_05_24/audit.json`
+- Short-code repaired eval report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_short_code_unresolved_medium_n8_publicselect/eval/report.json`
+- Prefill-class run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_prefill_class_unresolved_medium_n8_publicselect/report.json`
+- Prefill-class candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_prefill_class_medium_2026_05_24/audit.json`
+
+Protocol:
+
+- Re-ran unresolved medium tasks `2828` and `3166`.
+- Short-code probe used `n_samples=8`, max new tokens 2048, raw prompt rendering, bf16, SDPA, public-test selection, and a concise code-only suffix.
+- Added and tested `--response-prefix`, then re-ran the same probe with the model prefixed into a Python block:
+  `from typing import List`, `from collections import Counter`, and `class Solution:`.
+
+Result:
+
+- Short-code without prefill: hidden `0/2`, public oracle `0/2`, generation time `792.789s`.
+- Short-code health audit: `0/16` syntax-valid and `0/16` entrypoint candidates. The 2048-token budget simply cut the model off before it produced usable code.
+- Deterministic repair of the short-code run: hidden `0/2`, public oracle `0/2`, with no changed candidates.
+- Prefill-class run: hidden `0/2`, public oracle `0/2`, generation time `791.091s`.
+- Prefill-class health audit: `16/16` syntax-valid and `16/16` entrypoint candidates.
+- This is a useful negative result: response prefixing fixes the format/entrypoint failure completely under short budgets, but `2828` and `3166` still need better algorithmic candidates or targeted verified data.
+
 ## Current Interpretation
 
 Good signal:
@@ -290,6 +317,7 @@ Good signal:
 - The first-12 staged protocol reached `9/12 = 75.0%`, far above the original 7B greedy baseline on the full release_v6 run.
 - The extraction repair is useful infrastructure for future runs because it prevents reasoning/prose leakage from being misclassified as model algorithm failure.
 - Candidate-health audit now gives a lightweight gate to avoid mistaking syntax/entrypoint collapse for algorithmic weakness.
+- Response prefixing is the right infra path for short-budget candidate generation: it changed `0/16` syntax-valid candidates into `16/16` syntax-valid candidates on the unresolved-medium probe.
 
 Bad/limiting signal:
 
@@ -305,6 +333,7 @@ Bad/limiting signal:
 - Deterministic extraction repair did not improve the first-12 score beyond `9/12`; next gains require new candidates, stronger public/differential tests, or targeted post-training data rather than more cleanup of the same samples.
 - A long independent-rerun suffix also failed on unresolved medium tasks with public oracle `0/2`, so the next attempt should not spend more L20 time on the same style of verbose prompt.
 - The remaining medium failures are not fixed by more verbose prompting; the original clean-code candidates fail public tests, while later verbose candidates often fail syntax/entrypoint health.
+- Even with response-prefix forcing and healthy syntax, unresolved medium public oracle stayed `0/2`; this is now clearly an algorithm/data issue, not just output formatting.
 
 ## Next Run
 
@@ -318,4 +347,5 @@ Purpose:
 - Use deterministic extraction repair by default for future saved generations, but do not spend more cycles cleaning the same candidates unless a public-test signal changes.
 - Prefer short, constrained code-only candidate construction or targeted verified training examples over long free-form reasoning reruns.
 - Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
+- For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

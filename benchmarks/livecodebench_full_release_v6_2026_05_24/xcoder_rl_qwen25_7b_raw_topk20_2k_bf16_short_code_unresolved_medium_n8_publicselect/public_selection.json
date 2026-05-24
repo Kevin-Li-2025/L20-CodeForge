@@ -1,0 +1,128 @@
+{
+  "metrics": {
+    "pass@1": 0.0,
+    "pass@8": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0
+      },
+      "pass@8": {
+        "0": 0.0,
+        "1": 0.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "selected_index": 5,
+      "tie_breaker": "shortest",
+      "n_candidates": 8,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "selected_index": 7,
+      "tie_breaker": "shortest",
+      "n_candidates": 8,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 86) (<string>, line 86)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 54) (<string>, line 54)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 135) (<string>, line 135)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 42)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      }
+    ]
+  ]
+}

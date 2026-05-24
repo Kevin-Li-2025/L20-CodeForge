@@ -434,6 +434,7 @@ def load_model(
 def build_generation_record(
     problem: Any,
     prompt_suffix: str,
+    response_prefix: str,
     raw_outputs: list[str],
     code_outputs: list[str],
 ) -> dict[str, Any]:
@@ -447,6 +448,7 @@ def build_generation_record(
             problem,
             prompt_suffix=prompt_suffix,
         ),
+        "response_prefix": response_prefix,
         "raw_outputs": raw_outputs,
         "code_list": code_outputs,
     }
@@ -483,6 +485,7 @@ def generate_one_batch(
     prompt: str,
     prompt_rendering: str,
     system_message: str,
+    response_prefix: str,
     temperature: float,
     top_p: float,
     top_k: int | None,
@@ -500,8 +503,9 @@ def generate_one_batch(
         prompt_rendering=prompt_rendering,
         system_message=system_message,
     )
+    rendered_with_prefix = rendered + response_prefix
     encoded = tokenizer(
-        rendered,
+        rendered_with_prefix,
         return_tensors="pt",
         truncation=True,
         max_length=max_input_tokens,
@@ -532,7 +536,8 @@ def generate_one_batch(
                 del scores, kwargs
                 return all(
                     generated_text_has_closed_code_block(
-                        tokenizer.decode(
+                        response_prefix
+                        + tokenizer.decode(
                             output[prompt_tokens_for_stop:],
                             skip_special_tokens=True,
                         )
@@ -547,7 +552,8 @@ def generate_one_batch(
 
     prompt_tokens = encoded["input_ids"].shape[1]
     return [
-        tokenizer.decode(output[prompt_tokens:], skip_special_tokens=True)
+        response_prefix
+        + tokenizer.decode(output[prompt_tokens:], skip_special_tokens=True)
         for output in output_ids
     ]
 
@@ -561,6 +567,7 @@ def generate_problem_outputs(
     prompt_suffix: str,
     prompt_rendering: str,
     system_message: str,
+    response_prefix: str,
     temperature: float,
     top_p: float,
     top_k: int | None,
@@ -582,6 +589,7 @@ def generate_problem_outputs(
             prompt=prompt,
             prompt_rendering=prompt_rendering,
             system_message=system_message,
+            response_prefix=response_prefix,
             temperature=temperature,
             top_p=top_p,
             top_k=top_k,
@@ -685,6 +693,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             partial_record = build_generation_record(
                 problem=problem,
                 prompt_suffix=args.prompt_suffix,
+                response_prefix=args.response_prefix,
                 raw_outputs=existing_raw_outputs + partial_raw_outputs,
                 code_outputs=existing_code_outputs + partial_code_outputs,
             )
@@ -707,6 +716,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             prompt_suffix=args.prompt_suffix,
             prompt_rendering=args.prompt_rendering,
             system_message=args.system_message,
+            response_prefix=args.response_prefix,
             temperature=args.temperature,
             top_p=args.top_p,
             top_k=args.top_k,
@@ -721,6 +731,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             build_generation_record(
                 problem=problem,
                 prompt_suffix=args.prompt_suffix,
+                response_prefix=args.response_prefix,
                 raw_outputs=raw_outputs,
                 code_outputs=code_outputs,
             )
@@ -883,6 +894,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "attn_implementation": args.attn_implementation,
         "prompt_rendering": args.prompt_rendering,
         "prompt_suffix": args.prompt_suffix,
+        "response_prefix": args.response_prefix,
         "system_message": args.system_message if args.prompt_rendering == "chat" else None,
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
@@ -987,6 +999,14 @@ def build_parser() -> argparse.ArgumentParser:
         "--prompt-suffix",
         default="",
         help="Optional text appended after the benchmark answer instruction.",
+    )
+    parser.add_argument(
+        "--response-prefix",
+        default="",
+        help=(
+            "Optional assistant prefill appended to the model input and prepended "
+            "back onto saved raw outputs before code extraction."
+        ),
     )
     parser.add_argument("--system-message", default=SYSTEM_MESSAGE_GENERIC)
     parser.add_argument("--max-new-tokens", type=int, default=2048)

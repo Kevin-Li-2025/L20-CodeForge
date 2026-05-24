@@ -1,0 +1,37 @@
+[
+  {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0
+      }
+    }
+  },
+  {
+    "0": [
+      [
+        -4
+      ]
+    ],
+    "1": [
+      [
+        -4
+      ]
+    ]
+  },
+  [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid syntax (<string>, line 38)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)"
+      }
+    ]
+  ]
+]
