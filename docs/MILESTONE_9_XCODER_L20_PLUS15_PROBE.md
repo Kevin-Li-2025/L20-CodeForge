@@ -387,6 +387,35 @@ Result:
 - Regeneration time: `22.192s`.
 - Interpretation: this rescues the held-out `3329` failure cleanly. The right escalation path is not more first-pass token budget; it is a second-pass final-answer conversion after the model has already done useful reasoning.
 
+### second-pass first-12 remaining failures
+
+Path:
+
+- Medium failed-source regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_medium_2828_3166_from_failed_n4/report.json`
+- Medium failed-source evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_medium_2828_3166_from_failed_n4_eval/report.json`
+- Medium failed-source audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_first12_medium_2026_05_24/audit.json`
+- Hard 3024 regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4/report.json`
+- Hard 3024 evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4_eval/report.json`
+- Hard 3024 audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_first12_hard3024_2026_05_24/audit.json`
+- Medium independent-source regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_medium_2828_3166_from_independent_n4/report.json`
+- Medium independent-source evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_medium_2828_3166_from_independent_n4_eval/report.json`
+- Medium independent-source audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_first12_medium_independent_2026_05_24/audit.json`
+
+Protocol:
+
+- Applied second-pass final-answer regeneration to the remaining first-12 failures: medium `2828`, medium `3166`, and hard `3024`.
+- Medium retry 1 used the original failed-medium n=4 source reasoning; medium retry 2 used the independent unresolved-medium n=4 source reasoning for diversity.
+- Hard retry used the remaining-hard n=4 source reasoning.
+- All second-pass candidates were evaluated with public-test selection before full release_v6 hidden replay.
+
+Result:
+
+- Medium failed-source second pass: generated `8` candidates in `423.804s`; hidden/public-selected `0/2`, public oracle `0/2`; audit showed `8/8` syntax-valid and `8/8` with entrypoint.
+- Medium independent-source second pass: generated `8` candidates in `423.274s`; hidden/public-selected `0/2`, public oracle `0/2`; audit showed `8/8` syntax-valid and `8/8` with entrypoint.
+- Hard `3024` second pass: generated `4` candidates in `258.789s`; public oracle `1/1`, public selection pass rate `1/4`, and hidden/public-selected `1/1`; audit showed `3/4` syntax-valid and `4/4` with entrypoint.
+- Updated first-12 staged score: `10/12 = 83.3%`. The remaining unsolved first-12 tasks are `2828` and `3166`.
+- Interpretation: second-pass regeneration is valuable for reasoning-to-code collapse and rescued hard `3024`, but it does not fix the two medium algorithmic failures. Those need targeted verified data, stronger algorithmic teacher traces, or a different search distribution.
+
 ## Current Interpretation
 
 Good signal:
@@ -403,6 +432,7 @@ Good signal:
 - Starter-code response prefixing is better than a fixed generic class prefill for broader LCB slices because it uses the benchmark's actual function signature per task.
 - Static retry is now implemented correctly for variable-candidate runs and avoids hidden-output leakage.
 - Second-pass final-answer regeneration is the first method in this cycle that converted a reasoning-heavy failure into a public/hidden passing solution.
+- Second-pass also rescued hard `3024`, moving the first-12 staged score from `9/12` to `10/12`.
 
 Bad/limiting signal:
 
@@ -422,6 +452,7 @@ Bad/limiting signal:
 - Starter-code prefill still produced one syntax-invalid selected candidate on the held-out next3 slice, so short-budget prefill needs deterministic repair or a syntax-aware retry loop before a larger run.
 - The `3329` failure is more severe than syntax alone: starter-prefill, body-only prompting, 4k/8k budget escalation, and raw final-code fallback all failed to produce a syntax-valid candidate. This needs a different final-answer forcing method or targeted verified data.
 - The second pass was proven on one held-out task only; it must be validated on more failures before claiming broad generalization.
+- Medium `2828` and `3166` remain unsolved after two independent second-pass source pools; their failure mode is now algorithmic, not syntax or final-answer extraction.
 
 ## Next Run
 
@@ -438,5 +469,5 @@ Purpose:
 - For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
 - Prefer `--response-prefix-mode starter-code` over a fixed `class Solution` prefix for mixed held-out slices.
 - Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to second-pass final-answer regeneration or targeted teacher-data construction.
-- The immediate next run should apply second-pass regeneration to the remaining first-12 failures (`2828`, `3166`, `3024`) and to additional held-out syntax-collapse cases, then only scale if public/hidden replay continues to agree.
-- Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.
+- The immediate next run should build or mine targeted verified traces for `2828` and `3166`-style medium tasks, then test whether a small post-training or teacher-regeneration pass changes public oracle before scaling.
+- Keep the staged first-12 headline at `10/12 = 83.3%` until a larger, less curated validation slice confirms the method generalizes.

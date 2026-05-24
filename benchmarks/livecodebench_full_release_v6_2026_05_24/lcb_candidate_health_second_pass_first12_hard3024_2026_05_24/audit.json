@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 1,
+    "tasks": 1,
+    "candidates": 4,
+    "syntax_ok_candidates": 3,
+    "entrypoint_candidates": 4,
+    "public_oracle_pass_tasks": 1,
+    "hidden_selected_pass_tasks": 1,
+    "selected_syntax_error_tasks": 0
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.75,
+    "entrypoint_candidate_rate": 1.0,
+    "public_oracle_task_rate": 1.0,
+    "hidden_selected_task_rate": 1.0
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4/eval/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_first12_hard3024_from_remaining_n4/eval/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 4,
+        "syntax_ok_candidates": 3,
+        "entrypoint_candidates": 4,
+        "public_oracle_pass_tasks": 1,
+        "public_selected_pass_tasks": 1,
+        "hidden_selected_pass_tasks": 1,
+        "selected_syntax_error_tasks": 0
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.75,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 1.0,
+        "hidden_selected_task_rate": 1.0
+      },
+      "records": [
+        {
+          "question_id": "3024",
+          "question_title": "string-transformation",
+          "difficulty": "hard",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 3,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 3,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 12266,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 1911,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 12769,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 150",
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 2023,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
