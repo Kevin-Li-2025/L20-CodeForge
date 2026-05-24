@@ -173,7 +173,7 @@ def strip_lcb_code_block(text: str) -> str:
         flags=re.IGNORECASE | re.DOTALL,
     )
     if answer_match:
-        return answer_match.group(1).strip()
+        return strip_lcb_code_block(answer_match.group(1))
     if "</think>" in stripped.lower():
         after_think = re.split(
             r"</think>",
@@ -182,7 +182,7 @@ def strip_lcb_code_block(text: str) -> str:
             flags=re.IGNORECASE,
         )[1].strip()
         if after_think:
-            return after_think
+            return strip_lcb_code_block(after_think)
     if "```" not in stripped:
         return stripped
 

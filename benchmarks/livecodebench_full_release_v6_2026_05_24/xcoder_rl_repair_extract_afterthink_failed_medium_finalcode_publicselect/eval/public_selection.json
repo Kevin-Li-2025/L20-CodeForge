@@ -1,0 +1,181 @@
+{
+  "metrics": {
+    "pass@1": 0.25,
+    "detail": {
+      "pass@1": {
+        "0": 0.75,
+        "1": 0.0,
+        "2": 0.25,
+        "3": 0.0,
+        "4": 0.25
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "2779",
+      "question_title": "number-of-adjacent-elements-with-the-same-color",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        1.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        2,
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "2916",
+      "question_title": "check-if-it-is-possible-to-split-array",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        3
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "selected_index": 3,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3240",
+      "question_title": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+      "selected_index": 2,
+      "tie_breaker": "shortest",
+      "n_candidates": 4,
+      "public_scores": [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        2
+      ],
+      "public_oracle_pass": true
+    }
+  ],
+  "metadata": [
+    [
+      {},
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {},
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {}
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 403)"
+      },
+      {},
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 381)"
+      }
+    ]
+  ]
+}

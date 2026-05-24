@@ -1,0 +1,55 @@
+{
+  "input": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/generations.json",
+  "output": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_hard3024_strict_publicselect/generations.json",
+  "records_seen": 1,
+  "records_repaired": 1,
+  "question_ids": null,
+  "changed_candidates": 2,
+  "syntax_ok_candidates": 1,
+  "entrypoint_candidates": 2,
+  "seconds": 0.009,
+  "records": [
+    {
+      "question_id": "3024",
+      "question_title": "string-transformation",
+      "difficulty": "hard",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 3165,
+          "new_len": 804,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 2626,
+          "new_len": 53,
+          "changed": true,
+          "syntax_ok": false,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 57225,
+          "new_len": 57225,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 52175,
+          "new_len": 52175,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 2,
+      "syntax_ok_candidates": 1,
+      "entrypoint_candidates": 2
+    }
+  ]
+}

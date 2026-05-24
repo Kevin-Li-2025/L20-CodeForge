@@ -1,0 +1,223 @@
+{
+  "input": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/generations.json",
+  "output": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_failed_medium_finalcode_publicselect/generations.json",
+  "records_seen": 5,
+  "records_repaired": 5,
+  "question_ids": null,
+  "changed_candidates": 4,
+  "syntax_ok_candidates": 18,
+  "entrypoint_candidates": 20,
+  "seconds": 0.089,
+  "records": [
+    {
+      "question_id": "2779",
+      "question_title": "number-of-adjacent-elements-with-the-same-color",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 1535,
+          "new_len": 1535,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 19487,
+          "new_len": 19487,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 17467,
+          "new_len": 17442,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 3083,
+          "new_len": 3083,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        }
+      ],
+      "changed_candidates": 1,
+      "syntax_ok_candidates": 4,
+      "entrypoint_candidates": 4
+    },
+    {
+      "question_id": "2828",
+      "question_title": "lexicographically-smallest-string-after-substring-operation",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 32209,
+          "new_len": 32209,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 31771,
+          "new_len": 31771,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 31854,
+          "new_len": 31854,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 33483,
+          "new_len": 33483,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 4,
+      "entrypoint_candidates": 4
+    },
+    {
+      "question_id": "2916",
+      "question_title": "check-if-it-is-possible-to-split-array",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 29938,
+          "new_len": 29938,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 32459,
+          "new_len": 32459,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 34275,
+          "new_len": 34275,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 14400,
+          "new_len": 14400,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 4,
+      "entrypoint_candidates": 4
+    },
+    {
+      "question_id": "3166",
+      "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 32814,
+          "new_len": 32814,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 37641,
+          "new_len": 37596,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 29668,
+          "new_len": 29623,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 27768,
+          "new_len": 27723,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        }
+      ],
+      "changed_candidates": 3,
+      "syntax_ok_candidates": 4,
+      "entrypoint_candidates": 4
+    },
+    {
+      "question_id": "3240",
+      "question_title": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+      "difficulty": "medium",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 26204,
+          "new_len": 26204,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 26189,
+          "new_len": 26189,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 21180,
+          "new_len": 21180,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 25262,
+          "new_len": 25262,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": true
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 2,
+      "entrypoint_candidates": 4
+    }
+  ]
+}

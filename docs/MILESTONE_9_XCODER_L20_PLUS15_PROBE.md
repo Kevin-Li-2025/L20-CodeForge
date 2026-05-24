@@ -204,6 +204,30 @@ Result:
 - Generation time: `1726.398s`.
 - This confirms prompt-only retries are not sufficient for the remaining first-12 failures.
 
+### deterministic after-think extraction repair
+
+Path:
+
+- Failed medium repair report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_failed_medium_finalcode_publicselect/repair_report.json`
+- Failed medium eval report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_failed_medium_finalcode_publicselect/eval/report.json`
+- Remaining hard repair report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_remaining_hard_finalcode_publicselect/repair_report.json`
+- Remaining hard eval report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_remaining_hard_finalcode_publicselect/eval/report.json`
+- Hard 3024 strict repair report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_hard3024_strict_publicselect/repair_report.json`
+- Hard 3024 strict eval report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_hard3024_strict_publicselect/eval/report.json`
+
+Protocol:
+
+- Fixed `strip_lcb_code_block` so `<answer>...</answer>` and `</think>` continuations are recursively passed through fenced-code extraction instead of returning prose plus code fences.
+- Added `scripts/repair_lcb_generations.py` to deterministically re-extract saved candidates from `raw_outputs`, wrap top-level `def method(self, ...)` fragments into `class Solution`, and trim obvious malformed syntax tails when a compilable entrypoint remains.
+- Repaired and re-evaluated the failed-medium, remaining-hard, and hard-3024 strict saved generations with public-test selection.
+
+Result:
+
+- Failed-medium final-code repair: hidden `3/5`, public oracle `3/5`, unchanged from the original failed-medium n=4 public-selection run.
+- Remaining-hard final-code repair: hidden `1/2`, public oracle `1/2`, unchanged from the original remaining-hard n=4 public-selection run.
+- Hard 3024 strict repair: hidden `0/1`, public oracle `0/1`, unchanged from the original strict-code run.
+- The repair did identify and fix real extraction defects, especially prose retained after `</think>`, but the remaining first-12 misses are now dominated by algorithmic candidate failure rather than simple code-block extraction.
+
 ## Current Interpretation
 
 Good signal:
@@ -214,6 +238,7 @@ Good signal:
 - The failed hard problem was rescued by `n=4` plus public-test selection.
 - The failed-medium rerun rescued three of five medium failures, confirming that candidate search helps beyond hard tasks.
 - The first-12 staged protocol reached `9/12 = 75.0%`, far above the original 7B greedy baseline on the full release_v6 run.
+- The extraction repair is useful infrastructure for future runs because it prevents reasoning/prose leakage from being misclassified as model algorithm failure.
 
 Bad/limiting signal:
 
@@ -226,14 +251,16 @@ Bad/limiting signal:
 - Public-selection search still failed three first-12 tasks: medium `2828`, medium `3166`, and hard `3024`. These need stricter output-format control and/or better verification, not just more samples.
 - The strict-code prompt failed to rescue `2828` and `3166`, so the remaining medium failures likely need a repair/verifier stage rather than another prompt-only rerun.
 - The strict-code prompt also failed to rescue hard `3024`, with public pass@4 still zero.
+- Deterministic extraction repair did not improve the first-12 score beyond `9/12`; next gains require new candidates, stronger public/differential tests, or targeted post-training data rather than more cleanup of the same samples.
 
 ## Next Run
 
 Active remote run:
 
-- None. Prompt-only reruns are paused after failing to rescue `2828`, `3166`, and `3024`.
+- None. The L20 is idle after the deterministic repair evaluation.
 
 Purpose:
 
-- Next step is a repair/verifier path: inspect failed candidate syntax/public-test errors, build repair prompts or deterministic extraction/cleanup, and evaluate repaired candidates against public tests before hidden evaluation.
+- Next step is verifier-guided regeneration or targeted data construction for the three unresolved IDs: `2828`, `3166`, and `3024`.
+- Use deterministic extraction repair by default for future saved generations, but do not spend more cycles cleaning the same candidates unless a public-test signal changes.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

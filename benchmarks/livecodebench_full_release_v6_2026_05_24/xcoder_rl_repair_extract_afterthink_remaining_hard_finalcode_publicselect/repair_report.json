@@ -1,0 +1,97 @@
+{
+  "input": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/generations.json",
+  "output": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_remaining_hard_finalcode_publicselect/generations.json",
+  "records_seen": 2,
+  "records_repaired": 2,
+  "question_ids": null,
+  "changed_candidates": 1,
+  "syntax_ok_candidates": 2,
+  "entrypoint_candidates": 2,
+  "seconds": 0.016,
+  "records": [
+    {
+      "question_id": "2879",
+      "question_title": "minimum-changes-to-make-k-semi-palindromes",
+      "difficulty": "hard",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 1610,
+          "new_len": 1610,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 1846,
+          "new_len": 1846,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 56390,
+          "new_len": 56390,
+          "changed": false,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 2133,
+          "new_len": 2133,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 0,
+      "syntax_ok_candidates": 1,
+      "entrypoint_candidates": 1
+    },
+    {
+      "question_id": "3024",
+      "question_title": "string-transformation",
+      "difficulty": "hard",
+      "candidates": [
+        {
+          "candidate_index": 0,
+          "old_len": 47589,
+          "new_len": 47589,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 1,
+          "old_len": 4268,
+          "new_len": 1974,
+          "changed": true,
+          "syntax_ok": true,
+          "has_entrypoint": true
+        },
+        {
+          "candidate_index": 2,
+          "old_len": 44086,
+          "new_len": 44086,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        },
+        {
+          "candidate_index": 3,
+          "old_len": 48816,
+          "new_len": 48816,
+          "changed": false,
+          "syntax_ok": false,
+          "has_entrypoint": false
+        }
+      ],
+      "changed_candidates": 1,
+      "syntax_ok_candidates": 1,
+      "entrypoint_candidates": 1
+    }
+  ]
+}

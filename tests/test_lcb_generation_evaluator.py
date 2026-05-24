@@ -106,6 +106,16 @@ def load_public_selection_builder_module():
     return module
 
 
+def load_repair_module():
+    script = Path(__file__).parents[1] / "scripts" / "repair_lcb_generations.py"
+    spec = importlib.util.spec_from_file_location("repair_lcb_generations", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -238,12 +248,112 @@ def test_lcb_runner_strip_extracts_answer_tag() -> None:
     assert code == "print(1)"
 
 
+def test_lcb_runner_strip_extracts_fenced_answer_tag() -> None:
+    runner = load_runner_module()
+
+    code = runner.strip_lcb_code_block(
+        "<answer>Explanation\n```python\nprint(1)\n```\n</answer>"
+    )
+
+    assert code == "print(1)"
+
+
 def test_lcb_runner_strip_extracts_after_think_close() -> None:
     runner = load_runner_module()
 
     code = runner.strip_lcb_code_block("<think>reason</think>\nprint(2)")
 
     assert code == "print(2)"
+
+
+def test_lcb_runner_strip_extracts_fenced_code_after_think_close() -> None:
+    runner = load_runner_module()
+
+    code = runner.strip_lcb_code_block(
+        "<think>reason</think>\n"
+        "Here is the final code.\n"
+        "```python\n"
+        "class Solution:\n"
+        "    def solve(self):\n"
+        "        return 1\n"
+        "```\n"
+    )
+
+    assert code == "class Solution:\n    def solve(self):\n        return 1"
+
+
+def test_repair_generation_extracts_fenced_code_from_raw_output() -> None:
+    repair = load_repair_module()
+
+    code = repair.repair_code_text(
+        "<think>reason</think>\n"
+        "Use this code.\n"
+        "```python\n"
+        "class Solution:\n"
+        "    def answer(self):\n"
+        "        return 42\n"
+        "```\n"
+    )
+
+    assert code == "class Solution:\n    def answer(self):\n        return 42"
+
+
+def test_repair_generation_wraps_top_level_solution_method() -> None:
+    repair = load_repair_module()
+
+    code = repair.repair_code_text(
+        "# Your code here\n"
+        "def smallestString(self, s: str) -> str:\n"
+        "    return s\n"
+    )
+
+    assert code == "class Solution:\n    def smallestString(self, s: str) -> str:\n        return s"
+
+
+def test_repair_generation_trims_markdown_tail() -> None:
+    repair = load_repair_module()
+
+    code = repair.repair_code_text(
+        "```python\n"
+        "class Solution:\n"
+        "    def answer(self):\n"
+        "        return 42\n"
+        "```\n"
+        "\n"
+        "### Explanation\n"
+        "This is not code.\n"
+    )
+
+    assert code == "class Solution:\n    def answer(self):\n        return 42"
+
+
+def test_repair_generation_trims_incomplete_syntax_tail() -> None:
+    repair = load_repair_module()
+
+    code = repair.repair_code_text(
+        "```python\n"
+        "class Solution:\n"
+        "    def answer(self):\n"
+        "        return 42\n"
+        "    def broken(self,\n"
+    )
+
+    assert code == "class Solution:\n    def answer(self):\n        return 42"
+
+
+def test_repair_record_keeps_old_code_when_raw_extraction_is_empty() -> None:
+    repair = load_repair_module()
+
+    repaired, reports = repair.repair_record(
+        {
+            "question_id": "x",
+            "raw_outputs": ["<think>reason</think>\n### Solution Code\n```"],
+            "code_list": ["class Solution:\n    def answer(self):\n        return 42"],
+        }
+    )
+
+    assert repaired["code_list"] == ["class Solution:\n    def answer(self):\n        return 42"]
+    assert reports[0]["has_entrypoint"] is True
 
 
 def test_evaluator_behavior_selection_uses_consensus_after_public_score() -> None:
