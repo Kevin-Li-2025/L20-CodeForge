@@ -1,0 +1,82 @@
+{
+  "metrics": {
+    "pass@1": 0.6666666666666666,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 1.0
+      }
+    }
+  },
+  "padded_for_lcb_metrics": true,
+  "records": [
+    {
+      "question_id": "3329",
+      "question_title": "find-the-length-of-the-longest-common-prefix",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 3,
+      "public_scores": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3374",
+      "question_title": "count-alternating-subarrays",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0
+      ],
+      "public_oracle_pass": true
+    },
+    {
+      "question_id": "3381",
+      "question_title": "shortest-subarray-with-or-at-least-k-i",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0
+      ],
+      "public_oracle_pass": true
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 146)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 142)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 165)"
+      }
+    ],
+    [
+      {}
+    ],
+    [
+      {}
+    ]
+  ]
+}

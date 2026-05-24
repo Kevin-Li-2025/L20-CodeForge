@@ -1,0 +1,72 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "benchmark_scope": "release_v6 parquet shard subset; not a full leaderboard run",
+  "lcb_repo": "/home/hhai/LiveCodeBench",
+  "lcb_repo_commit": "xcoder-raw-finalcode-3329-v1",
+  "parquet": "data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_stratified60.parquet",
+  "parquet_sha256": "772307b99441ba52922f690e2f3eb60f0b5cbfd0a6368759aa6216659be7871c",
+  "parquet_rows_selected": 1,
+  "model": "/home/hhai/.cache/huggingface/hub/models--IIGroup--X-Coder-RL-Qwen2.5-7B/snapshots/f6d68f9ce4d2a8df8a3fd262d41c627c3e308a45",
+  "adapter_path": null,
+  "n_samples": 1,
+  "candidate_counts": [
+    1
+  ],
+  "static_healthy_candidate_counts": [
+    0
+  ],
+  "static_retry_min_healthy_samples": 0,
+  "static_retry_max_extra_samples": 0,
+  "selection": "public_tests",
+  "public_select_tie_breaker": "shortest",
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "attn_implementation": "sdpa",
+  "prompt_rendering": "raw",
+  "prompt_suffix": "Return only the final Python solution in one fenced code block. Do not include explanations outside the code block.",
+  "response_prefix": "",
+  "response_prefix_mode": "literal",
+  "system_message": null,
+  "max_new_tokens": 8192,
+  "max_input_tokens": 8192,
+  "stop_after_code_block": true,
+  "seed": 48,
+  "start_date": null,
+  "end_date": null,
+  "difficulty": null,
+  "question_ids": "3329",
+  "limit": null,
+  "load_in_4bit": false,
+  "bf16": true,
+  "generation_seconds": 217.499,
+  "resume": false,
+  "allow_partial_resume": false,
+  "resume_generations_source": null,
+  "resumed_count": 0,
+  "generated_this_run": 1,
+  "samples_generated_this_run": 1,
+  "public_selection_seconds": 0.225,
+  "evaluation_seconds": 0.19,
+  "metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0
+      }
+    }
+  },
+  "public_selection_metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0
+      }
+    }
+  },
+  "public_selection_padded_for_lcb_metrics": false,
+  "public_selected_pass_count": 0,
+  "public_oracle_pass_count": 0,
+  "passed_at_1_count": 0,
+  "total": 1
+}

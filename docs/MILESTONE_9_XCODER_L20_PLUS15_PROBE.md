@@ -23,6 +23,8 @@ Sources:
 - Added `--prompt-suffix` for controlled prompt experiments without editing code.
 - Added `--response-prefix` for assistant-prefill experiments where the model input starts inside a Python code block and saved raw outputs are prepended with the same prefix before code extraction.
 - Added `--response-prefix-mode starter-code` so assistant prefill can reuse each problem's exact starter signature instead of a fixed generic `class Solution`.
+- Added `--static-retry-min-healthy-samples` and `--static-retry-max-extra-samples` for a public/hidden-free syntax and entrypoint retry gate.
+- Added padding/trim handling for variable candidate counts before LiveCodeBench `codegen_metrics`, because upstream metadata grouping assumes each task has the same number of candidates.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
 - Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
@@ -329,6 +331,36 @@ Result:
 - Candidate-health audit: `2/3` syntax-valid, `3/3` entrypoint candidates, and `1/3` selected syntax-error tasks.
 - Interpretation: starter-code prefill preserves useful short-budget performance on a held-out slice and avoids generic entrypoint guessing, but it still needs a syntax/repair gate before scaling beyond small probes.
 
+### static retry and 3329 budget/fallback probe
+
+Path:
+
+- Static-retry next3 report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_static_retry_publicselect/report.json`
+- Static-retry next3 audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_starter_prefill_next3_static_retry_2026_05_24/audit.json`
+- Body-only 3329 report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1536_bf16_starter_prefill_bodyonly_3329_n1_static_retry_publicselect/report.json`
+- 4k starter-prefill 3329 report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_4k_bf16_starter_prefill_3329_n1_publicselect/report.json`
+- 8k starter-prefill 3329 report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_starter_prefill_3329_n1_publicselect/report.json`
+- 8k raw final-code 3329 report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_3329_n1_publicselect/report.json`
+- Combined candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_3329_retry_budget_fallback_2026_05_24/audit.json`
+
+Protocol:
+
+- Added a static retry gate that only checks `ast.parse` and entrypoint presence; it does not inspect hidden expected outputs.
+- Re-ran the held-out next3 with starter-code prefill, `n_samples=1`, `max_new_tokens=2048`, `static_retry_min_healthy_samples=1`, and `static_retry_max_extra_samples=2`.
+- Fixed the runner after this exposed a LiveCodeBench assumption: upstream `codegen_metrics` asserts metadata length against the first task's candidate count, so variable-candidate runs now pad for metric evaluation and trim back to real candidate counts before public selection.
+- Ran focused `3329` probes to test whether prompt wording, more short retries, budget escalation, or raw final-code fallback could recover the failed held-out task.
+
+Result:
+
+- Static-retry next3: hidden/public-selected `2/3`, public oracle `2/3`, generation time `215.755s`.
+- Static-retry candidate counts: `[3, 1, 1]`; static-healthy candidate counts: `[0, 1, 1]`.
+- Body-only `3329` at 1536 tokens with 2 extra retries: hidden/public `0/1`, public oracle `0/1`, `0/3` static-healthy.
+- Starter-prefill `3329` at 4096 tokens with 1 extra retry: hidden/public `0/1`, public oracle `0/1`, `0/2` static-healthy.
+- Starter-prefill `3329` at 8192 tokens: hidden/public `0/1`, public oracle `0/1`, `0/1` static-healthy.
+- Raw final-code `3329` at 8192 tokens: hidden/public `0/1`, public oracle `0/1`, `0/1` static-healthy.
+- Combined audit: `12` candidates across `7` task instances; only `2/12 = 16.7%` syntax-valid, both from the already-passing next3 tasks.
+- Interpretation: static retry is useful as a gate and correctly surfaces failures, but `3329` is not fixed by more short samples, body-only prompting, or 8k budget. The model spends the generation on long reasoning/prose and never reaches a usable final implementation under these prompts.
+
 ## Current Interpretation
 
 Good signal:
@@ -343,6 +375,7 @@ Good signal:
 - Candidate-health audit now gives a lightweight gate to avoid mistaking syntax/entrypoint collapse for algorithmic weakness.
 - Response prefixing is the right infra path for short-budget candidate generation: it changed `0/16` syntax-valid candidates into `16/16` syntax-valid candidates on the unresolved-medium probe.
 - Starter-code response prefixing is better than a fixed generic class prefill for broader LCB slices because it uses the benchmark's actual function signature per task.
+- Static retry is now implemented correctly for variable-candidate runs and avoids hidden-output leakage.
 
 Bad/limiting signal:
 
@@ -360,6 +393,7 @@ Bad/limiting signal:
 - The remaining medium failures are not fixed by more verbose prompting; the original clean-code candidates fail public tests, while later verbose candidates often fail syntax/entrypoint health.
 - Even with response-prefix forcing and healthy syntax, unresolved medium public oracle stayed `0/2`; this is now clearly an algorithm/data issue, not just output formatting.
 - Starter-code prefill still produced one syntax-invalid selected candidate on the held-out next3 slice, so short-budget prefill needs deterministic repair or a syntax-aware retry loop before a larger run.
+- The `3329` failure is more severe than syntax alone: starter-prefill, body-only prompting, 4k/8k budget escalation, and raw final-code fallback all failed to produce a syntax-valid candidate. This needs a different final-answer forcing method or targeted verified data.
 
 ## Next Run
 
@@ -375,5 +409,6 @@ Purpose:
 - Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
 - For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
 - Prefer `--response-prefix-mode starter-code` over a fixed `class Solution` prefix for mixed held-out slices.
-- The immediate next infra step is to add a repair/retry loop for syntax-invalid starter-prefill outputs, then re-evaluate the failed held-out candidate without using hidden expected outputs.
+- Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to a stronger final-answer forcing method or targeted teacher-data construction.
+- The immediate next infra step is to implement a second-pass answer extractor/regenerator that takes the model's saved reasoning and asks for only the final implementation, then evaluates with public tests before any larger run.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

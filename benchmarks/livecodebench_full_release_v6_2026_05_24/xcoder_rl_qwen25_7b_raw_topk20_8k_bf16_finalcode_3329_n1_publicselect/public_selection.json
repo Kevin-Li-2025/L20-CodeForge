@@ -1,0 +1,34 @@
+{
+  "metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0
+      }
+    }
+  },
+  "padded_for_lcb_metrics": false,
+  "records": [
+    {
+      "question_id": "3329",
+      "question_title": "find-the-length-of-the-longest-common-prefix",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: unterminated string literal (detected at line 66) (<string>, line 66)"
+      }
+    ]
+  ]
+}

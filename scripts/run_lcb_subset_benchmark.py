@@ -108,6 +108,54 @@ def candidate_static_health_rank(code: str) -> tuple[int, int]:
     return (0 if code_syntax_ok(code) else 1, 0 if code_has_entrypoint(code) else 1)
 
 
+def code_static_health_ok(code: str) -> bool:
+    return code_syntax_ok(code) and code_has_entrypoint(code)
+
+
+def count_static_healthy_candidates(code_outputs: list[str]) -> int:
+    return sum(code_static_health_ok(code) for code in code_outputs)
+
+
+def pad_generations_for_lcb_metrics(
+    generations: list[list[str]],
+) -> tuple[list[list[str]], bool]:
+    if not generations:
+        return generations, False
+    lengths = [len(items) for items in generations]
+    max_length = max(lengths)
+    if len(set(lengths)) == 1:
+        return generations, False
+    padded = [
+        items + [items[-1] if items else ""] * (max_length - len(items))
+        for items in generations
+    ]
+    return padded, True
+
+
+def trim_metric_results_to_candidate_counts(
+    results: dict[int, list[Any]],
+    candidate_counts: list[int],
+) -> dict[int, list[Any]]:
+    return {
+        index: list(results.get(index, []))[:candidate_count]
+        for index, candidate_count in enumerate(candidate_counts)
+    }
+
+
+def trim_metric_metadata_to_candidate_counts(
+    metadata: list[Any],
+    candidate_counts: list[int],
+) -> list[Any]:
+    trimmed = []
+    for index, candidate_count in enumerate(candidate_counts):
+        task_metadata = metadata[index] if index < len(metadata) else []
+        if isinstance(task_metadata, list):
+            trimmed.append(task_metadata[:candidate_count])
+        else:
+            trimmed.append(task_metadata)
+    return trimmed
+
+
 def tie_break_candidate_index(
     indices: list[int],
     code_outputs: list[str],
@@ -597,13 +645,22 @@ def generate_problem_outputs(
     max_new_tokens: int,
     max_input_tokens: int,
     stop_after_code_block: bool,
+    min_static_healthy_samples: int = 0,
+    max_extra_static_retry_samples: int = 0,
+    existing_code_outputs_for_health: list[str] | None = None,
     progress_callback: Callable[[list[str], list[str]], None] | None = None,
 ) -> tuple[list[str], list[str]]:
     prompt = build_lcb_generation_prompt(problem, prompt_suffix=prompt_suffix)
     raw_outputs: list[str] = []
     code_outputs: list[str] = []
-    while len(raw_outputs) < n_samples:
-        batch_size = min(sample_batch_size, n_samples - len(raw_outputs))
+
+    def healthy_count() -> int:
+        return count_static_healthy_candidates(
+            (existing_code_outputs_for_health or []) + code_outputs
+        )
+
+    def generate_batch(batch_size: int) -> None:
+        nonlocal raw_outputs, code_outputs
         if temperature == 0:
             batch_size = 1
         batch_outputs = generate_one_batch(
@@ -624,8 +681,24 @@ def generate_problem_outputs(
         raw_outputs.extend(batch_outputs)
         code_outputs.extend(strip_lcb_code_block(output) for output in batch_outputs)
         if progress_callback is not None:
-            progress_callback(raw_outputs[:n_samples], code_outputs[:n_samples])
-    return raw_outputs[:n_samples], code_outputs[:n_samples]
+            progress_callback(raw_outputs, code_outputs)
+
+    while len(raw_outputs) < n_samples:
+        generate_batch(min(sample_batch_size, n_samples - len(raw_outputs)))
+
+    extra_generated = 0
+    while (
+        healthy_count() < min_static_healthy_samples
+        and extra_generated < max_extra_static_retry_samples
+    ):
+        batch_size = min(
+            sample_batch_size,
+            max_extra_static_retry_samples - extra_generated,
+        )
+        before = len(raw_outputs)
+        generate_batch(batch_size)
+        extra_generated += len(raw_outputs) - before
+    return raw_outputs, code_outputs
 
 
 def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
@@ -642,6 +715,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         )
     if args.overwrite and args.resume:
         raise ValueError("--overwrite and --resume are mutually exclusive")
+    if args.static_retry_min_healthy_samples < 0:
+        raise ValueError("--static-retry-min-healthy-samples must be non-negative")
+    if args.static_retry_max_extra_samples < 0:
+        raise ValueError("--static-retry-max-extra-samples must be non-negative")
 
     _, codegen_metrics = load_lcb_modules(lcb_repo)
     problems = load_problems_from_parquet(
@@ -689,7 +766,14 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         existing_sample_count = (
             len(existing_record.get("code_list", [])) if existing_record else 0
         )
-        if existing_record is not None and existing_sample_count >= args.n_samples:
+        existing_static_healthy_count = count_static_healthy_candidates(
+            list(existing_record.get("code_list", [])) if existing_record else []
+        )
+        if (
+            existing_record is not None
+            and existing_sample_count >= args.n_samples
+            and existing_static_healthy_count >= args.static_retry_min_healthy_samples
+        ):
             print(
                 f"[{index}/{len(problems)}] resuming {problem.question_id} "
                 f"{problem.question_title}"
@@ -702,7 +786,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         existing_code_outputs = (
             list(existing_record.get("code_list", [])) if existing_record else []
         )
-        missing_samples = args.n_samples - len(existing_code_outputs)
+        missing_samples = max(0, args.n_samples - len(existing_code_outputs))
         action = "extending" if existing_record is not None else "generating"
         print(
             f"[{index}/{len(problems)}] {action} {problem.question_id} "
@@ -752,6 +836,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
             stop_after_code_block=args.stop_after_code_block,
+            min_static_healthy_samples=args.static_retry_min_healthy_samples,
+            max_extra_static_retry_samples=args.static_retry_max_extra_samples,
+            existing_code_outputs_for_health=existing_code_outputs,
             progress_callback=persist_partial_progress,
         )
         raw_outputs = existing_raw_outputs + raw_outputs
@@ -767,12 +854,16 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             )
         )
         generated_this_run += 1
-        samples_generated_this_run += missing_samples
+        samples_generated_this_run += len(raw_outputs) - len(existing_raw_outputs)
         generations_path.write_text(
             json.dumps(generation_records, indent=2, ensure_ascii=True) + "\n",
             encoding="utf-8",
         )
     generations = [record["code_list"] for record in generation_records]
+    candidate_counts = [len(items) for items in generations]
+    static_healthy_candidate_counts = [
+        count_static_healthy_candidates(items) for items in generations
+    ]
     generations_path.write_text(
         json.dumps(generation_records, indent=2, ensure_ascii=True) + "\n",
         encoding="utf-8",
@@ -791,6 +882,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "model": args.model,
             "adapter_path": args.adapter_path,
             "n_samples": args.n_samples,
+            "candidate_counts": candidate_counts,
+            "static_healthy_candidate_counts": static_healthy_candidate_counts,
+            "static_retry_min_healthy_samples": args.static_retry_min_healthy_samples,
+            "static_retry_max_extra_samples": args.static_retry_max_extra_samples,
             "selection": "none",
             "temperature": args.temperature,
             "top_p": args.top_p,
@@ -835,20 +930,33 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
     public_selection_records: list[dict[str, Any]] = []
     public_selection_metrics: dict[str, Any] | None = None
     public_selection_metadata: Any | None = None
+    public_selection_padded_for_metrics = False
     final_generations = generations
     final_raw_outputs = [record["raw_outputs"] for record in generation_records]
     if args.public_select:
         public_selection_started = time.monotonic()
         public_samples = [get_public_evaluation_sample(problem) for problem in problems]
-        public_k_list = sorted({1, args.n_samples})
+        public_generations_for_metrics, public_selection_padded_for_metrics = (
+            pad_generations_for_lcb_metrics(generations)
+        )
+        public_k_list = [1] if public_selection_padded_for_metrics else sorted({1, args.n_samples})
         public_metrics, public_results, public_metadata = codegen_metrics(
             public_samples,
-            generations,
+            public_generations_for_metrics,
             k_list=public_k_list,
             num_process_evaluate=args.num_process_evaluate,
             timeout=args.public_select_timeout,
             debug=args.debug,
         )
+        if public_selection_padded_for_metrics:
+            public_results = trim_metric_results_to_candidate_counts(
+                public_results,
+                candidate_counts,
+            )
+            public_metadata = trim_metric_metadata_to_candidate_counts(
+                public_metadata,
+                candidate_counts,
+            )
         final_generations, public_selection_records = build_public_selection_records(
             problems=problems,
             generations=generations,
@@ -866,6 +974,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             json.dumps(
                 {
                     "metrics": public_selection_metrics,
+                    "padded_for_lcb_metrics": public_selection_padded_for_metrics,
                     "records": public_selection_records,
                     "metadata": public_selection_metadata,
                 },
@@ -916,6 +1025,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "model": args.model,
         "adapter_path": args.adapter_path,
         "n_samples": args.n_samples,
+        "candidate_counts": candidate_counts,
+        "static_healthy_candidate_counts": static_healthy_candidate_counts,
+        "static_retry_min_healthy_samples": args.static_retry_min_healthy_samples,
+        "static_retry_max_extra_samples": args.static_retry_max_extra_samples,
         "selection": "public_tests" if args.public_select else "none",
         "public_select_tie_breaker": args.public_select_tie_breaker
         if args.public_select
@@ -951,6 +1064,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "evaluation_seconds": eval_seconds,
         "metrics": make_json_safe(metrics),
         "public_selection_metrics": public_selection_metrics,
+        "public_selection_padded_for_lcb_metrics": public_selection_padded_for_metrics,
         "public_selected_pass_count": sum(
             record["selected_public_score"] == 1.0 for record in public_selection_records
         )
@@ -1057,6 +1171,21 @@ def build_parser() -> argparse.ArgumentParser:
         "--stop-after-code-block",
         action="store_true",
         help="Stop generation after every returned sequence has a closed fenced code block.",
+    )
+    parser.add_argument(
+        "--static-retry-min-healthy-samples",
+        type=int,
+        default=0,
+        help=(
+            "Generate extra candidates until this many syntax-valid candidates with "
+            "an entrypoint exist for each problem. Uses only static checks."
+        ),
+    )
+    parser.add_argument(
+        "--static-retry-max-extra-samples",
+        type=int,
+        default=0,
+        help="Maximum extra samples per problem for the static health retry gate.",
     )
     parser.add_argument("--num-process-evaluate", type=int, default=4)
     parser.add_argument("--timeout", type=int, default=8)

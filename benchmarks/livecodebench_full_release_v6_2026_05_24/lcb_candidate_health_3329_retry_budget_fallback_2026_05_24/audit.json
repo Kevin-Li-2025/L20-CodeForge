@@ -1,0 +1,373 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 5,
+    "tasks": 7,
+    "candidates": 12,
+    "syntax_ok_candidates": 2,
+    "entrypoint_candidates": 12,
+    "public_oracle_pass_tasks": 2,
+    "hidden_selected_pass_tasks": 2,
+    "selected_syntax_error_tasks": 5
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.16666666666666666,
+    "entrypoint_candidate_rate": 1.0,
+    "public_oracle_task_rate": 0.2857142857142857,
+    "hidden_selected_task_rate": 0.2857142857142857
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_static_retry_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_static_retry_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_static_retry_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_static_retry_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 3,
+        "candidates": 5,
+        "syntax_ok_candidates": 2,
+        "entrypoint_candidates": 5,
+        "public_oracle_pass_tasks": 2,
+        "public_selected_pass_tasks": 2,
+        "hidden_selected_pass_tasks": 2,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.4,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.6666666666666666,
+        "hidden_selected_task_rate": 0.6666666666666666
+      },
+      "records": [
+        {
+          "question_id": "3329",
+          "question_title": "find-the-length-of-the-longest-common-prefix",
+          "difficulty": "medium",
+          "n_candidates": 3,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 3,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 146)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7587,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 109",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 8205,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 105",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 7591,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 128",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3374",
+          "question_title": "count-alternating-subarrays",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 0,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3520,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3381",
+          "question_title": "shortest-subarray-with-or-at-least-k-i",
+          "difficulty": "easy",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 0,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 5139,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1536_bf16_starter_prefill_bodyonly_3329_n1_static_retry_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1536_bf16_starter_prefill_bodyonly_3329_n1_static_retry_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1536_bf16_starter_prefill_bodyonly_3329_n1_static_retry_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1536_bf16_starter_prefill_bodyonly_3329_n1_static_retry_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 3,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 3,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3329",
+          "question_title": "find-the-length-of-the-longest-common-prefix",
+          "difficulty": "medium",
+          "n_candidates": 3,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 3,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 126)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 6416,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 66",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 6206,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 89",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 6309,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 46",
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_4k_bf16_starter_prefill_3329_n1_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_4k_bf16_starter_prefill_3329_n1_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_4k_bf16_starter_prefill_3329_n1_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_4k_bf16_starter_prefill_3329_n1_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 2,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 2,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3329",
+          "question_title": "find-the-length-of-the-longest-common-prefix",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected ':' (<string>, line 269)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 15376,
+              "syntax_ok": false,
+              "syntax_error": "expected ':' at line 232",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 16507,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 234",
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_starter_prefill_3329_n1_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_starter_prefill_3329_n1_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_starter_prefill_3329_n1_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_starter_prefill_3329_n1_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 1,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 1,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3329",
+          "question_title": "find-the-length-of-the-longest-common-prefix",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 637)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 30751,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 5 at line 600",
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_3329_n1_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_3329_n1_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_3329_n1_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_3329_n1_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 1,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 1,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3329",
+          "question_title": "find-the-length-of-the-longest-common-prefix",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: unterminated string literal (detected at line 66) (<string>, line 66)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 32497,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 29) at line 29",
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

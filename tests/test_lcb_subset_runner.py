@@ -170,6 +170,90 @@ def test_public_tie_breaker_prefers_syntax_valid_candidate() -> None:
     assert selected == 1
 
 
+def test_count_static_healthy_candidates_requires_syntax_and_entrypoint() -> None:
+    runner = load_runner_module()
+
+    assert (
+        runner.count_static_healthy_candidates(
+            [
+                "class Solution:\n    def answer(self):\n        return 1",
+                "class Solution:\n    def answer(self,",
+                "def helper():\n    return 1",
+            ]
+        )
+        == 1
+    )
+
+
+def test_pad_generations_for_lcb_metrics_rectangularizes_variable_counts() -> None:
+    runner = load_runner_module()
+
+    padded, did_pad = runner.pad_generations_for_lcb_metrics([["a", "b"], ["c"]])
+
+    assert did_pad is True
+    assert padded == [["a", "b"], ["c", "c"]]
+
+
+def test_trim_metric_payloads_to_candidate_counts_removes_padding() -> None:
+    runner = load_runner_module()
+
+    results = runner.trim_metric_results_to_candidate_counts(
+        {0: [["r0"], ["r1"]], 1: [["r2"], ["padded"]]},
+        [2, 1],
+    )
+    metadata = runner.trim_metric_metadata_to_candidate_counts(
+        [["m0", "m1"], ["m2", "padded"]],
+        [2, 1],
+    )
+
+    assert results == {0: [["r0"], ["r1"]], 1: [["r2"]]}
+    assert metadata == [["m0", "m1"], ["m2"]]
+
+
+def test_generate_problem_outputs_static_retry_adds_healthy_candidate() -> None:
+    runner = load_runner_module()
+    outputs = [
+        "class Solution:\n    def answer(self,",
+        "class Solution:\n    def answer(self):\n        return 1",
+    ]
+    progress_counts = []
+
+    def fake_generate_one_batch(**kwargs):  # type: ignore[no-untyped-def]
+        del kwargs
+        return [outputs.pop(0)]
+
+    runner.generate_one_batch = fake_generate_one_batch
+
+    raw_outputs, code_outputs = runner.generate_problem_outputs(
+        model=object(),
+        tokenizer=object(),
+        problem=FakeProblem("Implement answer."),
+        n_samples=1,
+        sample_batch_size=1,
+        prompt_suffix="",
+        prompt_rendering="raw",
+        system_message="",
+        response_prefix="",
+        temperature=0.6,
+        top_p=0.95,
+        top_k=20,
+        max_new_tokens=32,
+        max_input_tokens=128,
+        stop_after_code_block=False,
+        min_static_healthy_samples=1,
+        max_extra_static_retry_samples=2,
+        existing_code_outputs_for_health=[],
+        progress_callback=lambda raw, code: progress_counts.append((len(raw), len(code))),
+    )
+
+    assert raw_outputs == [
+        "class Solution:\n    def answer(self,",
+        "class Solution:\n    def answer(self):\n        return 1",
+    ]
+    assert code_outputs == raw_outputs
+    assert progress_counts == [(1, 1), (2, 2)]
+
+
 def test_build_public_selection_records_returns_single_selected_generation() -> None:
     runner = load_runner_module()
     problem = type("Problem", (), {"question_id": "x", "question_title": "title"})()

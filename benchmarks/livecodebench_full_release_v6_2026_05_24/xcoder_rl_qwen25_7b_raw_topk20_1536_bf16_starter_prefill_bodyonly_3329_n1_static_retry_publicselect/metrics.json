@@ -1,0 +1,25 @@
+[
+  {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0
+      }
+    }
+  },
+  {
+    "0": [
+      [
+        -4
+      ]
+    ]
+  },
+  [
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 42 (<string>, line 126)"
+      }
+    ]
+  ]
+]
