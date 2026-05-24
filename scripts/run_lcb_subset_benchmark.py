@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime
@@ -164,6 +165,22 @@ def build_lcb_generation_prompt(question: Any) -> str:
 
 def strip_lcb_code_block(text: str) -> str:
     stripped = text.strip()
+    answer_match = re.search(
+        r"<answer>\s*(.*?)\s*</answer>",
+        stripped,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if answer_match:
+        return answer_match.group(1).strip()
+    if "</think>" in stripped.lower():
+        after_think = re.split(
+            r"</think>",
+            stripped,
+            maxsplit=1,
+            flags=re.IGNORECASE,
+        )[1].strip()
+        if after_think:
+            return after_think
     if "```" not in stripped:
         return stripped
 
@@ -341,26 +358,47 @@ def load_model(
     return model, tokenizer
 
 
+def render_model_input(
+    tokenizer: Any,
+    prompt: str,
+    prompt_rendering: str,
+    system_message: str,
+) -> str:
+    if prompt_rendering == "raw":
+        return prompt
+    if prompt_rendering == "chat":
+        messages = [
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": prompt},
+        ]
+        return tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,
+        )
+    raise ValueError("prompt_rendering must be one of: chat, raw")
+
+
 def generate_one_batch(
     model: Any,
     tokenizer: Any,
     prompt: str,
+    prompt_rendering: str,
+    system_message: str,
     temperature: float,
     top_p: float,
+    top_k: int | None,
     max_new_tokens: int,
     max_input_tokens: int,
     num_return_sequences: int,
 ) -> list[str]:
     import torch
 
-    messages = [
-        {"role": "system", "content": SYSTEM_MESSAGE_GENERIC},
-        {"role": "user", "content": prompt},
-    ]
-    rendered = tokenizer.apply_chat_template(
-        messages,
-        tokenize=False,
-        add_generation_prompt=True,
+    rendered = render_model_input(
+        tokenizer=tokenizer,
+        prompt=prompt,
+        prompt_rendering=prompt_rendering,
+        system_message=system_message,
     )
     encoded = tokenizer(
         rendered,
@@ -381,6 +419,8 @@ def generate_one_batch(
                 "num_return_sequences": num_return_sequences,
             }
         )
+        if top_k is not None and top_k >= 0:
+            kwargs["top_k"] = top_k
     else:
         kwargs["do_sample"] = False
 
@@ -400,8 +440,11 @@ def generate_problem_outputs(
     problem: Any,
     n_samples: int,
     sample_batch_size: int,
+    prompt_rendering: str,
+    system_message: str,
     temperature: float,
     top_p: float,
+    top_k: int | None,
     max_new_tokens: int,
     max_input_tokens: int,
 ) -> tuple[list[str], list[str]]:
@@ -416,8 +459,11 @@ def generate_problem_outputs(
             model=model,
             tokenizer=tokenizer,
             prompt=prompt,
+            prompt_rendering=prompt_rendering,
+            system_message=system_message,
             temperature=temperature,
             top_p=top_p,
+            top_k=top_k,
             max_new_tokens=max_new_tokens,
             max_input_tokens=max_input_tokens,
             num_return_sequences=batch_size,
@@ -511,8 +557,11 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             problem=problem,
             n_samples=missing_samples,
             sample_batch_size=args.sample_batch_size,
+            prompt_rendering=args.prompt_rendering,
+            system_message=args.system_message,
             temperature=args.temperature,
             top_p=args.top_p,
+            top_k=args.top_k,
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
         )
@@ -558,6 +607,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "selection": "none",
             "temperature": args.temperature,
             "top_p": args.top_p,
+            "top_k": args.top_k,
+            "prompt_rendering": args.prompt_rendering,
+            "system_message": args.system_message if args.prompt_rendering == "chat" else None,
             "max_new_tokens": args.max_new_tokens,
             "max_input_tokens": args.max_input_tokens,
             "seed": args.seed,
@@ -677,6 +729,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         else None,
         "temperature": args.temperature,
         "top_p": args.top_p,
+        "top_k": args.top_k,
+        "prompt_rendering": args.prompt_rendering,
+        "system_message": args.system_message if args.prompt_rendering == "chat" else None,
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
         "seed": args.seed,
@@ -757,6 +812,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--public-select-timeout", type=int, default=4)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--top-p", type=float, default=0.95)
+    parser.add_argument("--top-k", type=int)
+    parser.add_argument(
+        "--prompt-rendering",
+        choices=["chat", "raw"],
+        default="chat",
+        help="Use chat template wrapping or feed the benchmark prompt as raw text.",
+    )
+    parser.add_argument("--system-message", default=SYSTEM_MESSAGE_GENERIC)
     parser.add_argument("--max-new-tokens", type=int, default=2048)
     parser.add_argument("--max-input-tokens", type=int, default=8192)
     parser.add_argument("--num-process-evaluate", type=int, default=4)

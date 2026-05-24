@@ -25,6 +25,16 @@ def load_behavior_generator_module():
     return module
 
 
+def load_runner_module():
+    script = Path(__file__).parents[1] / "scripts" / "run_lcb_subset_benchmark.py"
+    spec = importlib.util.spec_from_file_location("run_lcb_subset_benchmark", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def load_adaptive_differential_module():
     script = (
         Path(__file__).parents[1]
@@ -204,6 +214,36 @@ def test_public_selection_builder_uses_max_candidate_for_k_list() -> None:
     builder = load_public_selection_builder_module()
 
     assert builder.public_k_list_for_generations([["a"], ["b", "c", "d"]]) == [1, 3]
+
+
+def test_lcb_runner_raw_prompt_rendering_does_not_apply_chat_template() -> None:
+    runner = load_runner_module()
+    tokenizer = object()
+
+    rendered = runner.render_model_input(
+        tokenizer=tokenizer,
+        prompt="### Question\nSolve it",
+        prompt_rendering="raw",
+        system_message="system",
+    )
+
+    assert rendered == "### Question\nSolve it"
+
+
+def test_lcb_runner_strip_extracts_answer_tag() -> None:
+    runner = load_runner_module()
+
+    code = runner.strip_lcb_code_block("<think>reason</think><answer>print(1)</answer>")
+
+    assert code == "print(1)"
+
+
+def test_lcb_runner_strip_extracts_after_think_close() -> None:
+    runner = load_runner_module()
+
+    code = runner.strip_lcb_code_block("<think>reason</think>\nprint(2)")
+
+    assert code == "print(2)"
 
 
 def test_evaluator_behavior_selection_uses_consensus_after_public_score() -> None:
