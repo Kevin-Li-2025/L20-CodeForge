@@ -184,6 +184,26 @@ Result:
 - Generation time: `1453.078s`.
 - The stricter prompt did not solve either unresolved medium task and still produced malformed/non-code-heavy candidates. This suggests prompt-only formatting pressure is not sufficient; these failures need better candidate generation or a code-repair/verifier pass.
 
+### hard 3024 strict-code n=4 public selection
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/public_selection.json`
+
+Protocol:
+
+- Re-run unresolved hard task `3024`.
+- `n_samples=4`, max new tokens 16384, stop-after-code-block, public-test selection.
+- Same strict code-only suffix used for unresolved medium retry.
+
+Result:
+
+- Hidden eval after public selection: `0/1`.
+- Public oracle/pass@4: `0/1`.
+- Generation time: `1726.398s`.
+- This confirms prompt-only retries are not sufficient for the remaining first-12 failures.
+
 ## Current Interpretation
 
 Good signal:
@@ -205,14 +225,15 @@ Bad/limiting signal:
 - Medium `n=4` at 8k is also expensive: five tasks took about 57.2 minutes and still left two failures.
 - Public-selection search still failed three first-12 tasks: medium `2828`, medium `3166`, and hard `3024`. These need stricter output-format control and/or better verification, not just more samples.
 - The strict-code prompt failed to rescue `2828` and `3166`, so the remaining medium failures likely need a repair/verifier stage rather than another prompt-only rerun.
+- The strict-code prompt also failed to rescue hard `3024`, with public pass@4 still zero.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect`
+- None. Prompt-only reruns are paused after failing to rescue `2828`, `3166`, and `3024`.
 
 Purpose:
 
-- Re-run unresolved hard task `3024` with the stricter code-only suffix.
-- If it fails, stop prompt-only retries for the first-12 slice and switch to candidate repair / verifier-assisted selection.
+- Next step is a repair/verifier path: inspect failed candidate syntax/public-test errors, build repair prompts or deterministic extraction/cleanup, and evaluate repaired candidates against public tests before hidden evaluation.
+- Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.
