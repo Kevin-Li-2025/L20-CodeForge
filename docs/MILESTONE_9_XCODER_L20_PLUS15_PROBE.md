@@ -446,6 +446,29 @@ Result:
 - Interpretation: the remaining first-12 failures can be rescued by targeted verified code-prefix distillation. This is not a clean broad benchmark claim, because the prefix is task-targeted, but it is a strong signal for the next scalable method: mine or generate concise verified code-prefix traces, train a small adapter on those patterns, and validate on less curated held-out LCB slices.
 - Staged first-12 status: strict prompt/search route is `10/12 = 83.3%`; targeted code-prefix rescue reaches `12/12 = 100%` on the first-12 probe with the overfitting caveat above.
 
+### medium control12 automatic starter-prefix generalization check
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_starter_prefill_medium_control12_2026_05_24/audit.json`
+
+Protocol:
+
+- Selected the remaining `12` medium tasks from the existing stratified60 shard that were not part of the first-12 or held-out next3 probes: `3416`, `3475`, `3639`, `3657`, `3751`, `3786`, `abc320_c`, `abc331_c`, `abc364_c`, `abc370_d`, `abc375_c`, `abc400_d`.
+- Used automatic starter-code/code-fence response prefixing only; no per-task algorithm prefix and no hidden-output tuning.
+- Ran X-Coder bf16 with `n=1`, temperature `0.6`, top-p `0.95`, top-k `20`, `max_new_tokens=2048`, public-test selection, and one static-health retry per task.
+
+Result:
+
+- Generated `17` total candidates for `12` tasks in `836.485s` because `5` tasks needed the extra static retry.
+- Public oracle: `0/12`; public-selected hidden replay: `0/12`.
+- Candidate health: `9/17` syntax-valid, `17/17` with an entrypoint, and `3` selected candidates were syntax-invalid.
+- Failure split: `3` tasks had no syntax-valid candidates after retry; the remaining `9` had syntax-valid candidates rejected by public tests.
+- Interpretation: automatic starter-prefixing alone does not generalize from the first-12 targeted rescue. The next credible improvement must be an automatic verified-prefix/trace generator or a trained adapter evaluated on this control12 slice before claiming broad generalization.
+
 ## Current Interpretation
 
 Good signal:
@@ -487,6 +510,7 @@ Bad/limiting signal:
 - Medium `2828` and `3166` remain unsolved after two independent second-pass source pools; their failure mode is now algorithmic, not syntax or final-answer extraction.
 - Natural-language teacher traces alone did not rescue `2828` or `3166`: they produced syntactically valid comment-heavy candidates with public oracle `0/2`.
 - The targeted code-prefix rescue is intentionally narrow and should be treated as a distillation/probing result, not as a clean LiveCodeBench leaderboard score.
+- A fresh medium control12 slice scored `0/12` under automatic starter-code/code-fence prefixing, so the first-12 targeted rescue currently does not transfer without a learned or generated task-specific algorithm prefix.
 
 ## Next Run
 
@@ -505,3 +529,4 @@ Purpose:
 - Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to second-pass final-answer regeneration or targeted teacher-data construction.
 - Build a small set of mined/verified code-prefix traces for similar greedy-string and frequency-partition tasks, then evaluate on a held-out medium slice without per-task hand prefixes.
 - Keep two separate headlines: strict prompt/search route `10/12 = 83.3%`; targeted code-prefix probe `12/12 = 100%` with overfitting caveat.
+- Use the medium control12 run as the immediate generalization gate: any automatic prefix generator or adapter should first improve public oracle above `0/12` on this slice before spending time on larger LCB runs.

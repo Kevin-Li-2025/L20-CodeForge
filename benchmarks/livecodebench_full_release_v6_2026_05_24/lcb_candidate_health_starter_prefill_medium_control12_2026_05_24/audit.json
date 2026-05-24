@@ -1,0 +1,412 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 1,
+    "tasks": 12,
+    "candidates": 17,
+    "syntax_ok_candidates": 9,
+    "entrypoint_candidates": 17,
+    "public_oracle_pass_tasks": 0,
+    "hidden_selected_pass_tasks": 0,
+    "selected_syntax_error_tasks": 3
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.5294117647058824,
+    "entrypoint_candidate_rate": 1.0,
+    "public_oracle_task_rate": 0.0,
+    "hidden_selected_task_rate": 0.0
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_medium_control12_n1_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 12,
+        "candidates": 17,
+        "syntax_ok_candidates": 9,
+        "entrypoint_candidates": 17,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 3
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.5294117647058824,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3416",
+          "question_title": "sum-of-digit-differences-of-all-pairs",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7318,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3475",
+          "question_title": "minimum-operations-to-make-binary-array-elements-equal-to-one-i",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 5701,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 112",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 7190,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3639",
+          "question_title": "zero-array-transformation-i",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7464,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 75",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 8567,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3657",
+          "question_title": "check-if-grid-can-be-cut-into-sections",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 123)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 8977,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 86",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 9216,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 79",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3751",
+          "question_title": "maximum-frequency-after-subarray-operation",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 132)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7563,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 95",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 8440,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 107",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3786",
+          "question_title": "longest-palindromic-subsequence-after-at-most-k-operations",
+          "difficulty": "medium",
+          "n_candidates": 2,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 93)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7599,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 56",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 7706,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 66",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc320_c",
+          "question_title": "Slot Strategy 2 (Easy)",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 6",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7176,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc331_c",
+          "question_title": "Sum of Numbers Greater Than Me",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 10 0 10 0 8",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 6751,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc364_c",
+          "question_title": "Minimum Glutton",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 2",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7983,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc370_d",
+          "question_title": "Cross Explosion",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 2",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7203,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc375_c",
+          "question_title": "Spiral Rotation",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer: mismatched output length",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 5828,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "abc400_d",
+          "question_title": "Takahashi the Wall Breaker",
+          "difficulty": "medium",
+          "n_candidates": 1,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong answer at output_line_idx=0:  != 1",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 7755,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

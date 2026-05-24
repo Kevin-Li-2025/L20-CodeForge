@@ -1,0 +1,279 @@
+{
+  "metrics": {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0
+      }
+    }
+  },
+  "padded_for_lcb_metrics": true,
+  "records": [
+    {
+      "question_id": "3416",
+      "question_title": "sum-of-digit-differences-of-all-pairs",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3475",
+      "question_title": "minimum-operations-to-make-binary-array-elements-equal-to-one-i",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3639",
+      "question_title": "zero-array-transformation-i",
+      "selected_index": 1,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3657",
+      "question_title": "check-if-grid-can-be-cut-into-sections",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3751",
+      "question_title": "maximum-frequency-after-subarray-operation",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "3786",
+      "question_title": "longest-palindromic-subsequence-after-at-most-k-operations",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        0.0,
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc320_c",
+      "question_title": "Slot Strategy 2 (Easy)",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc331_c",
+      "question_title": "Sum of Numbers Greater Than Me",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc364_c",
+      "question_title": "Minimum Glutton",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc370_d",
+      "question_title": "Cross Explosion",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc375_c",
+      "question_title": "Spiral Rotation",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    },
+    {
+      "question_id": "abc400_d",
+      "question_title": "Takahashi the Wall Breaker",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 1,
+      "public_scores": [
+        0.0
+      ],
+      "selected_public_score": 0.0,
+      "public_pass_indices": [],
+      "public_oracle_pass": false
+    }
+  ],
+  "metadata": [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 149)"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 112)"
+      },
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 123)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 116)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 132)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 144)"
+      }
+    ],
+    [
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 93)"
+      },
+      {
+        "error_code": -4,
+        "error_message": "Error during testing: expected an indented block after function definition on line 39 (<string>, line 103)"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 6"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 10 0 10 0 8"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer: mismatched output length"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 1"
+      }
+    ]
+  ]
+}
