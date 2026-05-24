@@ -1,272 +1,209 @@
-# l20-codeforge
+# L20-CodeForge
 
-Resource-constrained coding-agent RL and post-training stack for a single NVIDIA L20.
+Single-L20 post-training, verifier-guided inference, and executable benchmark
+infrastructure for code models.
 
-The design target is not broad pretraining. It is a compact loop that turns limited
-GPU time into measurable software-engineering capability:
+L20-CodeForge is an eval-first research stack for making a small GPU budget
+produce measurable coding capability. The project focuses on the pieces that
+matter in real post-training work: clean benchmark protocol, public/private test
+separation, candidate generation, repair, verifier experiments, trajectory data,
+and negative-result audits.
 
-1. Build executable repo-level evaluation first.
-2. Collect and normalize agent trajectories.
-3. Train small adapters with soft-verified SFT and preference data.
-4. Run guided GRPO/RLVR only on short, high-signal tasks.
-5. Use self-verification and verifier-guided candidate selection at inference time.
+Status: the repository currently demonstrates strong system-level gains on
+public benchmarks. It does not yet claim a +15 point greedy model-weight
+improvement over the base model.
 
-## Why This Shape
+## Results
 
-The stack follows current evidence from:
+| Benchmark | Base model / checkpoint | Protocol | Baseline | L20-CodeForge result | Delta | Artifact |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| LiveCodeBench `release_v6` full suite | `Qwen2.5-Coder-7B-Instruct` | `temperature=0.8`, `n=8`, public-test selection, hidden replay | `297/1055` (`28.15%`) greedy | `403/1055` (`38.20%`) | `+106` tasks, `+10.05` points | `benchmarks/livecodebench_full_release_v6_2026_05_22/` |
+| EvalPlus HumanEval+ | `Qwen2.5-Coder-7B-Instruct` | clean public-signal system, official EvalPlus scoring | `84.8%` greedy | `92.7%` | `+7.9` points | `benchmarks/evalplus_l20_codeforge_2026_05_22/` |
+| EvalPlus MBPP+ | `Qwen2.5-Coder-7B-Instruct` | clean public-signal system, official EvalPlus scoring | `72.2%` greedy | `81.7%` | `+9.5` points | `benchmarks/evalplus_l20_codeforge_2026_05_22/` |
+| X-Coder medium `control12` | `IIGroup/X-Coder-RL-Qwen2.5-7B` | strict code generation, public-only repair, one public-feedback round | `0/12` auto/strict starter-prefix checks | `4/12` | `+4` tasks | `docs/MILESTONE_9_XCODER_L20_PLUS15_PROBE.md` |
 
-- TRL GRPO custom reward support:
-  https://huggingface.co/docs/trl/grpo_trainer
-- mini-SWE-agent's simple bash-only trajectory shape:
-  https://github.com/SWE-agent/mini-swe-agent
-- SWE-bench's Docker-based executable evaluation:
-  https://www.swebench.com/SWE-bench/installation/
-- Qwen2.5-Coder model family and long-context code capabilities:
-  https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct
-- Unsloth VRAM guidance for QLoRA/LoRA:
-  https://unsloth.ai/docs/get-started/fine-tuning-for-beginners/unsloth-requirements
-- vLLM's recommendation for fresh uv-managed environments:
-  https://docs.vllm.ai/en/latest/getting_started/installation/gpu/
+Cross-benchmark guardrail: `benchmarks/generalization_scorecard_2026_05_23/`
+records a `PASS` gate over full LiveCodeBench plus EvalPlus HumanEval+/MBPP+.
 
-## Repository Layout
+## Claim Boundary
 
-```text
-configs/                 L20-first experiment configs
-docs/                    architecture and runbooks
-scripts/                 setup, smoke, and model utility scripts
-src/l20_codeforge/
-  context/               repo context packing and omission policies
-  data/                  task and trajectory schemas
-  envs/                  local repo execution adapters
-  evals/                 eval cards and reporting
-  gpu/                   L20 profile and memory policy
-  inference/             candidate verification and selection
-  rewards/               executable and patch-quality rewards
-  training/              TRL-compatible reward functions and config helpers
-tests/                   lightweight unit tests
+- The LiveCodeBench and EvalPlus numbers above are system-level results unless a
+  row explicitly says greedy model baseline.
+- Public tests, public examples, and public prompt metadata may be used for
+  candidate selection and repair. Hidden/private tests are reserved for final
+  measurement and audits.
+- This is not an official leaderboard submission. It is a reproducible local
+  checkpoint with saved generations, reports, hashes, and protocol notes.
+- Targeted probes, such as first-12 rescues or code-prefix experiments, are not
+  presented as broad benchmark results.
+- The current +15 goal is still open: the next milestone is to turn
+  system-level gains into a cleaner greedy or single-sample model-capability
+  improvement without overfitting to visible tests.
+
+## What This Project Builds
+
+L20-CodeForge is organized around one constraint: a single NVIDIA L20 should be
+enough to run a serious coding post-training loop if the loop is selective,
+measured, and executable.
+
+```mermaid
+flowchart LR
+    A["Benchmark task"] --> B["Prompt and context builder"]
+    B --> C["Candidate generation"]
+    C --> D["Public tests and static health checks"]
+    D --> E["Repair and feedback loop"]
+    E --> F["Verifier or selector"]
+    F --> G["Hidden-test replay"]
+    G --> H["Scorecard and audit"]
+    H --> I["SFT / DPO / RLVR data"]
 ```
 
-## First Remote Setup
+The repository contains:
 
-On the L20 host:
+- LiveCodeBench and EvalPlus evaluation harnesses with saved reports.
+- Public-test selection, repair, and behavior-test tooling.
+- Candidate health audits for syntax, entrypoint, and execution failure modes.
+- A trajectory schema for repo-repair agents and model training data.
+- SFT, DPO, reward-function, and GRPO/RLVR scaffolding.
+- Single-L20 setup scripts and GPU sanity checks.
+
+## Quickstart
+
+Local development:
 
 ```bash
-cd ~/l20-codeforge
-bash scripts/bootstrap_remote.sh
+python3 -m venv .venv
 source .venv/bin/activate
-python scripts/check_gpu.py
-pytest -q
-```
-
-The bootstrap script installs uv if missing, creates a Python 3.12 venv, installs a
-CUDA 12.4 PyTorch wheel, then installs this package with training and dev
-dependencies. It does not download large model weights.
-
-## Model Strategy
-
-Primary training target:
-
-- `Qwen/Qwen2.5-Coder-7B-Instruct`
-
-L20 policy:
-
-- Use QLoRA for 7B/14B work.
-- Use short-context GRPO first: 2K-4K completion budgets, small groups.
-- Keep vLLM in a separate environment if needed, because vLLM pins binary stacks.
-- Keep all generated checkpoints under `artifacts/`, never under the repo root.
-
-## Smoke Gates
-
-Before real training, these must pass:
-
-```bash
-python scripts/check_gpu.py
+python -m pip install -e ".[dev,bench]"
+python -m pytest -q
 python -m l20_codeforge profile
-pytest -q
-```
-
-After that, run a toy reward loop before loading a large model:
-
-```bash
-python -m l20_codeforge init-dirs
-python -m l20_codeforge eval-card smoke pass
 python -m l20_codeforge smoke-loop
 ```
 
-`smoke-loop` creates 36 executable repo-repair tasks with visible and hidden
-tests, evaluates known-good patches in isolated worktrees, writes trajectories,
-builds a report, and builds chat SFT JSONL:
-
-```text
-data/raw/smoke_tasks/
-artifacts/trajectories/smoke_reference.jsonl
-artifacts/reports/smoke_reference_report.json
-data/processed/smoke_sft.jsonl
-```
-
-This is the first quality gate. Do not start GPU training until this local loop
-passes on the target machine.
-
-Milestone notes:
-
-- `docs/MILESTONE_1_DATA_FACTORY.md`: first executable data loop.
-- `docs/MILESTONE_2_REPAIR_SUITE.md`: 36-task visible/hidden repair suite.
-- `docs/MILESTONE_3_MINI_SWE_ADAPTER.md`: mini-SWE-agent trajectory adapter and DPO pairs.
-- `docs/MILESTONE_4_REAL_DATA.md`: real SWE dataset registry and fetch path.
-- `benchmarks/evalplus_l20_codeforge_2026_05_22/`: reproducibility package
-  for the EvalPlus HumanEval+/MBPP+ benchmark sprint, including selected
-  samples, official reports, rechecks, hashes, and a summary table.
-- `benchmarks/livecodebench_full_release_v6_2026_05_22/`: full 1,055-task
-  LiveCodeBench `release_v6` greedy baseline with saved generations, hidden-test
-  evaluator outputs, hashes, and breakdowns. It also includes the `n=4` and
-  `n=8` public-test selection results, plus a candidate-aware behavior-test
-  prompt bank for the next verifier loop.
-- `docs/MILESTONE_8_LCB_PLUS15_FOCUS.md`: focused plan for turning the current
-  inference-time gain into a real greedy model-capability gain. The target is
-  `52.6%+` LiveCodeBench, i.e. at least 15 points above the published
-  Qwen2.5-Coder-7B-Instruct reference, with hidden tests reserved for final
-  measurement.
-
-LiveCodeBench verifier loop:
+On an L20 host:
 
 ```bash
-python scripts/build_lcb_behavior_test_prompts.py \
-  --lcb-repo /tmp/LiveCodeBench \
-  --prompt-public-parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
-  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_full_generate_only/generations.json \
-  --public-selection benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_full_eval/public_selection.json \
-  --output-dir benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64 \
-  --limit 64 \
-  --target-priority public-fragility \
-  --max-samples 4
+bash scripts/bootstrap_remote.sh
+source .venv/bin/activate
+python scripts/check_gpu.py
+python -m pytest -q
 ```
 
-After a local model fills the generated-test prompts, parse them to
-`behavior_inputs.json` and pass that file to `scripts/evaluate_lcb_generations.py`
-with `--behavior-inputs` and `--behavior-public-scores`.
+The bootstrap script creates an isolated Python environment, installs a CUDA
+PyTorch stack, and installs this package with training and development
+dependencies. It does not download large model weights.
 
-Public-selection-only payloads can be built without touching hidden tests:
+## Reproducing The Reported Checkpoints
 
-```bash
-python scripts/build_lcb_public_selection.py \
-  --lcb-repo /tmp/LiveCodeBench \
-  --parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
-  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_full_generate_only/generations.json \
-  --output artifacts/lcb_public_selection/qwen25_coder_7b_temp08_n8_public_selection.json \
-  --max-samples 8
-```
-
-For a local Transformers generation pass:
-
-```bash
-python scripts/generate_lcb_behavior_tests.py \
-  --prompts benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_prompts64/prompts.jsonl \
-  --output-dir artifacts/lcb_behavior_tests/qwen25_coder_7b_prompts64 \
-  --model /path/to/Qwen2.5-Coder-7B-Instruct \
-  --limit 64 \
-  --resume
-```
-
-The generated `behavior_inputs.json` is then used only as extra public-side
-candidate discrimination; hidden tests remain reserved for final measurement.
-
-Current generated-test probe:
-
-- `benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests64/`
-  records the first 64-prompt local-model pass.
-- It parsed `54` usable task records with `558` generated behavior inputs.
-- On those 54 targets, generated behavior consensus improved selection from
-  `51/54` to `52/54`.
-- A stricter `conservative-public-pass` selector with consensus margin `1`
-  keeps the same `52/54` result while requiring public-test pass and strong
-  generated-test agreement before overriding the public-selected candidate.
-- The full-suite headline score remains `378/1055` until the full evaluator has
-  retry-stabilized replay for flaky unchanged selections.
-- Post-hoc recheck of the two unchanged-code full hybrid flips gives a
-  stabilized audit count of `379/1055`; this stays separate from the headline
-  score until retry logic is built into the evaluator path.
-- `target_priority_analysis_2026_05_23` adds a public-signal-only targeter for
-  the next behavior-test batch. At the same 64-prompt budget, the new
-  `public-fragility` ordering raises retrospective public-pass/hidden-fail
-  target density from `3/64` to `20/64` without using hidden labels for prompt
-  construction or candidate selection.
-- `qwen25_coder_7b_temp08_n4_candidate_aware_behavior_tests128_fragility`
-  records the first expanded `public-fragility` generation run: `128` prompt
-  records, `112` parsed non-empty behavior-test records, and `1130` generated
-  input-only behavior tests in `1227.057s`.
-- The targeted 112-task conservative replay was a stabilized-neutral result:
-  public-selection baseline `68/112`, raw behavior replay `66/112` due to two
-  known unchanged-code flaky tasks, and rechecked audit `68/112`. The selector
-  made four public-pass overrides but did not change hidden outcomes, so the
-  full-suite headline remains `378/1055`.
-- A stricter `conservative-differential-medoid` selector was added for the same
-  112-target batch. It made `0` overrides and stabilized to `68/112`, exposing
-  the real bottleneck: `89/112` targets had no valid generated behavior tests
-  that differentiated public-passing candidates. The next verifier step should
-  synthesize adaptive pairwise distinguishing inputs or add expected-output
-  verification before another full merged replay.
-- `qwen25_coder_7b_temp08_n4_adaptive_differential_fuzz_targets112_probe`
-  adds a CPU-only adaptive fuzz probe over the same 112 targets. It improved
-  differential coverage from `23/112` tasks and `98` differential tests to
-  `34/112` tasks and `154` differential tests, but hidden replay remained
-  stabilized-neutral at `68/112`. A support-cluster selector made one neutral
-  override, so the remaining bottleneck is expected-output verification rather
-  than input-only candidate clustering.
-- `qwen25_coder_7b_temp08_n4_expected_output_verifier_prompts154` turns those
-  154 differential inputs into multiple-choice expected-output verifier
-  prompts. The verifier sees the problem, public examples, one input, and
-  deduplicated candidate output options; it must choose an option or `NONE`.
-  The L20 Qwen2.5-Coder-7B verifier run completed `154/154` parsed choices in
-  `292.974s`, but the conservative selection replay regressed: `65/112` raw
-  and `67/112` after rechecking unchanged-code flakes versus the `68/112`
-  public-selection baseline. The audit found `10` overrides: one true
-  improvement, two true regressions, and seven neutral changes. This is a
-  high-signal negative result: expected-output verification needs calibration,
-  a stronger verifier, or a learned/RLVR verifier before it should touch the
-  headline `378/1055` run.
-- The next active improvement path is S* lite scaling: extend the saved full
-  `n=4` pool to `n=8`/`n=16`, add public-test repair only on public-failing
-  candidates, and keep hidden tests reserved for final replay. The LCB runner
-  now supports `--allow-partial-resume`, so the L20 can reuse existing samples
-  via `--resume-from-generations` and generate only missing completions when
-  expanding a pool.
-
-Generalization gate:
+Build the cross-benchmark scorecard:
 
 ```bash
 python scripts/build_generalization_scorecard.py \
   --output-dir benchmarks/generalization_scorecard_2026_05_23
 ```
 
-This builds a cross-benchmark scorecard over full LiveCodeBench `release_v6`
-and EvalPlus HumanEval+/MBPP+. Any future selector, repair, SFT, or RLVR change
-should improve the target benchmark without failing this gate.
-
-Full hidden-test materialization:
+Re-run the packaged EvalPlus scoring:
 
 ```bash
-python scripts/materialize_lcb_release_jsonl.py \
-  --release-version release_v6 \
-  --output-jsonl data/raw/livecodebench/full_release_v6/release_v6_test_full.jsonl \
-  --manifest data/raw/livecodebench/full_release_v6/release_v6_test_full.manifest.json
+python -m l20_codeforge eval-evalplus humaneval \
+  benchmarks/evalplus_l20_codeforge_2026_05_22/samples/humaneval.mixed-target.literal-combined.public-consensus-selected.samples.jsonl \
+  --output /tmp/humaneval_recheck.json \
+  --parallel 8
+
+python -m l20_codeforge eval-evalplus mbpp \
+  benchmarks/evalplus_l20_codeforge_2026_05_22/samples/mbpp.temp08.n5-plus-basefallback-n30.public-consensus-shortest-selected.samples.jsonl \
+  --output /tmp/mbpp_recheck.json \
+  --parallel 8
 ```
 
-The generated full JSONL contains private tests and is intentionally not
-committed. Commit hashes, manifests, evaluator outputs, and compact summaries
-only.
+LiveCodeBench full-suite reproduction requires a local materialized
+`release_v6` JSONL with private tests. That file is intentionally not committed.
+The committed package includes saved generations, compact summaries, hashes,
+and evaluator outputs. See
+`benchmarks/livecodebench_full_release_v6_2026_05_22/README.md` for the full
+generation and replay commands.
 
-Agent trajectory bridge:
+## Key Artifacts
 
-```bash
-python -m l20_codeforge export-mini-tasks
-python -m l20_codeforge convert-mini data/raw/smoke_tasks/<task>/task.json artifacts/mini_swe/trajectories/<task>.traj.json
-python -m l20_codeforge build-dpo artifacts/trajectories/mini_swe_converted.jsonl
+| Path | Purpose |
+| --- | --- |
+| `benchmarks/generalization_scorecard_2026_05_23/scorecard.json` | Machine-readable LCB + EvalPlus gate. |
+| `benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json` | Headline full LCB `n=8` public-selection result. |
+| `benchmarks/livecodebench_full_release_v6_2026_05_22/README.md` | Full LCB protocol, hashes, breakdowns, and commands. |
+| `benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv` | EvalPlus greedy baselines and clean system rows. |
+| `docs/MILESTONE_8_LCB_PLUS15_FOCUS.md` | Research plan for converting system gain into model-capability gain. |
+| `docs/MILESTONE_9_XCODER_L20_PLUS15_PROBE.md` | X-Coder probe, control slices, positive results, and overfitting checks. |
+| `scripts/evaluate_lcb_generations.py` | Hidden replay, public selection, behavior-input selection, and variable-candidate handling. |
+| `scripts/regenerate_lcb_final_answers.py` | Second-pass code regeneration with optional public-test feedback. |
+| `src/l20_codeforge/` | Package code for data, envs, evals, rewards, inference, training, and GPU profiling. |
+
+## What Worked
+
+- Full-suite `n=8` public-test selection moved Qwen2.5-Coder-7B-Instruct from
+  `297/1055` to `403/1055` on LiveCodeBench `release_v6`.
+- EvalPlus clean public-signal systems improved HumanEval+ and MBPP+ without
+  using EvalPlus extra tests for selection.
+- One public-feedback repair round on the X-Coder medium control slice lifted
+  the gate from `2/12` after public-only repair to `4/12`.
+- The evaluation harness caught optimistic small-subset results and forced the
+  project onto full-suite and cross-benchmark scorecards.
+
+## What Failed
+
+These failures are kept in the repository because they are useful research
+signal, not noise.
+
+- Small LiveCodeBench subsets were optimistic relative to the full 1,055-task
+  suite.
+- Automatic starter-prefix prompting did not generalize on the medium
+  `control12` slice (`0/12`).
+- Multi-source code-only repair did not improve the medium fail10 slice.
+- A second public-feedback repair round produced public-test signal but `0/8`
+  hidden passes, which is an overfitting warning.
+- Input-only adaptive differential tests had little leverage when the candidate
+  pool lacked multiple public-passing alternatives.
+- The first expected-output verifier pass regressed the targeted replay, so it
+  needs calibration or a stronger verifier before it can affect headline runs.
+
+## Repository Layout
+
+```text
+configs/                 L20-first experiment configs
+docs/                    architecture notes, milestones, and runbooks
+scripts/                 benchmark, repair, audit, setup, and GPU utilities
+src/l20_codeforge/
+  agents/                mini-SWE-agent trajectory adapter
+  context/               repo context packing
+  data/                  task, trajectory, SFT, and preference builders
+  envs/                  local repo execution adapters
+  evals/                 EvalPlus, patch, SFT, and eval-card tooling
+  gpu/                   L20 profile and memory policy
+  inference/             candidate selectors
+  rewards/               executable and patch-quality reward functions
+  training/              SFT and TRL-compatible reward helpers
+tests/                   unit and regression tests
+benchmarks/              committed benchmark packages and audit outputs
 ```
 
-Real data entry:
+## Current Roadmap
 
-```bash
-python -m l20_codeforge list-real-sources
-python -m l20_codeforge fetch-real-tasks swe-bench-lite --output data/raw/real/swe_bench_lite_sample.jsonl --limit 25
-python -m l20_codeforge build-real-sft data/raw/real/swe_bench_lite_sample.jsonl --output data/processed/real_sft/swe_bench_lite_sample_sft.jsonl
-```
+1. Build mined verified algorithm-prefix data from public failures, while
+   excluding exact LiveCodeBench prompts from training data.
+2. Train or calibrate an expected-output verifier before allowing generated
+   behavior tests to change headline selections.
+3. Improve the X-Coder medium `control12` gate from `4/12` to `6/12+` with an
+   automatic method, then scale to broader LCB slices.
+4. Add a small QLoRA/SFT adapter only after the data path beats prompting and
+   repair on held-out control slices.
+5. Keep the generalization scorecard as the release gate for every benchmark
+   claim.
+
+## References
+
+- LiveCodeBench: https://livecodebench.github.io/
+- EvalPlus: https://github.com/evalplus/evalplus
+- Qwen2.5-Coder: https://qwenlm.github.io/blog/qwen2.5-coder-family/
+- X-Coder model card: https://huggingface.co/IIGroup/X-Coder-RL-Qwen2.5-7B
+- TRL GRPO trainer: https://huggingface.co/docs/trl/grpo_trainer
+- mini-SWE-agent: https://github.com/SWE-agent/mini-swe-agent
+- SWE-bench: https://www.swebench.com/
