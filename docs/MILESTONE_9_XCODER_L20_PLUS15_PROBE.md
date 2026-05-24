@@ -143,6 +143,27 @@ Result:
 - Generation time: `3434.152s`.
 - Combined with the four already-passing easy/medium tasks, the first-12 easy/medium subtotal is now `7/9`.
 
+### mixed12 remaining-hard n=4 public selection
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/public_selection.json`
+
+Protocol:
+
+- Run the two remaining hard tasks from the first-12 slice: `2879`, `3024`.
+- `n_samples=4`, max new tokens 16384, stop-after-code-block, public-test selection.
+
+Result:
+
+- Hidden eval after public selection: `1/2 = 50.0%`.
+- Rescued ID: `2879`.
+- Still failed ID: `3024`.
+- Public oracle/pass@4: `1/2 = 50.0%`.
+- Generation time: `3155.956s`.
+- Combining staged runs gives first-12 score `9/12 = 75.0%`: four easy/medium fast-stage passes, three failed-medium search rescues, hard `2784`, and hard `2879`.
+
 ## Current Interpretation
 
 Good signal:
@@ -152,6 +173,7 @@ Good signal:
 - 8k final-code is enough for easy/medium tasks in the initial mixed sample.
 - The failed hard problem was rescued by `n=4` plus public-test selection.
 - The failed-medium rerun rescued three of five medium failures, confirming that candidate search helps beyond hard tasks.
+- The first-12 staged protocol reached `9/12 = 75.0%`, far above the original 7B greedy baseline on the full release_v6 run.
 
 Bad/limiting signal:
 
@@ -161,15 +183,16 @@ Bad/limiting signal:
 - Hard `n=4` at 16k took about 22.7 minutes for one task, so the next benchmark must be staged by difficulty.
 - Single-sample medium coverage is weak in the first mixed12 slice; only `4/9` easy/medium tasks passed.
 - Medium `n=4` at 8k is also expensive: five tasks took about 57.2 minutes and still left two failures.
+- Public-selection search still failed three first-12 tasks: medium `2828`, medium `3166`, and hard `3024`. These need stricter output-format control and/or better verification, not just more samples.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect`
+- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect`
 
 Purpose:
 
-- Run the two remaining hard tasks in the first-12 slice: `2879`, `3024`.
-- Use `n=4`, max new tokens 16384, stop-after-code-block, and public-test selection.
-- Combine: four easy/medium fast passes + three medium search rescues + q2784 hard rescue + remaining hard results.
+- Re-run unresolved medium tasks `2828` and `3166` with a stricter code-only suffix that requires the response to start with a fenced Python code block.
+- If that rescues either medium task, update the staged first-12 score above `9/12`.
+- After this run, re-run hard `3024` with the same stricter output-format prompt; its previous failures were dominated by invalid syntax / non-code characters.
