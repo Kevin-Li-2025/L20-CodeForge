@@ -469,6 +469,29 @@ Result:
 - Failure split: `3` tasks had no syntax-valid candidates after retry; the remaining `9` had syntax-valid candidates rejected by public tests.
 - Interpretation: automatic starter-prefixing alone does not generalize from the first-12 targeted rescue. The next credible improvement must be an automatic verified-prefix/trace generator or a trained adapter evaluated on this control12 slice before claiming broad generalization.
 
+### medium control12 strict starter-prefix check
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1k_bf16_strict_starter_prefill_medium_control12_n1_publicselect/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1k_bf16_strict_starter_prefill_medium_control12_n1_publicselect/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_1k_bf16_strict_starter_prefill_medium_control12_n1_publicselect/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_strict_starter_prefill_medium_control12_2026_05_24/audit.json`
+
+Protocol:
+
+- Reused the same medium control12 slice.
+- Kept automatic starter-code/code-fence prefixing and public-test selection, but added a strict implementation suffix: compact executable code only, no reasoning/prose/comments, and close the code block after final code.
+- Reduced budget from `2048` to `1024` new tokens and lowered temperature from `0.6` to `0.2`.
+
+Result:
+
+- Generated `14` candidates for `12` tasks in `353.427s`, down from `17` candidates in `836.485s`.
+- Candidate health improved from `9/17 = 52.9%` syntax-valid to `10/14 = 71.4%` syntax-valid; entrypoint stayed `100%`.
+- Public oracle remained `0/12`; public-selected hidden replay remained `0/12`.
+- Failure split: `2` tasks still had no syntax-valid candidates, and `10` tasks had syntax-valid candidates rejected by public tests.
+- Interpretation: strict output control reduces wasted L20 time and syntax collapse, but it does not solve algorithmic generalization. The control12 gate now strongly argues for automatic verified algorithm-prefix generation or training, not more prompt hygiene.
+
 ## Current Interpretation
 
 Good signal:
@@ -488,6 +511,7 @@ Good signal:
 - Second-pass also rescued hard `3024`, moving the first-12 staged score from `9/12` to `10/12`.
 - Targeted verified code-prefix completion rescued the two remaining first-12 medium failures (`2828`, `3166`) with public and hidden replay both passing.
 - The best current architecture is now clearer: long reasoning/search finds ideas; a short verified code-prefix or distilled trace is needed to force executable implementation.
+- Strict starter-prefix prompting makes medium-control generation cheaper and healthier: `353s` vs `836s`, and syntax-valid rate `71.4%` vs `52.9%`.
 
 Bad/limiting signal:
 
@@ -511,6 +535,7 @@ Bad/limiting signal:
 - Natural-language teacher traces alone did not rescue `2828` or `3166`: they produced syntactically valid comment-heavy candidates with public oracle `0/2`.
 - The targeted code-prefix rescue is intentionally narrow and should be treated as a distillation/probing result, not as a clean LiveCodeBench leaderboard score.
 - A fresh medium control12 slice scored `0/12` under automatic starter-code/code-fence prefixing, so the first-12 targeted rescue currently does not transfer without a learned or generated task-specific algorithm prefix.
+- Strict output control also scored `0/12` on the same medium control12 slice. It fixes part of the format problem, but not the algorithm-selection problem.
 
 ## Next Run
 
@@ -530,3 +555,4 @@ Purpose:
 - Build a small set of mined/verified code-prefix traces for similar greedy-string and frequency-partition tasks, then evaluate on a held-out medium slice without per-task hand prefixes.
 - Keep two separate headlines: strict prompt/search route `10/12 = 83.3%`; targeted code-prefix probe `12/12 = 100%` with overfitting caveat.
 - Use the medium control12 run as the immediate generalization gate: any automatic prefix generator or adapter should first improve public oracle above `0/12` on this slice before spending time on larger LCB runs.
+- Default future short-budget control runs to the strict suffix because it is faster and healthier, but do not expect it to improve benchmark score without additional algorithm-prefix signal.
