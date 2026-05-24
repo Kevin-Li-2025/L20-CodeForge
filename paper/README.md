@@ -41,6 +41,10 @@ Metadata and category plan:
 
 - See `ARXIV_SUBMISSION.md`.
 
+Reference scope and source checks:
+
+- See `REFERENCE_AUDIT.md`.
+
 Source package:
 
 ```bash

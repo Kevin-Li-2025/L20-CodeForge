@@ -97,7 +97,7 @@ Several plausible improvements were rejected because they failed hidden replay
 or cross-benchmark checks. These failures are reported because they define the
 boundary between useful test-time scaling and visible-test overfitting.
 
-\section{Related Work}
+\section{Related Work and Positioning}
 
 \paragraph{Code-generation benchmarks.}
 LiveCodeBench was introduced to reduce contamination and broaden code-model
@@ -121,30 +121,73 @@ filtering is central to competitive-programming performance
 select among samples \citep{chen2022codet}. LEVER trains an execution-aware
 verifier to rerank generated programs \citep{ni2023lever}. S* studies
 test-time scaling for code and reports large gains from hybrid search and
-selection on LiveCodeBench \citep{wang2025sstar}. L20-CodeForge follows the
+selection on LiveCodeBench \citep{li2025sstar}. L20-CodeForge follows the
 same broad line of work but restricts the compute budget and emphasizes
 auditable artifacts over maximum score.
 
 \paragraph{Verified data and code RL.}
-Recent code-post-training work shows that verified competitive-programming data
-and high-quality tests can substantially improve small models. rStar-Coder
-constructs verified reasoning data and reports large LiveCodeBench gains for
-Qwen2.5 models \citep{guan2025rstarcoder}. HardTests studies high-quality test
-synthesis for difficult coding problems and finds that stronger tests improve
-both evaluation and training signal \citep{he2025hardtests}. X-Coder reports a
-Qwen2.5-derived RLVR model trained with verified code-reasoning data
-\citep{xcode2026xcoder}. These results suggest that durable model-weight gains
-need verified data and calibrated rewards, not only prompt changes.
+CodeRL uses unit-test and critic feedback for reinforcement learning and
+test-time regeneration \citep{le2022coderl}. ACECoder synthesizes test cases to
+train reward models and run code RL, reporting gains across HumanEval, MBPP,
+BigCodeBench, and LiveCodeBench \citep{zeng2025acecoder}. Recent
+post-training work also shows that verified competitive-programming data and
+high-quality tests can substantially improve small models. rStar-Coder
+constructs a large verified reasoning dataset and reports large LiveCodeBench
+gains for Qwen2.5 models \citep{liu2025rstarcoder}. HardTests studies
+high-quality test synthesis for difficult coding problems and finds that
+stronger tests improve both evaluation and training signal
+\citep{he2025hardtests}. X-Coder reports a Qwen2.5-derived RLVR model trained
+with fully synthetic tasks, solutions, and tests \citep{wu2026xcoder}. These
+results suggest that durable model-weight gains need verified data and
+calibrated rewards, not only prompt changes.
 
-\paragraph{Reproducible ML reporting.}
-The paper structure follows the reproducibility concerns emphasized by arXiv
-submission guidance and the NeurIPS checklist: state compute, data boundaries,
-evaluation protocol, limitations, and artifacts that allow independent
-inspection \citep{arxiv2026submit,neurips2026checklist}. This is especially
-important for executable code benchmarks, where small changes in candidate
-selection can change the apparent result.
+\paragraph{Execution feedback and refinement.}
+OpenCodeInterpreter integrates code generation with execution and refinement
+through multi-turn feedback \citep{zheng2024opencodeinterpreter}. Reflexion
+uses verbal feedback to improve language-agent behavior across tasks including
+coding \citep{shinn2023reflexion}. L20-CodeForge differs in emphasis: the
+repair loop is not treated as an unconstrained self-improvement process. It is
+bounded by a public/private evaluation contract, and repeated feedback is
+reported as a possible overfitting source when hidden replay does not improve.
 
-\section{Method}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.25\linewidth}
+                >{\raggedright\arraybackslash}p{0.30\linewidth}
+                >{\raggedright\arraybackslash}p{0.34\linewidth}}
+\toprule
+Line of work & Main idea & Difference in this paper \\
+\midrule
+AlphaCode, CodeT, LEVER, S* & Sampling, execution agreement, verifier or
+test-time selection & Same family of ideas, but constrained to one L20 and
+reported with full artifact hashes and negative results \\
+CodeRL, ACECoder & RL or reward modeling from unit tests and synthesized tests
+& Treated as the next model-weight direction; the present claim remains
+inference-system level \\
+rStar-Coder, HardTests, X-Coder & Verified synthetic tasks, tests, and
+reasoning data for stronger code models & Used as evidence that verified data
+is required for durable single-sample gains \\
+OpenCodeInterpreter, Reflexion & Execution/reflection feedback loops for code
+or agents & This paper caps public-feedback repair and shows when repeated
+feedback overfits visible tests \\
+LiveCodeBench, EvalPlus & Stronger contamination and test adequacy standards
+for code evaluation & Used as measurement infrastructure and as guardrails
+against optimistic subset results \\
+\bottomrule
+\end{tabular}
+\caption{Positioning against the closest research lines.}
+\label{tab:positioning}
+\end{table}
+
+Taken together, this literature suggests a conservative boundary for the
+present work. Public-test selection is a legitimate test-time system
+intervention, but durable model-weight claims require verified training data,
+calibrated reward signals, and held-out single-sample gains. The experiments
+below are therefore reported as an auditable inference and post-training
+infrastructure result, not as evidence that the base checkpoint has improved.
+
+\section{Design and Protocol}
 
 \subsection{Public and Private Signals}
 
@@ -234,7 +277,7 @@ EvalPlus experiments use Qwen2.5-Coder-7B-Instruct without an adapter. The
 reported LiveCodeBench system result uses temperature 0.8, top-p 0.95, eight
 samples per task, public-test selection, and hidden-test replay.
 
-\section{System}
+\section{System Modules}
 
 Figure~\ref{fig:system} summarizes the implementation. Candidate generation and
 repair are public-side operations. Hidden replay is outside the selection loop.
@@ -282,6 +325,16 @@ overfitting.
 selection, and repair. Private tests are reserved for final replay and audits.}
 \label{fig:system}
 \end{figure}
+
+The system is organized so each stage can be rerun without changing the
+contract of the adjacent stages. The context builder emits public-only prompt
+records. The generator emits immutable candidate files. The selector consumes
+candidate files and public execution outcomes, but never private labels. Hidden
+replay consumes exactly one selected candidate per task. The scorecard then
+joins benchmark summaries, hashes, and failure counts into a read-only report.
+This separation is a practical guardrail: a new repair policy, verifier, or
+adapter can be swapped into the public side while preserving the same hidden
+replay and scorecard path.
 
 \section{Experiments}
 

@@ -42,10 +42,10 @@ Rationale:
 Suggested text:
 
 ```text
-Preprint. Code, benchmark artifacts, CI, and reproducibility notes are available at https://github.com/Kevin-Li-2025/L20-CodeForge.
+10 pages. Code, benchmark artifacts, CI, and reproducibility notes are available at https://github.com/Kevin-Li-2025/L20-CodeForge.
 ```
 
-Update the page count after the final compile.
+Update the page count again if the final compile changes.
 
 ## License
 
