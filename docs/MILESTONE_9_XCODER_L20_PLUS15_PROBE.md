@@ -25,6 +25,7 @@ Sources:
 - Added `--response-prefix-mode starter-code` so assistant prefill can reuse each problem's exact starter signature instead of a fixed generic `class Solution`.
 - Added `--static-retry-min-healthy-samples` and `--static-retry-max-extra-samples` for a public/hidden-free syntax and entrypoint retry gate.
 - Added padding/trim handling for variable candidate counts before LiveCodeBench `codegen_metrics`, because upstream metadata grouping assumes each task has the same number of candidates.
+- Added `scripts/regenerate_lcb_final_answers.py`, a second-pass regenerator that turns saved reasoning-heavy attempts into final executable code without using hidden expected outputs.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
 - Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
@@ -361,6 +362,31 @@ Result:
 - Combined audit: `12` candidates across `7` task instances; only `2/12 = 16.7%` syntax-valid, both from the already-passing next3 tasks.
 - Interpretation: static retry is useful as a gate and correctly surfaces failures, but `3329` is not fixed by more short samples, body-only prompting, or 8k budget. The model spends the generation on long reasoning/prose and never reaches a usable final implementation under these prompts.
 
+### second-pass final-answer regeneration for 3329
+
+Path:
+
+- Regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_3329_from_raw8k_n2/report.json`
+- Evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_3329_from_raw8k_n2_eval/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_final_answer_3329_from_raw8k_n2_eval/public_selection.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_3329_2026_05_24/audit.json`
+
+Protocol:
+
+- Used the saved raw 8k final-code attempt for `3329` as non-hidden source reasoning.
+- Prompted the model to convert the previous reasoning into final executable code only.
+- Used response prefix `````python``, `temperature=0.2`, `top_p=0.95`, `top_k=20`, `max_new_tokens=2048`, and generated two candidates.
+- Evaluated with public-test selection and full release_v6 hidden replay.
+
+Result:
+
+- Regenerated candidates: `2`.
+- Candidate health: `2/2` syntax-valid and `2/2` with entrypoint.
+- Public oracle: `1/1`.
+- Hidden/public-selected score: `1/1`.
+- Regeneration time: `22.192s`.
+- Interpretation: this rescues the held-out `3329` failure cleanly. The right escalation path is not more first-pass token budget; it is a second-pass final-answer conversion after the model has already done useful reasoning.
+
 ## Current Interpretation
 
 Good signal:
@@ -376,6 +402,7 @@ Good signal:
 - Response prefixing is the right infra path for short-budget candidate generation: it changed `0/16` syntax-valid candidates into `16/16` syntax-valid candidates on the unresolved-medium probe.
 - Starter-code response prefixing is better than a fixed generic class prefill for broader LCB slices because it uses the benchmark's actual function signature per task.
 - Static retry is now implemented correctly for variable-candidate runs and avoids hidden-output leakage.
+- Second-pass final-answer regeneration is the first method in this cycle that converted a reasoning-heavy failure into a public/hidden passing solution.
 
 Bad/limiting signal:
 
@@ -394,6 +421,7 @@ Bad/limiting signal:
 - Even with response-prefix forcing and healthy syntax, unresolved medium public oracle stayed `0/2`; this is now clearly an algorithm/data issue, not just output formatting.
 - Starter-code prefill still produced one syntax-invalid selected candidate on the held-out next3 slice, so short-budget prefill needs deterministic repair or a syntax-aware retry loop before a larger run.
 - The `3329` failure is more severe than syntax alone: starter-prefill, body-only prompting, 4k/8k budget escalation, and raw final-code fallback all failed to produce a syntax-valid candidate. This needs a different final-answer forcing method or targeted verified data.
+- The second pass was proven on one held-out task only; it must be validated on more failures before claiming broad generalization.
 
 ## Next Run
 
@@ -409,6 +437,6 @@ Purpose:
 - Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
 - For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
 - Prefer `--response-prefix-mode starter-code` over a fixed `class Solution` prefix for mixed held-out slices.
-- Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to a stronger final-answer forcing method or targeted teacher-data construction.
-- The immediate next infra step is to implement a second-pass answer extractor/regenerator that takes the model's saved reasoning and asks for only the final implementation, then evaluates with public tests before any larger run.
+- Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to second-pass final-answer regeneration or targeted teacher-data construction.
+- The immediate next run should apply second-pass regeneration to the remaining first-12 failures (`2828`, `3166`, `3024`) and to additional held-out syntax-collapse cases, then only scale if public/hidden replay continues to agree.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

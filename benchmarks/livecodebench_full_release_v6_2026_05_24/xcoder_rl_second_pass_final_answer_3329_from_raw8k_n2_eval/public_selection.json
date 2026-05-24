@@ -1,0 +1,35 @@
+{
+  "metrics": {
+    "pass@1": 1.0,
+    "detail": {
+      "pass@1": {
+        "0": 1.0
+      }
+    }
+  },
+  "records": [
+    {
+      "question_id": "3329",
+      "question_title": "find-the-length-of-the-longest-common-prefix",
+      "selected_index": 0,
+      "tie_breaker": "shortest",
+      "n_candidates": 2,
+      "public_scores": [
+        1.0,
+        1.0
+      ],
+      "selected_public_score": 1.0,
+      "public_pass_indices": [
+        0,
+        1
+      ],
+      "public_oracle_pass": true
+    }
+  ],
+  "metadata": [
+    [
+      {},
+      {}
+    ]
+  ]
+}

@@ -126,6 +126,16 @@ def load_candidate_health_audit_module():
     return module
 
 
+def load_final_answer_regenerator_module():
+    script = Path(__file__).parents[1] / "scripts" / "regenerate_lcb_final_answers.py"
+    spec = importlib.util.spec_from_file_location("regenerate_lcb_final_answers", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -136,6 +146,49 @@ def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     )
 
     assert selected == 2
+
+
+def test_final_answer_regenerator_keeps_reasoning_tail() -> None:
+    regenerator = load_final_answer_regenerator_module()
+
+    assert regenerator.truncate_reasoning("alpha beta gamma", 10) == "beta gamma"
+
+
+def test_final_answer_regenerator_builds_strict_prompt() -> None:
+    regenerator = load_final_answer_regenerator_module()
+    problem = type(
+        "Problem",
+        (),
+        {
+            "question_content": "Solve it.",
+            "starter_code": "class Solution:\n    def solve(self) -> int:",
+        },
+    )()
+
+    prompt = regenerator.build_second_pass_prompt(
+        problem=problem,
+        source_text="Previous reasoning.",
+        reasoning_max_chars=100,
+    )
+
+    assert "Solve it." in prompt
+    assert "class Solution" in prompt
+    assert "Previous reasoning." in prompt
+    assert "Do not think aloud" in prompt
+    assert prompt.endswith("### Final answer\n")
+
+
+def test_final_answer_regenerator_selects_source_candidate_indices() -> None:
+    regenerator = load_final_answer_regenerator_module()
+
+    selected = regenerator.select_source_texts(
+        {"raw_outputs": ["a", "", "c", "d"]},
+        field="raw_outputs",
+        max_source_candidates=2,
+        candidate_indices=[2, 3],
+    )
+
+    assert selected == [(2, "c"), (3, "d")]
 
 
 def test_evaluator_public_selection_records_single_candidate() -> None:
