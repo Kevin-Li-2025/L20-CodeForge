@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 1,
+    "tasks": 2,
+    "candidates": 8,
+    "syntax_ok_candidates": 8,
+    "entrypoint_candidates": 8,
+    "public_oracle_pass_tasks": 2,
+    "hidden_selected_pass_tasks": 2,
+    "selected_syntax_error_tasks": 0
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 1.0,
+    "entrypoint_candidate_rate": 1.0,
+    "public_oracle_task_rate": 1.0,
+    "hidden_selected_task_rate": 1.0
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined/eval/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined/eval/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 8,
+        "syntax_ok_candidates": 8,
+        "entrypoint_candidates": 8,
+        "public_oracle_pass_tasks": 2,
+        "public_selected_pass_tasks": 2,
+        "hidden_selected_pass_tasks": 2,
+        "selected_syntax_error_tasks": 0
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 1.0,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 1.0,
+        "hidden_selected_task_rate": 1.0
+      },
+      "records": [
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 0,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 437,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 437,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 437,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 437,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 1,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 643,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 609,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 637,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 609,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

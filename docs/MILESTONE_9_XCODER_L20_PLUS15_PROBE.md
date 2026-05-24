@@ -416,6 +416,36 @@ Result:
 - Updated first-12 staged score: `10/12 = 83.3%`. The remaining unsolved first-12 tasks are `2828` and `3166`.
 - Interpretation: second-pass regeneration is valuable for reasoning-to-code collapse and rescued hard `3024`, but it does not fix the two medium algorithmic failures. Those need targeted verified data, stronger algorithmic teacher traces, or a different search distribution.
 
+### targeted teacher trace and code-prefix rescue for 2828/3166
+
+Path:
+
+- Targeted teacher trace source: `data/processed/livecodebench/targeted_teacher_traces_2828_3166_v1.json`
+- Natural-language trace regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_teacher_trace_2828_3166_n4/report.json`
+- Natural-language trace evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_teacher_trace_2828_3166_n4_eval/report.json`
+- Natural-language trace audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_teacher_trace_2828_3166_2026_05_24/audit.json`
+- Targeted code-prefix `2828` regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_n4/report.json`
+- Targeted code-prefix `3166` regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_3166_n4/report.json`
+- Targeted code-prefix combined generations: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined/generations.json`
+- Targeted code-prefix combined evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_targeted_code_prefix_2828_3166_n4_combined_eval/report.json`
+- Targeted code-prefix audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_targeted_code_prefix_2828_3166_2026_05_24/audit.json`
+
+Protocol:
+
+- Built two short verified traces from the public problem statements only: one greedy string trace for `2828`, and one frequency/base-size trace for `3166`.
+- First tested natural-language second-pass regeneration with `n=4` per task and the same public-selection/full-replay evaluator.
+- Because natural-language trace still expanded into comment-heavy non-solutions, tested a narrower code-prefix completion probe: the prompt supplied the key function skeleton and left the model to complete the implementation.
+
+Result:
+
+- Natural-language trace: generated `8` candidates in `74.876s`; `8/8` syntax-valid and `8/8` with entrypoint, but public oracle `0/2` and hidden/public-selected `0/2`.
+- Code-prefix `2828`: generated `4` candidates in `22.275s`.
+- Code-prefix `3166`: generated `4` candidates in `19.755s`.
+- Code-prefix combined evaluation: public oracle `2/2`, public-selected public pass `2/2`, hidden/public-selected `2/2`.
+- Code-prefix audit: `8/8` syntax-valid, `8/8` with entrypoint, public oracle task rate `1.0`, hidden-selected task rate `1.0`.
+- Interpretation: the remaining first-12 failures can be rescued by targeted verified code-prefix distillation. This is not a clean broad benchmark claim, because the prefix is task-targeted, but it is a strong signal for the next scalable method: mine or generate concise verified code-prefix traces, train a small adapter on those patterns, and validate on less curated held-out LCB slices.
+- Staged first-12 status: strict prompt/search route is `10/12 = 83.3%`; targeted code-prefix rescue reaches `12/12 = 100%` on the first-12 probe with the overfitting caveat above.
+
 ## Current Interpretation
 
 Good signal:
@@ -433,6 +463,8 @@ Good signal:
 - Static retry is now implemented correctly for variable-candidate runs and avoids hidden-output leakage.
 - Second-pass final-answer regeneration is the first method in this cycle that converted a reasoning-heavy failure into a public/hidden passing solution.
 - Second-pass also rescued hard `3024`, moving the first-12 staged score from `9/12` to `10/12`.
+- Targeted verified code-prefix completion rescued the two remaining first-12 medium failures (`2828`, `3166`) with public and hidden replay both passing.
+- The best current architecture is now clearer: long reasoning/search finds ideas; a short verified code-prefix or distilled trace is needed to force executable implementation.
 
 Bad/limiting signal:
 
@@ -453,21 +485,23 @@ Bad/limiting signal:
 - The `3329` failure is more severe than syntax alone: starter-prefill, body-only prompting, 4k/8k budget escalation, and raw final-code fallback all failed to produce a syntax-valid candidate. This needs a different final-answer forcing method or targeted verified data.
 - The second pass was proven on one held-out task only; it must be validated on more failures before claiming broad generalization.
 - Medium `2828` and `3166` remain unsolved after two independent second-pass source pools; their failure mode is now algorithmic, not syntax or final-answer extraction.
+- Natural-language teacher traces alone did not rescue `2828` or `3166`: they produced syntactically valid comment-heavy candidates with public oracle `0/2`.
+- The targeted code-prefix rescue is intentionally narrow and should be treated as a distillation/probing result, not as a clean LiveCodeBench leaderboard score.
 
 ## Next Run
 
 Active remote run:
 
-- None. The L20 is idle after the deterministic repair evaluation.
+- None. The L20 is idle after the targeted code-prefix evaluation.
 
 Purpose:
 
-- Next step is verifier-guided regeneration or targeted data construction for the three unresolved IDs: `2828`, `3166`, and `3024`.
+- Next step is to generalize the code-prefix result beyond the hand-targeted first-12 slice.
 - Use deterministic extraction repair by default for future saved generations, but do not spend more cycles cleaning the same candidates unless a public-test signal changes.
 - Prefer short, constrained code-only candidate construction or targeted verified training examples over long free-form reasoning reruns.
 - Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
 - For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
 - Prefer `--response-prefix-mode starter-code` over a fixed `class Solution` prefix for mixed held-out slices.
 - Do not scale the current starter-prefill prompt blindly; route syntax-collapse tasks like `3329` to second-pass final-answer regeneration or targeted teacher-data construction.
-- The immediate next run should build or mine targeted verified traces for `2828` and `3166`-style medium tasks, then test whether a small post-training or teacher-regeneration pass changes public oracle before scaling.
-- Keep the staged first-12 headline at `10/12 = 83.3%` until a larger, less curated validation slice confirms the method generalizes.
+- Build a small set of mined/verified code-prefix traces for similar greedy-string and frequency-partition tasks, then evaluate on a held-out medium slice without per-task hand prefixes.
+- Keep two separate headlines: strict prompt/search route `10/12 = 83.3%`; targeted code-prefix probe `12/12 = 100%` with overfitting caveat.

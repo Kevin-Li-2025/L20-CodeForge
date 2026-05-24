@@ -1,0 +1,14 @@
+[
+  {
+    "question_id": "2828",
+    "raw_outputs": [
+      "Verified teacher trace for lexicographically-smallest-string-after-substring-operation. The operation must be used exactly once. If every character is 'a', the only lexicographically best legal move is to change the last character to 'z', giving s[:-1] + 'z'. Otherwise, leave the maximal leading run of 'a' unchanged, start at the first non-'a', and decrement every consecutive non-'a' character until the next 'a' or the end of the string. Stop before an 'a' because changing 'a' to 'z' makes the result worse at that position, while every non-'a' decremented in the earliest possible segment strictly improves the string. Implement in O(n) by converting to a list, scanning i past leading 'a', scanning j while arr[j] != 'a', replacing each arr[j] by chr(ord(arr[j]) - 1), then returning ''.join(arr). Do not include comments in the final code."
+    ]
+  },
+  {
+    "question_id": "3166",
+    "raw_outputs": [
+      "Verified teacher trace for minimum-number-of-groups-to-create-a-valid-assignment. Count frequencies of each distinct value. If all group sizes differ by at most 1, then for some base size x every group has size x or x+1. For a fixed x and a frequency f, f is feasible iff there exists a group count g with g*x <= f <= g*(x+1), equivalently ceil(f/(x+1)) <= floor(f/x). For that x, the minimum groups for f is ceil(f/(x+1)) = (f + x) // (x + 1). To minimize total groups, try the largest possible base size first: iterate x from min(freqs) down to 1. For each frequency f, compute g = (f + x) // (x + 1); if g*x > f, this x is infeasible. If every frequency is feasible, return the sum of g. This is O(number_of_distinct_values * min_frequency), bounded by O(n), since every frequency is at least min_frequency. Do not include comments in the final code."
+    ]
+  }
+]
