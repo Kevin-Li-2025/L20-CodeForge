@@ -46,6 +46,17 @@ def test_build_lcb_generation_prompt_includes_starter_code() -> None:
     assert "# YOUR CODE HERE" not in prompt
 
 
+def test_build_lcb_generation_prompt_appends_prompt_suffix() -> None:
+    runner = load_runner_module()
+
+    prompt = runner.build_lcb_generation_prompt(
+        FakeProblem("Solve A+B."),
+        prompt_suffix="Return only final code.",
+    )
+
+    assert prompt.endswith("Return only final code.\n\n")
+
+
 def test_strip_lcb_code_block_prefers_last_python_like_block() -> None:
     runner = load_runner_module()
 
@@ -109,6 +120,37 @@ def test_build_public_selection_records_returns_single_selected_generation() -> 
     assert selected == [["good"]]
     assert records[0]["selected_index"] == 1
     assert records[0]["public_oracle_pass"] is True
+
+
+def test_build_base_model_kwargs_places_non_quantized_model_on_cuda() -> None:
+    runner = load_runner_module()
+
+    class FakeCuda:
+        @staticmethod
+        def is_available() -> bool:
+            return True
+
+    class FakeTorch:
+        bfloat16 = "bf16"
+        float16 = "fp16"
+        cuda = FakeCuda()
+
+    kwargs = runner.build_base_model_kwargs(
+        torch_module=FakeTorch,
+        load_in_4bit=False,
+        bf16=True,
+        attn_implementation="sdpa",
+    )
+
+    assert kwargs["torch_dtype"] == "bf16"
+    assert kwargs["device_map"] == "auto"
+    assert kwargs["attn_implementation"] == "sdpa"
+
+
+def test_parse_question_ids_strips_empty_values() -> None:
+    runner = load_runner_module()
+
+    assert runner.parse_question_ids(" 2777, ,2784 ") == {"2777", "2784"}
 
 
 def test_validate_resume_records_truncates_to_requested_samples() -> None:

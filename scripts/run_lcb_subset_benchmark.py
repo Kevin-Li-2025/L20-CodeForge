@@ -151,7 +151,7 @@ def build_public_selection_records(
     return selected_generations, records
 
 
-def build_lcb_generation_prompt(question: Any) -> str:
+def build_lcb_generation_prompt(question: Any, prompt_suffix: str = "") -> str:
     prompt = f"### Question:\n{question.question_content}\n\n"
     if question.starter_code:
         prompt += f"### Format: {FORMAT_WITH_STARTER_CODE}\n"
@@ -160,6 +160,8 @@ def build_lcb_generation_prompt(question: Any) -> str:
         prompt += f"### Format: {FORMAT_WITHOUT_STARTER_CODE}\n"
         prompt += "```python\n# YOUR CODE HERE\n```\n\n"
     prompt += "### Answer: (use the provided format with backticks)\n\n"
+    if prompt_suffix:
+        prompt += prompt_suffix.strip() + "\n\n"
     return prompt
 
 
@@ -208,6 +210,15 @@ def parse_iso_date(value: str | None) -> datetime | None:
     if value is None:
         return None
     return datetime.fromisoformat(value)
+
+
+def parse_question_ids(value: str | None) -> set[str] | None:
+    if value is None:
+        return None
+    question_ids = {item.strip() for item in value.split(",") if item.strip()}
+    if not question_ids:
+        raise ValueError("--question-ids must contain at least one id")
+    return question_ids
 
 
 def load_lcb_modules(lcb_repo: Path) -> tuple[Any, Any]:
@@ -299,6 +310,7 @@ def load_problems_from_parquet(
     start_date: datetime | None = None,
     end_date: datetime | None = None,
     difficulty: str | None = None,
+    question_ids: set[str] | None = None,
     limit: int | None = None,
 ) -> list[Any]:
     import pyarrow.parquet as pq
@@ -313,9 +325,29 @@ def load_problems_from_parquet(
         problems = [problem for problem in problems if problem.contest_date <= end_date]
     if difficulty is not None:
         problems = [problem for problem in problems if problem.difficulty.value == difficulty]
+    if question_ids is not None:
+        problems = [problem for problem in problems if problem.question_id in question_ids]
     if limit is not None:
         problems = problems[:limit]
     return problems
+
+
+def build_base_model_kwargs(
+    torch_module: Any,
+    load_in_4bit: bool,
+    bf16: bool,
+    attn_implementation: str,
+) -> dict[str, Any]:
+    model_kwargs: dict[str, Any] = {
+        "trust_remote_code": True,
+        "low_cpu_mem_usage": True,
+        "torch_dtype": torch_module.bfloat16 if bf16 else torch_module.float16,
+    }
+    if attn_implementation != "auto":
+        model_kwargs["attn_implementation"] = attn_implementation
+    if load_in_4bit or torch_module.cuda.is_available():
+        model_kwargs["device_map"] = "auto"
+    return model_kwargs
 
 
 def load_model(
@@ -323,6 +355,7 @@ def load_model(
     adapter_path: str | None,
     load_in_4bit: bool,
     bf16: bool,
+    attn_implementation: str,
 ) -> tuple[Any, Any]:
     import torch
     from peft import PeftModel
@@ -337,13 +370,13 @@ def load_model(
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    model_kwargs: dict[str, Any] = {
-        "trust_remote_code": True,
-        "low_cpu_mem_usage": True,
-        "torch_dtype": torch.bfloat16 if bf16 else torch.float16,
-    }
+    model_kwargs = build_base_model_kwargs(
+        torch_module=torch,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+        attn_implementation=attn_implementation,
+    )
     if load_in_4bit:
-        model_kwargs["device_map"] = "auto"
         model_kwargs["quantization_config"] = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_compute_dtype=torch.bfloat16 if bf16 else torch.float16,
@@ -440,6 +473,7 @@ def generate_problem_outputs(
     problem: Any,
     n_samples: int,
     sample_batch_size: int,
+    prompt_suffix: str,
     prompt_rendering: str,
     system_message: str,
     temperature: float,
@@ -448,7 +482,7 @@ def generate_problem_outputs(
     max_new_tokens: int,
     max_input_tokens: int,
 ) -> tuple[list[str], list[str]]:
-    prompt = build_lcb_generation_prompt(problem)
+    prompt = build_lcb_generation_prompt(problem, prompt_suffix=prompt_suffix)
     raw_outputs: list[str] = []
     code_outputs: list[str] = []
     while len(raw_outputs) < n_samples:
@@ -495,6 +529,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         start_date=parse_iso_date(args.start_date),
         end_date=parse_iso_date(args.end_date),
         difficulty=args.difficulty,
+        question_ids=parse_question_ids(args.question_ids),
         limit=args.limit,
     )
     if not problems:
@@ -510,6 +545,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         adapter_path=args.adapter_path,
         load_in_4bit=not args.no_4bit,
         bf16=not args.no_bf16,
+        attn_implementation=args.attn_implementation,
     )
     resume_from_generations = (
         Path(args.resume_from_generations) if args.resume_from_generations else None
@@ -557,6 +593,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             problem=problem,
             n_samples=missing_samples,
             sample_batch_size=args.sample_batch_size,
+            prompt_suffix=args.prompt_suffix,
             prompt_rendering=args.prompt_rendering,
             system_message=args.system_message,
             temperature=args.temperature,
@@ -574,7 +611,10 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 "contest_date": problem.contest_date.isoformat(),
                 "platform": problem.platform.value,
                 "difficulty": problem.difficulty.value,
-                "prompt": build_lcb_generation_prompt(problem),
+                "prompt": build_lcb_generation_prompt(
+                    problem,
+                    prompt_suffix=args.prompt_suffix,
+                ),
                 "raw_outputs": raw_outputs,
                 "code_list": code_outputs,
             }
@@ -608,7 +648,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "temperature": args.temperature,
             "top_p": args.top_p,
             "top_k": args.top_k,
+            "attn_implementation": args.attn_implementation,
             "prompt_rendering": args.prompt_rendering,
+            "prompt_suffix": args.prompt_suffix,
             "system_message": args.system_message if args.prompt_rendering == "chat" else None,
             "max_new_tokens": args.max_new_tokens,
             "max_input_tokens": args.max_input_tokens,
@@ -616,6 +658,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "start_date": args.start_date,
             "end_date": args.end_date,
             "difficulty": args.difficulty,
+            "question_ids": args.question_ids,
             "limit": args.limit,
             "load_in_4bit": not args.no_4bit,
             "bf16": not args.no_bf16,
@@ -730,7 +773,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "temperature": args.temperature,
         "top_p": args.top_p,
         "top_k": args.top_k,
+        "attn_implementation": args.attn_implementation,
         "prompt_rendering": args.prompt_rendering,
+        "prompt_suffix": args.prompt_suffix,
         "system_message": args.system_message if args.prompt_rendering == "chat" else None,
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
@@ -738,6 +783,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "start_date": args.start_date,
         "end_date": args.end_date,
         "difficulty": args.difficulty,
+        "question_ids": args.question_ids,
         "limit": args.limit,
         "load_in_4bit": not args.no_4bit,
         "bf16": not args.no_bf16,
@@ -801,6 +847,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--start-date")
     parser.add_argument("--end-date")
     parser.add_argument("--difficulty", choices=["easy", "medium", "hard"])
+    parser.add_argument(
+        "--question-ids",
+        help="Optional comma-separated LiveCodeBench question IDs to select.",
+    )
     parser.add_argument("--n-samples", type=int, default=1)
     parser.add_argument("--sample-batch-size", type=int, default=1)
     parser.add_argument("--public-select", action="store_true")
@@ -814,10 +864,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--top-p", type=float, default=0.95)
     parser.add_argument("--top-k", type=int)
     parser.add_argument(
+        "--attn-implementation",
+        choices=["auto", "sdpa", "flash_attention_2", "eager"],
+        default="auto",
+        help="Optional transformers attention backend override.",
+    )
+    parser.add_argument(
         "--prompt-rendering",
         choices=["chat", "raw"],
         default="chat",
         help="Use chat template wrapping or feed the benchmark prompt as raw text.",
+    )
+    parser.add_argument(
+        "--prompt-suffix",
+        default="",
+        help="Optional text appended after the benchmark answer instruction.",
     )
     parser.add_argument("--system-message", default=SYSTEM_MESSAGE_GENERIC)
     parser.add_argument("--max-new-tokens", type=int, default=2048)
