@@ -22,6 +22,7 @@ Sources:
 - Added `--attn-implementation` so benchmark reports capture SDPA/flash/eager choices.
 - Added `--prompt-suffix` for controlled prompt experiments without editing code.
 - Added `--response-prefix` for assistant-prefill experiments where the model input starts inside a Python code block and saved raw outputs are prepended with the same prefix before code extraction.
+- Added `--response-prefix-mode starter-code` so assistant prefill can reuse each problem's exact starter signature instead of a fixed generic `class Solution`.
 - Added `--question-ids` for precise failure reruns.
 - Added `--stop-after-code-block` to stop generation once a complete fenced code block is emitted.
 - Added per-batch checkpointing so long `n>1` searches write `generations.json` after each completed candidate batch instead of only after the full problem finishes.
@@ -305,6 +306,29 @@ Result:
 - Prefill-class health audit: `16/16` syntax-valid and `16/16` entrypoint candidates.
 - This is a useful negative result: response prefixing fixes the format/entrypoint failure completely under short budgets, but `2828` and `3166` still need better algorithmic candidates or targeted verified data.
 
+### starter-code prefill next3 n=1 held-out probe
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_2k_bf16_starter_prefill_next3_n1_publicselect/report.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_starter_prefill_next3_2026_05_24/audit.json`
+
+Protocol:
+
+- Added `--response-prefix-mode starter-code`.
+- Ran the next three stratified60 tasks not used in the first-12 staged result: `3329`, `3374`, and `3381`.
+- Used the local Hugging Face snapshot path with offline mode after the first attempt stalled on network metadata before model load.
+- Runtime: bf16, SDPA, raw prompt rendering, `temperature=0.6`, `top_p=0.95`, `top_k=20`, `max_new_tokens=2048`, public-test selection with one candidate.
+- Assistant prefill included a Python code fence, common imports, and each problem's exact starter code.
+
+Result:
+
+- Hidden/public-selected score: `2/3 = 66.7%`.
+- Public oracle: `2/3 = 66.7%`.
+- Generation time: `162.030s`.
+- Candidate-health audit: `2/3` syntax-valid, `3/3` entrypoint candidates, and `1/3` selected syntax-error tasks.
+- Interpretation: starter-code prefill preserves useful short-budget performance on a held-out slice and avoids generic entrypoint guessing, but it still needs a syntax/repair gate before scaling beyond small probes.
+
 ## Current Interpretation
 
 Good signal:
@@ -318,6 +342,7 @@ Good signal:
 - The extraction repair is useful infrastructure for future runs because it prevents reasoning/prose leakage from being misclassified as model algorithm failure.
 - Candidate-health audit now gives a lightweight gate to avoid mistaking syntax/entrypoint collapse for algorithmic weakness.
 - Response prefixing is the right infra path for short-budget candidate generation: it changed `0/16` syntax-valid candidates into `16/16` syntax-valid candidates on the unresolved-medium probe.
+- Starter-code response prefixing is better than a fixed generic class prefill for broader LCB slices because it uses the benchmark's actual function signature per task.
 
 Bad/limiting signal:
 
@@ -334,6 +359,7 @@ Bad/limiting signal:
 - A long independent-rerun suffix also failed on unresolved medium tasks with public oracle `0/2`, so the next attempt should not spend more L20 time on the same style of verbose prompt.
 - The remaining medium failures are not fixed by more verbose prompting; the original clean-code candidates fail public tests, while later verbose candidates often fail syntax/entrypoint health.
 - Even with response-prefix forcing and healthy syntax, unresolved medium public oracle stayed `0/2`; this is now clearly an algorithm/data issue, not just output formatting.
+- Starter-code prefill still produced one syntax-invalid selected candidate on the held-out next3 slice, so short-budget prefill needs deterministic repair or a syntax-aware retry loop before a larger run.
 
 ## Next Run
 
@@ -348,4 +374,6 @@ Purpose:
 - Prefer short, constrained code-only candidate construction or targeted verified training examples over long free-form reasoning reruns.
 - Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
 - For future short-budget generation, use `--response-prefix`; do not use short `max_new_tokens` without prefill.
+- Prefer `--response-prefix-mode starter-code` over a fixed `class Solution` prefix for mixed held-out slices.
+- The immediate next infra step is to add a repair/retry loop for syntax-invalid starter-prefill outputs, then re-evaluate the failed held-out candidate without using hidden expected outputs.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

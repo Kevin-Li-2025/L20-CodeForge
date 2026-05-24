@@ -205,6 +205,27 @@ def build_lcb_generation_prompt(question: Any, prompt_suffix: str = "") -> str:
     return prompt
 
 
+def resolve_response_prefix(
+    problem: Any,
+    response_prefix: str,
+    response_prefix_mode: str,
+) -> str:
+    if response_prefix_mode == "literal":
+        return response_prefix
+    if response_prefix_mode != "starter-code":
+        raise ValueError("response_prefix_mode must be one of: literal, starter-code")
+
+    prefix = response_prefix or "```python\n"
+    if prefix and not prefix.endswith("\n"):
+        prefix += "\n"
+
+    starter_code = getattr(problem, "starter_code", "") or ""
+    starter_code = starter_code.strip()
+    if starter_code:
+        return prefix + starter_code + "\n"
+    return prefix
+
+
 def strip_lcb_code_block(text: str) -> str:
     stripped = text.strip()
     answer_match = re.search(
@@ -435,6 +456,7 @@ def build_generation_record(
     problem: Any,
     prompt_suffix: str,
     response_prefix: str,
+    response_prefix_mode: str,
     raw_outputs: list[str],
     code_outputs: list[str],
 ) -> dict[str, Any]:
@@ -449,6 +471,7 @@ def build_generation_record(
             prompt_suffix=prompt_suffix,
         ),
         "response_prefix": response_prefix,
+        "response_prefix_mode": response_prefix_mode,
         "raw_outputs": raw_outputs,
         "code_list": code_outputs,
     }
@@ -685,6 +708,11 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             f"[{index}/{len(problems)}] {action} {problem.question_id} "
             f"{problem.question_title} missing_samples={missing_samples}"
         )
+        problem_response_prefix = resolve_response_prefix(
+            problem=problem,
+            response_prefix=args.response_prefix,
+            response_prefix_mode=args.response_prefix_mode,
+        )
 
         def persist_partial_progress(
             partial_raw_outputs: list[str],
@@ -693,7 +721,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             partial_record = build_generation_record(
                 problem=problem,
                 prompt_suffix=args.prompt_suffix,
-                response_prefix=args.response_prefix,
+                response_prefix=problem_response_prefix,
+                response_prefix_mode=args.response_prefix_mode,
                 raw_outputs=existing_raw_outputs + partial_raw_outputs,
                 code_outputs=existing_code_outputs + partial_code_outputs,
             )
@@ -716,7 +745,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             prompt_suffix=args.prompt_suffix,
             prompt_rendering=args.prompt_rendering,
             system_message=args.system_message,
-            response_prefix=args.response_prefix,
+            response_prefix=problem_response_prefix,
             temperature=args.temperature,
             top_p=args.top_p,
             top_k=args.top_k,
@@ -731,7 +760,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             build_generation_record(
                 problem=problem,
                 prompt_suffix=args.prompt_suffix,
-                response_prefix=args.response_prefix,
+                response_prefix=problem_response_prefix,
+                response_prefix_mode=args.response_prefix_mode,
                 raw_outputs=raw_outputs,
                 code_outputs=code_outputs,
             )
@@ -768,6 +798,8 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "attn_implementation": args.attn_implementation,
             "prompt_rendering": args.prompt_rendering,
             "prompt_suffix": args.prompt_suffix,
+            "response_prefix": args.response_prefix,
+            "response_prefix_mode": args.response_prefix_mode,
             "system_message": args.system_message if args.prompt_rendering == "chat" else None,
             "max_new_tokens": args.max_new_tokens,
             "max_input_tokens": args.max_input_tokens,
@@ -895,6 +927,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "prompt_rendering": args.prompt_rendering,
         "prompt_suffix": args.prompt_suffix,
         "response_prefix": args.response_prefix,
+        "response_prefix_mode": args.response_prefix_mode,
         "system_message": args.system_message if args.prompt_rendering == "chat" else None,
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
@@ -1006,6 +1039,15 @@ def build_parser() -> argparse.ArgumentParser:
         help=(
             "Optional assistant prefill appended to the model input and prepended "
             "back onto saved raw outputs before code extraction."
+        ),
+    )
+    parser.add_argument(
+        "--response-prefix-mode",
+        choices=["literal", "starter-code"],
+        default="literal",
+        help=(
+            "Use the response prefix literally, or append each problem's starter "
+            "code after the prefix before generation."
         ),
     )
     parser.add_argument("--system-message", default=SYSTEM_MESSAGE_GENERIC)

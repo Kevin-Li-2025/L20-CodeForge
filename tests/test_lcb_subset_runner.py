@@ -58,6 +58,47 @@ def test_build_lcb_generation_prompt_appends_prompt_suffix() -> None:
     assert prompt.endswith("Return only final code.\n\n")
 
 
+def test_resolve_response_prefix_literal_mode_preserves_text() -> None:
+    runner = load_runner_module()
+
+    prefix = runner.resolve_response_prefix(
+        FakeProblem("Solve A+B.", "class Solution:\n    def add(self):"),
+        response_prefix="```python\n",
+        response_prefix_mode="literal",
+    )
+
+    assert prefix == "```python\n"
+
+
+def test_resolve_response_prefix_starter_code_mode_appends_signature() -> None:
+    runner = load_runner_module()
+
+    prefix = runner.resolve_response_prefix(
+        FakeProblem("Solve A+B.", "class Solution:\n    def add(self, a: int) -> int:"),
+        response_prefix="```python\nfrom typing import List",
+        response_prefix_mode="starter-code",
+    )
+
+    assert prefix == (
+        "```python\n"
+        "from typing import List\n"
+        "class Solution:\n"
+        "    def add(self, a: int) -> int:\n"
+    )
+
+
+def test_resolve_response_prefix_starter_code_mode_uses_code_fence_default() -> None:
+    runner = load_runner_module()
+
+    prefix = runner.resolve_response_prefix(
+        FakeProblem("Solve A+B."),
+        response_prefix="",
+        response_prefix_mode="starter-code",
+    )
+
+    assert prefix == "```python\n"
+
+
 def test_strip_lcb_code_block_prefers_last_python_like_block() -> None:
     runner = load_runner_module()
 
@@ -192,6 +233,7 @@ def test_build_generation_record_includes_partial_outputs() -> None:
         problem=problem,
         prompt_suffix="Return code only.",
         response_prefix="```python\n",
+        response_prefix_mode="literal",
         raw_outputs=["raw"],
         code_outputs=["code"],
     )
@@ -200,6 +242,7 @@ def test_build_generation_record_includes_partial_outputs() -> None:
     assert record["raw_outputs"] == ["raw"]
     assert record["code_list"] == ["code"]
     assert record["response_prefix"] == "```python\n"
+    assert record["response_prefix_mode"] == "literal"
     assert record["prompt"].endswith("Return code only.\n\n")
 
 
