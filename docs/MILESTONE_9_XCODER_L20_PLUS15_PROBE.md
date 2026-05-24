@@ -102,6 +102,26 @@ Result:
 - Generation time: `1362.501s`.
 - This is the first strong evidence that the path for hard problems is multi-sample verified search, not single-sample longer reasoning.
 
+### mixed12 easy/medium n=1 fast stage
+
+Path:
+
+- Run report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_easy_medium_n1/report.json`
+- Public selection: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_easy_medium_n1/public_selection.json`
+
+Protocol:
+
+- First twelve stratified60 tasks, excluding the three hard tasks.
+- `n_samples=1`, max new tokens 8192, public-selection enabled but only one candidate exists.
+
+Result:
+
+- Hidden eval: `4/9 = 44.4%`.
+- Passed IDs: `2777`, `2855`, `3242`, `3324`.
+- Failed IDs: `2779`, `2828`, `2916`, `3166`, `3240`.
+- Generation time: `1269.858s`.
+- This invalidates the assumption that easy/medium can all run as cheap single-sample tasks; medium tasks also need candidate search or stronger extraction/prompting.
+
 ## Current Interpretation
 
 Good signal:
@@ -117,15 +137,16 @@ Bad/limiting signal:
 - Full 32k or 16k for every task is too slow on one L20.
 - The scalable route has to be multi-sample search plus public/behavior/differential verification, with long budgets reserved for hard or failed cases.
 - Hard `n=4` at 16k took about 22.7 minutes for one task, so the next benchmark must be staged by difficulty.
+- Single-sample medium coverage is weak in the first mixed12 slice; only `4/9` easy/medium tasks passed.
 
 ## Next Run
 
 Active remote run:
 
-- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_easy_medium_n1`
+- `xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect`
 
 Purpose:
 
-- Evaluate the nine easy/medium tasks in the first 12 stratified60 problems with the fast 8k single-sample protocol.
-- Then evaluate the three hard tasks with the slower 16k n=4 public-selection protocol.
-- Combine the staged results as the next credible mixed12 score.
+- Re-run the five failed medium tasks with `n=4`, 8k, stop-after-code-block, and public-test selection.
+- If public selection rescues most failures, combine passing easy/medium n=1 results, failed-medium n=4 results, and hard n=4 results into the next mixed12 score.
+- If it does not, the next priority is prompt/extraction repair plus behavior/differential verification before expanding sample size.
