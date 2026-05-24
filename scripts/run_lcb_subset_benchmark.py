@@ -10,7 +10,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 
 SYSTEM_MESSAGE_GENERIC = (
@@ -391,6 +391,27 @@ def load_model(
     return model, tokenizer
 
 
+def build_generation_record(
+    problem: Any,
+    prompt_suffix: str,
+    raw_outputs: list[str],
+    code_outputs: list[str],
+) -> dict[str, Any]:
+    return {
+        "question_id": problem.question_id,
+        "question_title": problem.question_title,
+        "contest_date": problem.contest_date.isoformat(),
+        "platform": problem.platform.value,
+        "difficulty": problem.difficulty.value,
+        "prompt": build_lcb_generation_prompt(
+            problem,
+            prompt_suffix=prompt_suffix,
+        ),
+        "raw_outputs": raw_outputs,
+        "code_list": code_outputs,
+    }
+
+
 def render_model_input(
     tokenizer: Any,
     prompt: str,
@@ -506,6 +527,7 @@ def generate_problem_outputs(
     max_new_tokens: int,
     max_input_tokens: int,
     stop_after_code_block: bool,
+    progress_callback: Callable[[list[str], list[str]], None] | None = None,
 ) -> tuple[list[str], list[str]]:
     prompt = build_lcb_generation_prompt(problem, prompt_suffix=prompt_suffix)
     raw_outputs: list[str] = []
@@ -530,6 +552,8 @@ def generate_problem_outputs(
         )
         raw_outputs.extend(batch_outputs)
         code_outputs.extend(strip_lcb_code_block(output) for output in batch_outputs)
+        if progress_callback is not None:
+            progress_callback(raw_outputs[:n_samples], code_outputs[:n_samples])
     return raw_outputs[:n_samples], code_outputs[:n_samples]
 
 
@@ -613,6 +637,27 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             f"[{index}/{len(problems)}] {action} {problem.question_id} "
             f"{problem.question_title} missing_samples={missing_samples}"
         )
+
+        def persist_partial_progress(
+            partial_raw_outputs: list[str],
+            partial_code_outputs: list[str],
+        ) -> None:
+            partial_record = build_generation_record(
+                problem=problem,
+                prompt_suffix=args.prompt_suffix,
+                raw_outputs=existing_raw_outputs + partial_raw_outputs,
+                code_outputs=existing_code_outputs + partial_code_outputs,
+            )
+            generations_path.write_text(
+                json.dumps(
+                    generation_records + [partial_record],
+                    indent=2,
+                    ensure_ascii=True,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
         raw_outputs, code_outputs = generate_problem_outputs(
             model=model,
             tokenizer=tokenizer,
@@ -628,23 +673,17 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
             stop_after_code_block=args.stop_after_code_block,
+            progress_callback=persist_partial_progress,
         )
         raw_outputs = existing_raw_outputs + raw_outputs
         code_outputs = existing_code_outputs + code_outputs
         generation_records.append(
-            {
-                "question_id": problem.question_id,
-                "question_title": problem.question_title,
-                "contest_date": problem.contest_date.isoformat(),
-                "platform": problem.platform.value,
-                "difficulty": problem.difficulty.value,
-                "prompt": build_lcb_generation_prompt(
-                    problem,
-                    prompt_suffix=args.prompt_suffix,
-                ),
-                "raw_outputs": raw_outputs,
-                "code_list": code_outputs,
-            }
+            build_generation_record(
+                problem=problem,
+                prompt_suffix=args.prompt_suffix,
+                raw_outputs=raw_outputs,
+                code_outputs=code_outputs,
+            )
         )
         generated_this_run += 1
         samples_generated_this_run += missing_samples

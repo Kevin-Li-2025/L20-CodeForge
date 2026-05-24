@@ -4,6 +4,7 @@ import importlib.util
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from types import SimpleNamespace
 
 
 def load_runner_module():
@@ -158,6 +159,31 @@ def test_parse_question_ids_strips_empty_values() -> None:
     runner = load_runner_module()
 
     assert runner.parse_question_ids(" 2777, ,2784 ") == {"2777", "2784"}
+
+
+def test_build_generation_record_includes_partial_outputs() -> None:
+    runner = load_runner_module()
+    problem = SimpleNamespace(
+        question_id="2784",
+        question_title="power",
+        contest_date=SimpleNamespace(isoformat=lambda: "2023-05-13T00:00:00"),
+        platform=SimpleNamespace(value="leetcode"),
+        difficulty=SimpleNamespace(value="hard"),
+        question_content="Solve it.",
+        starter_code="",
+    )
+
+    record = runner.build_generation_record(
+        problem=problem,
+        prompt_suffix="Return code only.",
+        raw_outputs=["raw"],
+        code_outputs=["code"],
+    )
+
+    assert record["question_id"] == "2784"
+    assert record["raw_outputs"] == ["raw"]
+    assert record["code_list"] == ["code"]
+    assert record["prompt"].endswith("Return code only.\n\n")
 
 
 def test_validate_resume_records_truncates_to_requested_samples() -> None:
