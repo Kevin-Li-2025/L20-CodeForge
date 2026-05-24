@@ -86,6 +86,16 @@ def load_chunk_evaluator_module():
     return module
 
 
+def load_public_selection_builder_module():
+    script = Path(__file__).parents[1] / "scripts" / "build_lcb_public_selection.py"
+    spec = importlib.util.spec_from_file_location("build_lcb_public_selection", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -169,6 +179,31 @@ def test_chunk_evaluator_remaps_results_by_chunk_start() -> None:
     assert pass_lists == [[True], [False], [False], [True]]
     assert [item[0].get("error_code") for item in metadata] == [None, None, "x", None]
     assert [item["question_id"] for item in eval_all] == ["a", "b", "c", "d"]
+
+
+def test_public_selection_builder_aligns_saved_generations() -> None:
+    builder = load_public_selection_builder_module()
+    problem_a = type("Problem", (), {"question_id": "a"})()
+    problem_b = type("Problem", (), {"question_id": "b"})()
+    problem_c = type("Problem", (), {"question_id": "c"})()
+
+    problems, generations = builder.select_problem_generations(
+        problems=[problem_a, problem_b, problem_c],
+        generation_records={
+            "b": {"code_list": ["b0", "b1"]},
+            "c": {"code_list": []},
+        },
+        max_samples=1,
+    )
+
+    assert [problem.question_id for problem in problems] == ["b"]
+    assert generations == [["b0"]]
+
+
+def test_public_selection_builder_uses_max_candidate_for_k_list() -> None:
+    builder = load_public_selection_builder_module()
+
+    assert builder.public_k_list_for_generations([["a"], ["b", "c", "d"]]) == [1, 3]
 
 
 def test_evaluator_behavior_selection_uses_consensus_after_public_score() -> None:

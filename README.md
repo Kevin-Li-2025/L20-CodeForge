@@ -121,6 +121,11 @@ Milestone notes:
   evaluator outputs, hashes, and breakdowns. It also includes the `n=4` and
   `n=8` public-test selection results, plus a candidate-aware behavior-test
   prompt bank for the next verifier loop.
+- `docs/MILESTONE_8_LCB_PLUS15_FOCUS.md`: focused plan for turning the current
+  inference-time gain into a real greedy model-capability gain. The target is
+  `52.6%+` LiveCodeBench, i.e. at least 15 points above the published
+  Qwen2.5-Coder-7B-Instruct reference, with hidden tests reserved for final
+  measurement.
 
 LiveCodeBench verifier loop:
 
@@ -139,6 +144,17 @@ python scripts/build_lcb_behavior_test_prompts.py \
 After a local model fills the generated-test prompts, parse them to
 `behavior_inputs.json` and pass that file to `scripts/evaluate_lcb_generations.py`
 with `--behavior-inputs` and `--behavior-public-scores`.
+
+Public-selection-only payloads can be built without touching hidden tests:
+
+```bash
+python scripts/build_lcb_public_selection.py \
+  --lcb-repo /tmp/LiveCodeBench \
+  --parquet data/raw/livecodebench/full_release_v6/release_v6_test_prompt_public_only.parquet \
+  --generations benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_full_generate_only/generations.json \
+  --output artifacts/lcb_public_selection/qwen25_coder_7b_temp08_n8_public_selection.json \
+  --max-samples 8
+```
 
 For a local Transformers generation pass:
 
