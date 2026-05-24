@@ -10,7 +10,6 @@ artifacts/
 data/raw/
 data/processed/
 logs/
-paper/*.pdf
 paper/*.tar.gz
 paper/*.aux
 paper/*.bbl
