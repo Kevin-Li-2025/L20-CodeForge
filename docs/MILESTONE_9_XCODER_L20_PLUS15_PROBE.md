@@ -568,6 +568,30 @@ Result:
 - Combined with the previous public-only second-pass repair, the medium control12 gate is now `4/12 = 33.3%`.
 - Interpretation: public execution feedback is the first automatic method in this control12 stage that moved previously failed tasks from public oracle `0` to hidden-pass `2`. It is slower than simple repair, but the result is qualitatively better: the failure message changed model behavior on tasks where more sampling did not.
 
+### medium control12 second public-feedback round
+
+Path:
+
+- Regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1/report.json`
+- Evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1_eval/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1_eval/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_public_feedback_repair_round2_medium_control12_fail8_n1_eval/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_public_feedback_repair_round2_medium_control12_fail8_2026_05_24/audit.json`
+
+Protocol:
+
+- Took the `8` remaining fail10 tasks after the first public-feedback repair: `3657`, `3751`, `3786`, `abc320_c`, `abc364_c`, `abc370_d`, `abc375_c`, `abc400_d`.
+- Used the first public-feedback repair candidates as source code and fed their visible public-test failures back into the same repair prompt.
+- Generated `20` candidates total with the same public-only feedback protocol; no hidden outputs or hidden metadata were used.
+
+Result:
+
+- Generated `20` second-round feedback repair candidates in `951.435s`.
+- Public oracle was `1/8`, but public-selected full replay was `0/8`.
+- The public-passing but hidden-failing task was `abc375_c` (`Spiral Rotation`).
+- Candidate health was `16/20 = 80.0%` syntax-valid and `20/20` with entrypoint.
+- Interpretation: recursive public-feedback repair shows overfitting risk after one round. The first feedback round is useful, but a second round should not be treated as a generalization improvement unless it also passes hidden replay or a stricter cross-check.
+
 ## Current Interpretation
 
 Good signal:
@@ -617,12 +641,13 @@ Bad/limiting signal:
 - Public-only second-pass repair is a real improvement but still leaves `10/12` control tasks unsolved, so it should be used as one stage in a verifier loop rather than as the final method.
 - Multi-source code-only repair did not improve the fail10 slice; execution feedback, not another ungrounded repair sample, was the ingredient that produced new passes.
 - Public-feedback repair is still only `2/10` on the fail10 slice and costs `1061s`, so it should be routed selectively to tasks with syntax-valid candidates rather than applied to every benchmark task.
+- A second public-feedback round created one public-passing candidate but zero hidden passes, so recursive public-test repair should be capped or cross-validated rather than repeated blindly.
 
 ## Next Run
 
 Active remote run:
 
-- None. The L20 is idle after the public-feedback repair evaluation.
+- None. The L20 is idle after the second public-feedback repair evaluation.
 
 Purpose:
 
@@ -638,4 +663,5 @@ Purpose:
 - Use the medium control12 run as the immediate generalization gate: any automatic prefix generator or adapter should first improve public oracle above `0/12` on this slice before spending time on larger LCB runs.
 - Default future short-budget control runs to the strict suffix because it is faster and healthier, but do not expect it to improve benchmark score without additional algorithm-prefix signal.
 - Next control experiment should extend public-only repair with more source candidates or a generated algorithm-prefix step, while keeping the same control12 gate and public-only selection protocol.
-- Use public-feedback repair as the next automatic verifier-loop stage for syntax-valid public failures; then evaluate whether a second feedback round rescues the remaining `8/10` fail10 tasks or starts overfitting public examples.
+- Do not continue recursive public-feedback repair on the same fail8 slice without a stronger cross-check; the second round produced public-only overfit signal.
+- Next improvement should use broader generated tests, differential behavior checks, or mined verified algorithm-prefix data before another repair loop.

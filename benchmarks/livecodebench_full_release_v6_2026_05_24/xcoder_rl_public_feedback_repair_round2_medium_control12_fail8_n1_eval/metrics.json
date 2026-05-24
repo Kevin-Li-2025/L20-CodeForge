@@ -1,0 +1,112 @@
+[
+  {
+    "pass@1": 0.0,
+    "detail": {
+      "pass@1": {
+        "0": 0.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 0.0
+      }
+    }
+  },
+  {
+    "0": [
+      [
+        false
+      ]
+    ],
+    "1": [
+      [
+        false
+      ]
+    ],
+    "2": [
+      [
+        false
+      ]
+    ],
+    "3": [
+      [
+        -2
+      ]
+    ],
+    "4": [
+      [
+        -2
+      ]
+    ],
+    "5": [
+      [
+        -2
+      ]
+    ],
+    "6": [
+      [
+        true,
+        true,
+        true,
+        -3
+      ]
+    ],
+    "7": [
+      [
+        -2
+      ]
+    ]
+  },
+  [
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong Answer"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 6"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 2"
+      }
+    ],
+    [
+      {
+        "error_code": -3,
+        "error_message": "Time Limit Exceeded"
+      }
+    ],
+    [
+      {
+        "error_code": -2,
+        "error_message": "Wrong answer at output_line_idx=0:  != 1"
+      }
+    ]
+  ]
+]
