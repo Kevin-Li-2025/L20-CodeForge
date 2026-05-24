@@ -492,6 +492,30 @@ Result:
 - Failure split: `2` tasks still had no syntax-valid candidates, and `10` tasks had syntax-valid candidates rejected by public tests.
 - Interpretation: strict output control reduces wasted L20 time and syntax collapse, but it does not solve algorithmic generalization. The control12 gate now strongly argues for automatic verified algorithm-prefix generation or training, not more prompt hygiene.
 
+### medium control12 public-only second-pass repair
+
+Path:
+
+- Regeneration report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_n1/report.json`
+- Evaluation report: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_n1_eval/report.json`
+- Public-selection payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_n1_eval/public_selection.json`
+- Metrics payload: `benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_n1_eval/metrics.json`
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_second_pass_strict_code_repair_medium_control12_2026_05_24/audit.json`
+
+Protocol:
+
+- Used the strict starter-prefix control12 generations as the only source.
+- Fed each failed code candidate back through `scripts/regenerate_lcb_final_answers.py` with `source_field=code_list`, one source candidate per task, one regenerated candidate per task, and no hidden-output information.
+- Kept compact final-code constraints: `temperature=0.2`, top-p `0.95`, top-k `20`, `max_new_tokens=1024`, raw prompt rendering, bf16 SDPA.
+
+Result:
+
+- Generated `12` repair candidates in `281.946s`.
+- Public oracle improved from `0/12` to `2/12`; public-selected full replay also passed `2/12`.
+- Passing tasks: `3416` (`sum-of-digit-differences-of-all-pairs`) and `abc331_c` (`Sum of Numbers Greater Than Me`).
+- Candidate health improved to `11/12` syntax-valid and `12/12` with entrypoint.
+- Interpretation: this is the first non-hand-targeted positive signal on the medium control12 gate. A public-only second pass over failed code is not enough by itself, but it is a credible building block for automatic verified-prefix repair: generate strict code, repair from code, then use public tests to keep only real improvements.
+
 ## Current Interpretation
 
 Good signal:
@@ -512,6 +536,7 @@ Good signal:
 - Targeted verified code-prefix completion rescued the two remaining first-12 medium failures (`2828`, `3166`) with public and hidden replay both passing.
 - The best current architecture is now clearer: long reasoning/search finds ideas; a short verified code-prefix or distilled trace is needed to force executable implementation.
 - Strict starter-prefix prompting makes medium-control generation cheaper and healthier: `353s` vs `836s`, and syntax-valid rate `71.4%` vs `52.9%`.
+- Public-only second-pass repair moved the medium control12 gate from `0/12` to `2/12` while improving candidate syntax health to `11/12`.
 
 Bad/limiting signal:
 
@@ -536,12 +561,13 @@ Bad/limiting signal:
 - The targeted code-prefix rescue is intentionally narrow and should be treated as a distillation/probing result, not as a clean LiveCodeBench leaderboard score.
 - A fresh medium control12 slice scored `0/12` under automatic starter-code/code-fence prefixing, so the first-12 targeted rescue currently does not transfer without a learned or generated task-specific algorithm prefix.
 - Strict output control also scored `0/12` on the same medium control12 slice. It fixes part of the format problem, but not the algorithm-selection problem.
+- Public-only second-pass repair is a real improvement but still leaves `10/12` control tasks unsolved, so it should be used as one stage in a verifier loop rather than as the final method.
 
 ## Next Run
 
 Active remote run:
 
-- None. The L20 is idle after the targeted code-prefix evaluation.
+- None. The L20 is idle after the public-only second-pass repair evaluation.
 
 Purpose:
 
@@ -556,3 +582,4 @@ Purpose:
 - Keep two separate headlines: strict prompt/search route `10/12 = 83.3%`; targeted code-prefix probe `12/12 = 100%` with overfitting caveat.
 - Use the medium control12 run as the immediate generalization gate: any automatic prefix generator or adapter should first improve public oracle above `0/12` on this slice before spending time on larger LCB runs.
 - Default future short-budget control runs to the strict suffix because it is faster and healthier, but do not expect it to improve benchmark score without additional algorithm-prefix signal.
+- Next control experiment should extend public-only repair with more source candidates or a generated algorithm-prefix step, while keeping the same control12 gate and public-only selection protocol.

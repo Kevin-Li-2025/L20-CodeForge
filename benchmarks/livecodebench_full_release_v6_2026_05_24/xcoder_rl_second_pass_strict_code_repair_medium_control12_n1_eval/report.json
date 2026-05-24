@@ -1,0 +1,66 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "benchmark_scope": "full release_v6 evaluation from saved generations",
+  "lcb_repo": "/home/hhai/LiveCodeBench",
+  "lcb_repo_commit": "xcoder-medium-control12-publiconly-repair-v1",
+  "full_jsonl": "data/raw/livecodebench/full_release_v6/release_v6_test_full.jsonl",
+  "full_jsonl_sha256": "4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd",
+  "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_second_pass_strict_code_repair_medium_control12_n1/generations.json",
+  "generations_sha256": "e5a0acaa640ecb1599cfe73b7060f852ffb71b2d0c830db68fbbe547236acf99",
+  "tasks_evaluated": 12,
+  "selection": "public_tests",
+  "public_selection_source": null,
+  "behavior_inputs_source": null,
+  "public_select_tie_breaker": "shortest",
+  "public_selection_seconds": 0.186,
+  "public_selection_metrics": {
+    "pass@1": 0.16666666666666666,
+    "detail": {
+      "pass@1": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 1.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0
+      }
+    }
+  },
+  "public_selected_public_pass_count": 2,
+  "public_oracle_pass_count": 2,
+  "behavior_tests_total": null,
+  "behavior_selection_policy": null,
+  "behavior_override_count": null,
+  "k": [
+    1
+  ],
+  "max_samples": null,
+  "evaluation_seconds": 2.889,
+  "metrics": {
+    "pass@1": 0.16666666666666666,
+    "detail": {
+      "pass@1": {
+        "0": 1.0,
+        "1": 0.0,
+        "2": 0.0,
+        "3": 0.0,
+        "4": 0.0,
+        "5": 0.0,
+        "6": 0.0,
+        "7": 1.0,
+        "8": 0.0,
+        "9": 0.0,
+        "10": 0.0,
+        "11": 0.0
+      }
+    }
+  },
+  "passed_at_1_count": 2,
+  "total": 12
+}
