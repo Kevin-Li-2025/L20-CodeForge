@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import os
@@ -85,6 +86,28 @@ def candidate_pass_fraction(result: list[Any]) -> float:
     return sum(item is True for item in result) / len(result)
 
 
+def code_has_entrypoint(code: str) -> bool:
+    return (
+        "class Solution" in code
+        or "input(" in code
+        or "sys.stdin" in code
+        or 'if __name__ == "__main__"' in code
+        or "if __name__ == '__main__'" in code
+    )
+
+
+def code_syntax_ok(code: str) -> bool:
+    try:
+        ast.parse(code)
+    except SyntaxError:
+        return False
+    return True
+
+
+def candidate_static_health_rank(code: str) -> tuple[int, int]:
+    return (0 if code_syntax_ok(code) else 1, 0 if code_has_entrypoint(code) else 1)
+
+
 def tie_break_candidate_index(
     indices: list[int],
     code_outputs: list[str],
@@ -93,11 +116,28 @@ def tie_break_candidate_index(
     if not indices:
         return 0
     if tie_breaker == "first":
-        return indices[0]
+        return min(
+            indices,
+            key=lambda index: (candidate_static_health_rank(code_outputs[index]), index),
+        )
     if tie_breaker == "shortest":
-        return min(indices, key=lambda index: (len(code_outputs[index]), index))
+        return min(
+            indices,
+            key=lambda index: (
+                candidate_static_health_rank(code_outputs[index]),
+                len(code_outputs[index]),
+                index,
+            ),
+        )
     if tie_breaker == "longest":
-        return max(indices, key=lambda index: (len(code_outputs[index]), -index))
+        return min(
+            indices,
+            key=lambda index: (
+                candidate_static_health_rank(code_outputs[index]),
+                -len(code_outputs[index]),
+                index,
+            ),
+        )
     raise ValueError("tie_breaker must be one of: first, shortest, longest")
 
 

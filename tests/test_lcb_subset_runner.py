@@ -114,6 +114,21 @@ def test_choose_public_selected_index_uses_best_partial_score() -> None:
     assert selected == 1
 
 
+def test_public_tie_breaker_prefers_syntax_valid_candidate() -> None:
+    runner = load_runner_module()
+
+    selected = runner.choose_public_selected_index(
+        public_results=[[False], [False]],
+        code_outputs=[
+            "class Solution:\n    def answer(self,",
+            "class Solution:\n    def answer(self):\n        return 1",
+        ],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 1
+
+
 def test_build_public_selection_records_returns_single_selected_generation() -> None:
     runner = load_runner_module()
     problem = type("Problem", (), {"question_id": "x", "question_title": "title"})()

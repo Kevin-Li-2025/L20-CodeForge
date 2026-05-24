@@ -253,6 +253,31 @@ Result:
 - Repaired public oracle/pass@4: `0/2`.
 - The suffix increased reasoning length and cost but did not create a public-passing candidate. This is a negative result against continuing long independent reruns for these two medium failures.
 
+### candidate-health audit and health-aware tie-breaker
+
+Path:
+
+- Candidate-health audit: `benchmarks/livecodebench_full_release_v6_2026_05_24/lcb_candidate_health_unresolved_2026_05_24/audit.json`
+- Independent medium health-tie recheck: `benchmarks/livecodebench_full_release_v6_2026_05_24/health_tiebreak_recheck_xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/report.json`
+- Repaired independent medium health-tie recheck: `benchmarks/livecodebench_full_release_v6_2026_05_24/health_tiebreak_recheck_xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/report.json`
+- Remaining hard health-tie recheck: `benchmarks/livecodebench_full_release_v6_2026_05_24/health_tiebreak_recheck_xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/report.json`
+
+Protocol:
+
+- Added `scripts/audit_lcb_candidate_health.py` to summarize saved `generations.json`, `public_selection.json`, and sanitized eval metadata without using hidden expected outputs.
+- The audit classifies syntax-valid candidates, entrypoint candidates, public-oracle availability, selected error metadata, and coarse failure modes.
+- Updated public-selection tie-breaking so equal public scores prefer static-healthier candidates before applying `first`, `shortest`, or `longest`.
+- Rechecked saved generations for independent medium, repaired independent medium, and remaining hard with the health-aware tie-breaker.
+
+Result:
+
+- Unresolved-run audit covered `6` runs, `14` task instances, and `56` candidates.
+- Candidate syntax health was weak overall: `23/56 = 41.1%` syntax-valid and `32/56 = 57.1%` with an obvious entrypoint.
+- The cleanest unresolved source remains the original failed-medium final-code run: `18/20` syntax-valid, `20/20` entrypoint candidates, but `2828` and `3166` still had public oracle `0/4`; those two are algorithmic failures under the current candidate set.
+- Verbose/strict reruns degraded format quality: independent unresolved medium had only `1/8` syntax-valid candidates before repair, and `2/8` after repair.
+- Health-aware tie-breaking changed selected candidate indices for `2828` in the independent/repaired-independent rechecks but did not change score: both remained `0/2`, public oracle `0/2`.
+- Remaining hard recheck stayed `1/2`, public oracle `1/2`; `3024` still had no public-passing candidate.
+
 ## Current Interpretation
 
 Good signal:
@@ -264,6 +289,7 @@ Good signal:
 - The failed-medium rerun rescued three of five medium failures, confirming that candidate search helps beyond hard tasks.
 - The first-12 staged protocol reached `9/12 = 75.0%`, far above the original 7B greedy baseline on the full release_v6 run.
 - The extraction repair is useful infrastructure for future runs because it prevents reasoning/prose leakage from being misclassified as model algorithm failure.
+- Candidate-health audit now gives a lightweight gate to avoid mistaking syntax/entrypoint collapse for algorithmic weakness.
 
 Bad/limiting signal:
 
@@ -278,6 +304,7 @@ Bad/limiting signal:
 - The strict-code prompt also failed to rescue hard `3024`, with public pass@4 still zero.
 - Deterministic extraction repair did not improve the first-12 score beyond `9/12`; next gains require new candidates, stronger public/differential tests, or targeted post-training data rather than more cleanup of the same samples.
 - A long independent-rerun suffix also failed on unresolved medium tasks with public oracle `0/2`, so the next attempt should not spend more L20 time on the same style of verbose prompt.
+- The remaining medium failures are not fixed by more verbose prompting; the original clean-code candidates fail public tests, while later verbose candidates often fail syntax/entrypoint health.
 
 ## Next Run
 
@@ -290,4 +317,5 @@ Purpose:
 - Next step is verifier-guided regeneration or targeted data construction for the three unresolved IDs: `2828`, `3166`, and `3024`.
 - Use deterministic extraction repair by default for future saved generations, but do not spend more cycles cleaning the same candidates unless a public-test signal changes.
 - Prefer short, constrained code-only candidate construction or targeted verified training examples over long free-form reasoning reruns.
+- Run candidate-health audit before committing expensive reruns; if syntax-valid/public-oracle remains zero, switch strategy instead of increasing `n`.
 - Keep the staged first-12 headline at `9/12 = 75.0%` until a repair/verifier method improves it.

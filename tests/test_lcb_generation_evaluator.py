@@ -116,6 +116,16 @@ def load_repair_module():
     return module
 
 
+def load_candidate_health_audit_module():
+    script = Path(__file__).parents[1] / "scripts" / "audit_lcb_candidate_health.py"
+    spec = importlib.util.spec_from_file_location("audit_lcb_candidate_health", script)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def test_evaluator_public_selection_prefers_short_public_pass() -> None:
     evaluator = load_evaluator_module()
 
@@ -142,6 +152,21 @@ def test_evaluator_public_selection_records_single_candidate() -> None:
     assert selected == [["good"]]
     assert records[0]["selected_index"] == 1
     assert records[0]["public_oracle_pass"] is True
+
+
+def test_evaluator_public_tie_breaker_prefers_static_health() -> None:
+    evaluator = load_evaluator_module()
+
+    selected = evaluator.choose_public_selected_index_from_scores(
+        public_scores=[0.0, 0.0],
+        code_outputs=[
+            "class Solution:\n    def answer(self,",
+            "class Solution:\n    def answer(self):\n        return 1",
+        ],
+        tie_breaker="shortest",
+    )
+
+    assert selected == 1
 
 
 def test_evaluator_applies_saved_public_selection_by_question_id() -> None:
@@ -354,6 +379,102 @@ def test_repair_record_keeps_old_code_when_raw_extraction_is_empty() -> None:
 
     assert repaired["code_list"] == ["class Solution:\n    def answer(self):\n        return 42"]
     assert reports[0]["has_entrypoint"] is True
+
+
+def test_candidate_health_audit_classifies_public_rejected_valid_candidates(
+    tmp_path: Path,
+) -> None:
+    audit = load_candidate_health_audit_module()
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "generations.json").write_text(
+        json.dumps(
+            [
+                {
+                    "question_id": "q1",
+                    "question_title": "task",
+                    "difficulty": "medium",
+                    "code_list": [
+                        "class Solution:\n    def answer(self):\n        return 1",
+                        "class Solution:\n    def answer(self):\n        return 2",
+                    ],
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "public_selection.json").write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "question_id": "q1",
+                        "selected_index": 0,
+                        "public_scores": [0.0, 0.0],
+                        "public_oracle_pass": False,
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "eval_all.json").write_text(
+        json.dumps(
+            [
+                {
+                    "question_id": "q1",
+                    "graded_list": [False],
+                    "metadata": [{"error_code": -2, "error_message": "Wrong Answer"}],
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    summary = audit.summarize_run(run_dir)
+
+    assert summary["totals"]["syntax_ok_candidates"] == 2
+    assert summary["records"][0]["failure_mode"] == "public_tests_reject_syntax_valid_candidates"
+    assert summary["records"][0]["selected_error_code"] == -2
+
+
+def test_candidate_health_audit_classifies_no_syntax_valid_candidates(
+    tmp_path: Path,
+) -> None:
+    audit = load_candidate_health_audit_module()
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "generations.json").write_text(
+        json.dumps(
+            [
+                {
+                    "question_id": "q1",
+                    "code_list": ["class Solution:\n    def answer(self,"],
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
+    (run_dir / "public_selection.json").write_text(
+        json.dumps(
+            {
+                "records": [
+                    {
+                        "question_id": "q1",
+                        "selected_index": 0,
+                        "public_scores": [0.0],
+                        "public_oracle_pass": False,
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    summary = audit.summarize_run(run_dir)
+
+    assert summary["totals"]["syntax_ok_candidates"] == 0
+    assert summary["records"][0]["failure_mode"] == "no_syntax_valid_candidates"
 
 
 def test_evaluator_behavior_selection_uses_consensus_after_public_score() -> None:

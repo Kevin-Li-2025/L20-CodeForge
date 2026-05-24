@@ -1,0 +1,882 @@
+{
+  "metadata": {
+    "source": "lcb_candidate_health_audit_v1",
+    "hidden_expected_outputs_used": false
+  },
+  "totals": {
+    "runs": 6,
+    "tasks": 14,
+    "candidates": 56,
+    "syntax_ok_candidates": 23,
+    "entrypoint_candidates": 32,
+    "public_oracle_pass_tasks": 4,
+    "hidden_selected_pass_tasks": 4,
+    "selected_syntax_error_tasks": 7
+  },
+  "rates": {
+    "syntax_ok_candidate_rate": 0.4107142857142857,
+    "entrypoint_candidate_rate": 0.5714285714285714,
+    "public_oracle_task_rate": 0.2857142857142857,
+    "hidden_selected_task_rate": 0.2857142857142857
+  },
+  "runs": [
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_finalcode_stop_mixed12_failed_medium_n4_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 5,
+        "candidates": 20,
+        "syntax_ok_candidates": 18,
+        "entrypoint_candidates": 20,
+        "public_oracle_pass_tasks": 3,
+        "public_selected_pass_tasks": 3,
+        "hidden_selected_pass_tasks": 3,
+        "selected_syntax_error_tasks": 0
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.9,
+        "entrypoint_candidate_rate": 1.0,
+        "public_oracle_task_rate": 0.6,
+        "hidden_selected_task_rate": 0.6
+      },
+      "records": [
+        {
+          "question_id": "2779",
+          "question_title": "number-of-adjacent-elements-with-the-same-color",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            1.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 0,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 1535,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 19487,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 17467,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 3083,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 32209,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 31771,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 31854,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 33483,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "2916",
+          "question_title": "check-if-it-is-possible-to-split-array",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 3,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 29938,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 32459,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 34275,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 14400,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 4,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 3,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 32814,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 37641,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 29668,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 27768,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3240",
+          "question_title": "maximum-number-that-sum-of-the-prices-is-less-than-or-equal-to-k",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 4,
+          "public_scores": [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 2,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 26204,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 26189,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 366",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 21180,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 25262,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 344",
+              "has_entrypoint": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_strictcode_unresolved_medium_n4_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 8,
+        "syntax_ok_candidates": 1,
+        "entrypoint_candidates": 2,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.125,
+        "entrypoint_candidate_rate": 0.25,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -2,
+          "selected_error_message": "Wrong Answer",
+          "failure_mode": "public_tests_reject_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 29085,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 87) at line 87",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 108,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 32163,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 56) at line 56",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 32067,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 563",
+              "has_entrypoint": true
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 0,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 0,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: unterminated string literal (detected at line 82) (<string>, line 82)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 27091,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 45) at line 45",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 34043,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 17) at line 17",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 27424,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after function definition on line 2 at line 349",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 32279,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 143) at line 143",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_8k_bf16_independent_unresolved_medium_n4_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 8,
+        "syntax_ok_candidates": 1,
+        "entrypoint_candidates": 3,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 2
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.125,
+        "entrypoint_candidate_rate": 0.375,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 3,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: invalid character '\u2010' (U+2010) (<string>, line 38)",
+          "failure_mode": "selector_chose_syntax_invalid_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 33310,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 31861,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 34669,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 22) at line 22",
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 33419,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 34) at line 34",
+              "has_entrypoint": false
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 0,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 2,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 34019,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 18) at line 18",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 28420,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 21) at line 21",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 27228,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 19) at line 19",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 28699,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_finalcode_stop_mixed12_remaining_hard_n4_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 8,
+        "syntax_ok_candidates": 1,
+        "entrypoint_candidates": 2,
+        "public_oracle_pass_tasks": 1,
+        "public_selected_pass_tasks": 1,
+        "hidden_selected_pass_tasks": 1,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.125,
+        "entrypoint_candidate_rate": 0.25,
+        "public_oracle_task_rate": 0.5,
+        "hidden_selected_task_rate": 0.5
+      },
+      "records": [
+        {
+          "question_id": "2879",
+          "question_title": "minimum-changes-to-make-k-semi-palindromes",
+          "difficulty": "hard",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 1,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "public_oracle_pass": true,
+          "selected_index": 2,
+          "selected_public_score": 1.0,
+          "hidden_selected_pass": true,
+          "selected_error_code": null,
+          "selected_error_message": null,
+          "failure_mode": "has_public_passing_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 1610,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2264' (U+2264) at line 4",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 1846,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 56390,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 2133,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2264' (U+2264) at line 1",
+              "has_entrypoint": false
+            }
+          ]
+        },
+        {
+          "question_id": "3024",
+          "question_title": "string-transformation",
+          "difficulty": "hard",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 1,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: invalid syntax (<string>, line 38)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 47589,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 4268,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 44086,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 48816,
+              "syntax_ok": false,
+              "syntax_error": "invalid character '\u2010' (U+2010) at line 1",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_qwen25_7b_raw_topk20_16k_bf16_strictcode_hard3024_n4_publicselect/eval_all.json",
+      "totals": {
+        "tasks": 1,
+        "candidates": 4,
+        "syntax_ok_candidates": 0,
+        "entrypoint_candidates": 2,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 1
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.0,
+        "entrypoint_candidate_rate": 0.5,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "3024",
+          "question_title": "string-transformation",
+          "difficulty": "hard",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 2,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: invalid syntax (<string>, line 38)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 3165,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 2626,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 57225,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 73) at line 73",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 52175,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 22) at line 22",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_dir": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect",
+      "generations": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/generations.json",
+      "public_selection": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/eval/public_selection.json",
+      "eval_all": "benchmarks/livecodebench_full_release_v6_2026_05_24/xcoder_rl_repair_extract_afterthink_independent_unresolved_medium_n4_publicselect/eval/eval_all.json",
+      "totals": {
+        "tasks": 2,
+        "candidates": 8,
+        "syntax_ok_candidates": 2,
+        "entrypoint_candidates": 3,
+        "public_oracle_pass_tasks": 0,
+        "public_selected_pass_tasks": 0,
+        "hidden_selected_pass_tasks": 0,
+        "selected_syntax_error_tasks": 2
+      },
+      "rates": {
+        "syntax_ok_candidate_rate": 0.25,
+        "entrypoint_candidate_rate": 0.375,
+        "public_oracle_task_rate": 0.0,
+        "hidden_selected_task_rate": 0.0
+      },
+      "records": [
+        {
+          "question_id": "2828",
+          "question_title": "lexicographically-smallest-string-after-substring-operation",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 2,
+          "entrypoint_candidates": 3,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 1,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: expected an indented block after class definition on line 38 (<string>, line 38)",
+          "failure_mode": "selector_chose_syntax_invalid_candidate",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 33310,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 1,
+              "length": 15,
+              "syntax_ok": false,
+              "syntax_error": "expected an indented block after class definition on line 1 at line 1",
+              "has_entrypoint": true
+            },
+            {
+              "index": 2,
+              "length": 6813,
+              "syntax_ok": true,
+              "syntax_error": null,
+              "has_entrypoint": true
+            },
+            {
+              "index": 3,
+              "length": 33419,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 34) at line 34",
+              "has_entrypoint": false
+            }
+          ]
+        },
+        {
+          "question_id": "3166",
+          "question_title": "minimum-number-of-groups-to-create-a-valid-assignment",
+          "difficulty": "medium",
+          "n_candidates": 4,
+          "syntax_ok_candidates": 0,
+          "entrypoint_candidates": 0,
+          "public_scores": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_oracle_pass": false,
+          "selected_index": 2,
+          "selected_public_score": 0.0,
+          "hidden_selected_pass": false,
+          "selected_error_code": -4,
+          "selected_error_message": "Error during testing: unterminated string literal (detected at line 56) (<string>, line 56)",
+          "failure_mode": "no_syntax_valid_candidates",
+          "candidate_health": [
+            {
+              "index": 0,
+              "length": 34019,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 18) at line 18",
+              "has_entrypoint": false
+            },
+            {
+              "index": 1,
+              "length": 28420,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 21) at line 21",
+              "has_entrypoint": false
+            },
+            {
+              "index": 2,
+              "length": 27228,
+              "syntax_ok": false,
+              "syntax_error": "unterminated string literal (detected at line 19) at line 19",
+              "has_entrypoint": false
+            },
+            {
+              "index": 3,
+              "length": 28699,
+              "syntax_ok": false,
+              "syntax_error": "invalid syntax at line 1",
+              "has_entrypoint": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
