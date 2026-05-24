@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="880" viewBox="0 0 1440 880" role="img" aria-labelledby="title desc">
+  <title id="title">L20-CodeForge architecture</title>
+  <desc id="desc">Single-L20 code post-training loop from public benchmark tasks through candidate generation, repair, verification, hidden replay, audits, and training data.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#283142"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .panel { fill: #ffffff; stroke: #d9dee7; stroke-width: 2; rx: 18; }
+      .box { stroke-width: 2; rx: 14; }
+      .primary { fill: #edf6ff; stroke: #2f74c0; }
+      .verify { fill: #f1f8f1; stroke: #3f8f48; }
+      .audit { fill: #fff7e8; stroke: #c7831e; }
+      .train { fill: #f5f0ff; stroke: #7759c7; }
+      .text { fill: #172033; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .title { font-size: 42px; font-weight: 750; }
+      .subtitle { font-size: 22px; fill: #596579; }
+      .label { font-size: 22px; font-weight: 700; }
+      .small { font-size: 17px; fill: #596579; }
+      .tiny { font-size: 15px; fill: #697386; }
+      .arrow { stroke: #283142; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .soft-arrow { stroke: #7c8799; stroke-width: 2.5; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+      .lane-title { font-size: 18px; font-weight: 750; fill: #3f4a5f; letter-spacing: 0.02em; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1440" height="880"/>
+  <text class="text title" x="72" y="76">L20-CodeForge Architecture</text>
+  <text class="text subtitle" x="72" y="112">Eval-first post-training and verifier-guided inference on a single NVIDIA L20</text>
+
+  <rect class="panel" x="54" y="150" width="1332" height="650"/>
+
+  <text class="lane-title" x="92" y="202">PUBLIC-SIDE LOOP</text>
+  <text class="lane-title" x="92" y="462">PRIVATE MEASUREMENT</text>
+  <text class="lane-title" x="92" y="650">DATA FLYWHEEL</text>
+
+  <rect class="box primary" x="92" y="230" width="210" height="116"/>
+  <text class="text label" x="118" y="274">Benchmark Task</text>
+  <text class="text small" x="118" y="304">Prompt, public tests,</text>
+  <text class="text small" x="118" y="328">metadata only</text>
+
+  <rect class="box primary" x="356" y="230" width="226" height="116"/>
+  <text class="text label" x="382" y="274">Context Builder</text>
+  <text class="text small" x="382" y="304">Pack problem, starter</text>
+  <text class="text small" x="382" y="328">code, constraints</text>
+
+  <rect class="box primary" x="638" y="230" width="230" height="116"/>
+  <text class="text label" x="664" y="274">Candidate Search</text>
+  <text class="text small" x="664" y="304">Greedy, n-sample,</text>
+  <text class="text small" x="664" y="328">budgeted by L20</text>
+
+  <rect class="box verify" x="928" y="230" width="228" height="116"/>
+  <text class="text label" x="954" y="274">Public Execution</text>
+  <text class="text small" x="954" y="304">Visible tests, syntax,</text>
+  <text class="text small" x="954" y="328">entrypoint health</text>
+
+  <rect class="box verify" x="928" y="372" width="228" height="116"/>
+  <text class="text label" x="954" y="416">Repair Loop</text>
+  <text class="text small" x="954" y="446">Public-only failure</text>
+  <text class="text small" x="954" y="470">feedback and retry</text>
+
+  <rect class="box verify" x="638" y="372" width="230" height="116"/>
+  <text class="text label" x="664" y="416">Selector / Verifier</text>
+  <text class="text small" x="664" y="446">Public pass, behavior</text>
+  <text class="text small" x="664" y="470">tests, tie-breakers</text>
+
+  <rect class="box audit" x="356" y="486" width="226" height="116"/>
+  <text class="text label" x="382" y="530">Hidden Replay</text>
+  <text class="text small" x="382" y="560">Private tests used</text>
+  <text class="text small" x="382" y="584">only for scoring</text>
+
+  <rect class="box audit" x="638" y="486" width="230" height="116"/>
+  <text class="text label" x="664" y="530">Scorecard</text>
+  <text class="text small" x="664" y="560">LCB + EvalPlus gate,</text>
+  <text class="text small" x="664" y="584">hashes, reports</text>
+
+  <rect class="box audit" x="928" y="486" width="228" height="116"/>
+  <text class="text label" x="954" y="530">Audit</text>
+  <text class="text small" x="954" y="560">Overfit checks, failed</text>
+  <text class="text small" x="954" y="584">methods, diagnostics</text>
+
+  <rect class="box train" x="356" y="664" width="226" height="116"/>
+  <text class="text label" x="382" y="708">Trajectory Store</text>
+  <text class="text small" x="382" y="738">Candidates, traces,</text>
+  <text class="text small" x="382" y="762">public outcomes</text>
+
+  <rect class="box train" x="638" y="664" width="230" height="116"/>
+  <text class="text label" x="664" y="708">Training Data</text>
+  <text class="text small" x="664" y="738">SFT, DPO pairs,</text>
+  <text class="text small" x="664" y="762">RLVR rewards</text>
+
+  <rect class="box train" x="928" y="664" width="228" height="116"/>
+  <text class="text label" x="954" y="708">L20 Adapter Run</text>
+  <text class="text small" x="954" y="738">QLoRA / verifier /</text>
+  <text class="text small" x="954" y="762">small RL updates</text>
+
+  <rect class="box primary" x="1208" y="310" width="118" height="238"/>
+  <text class="text label" x="1233" y="366">L20</text>
+  <text class="text small" x="1230" y="404">Budget</text>
+  <text class="text tiny" x="1229" y="440">single GPU</text>
+  <text class="text tiny" x="1229" y="466">bf16 / 4-bit</text>
+  <text class="text tiny" x="1229" y="492">selective use</text>
+
+  <path class="arrow" d="M 302 288 H 348"/>
+  <path class="arrow" d="M 582 288 H 630"/>
+  <path class="arrow" d="M 868 288 H 920"/>
+  <path class="arrow" d="M 1042 346 V 364"/>
+  <path class="arrow" d="M 928 430 H 876"/>
+  <path class="arrow" d="M 638 430 H 592 C 548 430 520 454 494 486"/>
+  <path class="arrow" d="M 582 544 H 630"/>
+  <path class="arrow" d="M 868 544 H 920"/>
+  <path class="soft-arrow" d="M 1042 602 V 646"/>
+  <path class="arrow" d="M 582 722 H 630"/>
+  <path class="arrow" d="M 868 722 H 920"/>
+  <path class="soft-arrow" d="M 1156 722 C 1260 722 1288 620 1268 548"/>
+  <path class="soft-arrow" d="M 1208 430 H 1164"/>
+
+  <text class="text tiny" x="96" y="828">Boundary: hidden/private tests never enter candidate generation, repair, or verifier selection.</text>
+  <text class="text tiny" x="1040" y="828">Committed artifacts include reports, hashes, and summaries, not private test payloads.</text>
+</svg>

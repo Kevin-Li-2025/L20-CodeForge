@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Python tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package
+        run: python -m pip install -e ".[dev,bench]"
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: Build generalization scorecard
+        run: |
+          python scripts/build_generalization_scorecard.py \
+            --output-dir /tmp/l20_codeforge_scorecard_ci
+
+      - name: Verify benchmark artifact hashes
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          expected = {
+              "benchmarks/generalization_scorecard_2026_05_23/scorecard.json":
+                  "1eb0402378ea25732225b29d7ba367b6111ab3351e54cc7c01fa7646a7a12712",
+              "benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json":
+                  "2a0ff919aa15eb9ecdf74824f7bf790a23f6d0197ef74970b6190c60e0e00772",
+              "benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv":
+                  "08732bbb76450f92ef3c02fa97a163aba01f71028365072c205c5a3af45d5550",
+          }
+          for rel_path, expected_sha in expected.items():
+              actual_sha = hashlib.sha256(Path(rel_path).read_bytes()).hexdigest()
+              if actual_sha != expected_sha:
+                  raise SystemExit(f"{rel_path}: expected {expected_sha}, got {actual_sha}")
+          print("benchmark artifact hashes verified")
+          PY

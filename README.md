@@ -1,5 +1,7 @@
 # L20-CodeForge
 
+[![CI](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml)
+
 Single-L20 post-training, verifier-guided inference, and executable benchmark
 infrastructure for code models.
 
@@ -13,6 +15,9 @@ Status: the repository currently demonstrates strong system-level gains on
 public benchmarks. It does not yet claim a +15 point greedy model-weight
 improvement over the base model.
 
+Core docs: [Reproducibility](REPRODUCIBILITY.md) and
+[Architecture](docs/ARCHITECTURE.md).
+
 ## Results
 
 | Benchmark | Base model / checkpoint | Protocol | Baseline | L20-CodeForge result | Delta | Artifact |
@@ -24,6 +29,17 @@ improvement over the base model.
 
 Cross-benchmark guardrail: `benchmarks/generalization_scorecard_2026_05_23/`
 records a `PASS` gate over full LiveCodeBench plus EvalPlus HumanEval+/MBPP+.
+
+## Benchmark Artifact Hashes
+
+| Artifact | SHA-256 |
+| --- | --- |
+| `benchmarks/generalization_scorecard_2026_05_23/scorecard.json` | `1eb0402378ea25732225b29d7ba367b6111ab3351e54cc7c01fa7646a7a12712` |
+| `benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json` | `2a0ff919aa15eb9ecdf74824f7bf790a23f6d0197ef74970b6190c60e0e00772` |
+| `benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv` | `08732bbb76450f92ef3c02fa97a163aba01f71028365072c205c5a3af45d5550` |
+
+See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for the full hash-verification
+command and expected output.
 
 ## Claim Boundary
 
@@ -46,17 +62,7 @@ L20-CodeForge is organized around one constraint: a single NVIDIA L20 should be
 enough to run a serious coding post-training loop if the loop is selective,
 measured, and executable.
 
-```mermaid
-flowchart LR
-    A["Benchmark task"] --> B["Prompt and context builder"]
-    B --> C["Candidate generation"]
-    C --> D["Public tests and static health checks"]
-    D --> E["Repair and feedback loop"]
-    E --> F["Verifier or selector"]
-    F --> G["Hidden-test replay"]
-    G --> H["Scorecard and audit"]
-    H --> I["SFT / DPO / RLVR data"]
-```
+![L20-CodeForge architecture](docs/assets/architecture.svg)
 
 The repository contains:
 
@@ -80,6 +86,12 @@ python -m l20_codeforge profile
 python -m l20_codeforge smoke-loop
 ```
 
+The `python -m pytest -q` line should print:
+
+```text
+135 passed in <time>s
+```
+
 On an L20 host:
 
 ```bash
@@ -100,6 +112,22 @@ Build the cross-benchmark scorecard:
 ```bash
 python scripts/build_generalization_scorecard.py \
   --output-dir benchmarks/generalization_scorecard_2026_05_23
+```
+
+Expected output includes:
+
+```json
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "lcb_overall_improves",
+      "value": 0.100474,
+      "threshold": 0.0,
+      "passed": true
+    }
+  ]
+}
 ```
 
 Re-run the packaged EvalPlus scoring:
