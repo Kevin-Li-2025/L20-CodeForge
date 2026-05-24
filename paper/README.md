@@ -37,6 +37,20 @@ Before uploading source to arXiv:
 - Verify title, abstract, authors, license, and category metadata in the arXiv
   submission UI.
 
+Metadata and category plan:
+
+- See `ARXIV_SUBMISSION.md`.
+
+Source package:
+
+```bash
+cd paper
+make arxiv-source
+```
+
+This creates `l20-codeforge-arxiv-source.tar.gz` with only the TeX source files
+needed by arXiv.
+
 Primary arXiv guidance:
 
 - https://info.arxiv.org/help/submit/index.html

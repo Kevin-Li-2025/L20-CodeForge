@@ -5,6 +5,7 @@
 \usepackage{booktabs}
 \usepackage{float}
 \usepackage{graphicx}
+\usepackage{array}
 \usepackage{microtype}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
@@ -12,7 +13,7 @@
 \usetikzlibrary{arrows.meta,positioning,fit}
 
 \title{L20-CodeForge: Auditable Test-Time Scaling for Code Generation on a Single GPU}
-\author{Anonymous Authors}
+\author{Yin Li\\University of Birmingham}
 \date{May 2026}
 
 \begin{document}
@@ -72,6 +73,30 @@ The study makes four contributions.
     with CI, scorecards, benchmark summaries, and exact hash checks.
 \end{enumerate}
 
+\section{Claim Boundary}
+
+The central result in this paper is a system result. It should not be read as a
+claim that the underlying Qwen2.5-Coder-7B-Instruct weights have improved. We
+make three boundaries explicit.
+
+\paragraph{System-level gains.}
+The LiveCodeBench headline result uses eight sampled candidates and public-test
+selection. This is a valid solver configuration, but it is different from a
+single greedy model evaluation. Whenever we compare against greedy decoding, the
+comparison is between a baseline model call and a bounded public-side inference
+system.
+
+\paragraph{Public signals only during selection.}
+Public tests, public examples, starter code, and public prompt metadata may be
+used by the solver. Hidden tests are used only after a candidate has already
+been selected. No hidden expected outputs, hidden failure messages, or hidden
+pass/fail labels enter generation, repair, verifier prompts, or tie-breaking.
+
+\paragraph{Negative results remain part of the evidence.}
+Several plausible improvements were rejected because they failed hidden replay
+or cross-benchmark checks. These failures are reported because they define the
+boundary between useful test-time scaling and visible-test overfitting.
+
 \section{Related Work}
 
 \paragraph{Code-generation benchmarks.}
@@ -83,6 +108,11 @@ miss incorrect programs because their tests are insufficient; it augments
 HumanEval and MBPP with many additional tests and can change model rankings
 \citep{liu2023evalplus}. These benchmarks motivate the two evaluation choices
 used here: full-suite replay on LiveCodeBench and cross-checking with EvalPlus.
+
+Qwen2.5-Coder provides the open 7B base model used in the main experiments
+\citep{qwen2024coder}. The paper does not compare against larger proprietary
+systems because the research question is whether a small open model can be used
+more reliably under a single-GPU budget.
 
 \paragraph{Test-time scaling and execution-guided selection.}
 AlphaCode demonstrated that large-scale sampling followed by program-behavior
@@ -106,7 +136,15 @@ Qwen2.5-derived RLVR model trained with verified code-reasoning data
 \citep{xcode2026xcoder}. These results suggest that durable model-weight gains
 need verified data and calibrated rewards, not only prompt changes.
 
-\section{Protocol}
+\paragraph{Reproducible ML reporting.}
+The paper structure follows the reproducibility concerns emphasized by arXiv
+submission guidance and the NeurIPS checklist: state compute, data boundaries,
+evaluation protocol, limitations, and artifacts that allow independent
+inspection \citep{arxiv2026submit,neurips2026checklist}. This is especially
+important for executable code benchmarks, where small changes in candidate
+selection can change the apparent result.
+
+\section{Method}
 
 \subsection{Public and Private Signals}
 
@@ -120,6 +158,74 @@ are available to any solver. It does not permit hidden-test selection, hidden
 failure feedback, or retuning against hidden outcomes. Negative outcomes are
 kept in the artifact record because they identify where public-side methods fail
 to generalize.
+
+\subsection{Task Materialization}
+
+For LiveCodeBench, the generation host receives a prompt/public-only parquet.
+That file contains the problem statement, starter code where available, and
+public examples/tests, but not the private tests. The full
+\texttt{release\_v6} JSONL with private tests is materialized separately for
+hidden replay. Its SHA-256 hash is recorded in the benchmark package; the file
+itself is not committed because it is large and contains private test payloads.
+
+Each saved generation file is immutable once it becomes a reported artifact.
+Later selection and audit steps read from saved generations rather than
+regenerating candidates. This makes the selection protocol inspectable and
+prevents accidental score drift from sampling randomness.
+
+\subsection{Candidate Generation}
+
+For the main LiveCodeBench run, the model is Qwen2.5-Coder-7B-Instruct. Greedy
+decoding uses one completion with temperature 0. The public-selection runs use
+temperature 0.8, top-p 0.95, a 2048-token completion budget, and either four or
+eight samples per task. The eight-sample run reuses the first four candidates
+from the four-sample run and generates only the missing candidates.
+
+Generation is checkpointed by task so interrupted runs can resume without
+discarding completed samples. This matters on the L20 because a full
+eight-sample LiveCodeBench generation pass took 28,480.919 seconds.
+
+\subsection{Public-Test Selection}
+
+For each task, candidates are executed against public tests only. If at least
+one candidate passes all public tests, the selector chooses the shortest
+public-passing program. If none pass all public tests, it chooses the shortest
+candidate among those with the best public score. The shortest-solution
+tie-breaker is deliberately simple: it avoids hidden labels, avoids learned
+reranking that would need extra calibration, and makes the selection rule easy
+to audit.
+
+The selector also records public-pass counts, selected indices, and selected
+public scores. For the eight-sample LiveCodeBench run, 618 of 1,055 selected
+candidates passed all public tests. Hidden replay later showed 403 hidden
+passes, leaving a large public-pass/hidden-fail gap that motivates repair and
+verifier work.
+
+\subsection{Repair and Verifier Experiments}
+
+Repair is treated as a public-side second pass. The repair prompt may include
+the original problem, public examples, the candidate code, and public-test
+failure messages. It may not include private failures. We evaluated three
+repair variants on the X-Coder medium control slice: starter-prefix prompting,
+public-only second-pass repair, and public-feedback repair.
+
+Verifier experiments are evaluated with the same rule: they may only consume
+public-side signals before selection. Candidate-aware behavior tests and
+expected-output verifier prompts were therefore built from generated or public
+inputs, not private labels. A verifier variant is allowed into a headline result
+only if it improves hidden replay without failing the generalization scorecard.
+
+\subsection{Hidden Replay and Scorecards}
+
+After public-side selection, the selected candidate is replayed against private
+tests using the LiveCodeBench evaluator. Hidden replay is chunked so a
+single-problem worker failure does not invalidate the full run. In the reported
+eight-sample run, one worker failure occurred on question id 3637; it is counted
+as a hidden failure rather than omitted.
+
+The generalization scorecard combines full LiveCodeBench with EvalPlus
+HumanEval+ and MBPP+. Any future selector, repair loop, adapter, or verifier
+must improve the target benchmark without failing this scorecard.
 
 \subsection{Hardware and Model}
 
@@ -202,6 +308,10 @@ selection uses only visible public tests; hidden tests are used for final replay
 \label{tab:lcb-main}
 \end{table}
 
+The relative improvement from greedy decoding to eight-sample public selection
+is 35.69\%. The result should be interpreted as bounded test-time scaling under
+a public-test solver, not as a new model checkpoint.
+
 The gain is not uniform across difficulty levels. Easy tasks improve from 206
 to 260 solved tasks, medium tasks from 82 to 124, and hard tasks from 9 to 19.
 The hard-task result remains weak in absolute terms, which is consistent with
@@ -221,6 +331,40 @@ Hard & 9 & 19 & 350 & 2.57 & 5.43 \\
 \caption{LiveCodeBench difficulty breakdown. Values in the last two columns are
 percentages.}
 \label{tab:lcb-breakdown}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Platform & Solved & Total & Pass@1 \\
+\midrule
+AtCoder & 199 & 602 & 33.06 \\
+Codeforces & 5 & 9 & 55.56 \\
+LeetCode & 199 & 444 & 44.82 \\
+\bottomrule
+\end{tabular}
+\caption{LiveCodeBench platform breakdown for the eight-sample public-selection
+run. Values in the last column are percentages.}
+\label{tab:lcb-platform}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+Failure class & Count \\
+\midrule
+Wrong answer & 438 \\
+Time limit exceeded & 147 \\
+Runtime error & 66 \\
+Fatal chunk failure counted as failure & 1 \\
+\bottomrule
+\end{tabular}
+\caption{Failure classes after eight-sample public selection and hidden replay.
+Wrong answers dominate, which points to algorithmic candidate quality rather
+than only formatting or entrypoint repair.}
+\label{tab:failures}
 \end{table}
 
 \subsection{EvalPlus}
@@ -244,6 +388,47 @@ the stricter EvalPlus tests for scoring, not for candidate selection.}
 \label{tab:evalplus}
 \end{table}
 
+\subsection{Artifacts, Hashes, and Runtime}
+
+Table~\ref{tab:artifacts} records the main reproducibility artifacts. Long
+hashes are included because they are the practical link between the paper claim
+and the repository state.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.28\linewidth}
+                >{\raggedright\arraybackslash}p{0.64\linewidth}}
+\toprule
+Artifact & SHA-256 \\
+\midrule
+Full LiveCodeBench JSONL & \texttt{4519422b52d7dd243358ee721ecfe94e26ab364a7af2938c8e5d170a17bcadcd} \\
+Eight-sample generations & \texttt{0950cbbbfcbed6d716b2c9b556e7e9aa3626211381a95e4c6e4a367bdd95df57} \\
+Eight-sample summary & \texttt{2a0ff919aa15eb9ecdf74824f7bf790a23f6d0197ef74970b6190c60e0e00772} \\
+Generalization scorecard & \texttt{1eb0402378ea25732225b29d7ba367b6111ab3351e54cc7c01fa7646a7a12712} \\
+EvalPlus summary & \texttt{08732bbb76450f92ef3c02fa97a163aba01f71028365072c205c5a3af45d5550} \\
+\bottomrule
+\end{tabular}
+\caption{Artifact hashes for the reported results.}
+\label{tab:artifacts}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lr}
+\toprule
+Operation & Wall time / setting \\
+\midrule
+Eight-sample generation & 28,480.919 seconds \\
+Chunked hidden replay & 449.914 seconds \\
+Chunk wall-time limit & 60 seconds \\
+GPU budget & single NVIDIA L20 \\
+\bottomrule
+\end{tabular}
+\caption{Runtime and hardware summary for the main LiveCodeBench result.}
+\label{tab:runtime}
+\end{table}
+
 \subsection{X-Coder Control Slice}
 
 We also probed IIGroup/X-Coder-RL-Qwen2.5-7B on a medium-difficulty control
@@ -252,6 +437,28 @@ second-pass repair reached 2/12. A single public-feedback repair round reached
 4/12. A second public-feedback round produced visible-test signal but no hidden
 passes. We therefore treat the first feedback round as useful but not sufficient
 for broad claims.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.30\linewidth}rr
+                >{\raggedright\arraybackslash}p{0.30\linewidth}}
+\toprule
+Control experiment & Public oracle & Hidden passes & Interpretation \\
+\midrule
+Automatic starter prefix & 0/12 & 0/12 & No transfer from targeted first-12 probes \\
+Strict starter prefix & 0/12 & 0/12 & Output control did not solve algorithms \\
+Public-only repair & 2/12 & 2/12 & First non-targeted positive signal \\
+Fail10 multi-source repair & 0/10 & 0/10 & More code-only samples did not help \\
+Public-feedback repair & 2/10 & 2/10 & Feedback changed behavior on two tasks \\
+Second feedback round & 1/8 & 0/8 & Visible-test overfit signal \\
+\bottomrule
+\end{tabular}
+\caption{X-Coder medium control-slice repair and feedback ablations. The
+combined control-slice status after public-only repair plus one feedback round
+is 4/12.}
+\label{tab:xcoder-ablation}
+\end{table}
 
 \section{Failure Analysis}
 
@@ -267,6 +474,12 @@ not change selection when the pool contained too few public-passing alternatives
 expected-output verifier over generated inputs regressed the targeted replay,
 indicating that verifier confidence needs calibration before it can safely alter
 headline selections.
+
+The same pattern appears in the X-Coder control slice. Public-feedback repair
+is useful for one round, but a second round created a public-passing candidate
+without a corresponding hidden pass. This is the failure mode the protocol is
+designed to expose: visible tests can steer the model toward local fixes that
+do not capture the underlying algorithm.
 
 \section{Reproducibility}
 
@@ -292,6 +505,11 @@ The generalization scorecard hash is:
 The repository also includes a separate reproducibility document with expected
 command outputs and artifact-hash checks.
 
+The arXiv source package is intentionally small: \texttt{main.tex} and
+\texttt{references.bib} are sufficient to rebuild the paper. Generated PDFs,
+logs, and auxiliary files are excluded from version control and from the source
+archive.
+
 \section{Limitations}
 
 The strongest limitation is that the main gain is a system-level gain, not a
@@ -301,6 +519,12 @@ one main base model and one main GPU type. Public tests are legitimate solver
 signals, but repeated repair on public failures can overfit them. Finally,
 private benchmark tests cannot be committed directly, so full hidden replay
 requires local materialization of the benchmark payload.
+
+The paper is also limited by scope. It does not yet include a trained adapter
+that improves greedy LiveCodeBench performance, a calibrated learned verifier,
+or a verified synthetic-data pipeline comparable to rStar-Coder or X-Coder. The
+appropriate next claim would require held-out single-sample gains, not only
+stronger public-side selection.
 
 \section{Conclusion}
 

@@ -11,6 +11,13 @@ data/raw/
 data/processed/
 logs/
 paper/*.pdf
+paper/*.tar.gz
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
 *.safetensors
 *.pt
 *.pth
