@@ -412,6 +412,10 @@ def render_model_input(
     raise ValueError("prompt_rendering must be one of: chat, raw")
 
 
+def generated_text_has_closed_code_block(text: str) -> bool:
+    return text.count("```") >= 2
+
+
 def generate_one_batch(
     model: Any,
     tokenizer: Any,
@@ -424,8 +428,10 @@ def generate_one_batch(
     max_new_tokens: int,
     max_input_tokens: int,
     num_return_sequences: int,
+    stop_after_code_block: bool,
 ) -> list[str]:
     import torch
+    from transformers import StoppingCriteria, StoppingCriteriaList
 
     rendered = render_model_input(
         tokenizer=tokenizer,
@@ -457,6 +463,24 @@ def generate_one_batch(
     else:
         kwargs["do_sample"] = False
 
+    if stop_after_code_block:
+        prompt_tokens_for_stop = encoded["input_ids"].shape[1]
+
+        class StopAfterClosedCodeBlock(StoppingCriteria):
+            def __call__(self, input_ids: Any, scores: Any, **kwargs: Any) -> bool:
+                del scores, kwargs
+                return all(
+                    generated_text_has_closed_code_block(
+                        tokenizer.decode(
+                            output[prompt_tokens_for_stop:],
+                            skip_special_tokens=True,
+                        )
+                    )
+                    for output in input_ids
+                )
+
+        kwargs["stopping_criteria"] = StoppingCriteriaList([StopAfterClosedCodeBlock()])
+
     with torch.inference_mode():
         output_ids = model.generate(**encoded, **kwargs)
 
@@ -481,6 +505,7 @@ def generate_problem_outputs(
     top_k: int | None,
     max_new_tokens: int,
     max_input_tokens: int,
+    stop_after_code_block: bool,
 ) -> tuple[list[str], list[str]]:
     prompt = build_lcb_generation_prompt(problem, prompt_suffix=prompt_suffix)
     raw_outputs: list[str] = []
@@ -501,6 +526,7 @@ def generate_problem_outputs(
             max_new_tokens=max_new_tokens,
             max_input_tokens=max_input_tokens,
             num_return_sequences=batch_size,
+            stop_after_code_block=stop_after_code_block,
         )
         raw_outputs.extend(batch_outputs)
         code_outputs.extend(strip_lcb_code_block(output) for output in batch_outputs)
@@ -601,6 +627,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             top_k=args.top_k,
             max_new_tokens=args.max_new_tokens,
             max_input_tokens=args.max_input_tokens,
+            stop_after_code_block=args.stop_after_code_block,
         )
         raw_outputs = existing_raw_outputs + raw_outputs
         code_outputs = existing_code_outputs + code_outputs
@@ -654,6 +681,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             "system_message": args.system_message if args.prompt_rendering == "chat" else None,
             "max_new_tokens": args.max_new_tokens,
             "max_input_tokens": args.max_input_tokens,
+            "stop_after_code_block": args.stop_after_code_block,
             "seed": args.seed,
             "start_date": args.start_date,
             "end_date": args.end_date,
@@ -779,6 +807,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "system_message": args.system_message if args.prompt_rendering == "chat" else None,
         "max_new_tokens": args.max_new_tokens,
         "max_input_tokens": args.max_input_tokens,
+        "stop_after_code_block": args.stop_after_code_block,
         "seed": args.seed,
         "start_date": args.start_date,
         "end_date": args.end_date,
@@ -883,6 +912,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--system-message", default=SYSTEM_MESSAGE_GENERIC)
     parser.add_argument("--max-new-tokens", type=int, default=2048)
     parser.add_argument("--max-input-tokens", type=int, default=8192)
+    parser.add_argument(
+        "--stop-after-code-block",
+        action="store_true",
+        help="Stop generation after every returned sequence has a closed fenced code block.",
+    )
     parser.add_argument("--num-process-evaluate", type=int, default=4)
     parser.add_argument("--timeout", type=int, default=8)
     parser.add_argument("--seed", type=int, default=42)

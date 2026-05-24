@@ -68,6 +68,13 @@ def test_strip_lcb_code_block_prefers_last_python_like_block() -> None:
     assert runner.strip_lcb_code_block(output) == "import sys\nprint(sys.stdin.read())"
 
 
+def test_generated_text_has_closed_code_block_requires_two_fences() -> None:
+    runner = load_runner_module()
+
+    assert runner.generated_text_has_closed_code_block("```python\nprint(1)\n```") is True
+    assert runner.generated_text_has_closed_code_block("```python\nprint(1)") is False
+
+
 def test_sanitize_lcb_metadata_removes_test_payloads() -> None:
     runner = load_runner_module()
     payload = {
