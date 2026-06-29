@@ -5,6 +5,20 @@
 Single-L20 post-training, verifier-guided inference, and executable benchmark
 infrastructure for code models.
 
+## Positioning
+
+L20-CodeForge is kept as the executable-code benchmark and post-training sandbox
+in the L20 project family. Its scope is benchmark protocol, candidate
+generation, repair, verifier-guided inference, trajectory data, and reward
+signals for code models.
+
+For serving, kernel, and runtime infrastructure work, use
+[l20-stack](https://github.com/Kevin-Li-2025/l20-stack). For from-scratch
+pretraining and public checkpoint release artifacts, use
+[l20-edu-135m-pretrain](https://github.com/Kevin-Li-2025/l20-edu-135m-pretrain).
+This repository should stay focused on executable coding benchmarks rather than
+becoming a second general L20 infrastructure repo.
+
 L20-CodeForge is an eval-first research stack for making a small GPU budget
 produce measurable coding capability. The project focuses on the pieces that
 matter in real post-training work: clean benchmark protocol, public/private test
