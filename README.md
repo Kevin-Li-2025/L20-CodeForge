@@ -85,6 +85,9 @@ The repository contains:
 - Candidate health audits for syntax, entrypoint, and execution failure modes.
 - A trajectory schema for repo-repair agents and model training data.
 - SFT, DPO, reward-function, and GRPO/RLVR scaffolding.
+- A migrated T4 GRPO reasoning experiment under
+  [`experiments/grpo_t4/`](experiments/grpo_t4/), retained as an experiment
+  artifact rather than a separate public repo.
 - Single-L20 setup scripts and GPU sanity checks.
 
 ## Quickstart
