@@ -7,6 +7,7 @@ import typer
 from rich.console import Console
 
 from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_mini_task_records
+from l20_codeforge.artifacts import artifact_report
 from l20_codeforge.context.compiler import ContextCompiler
 from l20_codeforge.data.code_bench_sft import build_mbpp_sft_jsonl
 from l20_codeforge.data.preferences import build_preference_pairs
@@ -21,8 +22,8 @@ from l20_codeforge.evals.evalplus_runner import (
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
-    select_evalplus_by_public_consensus,
     select_evalplus_by_prompt_doctests,
+    select_evalplus_by_public_consensus,
 )
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
@@ -33,6 +34,19 @@ from l20_codeforge.utils.paths import ensure_project_dirs
 
 app = typer.Typer(no_args_is_help=True)
 console = Console()
+
+
+@app.command("verify-artifacts")
+def verify_artifacts_command(root: Path = Path(".")) -> None:
+    """Verify hashes for the committed benchmark evidence used by the README."""
+    try:
+        report = artifact_report(root)
+    except ValueError as exc:
+        console.print(f"[red]failed to verify artifacts:[/red] {exc}")
+        raise typer.Exit(1) from exc
+    console.print_json(data=report)
+    if report["status"] != "PASS":
+        raise typer.Exit(1)
 
 
 @app.command()

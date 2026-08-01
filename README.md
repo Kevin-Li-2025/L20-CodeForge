@@ -1,6 +1,6 @@
 # L20-CodeForge
 
-[![CI](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml)
+[![CI](https://github.com/yinli-systems/L20-CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/yinli-systems/L20-CodeForge/actions/workflows/ci.yml)
 
 Single-L20 post-training, verifier-guided inference, and executable benchmark
 infrastructure for code models.
@@ -13,9 +13,9 @@ generation, repair, verifier-guided inference, trajectory data, and reward
 signals for code models.
 
 For serving, kernel, and runtime infrastructure work, use
-[l20-stack](https://github.com/Kevin-Li-2025/l20-stack). For from-scratch
+[l20-stack](https://github.com/yinli-systems/l20-stack). For from-scratch
 pretraining and public checkpoint release artifacts, use
-[l20-edu-135m-pretrain](https://github.com/Kevin-Li-2025/l20-edu-135m-pretrain).
+[l20-edu-135m-pretrain](https://github.com/yinli-systems/l20-edu-135m-pretrain).
 This repository should stay focused on executable coding benchmarks rather than
 becoming a second general L20 infrastructure repo.
 
@@ -99,15 +99,14 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev,bench]"
 python -m pytest -q
+python -m l20_codeforge verify-artifacts
 python -m l20_codeforge profile
 python -m l20_codeforge smoke-loop
 ```
 
-The `python -m pytest -q` line should print:
-
-```text
-135 passed in <time>s
-```
+The test command should finish with no failures. `verify-artifacts` should return
+`"status": "PASS"`; it checks every claim-bearing file listed in
+`REPRODUCIBILITY.md`, rather than duplicating a shorter hash list in CI.
 
 On an L20 host:
 

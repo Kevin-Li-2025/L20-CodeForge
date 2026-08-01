@@ -39,11 +39,11 @@ python -m pytest -q
 Expected output shape:
 
 ```text
-135 passed in <time>s
+<count> passed in <time>s
 ```
 
-The exact wall time depends on machine load. The pass count is the important
-invariant for this snapshot.
+The exact wall time and collected count can change as regression coverage grows;
+zero failures is the invariant.
 
 ## Static L20 Profile
 
@@ -95,33 +95,34 @@ check must have `"passed": true`.
 
 ## Benchmark Artifact Hashes
 
-Verify the committed artifact hashes:
+Verify every committed artifact used by the headline result tables:
 
 ```bash
-shasum -a 256 \
-  benchmarks/generalization_scorecard_2026_05_23/scorecard.json \
-  benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json \
-  benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv \
-  benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_public_select_full_eval/report.json \
-  benchmarks/evalplus_l20_codeforge_2026_05_22/rechecks/manifest.json
+python -m l20_codeforge verify-artifacts
 ```
 
-Expected output:
+Expected output begins with:
 
-```text
-1eb0402378ea25732225b29d7ba367b6111ab3351e54cc7c01fa7646a7a12712  benchmarks/generalization_scorecard_2026_05_23/scorecard.json
-2a0ff919aa15eb9ecdf74824f7bf790a23f6d0197ef74970b6190c60e0e00772  benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json
-08732bbb76450f92ef3c02fa97a163aba01f71028365072c205c5a3af45d5550  benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv
-7272f5591c2f868c059226a2a5ec8fc772994cfafd20eb8397a2b6d90aed64bf  benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_public_select_full_eval/report.json
-e86db2af864a9c8896dcd1bc2d4d7b44af7fa395b856ea02b6f0e69c31c915cc  benchmarks/evalplus_l20_codeforge_2026_05_22/rechecks/manifest.json
+```json
+{
+  "status": "PASS",
+  "artifacts": [
+    {
+      "path": "benchmarks/generalization_scorecard_2026_05_23/scorecard.json",
+      "status": "ok"
+    }
+  ]
+}
 ```
 
-The CI workflow verifies the three top-level claim artifacts on every push and
-pull request:
+The full output includes expected and actual SHA-256 values. CI checks these five
+claim artifacts on every push and pull request:
 
 - `benchmarks/generalization_scorecard_2026_05_23/scorecard.json`
 - `benchmarks/livecodebench_full_release_v6_2026_05_22/full_n8_public_select_summary.json`
 - `benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv`
+- `benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n8_public_select_full_eval/report.json`
+- `benchmarks/evalplus_l20_codeforge_2026_05_22/rechecks/manifest.json`
 
 ## LiveCodeBench Full Replay Boundary
 
