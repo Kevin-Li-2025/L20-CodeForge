@@ -1,0 +1,47 @@
+{
+  "protocol": "same frozen development tasks; greedy n=1; select the smallest adapter scale meeting the predeclared Base-to-final improvement gate",
+  "base": {
+    "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-dev200/merged.jsonl",
+    "sha256": "fe99e60a16ff891d249377250f5b233778374bf3ab213eb37e77477eddd9cbaa",
+    "tasks": 200,
+    "passed": 70,
+    "greedy_accuracy": 0.35
+  },
+  "required_absolute_delta": 0.02,
+  "required_passed": 74,
+  "candidates": [
+    {
+      "scale": 0.5,
+      "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-scale-0.5/merged.jsonl",
+      "sha256": "6aed0af8abb3cc322936e22f72593ffd96c53b4dc808fef4ddfd21f05597828f",
+      "tasks": 200,
+      "passed": 68,
+      "greedy_accuracy": 0.34,
+      "absolute_delta_vs_base": -0.01,
+      "eligible": false
+    },
+    {
+      "scale": 0.75,
+      "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-scale-0.75/merged.jsonl",
+      "sha256": "0ebdc352842e0d3d2c3e12f1f2fa19796bd1098e484c7a4729e5365123eeb525",
+      "tasks": 200,
+      "passed": 69,
+      "greedy_accuracy": 0.345,
+      "absolute_delta_vs_base": -0.005,
+      "eligible": false
+    },
+    {
+      "scale": 1.0,
+      "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-scale-1.0/merged.jsonl",
+      "sha256": "61f71b2b997ba712c1542fe20a3de65433ec5ed255f37c51f4f28d6cc637a20a",
+      "tasks": 200,
+      "passed": 73,
+      "greedy_accuracy": 0.365,
+      "absolute_delta_vs_base": 0.015,
+      "eligible": false
+    }
+  ],
+  "selected": null,
+  "development_gate_passed": false,
+  "claim_boundary": "Development data only. EvalPlus scores are neither read nor used for scale selection."
+}

@@ -1,0 +1,31 @@
+{
+  "model_name_or_path": "/ssd/scxi253/l20-codeforge-gpu-campaign/hf-home/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+  "train_jsonl": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/verified-sft/train.jsonl",
+  "train_jsonl_sha256": "639f5d743da758eeb3747ce9931ecd1837986a2d2dede7cb53973b5ba5c6d26a",
+  "output_dir": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/verified-sft/checkpoint",
+  "records": 414,
+  "max_steps": 100,
+  "max_length": 3072,
+  "learning_rate": 0.0001,
+  "per_device_train_batch_size": 1,
+  "gradient_accumulation_steps": 4,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "completion_only_loss": true,
+  "load_in_4bit": true,
+  "bf16": true,
+  "seed": 42,
+  "torch": "2.6.0+cu124",
+  "cuda": "12.4",
+  "cuda_available": true,
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "metrics": {
+    "train_runtime": 187.3616,
+    "train_samples_per_second": 4.27,
+    "train_steps_per_second": 0.534,
+    "total_flos": 1.4066788287381504e+16,
+    "train_loss": 0.10578758087009192,
+    "epoch": 1.927536231884058
+  }
+}

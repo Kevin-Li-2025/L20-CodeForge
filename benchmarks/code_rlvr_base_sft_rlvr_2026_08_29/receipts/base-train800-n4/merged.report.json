@@ -1,0 +1,29 @@
+{
+  "inputs": [
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-0.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-1.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-2.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-3.jsonl"
+  ],
+  "input_sha256": {
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-0.jsonl": "b50826f7e3379e2cad1634b6b9e2847e08592ea4685eb0f3ebc3df697f0c6317",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-1.jsonl": "0b8d4b00f4348e8b64d28c365629ff9ba72b68f729fba57fa4fe201248a8bfb5",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-2.jsonl": "6249e4215667038e4157b7f4aa89154c15f7386f9afd761a1a7adf0d86eef9cc",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/shard-3.jsonl": "437221ece7cc773a6825456946a1f921eb1eec096ba5d17f12a65351704a0d2f"
+  },
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/merged.jsonl",
+  "output_sha256": "7038f82076cf44f99bcf464e32af240f18e417c0eb8f8e6ff504faa71a1eea54",
+  "summary": {
+    "tasks": 800,
+    "expected_tasks": 800,
+    "missing_tasks": 0,
+    "samples": 3200,
+    "greedy_passes": 279,
+    "greedy_accuracy": 0.34875,
+    "pass_at_n_tasks": 414,
+    "pass_at_n": 0.5175,
+    "mixed_reward_tasks": 263,
+    "mixed_reward_fraction": 0.32875,
+    "mean_pass_fraction": 0.49561838985398554
+  }
+}

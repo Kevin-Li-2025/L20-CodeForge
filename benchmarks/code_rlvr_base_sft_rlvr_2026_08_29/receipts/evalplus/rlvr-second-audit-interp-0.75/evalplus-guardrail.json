@@ -1,0 +1,53 @@
+{
+  "protocol": "official EvalPlus greedy n=1; Plus means base and extra tests pass",
+  "datasets": {
+    "humaneval": {
+      "expected_tasks": 164,
+      "base": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/base-current/humaneval/humaneval.samples_eval_results.json",
+        "sha256": "133be6f88f22fe16fe6fefebd595273593a3cfcdcaeed4aeb36a2823038c29c3",
+        "base_tests_passed": 146,
+        "plus_passed": 137,
+        "plus_pass_at_1": 0.8353658536585366
+      },
+      "final": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/rlvr-second-audit-interp-0.75/humaneval/humaneval.samples_eval_results.json",
+        "sha256": "07981b5cecf4c84ac849aa288ada178e89b193ff3b9854bcb8b7d657c68b2e6f",
+        "base_tests_passed": 143,
+        "plus_passed": 136,
+        "plus_pass_at_1": 0.8292682926829268
+      },
+      "paired_plus_transitions": {
+        "gained_tasks": 4,
+        "lost_tasks": 5,
+        "net_tasks": -1
+      },
+      "no_regression": false
+    },
+    "mbpp": {
+      "expected_tasks": 378,
+      "base": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/base-current/mbpp/mbpp.samples_eval_results.json",
+        "sha256": "7c9babbc2d85bcf573a8e25a21949ebfc5c792364796ba2ab8a2478231c82a50",
+        "base_tests_passed": 312,
+        "plus_passed": 271,
+        "plus_pass_at_1": 0.716931216931217
+      },
+      "final": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/rlvr-second-audit-interp-0.75/mbpp/mbpp.samples_eval_results.json",
+        "sha256": "4876f35a618f4029b409566ac4ed3f0d3c4df1f71f2dd8b01b486c5bf890d89e",
+        "base_tests_passed": 309,
+        "plus_passed": 270,
+        "plus_pass_at_1": 0.7142857142857143
+      },
+      "paired_plus_transitions": {
+        "gained_tasks": 11,
+        "lost_tasks": 12,
+        "net_tasks": -1
+      },
+      "no_regression": false
+    }
+  },
+  "evalplus_no_regression_passed": false,
+  "claim_boundary": "Final guardrail only. These results must not select a training checkpoint or scale."
+}

@@ -1,0 +1,12 @@
+{
+  "source": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr/interp-sft-to-rlvr-0.75",
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr/interp-0.75-global-scale-0.875",
+  "scale": 0.875,
+  "method": "scale global lora_alpha; LoRA delta is proportional to alpha/r",
+  "source_lora_alpha": 32,
+  "output_lora_alpha": 28,
+  "source_weights_sha256": "59e9e7322c327093b3e695e49a4c9b2884bc23f2f471576a2ca6035fc49d6892",
+  "output_weights_sha256": "59e9e7322c327093b3e695e49a4c9b2884bc23f2f471576a2ca6035fc49d6892",
+  "source_config_sha256": "3fbe3b2bd7671929b144138e8f91d26c9351351e1795a69d24bb971dec2712c0",
+  "output_config_sha256": "762ce1752ebb9cc3725590f8a927f75a2896f34c9b14f0d1da9bddbc940dd291"
+}
