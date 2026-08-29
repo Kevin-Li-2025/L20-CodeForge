@@ -21,13 +21,15 @@ from l20_codeforge.evals.evalplus_runner import (
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
-    select_evalplus_by_public_consensus,
     select_evalplus_by_prompt_doctests,
+    select_evalplus_by_public_consensus,
 )
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
+from l20_codeforge.evals.verifier_audit import VerifierAuditGates, audit_verifier_dataset
 from l20_codeforge.gpu.profile import L20Profile
+from l20_codeforge.rewards.code_execution import CodeExecutionConfig
 from l20_codeforge.training.sft import train_real_sft
 from l20_codeforge.utils.paths import ensure_project_dirs
 
@@ -139,6 +141,7 @@ def train_real_sft_command(
     lora_dropout: float = 0.05,
     load_in_4bit: bool = False,
     bf16: bool = True,
+    seed: int = 42,
 ) -> None:
     """Run LoRA/QLoRA SFT on real gold-patch chat data."""
     report = train_real_sft(
@@ -156,6 +159,7 @@ def train_real_sft_command(
         lora_dropout=lora_dropout,
         load_in_4bit=load_in_4bit,
         bf16=bf16,
+        seed=seed,
     )
     console.print_json(data=report)
 
@@ -312,6 +316,59 @@ def eval_real_patch_command(
             "worktree": report.worktree,
         }
     )
+
+
+@app.command("audit-code-verifier")
+def audit_code_verifier_command(
+    input_jsonl: Path,
+    output: Path = Path("artifacts/verifier/audit.json"),
+    timeout_seconds: float = 2.0,
+    compile_timeout_seconds: float = 5.0,
+    memory_limit_mb: int = 512,
+    max_output_chars: int = 100000,
+    comparison: str = "tokens",
+    min_reference_solutions: int = 1,
+    min_reference_accept_rate: float = 1.0,
+    min_faulty_kill_rate: float = 0.7,
+    max_false_positive_rate: float = 0.05,
+    max_false_negative_rate: float = 0.05,
+    limit: int | None = None,
+    fail_on_gates: bool = False,
+) -> None:
+    """Audit labeled algorithmic-code tests before using them as RL rewards."""
+
+    if comparison not in {"tokens", "exact"}:
+        console.print("[red]comparison must be 'tokens' or 'exact'[/red]")
+        raise typer.Exit(2)
+    report = audit_verifier_dataset(
+        input_path=input_jsonl,
+        output_path=output,
+        execution_config=CodeExecutionConfig(
+            timeout_seconds=timeout_seconds,
+            compile_timeout_seconds=compile_timeout_seconds,
+            memory_limit_mb=memory_limit_mb,
+            max_output_chars=max_output_chars,
+            comparison=comparison,
+        ),
+        gates=VerifierAuditGates(
+            min_reference_accept_rate=min_reference_accept_rate,
+            min_faulty_kill_rate=min_faulty_kill_rate,
+            max_false_positive_rate=max_false_positive_rate,
+            max_false_negative_rate=max_false_negative_rate,
+        ),
+        min_reference_solutions=min_reference_solutions,
+        limit=limit,
+    )
+    console.print_json(
+        data={
+            "status": report["status"],
+            "summary": report["summary"],
+            "gates": report["gates"],
+            "output": str(output),
+        }
+    )
+    if fail_on_gates and report["status"] != "PASS":
+        raise typer.Exit(2)
 
 
 @app.command("generate-evalplus")

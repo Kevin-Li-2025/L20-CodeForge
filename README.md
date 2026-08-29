@@ -83,6 +83,8 @@ The repository contains:
 - LiveCodeBench and EvalPlus evaluation harnesses with saved reports.
 - Public-test selection, repair, and behavior-test tooling.
 - Candidate health audits for syntax, entrypoint, and execution failure modes.
+- Failure-driven algorithmic-code verifier audits with labeled false-positive,
+  false-negative, faulty-code kill-rate, and behavior-diversity gates.
 - A trajectory schema for repo-repair agents and model training data.
 - SFT, DPO, reward-function, and GRPO/RLVR scaffolding.
 - A migrated T4 GRPO reasoning experiment under
@@ -101,12 +103,20 @@ python -m pip install -e ".[dev,bench]"
 python -m pytest -q
 python -m l20_codeforge profile
 python -m l20_codeforge smoke-loop
+python -m l20_codeforge audit-code-verifier \
+  examples/verifier_audit.square.jsonl \
+  --output artifacts/verifier/square-audit.json \
+  --min-reference-solutions 2 \
+  --min-faulty-kill-rate 1.0 \
+  --max-false-positive-rate 0.0 \
+  --max-false-negative-rate 0.0 \
+  --fail-on-gates
 ```
 
 The `python -m pytest -q` line should print:
 
 ```text
-135 passed in <time>s
+143 passed in <time>s
 ```
 
 On an L20 host:
@@ -178,6 +188,8 @@ generation and replay commands.
 | `benchmarks/evalplus_l20_codeforge_2026_05_22/summary.csv` | EvalPlus greedy baselines and clean system rows. |
 | `docs/MILESTONE_8_LCB_PLUS15_FOCUS.md` | Research plan for converting system gain into model-capability gain. |
 | `docs/MILESTONE_9_XCODER_L20_PLUS15_PROBE.md` | X-Coder probe, control slices, positive results, and overfitting checks. |
+| `docs/MILESTONE_10_FAILURE_DRIVEN_RLVR.md` | Verifier-first RLVR decision, audit gates, reward ablation, and four-GPU pilot boundary. |
+| `configs/qwen25_coder_7b_failure_driven_rlvr.yaml` | Pinned Phase-A data/verifier gates and proposed 100-step GRPO pilot. |
 | `scripts/evaluate_lcb_generations.py` | Hidden replay, public selection, behavior-input selection, and variable-candidate handling. |
 | `scripts/regenerate_lcb_final_answers.py` | Second-pass code regeneration with optional public-test feedback. |
 | `src/l20_codeforge/` | Package code for data, envs, evals, rewards, inference, training, and GPU profiling. |
@@ -232,16 +244,17 @@ benchmarks/              committed benchmark packages and audit outputs
 
 ## Current Roadmap
 
-1. Build mined verified algorithm-prefix data from public failures, while
-   excluding exact LiveCodeBench prompts from training data.
-2. Train or calibrate an expected-output verifier before allowing generated
-   behavior tests to change headline selections.
-3. Improve the X-Coder medium `control12` gate from `4/12` to `6/12+` with an
-   automatic method, then scale to broader LCB slices.
-4. Add a small QLoRA/SFT adapter only after the data path beats prompting and
-   repair on held-out control slices.
-5. Keep the generalization scorecard as the release gate for every benchmark
-   claim.
+1. Build a 2K-task, source- and license-audited faulty-code pool with exact and
+   near-duplicate LiveCodeBench exclusion receipts.
+2. Admit verifier tests only after references, known-correct solutions, faulty
+   kill rate, false-positive rate, and false-negative rate pass the Milestone 10
+   gates.
+3. Run matched verified-SFT and 100-step dense-vs-binary RLVR ablations; keep the
+   SWE-Gym adapter as a negative control.
+4. Improve greedy `n=1` on held-out algorithmic tasks without regressing
+   EvalPlus; report `pass@4` and public selection separately.
+5. Keep frozen/hidden tests out of model selection and run the legacy full
+   LiveCodeBench replay only after the recipe is fixed.
 
 ## References
 
@@ -249,6 +262,8 @@ benchmarks/              committed benchmark packages and audit outputs
 - EvalPlus: https://github.com/evalplus/evalplus
 - Qwen2.5-Coder: https://qwenlm.github.io/blog/qwen2.5-coder-family/
 - X-Coder model card: https://huggingface.co/IIGroup/X-Coder-RL-Qwen2.5-7B
+- HardTests: https://arxiv.org/abs/2505.24098
+- RobustTests: https://arxiv.org/abs/2608.24135
 - TRL GRPO trainer: https://huggingface.co/docs/trl/grpo_trainer
 - mini-SWE-agent: https://github.com/SWE-agent/mini-swe-agent
 - SWE-bench: https://www.swebench.com/
