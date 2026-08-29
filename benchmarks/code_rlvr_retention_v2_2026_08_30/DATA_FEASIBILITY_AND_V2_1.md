@@ -1,4 +1,9 @@
-# v2 data-feasibility receipt and v2.1 replacement
+# Retracted v2 data-feasibility receipt and v2.1 replacement
+
+**Status: `RETRACTED_INVALID_INCOMPLETE_SOURCE`.** This audit consumed only
+1,500 source rows because converted parquet shard `0002` was omitted. It is
+preserved as an audit trail, but none of its feasibility conclusions or the
+v2.1 replacement is authoritative. See `SOURCE_RECONSTRUCTION_CORRECTION.md`.
 
 ## v2 fail-closed result
 

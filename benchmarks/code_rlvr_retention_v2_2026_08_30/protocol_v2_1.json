@@ -1,5 +1,5 @@
 {
-  "status": "PREREGISTERED_BEFORE_RUNTIME_SMOKE_OR_FORMAL_TRAINING",
+  "status": "RETRACTED_INVALID_INCOMPLETE_1500_ROW_SOURCE",
   "supersedes": "protocol.json",
   "supersession_reason": "v2 admitted only 145 of 200 requested report-only final tasks under its unchanged near-duplicate gate",
   "inherited_protocol": "PREREGISTRATION.md",
