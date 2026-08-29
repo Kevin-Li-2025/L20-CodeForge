@@ -1,0 +1,53 @@
+{
+  "runtime_smoke": {
+    "sft": {"job": 1492964, "state": "COMPLETED", "exit_code": "0:0"},
+    "grpo_initial": {
+      "job": 1492992,
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "classification": "pre-backward Transformers return-type compatibility failure; no model-quality result"
+    },
+    "grpo_retry": {"job": 1493040, "state": "COMPLETED", "exit_code": "0:0"}
+  },
+  "formal_training": {
+    "sft": {
+      "seed42": 1493070,
+      "seed43": 1493071,
+      "seed44": 1493072
+    },
+    "rlvr": {
+      "seed42": 1493126,
+      "seed43": 1493127,
+      "seed44": 1493128
+    },
+    "state": "all COMPLETED 0:0"
+  },
+  "development_evaluation": {
+    "base_rstar": 1493149,
+    "sft_rstar": {"seed42": 1493150, "seed43": 1493151, "seed44": 1493152},
+    "base_mbpp": 1493153,
+    "sft_mbpp": {"seed42": 1493154, "seed43": 1493155, "seed44": 1493156},
+    "rlvr_rstar": {"seed42": 1493204, "seed43": 1493206, "seed44": 1493208},
+    "rlvr_mbpp": {"seed42": 1493205, "seed43": 1493207, "seed44": 1493209},
+    "state": "all array elements and scalar jobs COMPLETED 0:0"
+  },
+  "final_evaluation": {
+    "selected_rstar_final": {"job": 1493617, "state": "all 4 array elements COMPLETED 0:0"},
+    "evalplus_generation_initial": {
+      "humaneval": 1493618,
+      "mbpp": 1493619,
+      "state": "FAILED 1:0 before generation because the new cache root was empty and compute nodes could not reach GitHub"
+    },
+    "evalplus_generation_cache_retry": {
+      "humaneval": 1493685,
+      "mbpp": 1493686,
+      "state": "all 8 array elements COMPLETED 0:0"
+    },
+    "evalplus_official_scoring": {
+      "humaneval": 1493743,
+      "mbpp": 1493744,
+      "state": "both COMPLETED 0:0"
+    }
+  },
+  "claim_boundary": "Failed infrastructure attempts produced no complete model score and are retained for auditability; only complete merged/scored artifacts are reported."
+}

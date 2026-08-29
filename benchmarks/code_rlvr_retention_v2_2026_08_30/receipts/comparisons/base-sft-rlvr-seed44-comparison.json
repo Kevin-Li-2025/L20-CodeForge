@@ -1,0 +1,71 @@
+{
+  "protocol": "same frozen dev tasks; greedy n=1; sample_index=0",
+  "expected_tasks": 200,
+  "stages": {
+    "base": {
+      "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/base/new-dev/merged.jsonl",
+      "sha256": "595e122d2698f3ac7515d8a39cefba8135faaf814aa8d2a8729dac0f1f78b4a1",
+      "tasks": 200,
+      "passed": 76,
+      "greedy_accuracy": 0.38
+    },
+    "sft": {
+      "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/sft-seed44/new-dev/merged.jsonl",
+      "sha256": "d1bbe532089f2231f03de6a0b3f16930e104c11580ac4a24f5cc2508b10793bc",
+      "tasks": 200,
+      "passed": 81,
+      "greedy_accuracy": 0.405
+    },
+    "rlvr": {
+      "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/merged.jsonl",
+      "sha256": "8569075600b8384db139cb4c4d76bd5e869b52651b3dd5e6ab0aa65c51bc5cdc",
+      "tasks": 200,
+      "passed": 81,
+      "greedy_accuracy": 0.405
+    }
+  },
+  "paired_comparisons": {
+    "base_to_sft": {
+      "gained_tasks": 17,
+      "lost_tasks": 12,
+      "net_tasks": 5,
+      "absolute_delta": 0.025,
+      "percentage_point_delta": 2.5,
+      "paired_bootstrap_95pct_absolute_delta": [
+        -0.025,
+        0.08
+      ],
+      "exact_mcnemar_p_value": 0.45825831964612007
+    },
+    "sft_to_rlvr": {
+      "gained_tasks": 1,
+      "lost_tasks": 1,
+      "net_tasks": 0,
+      "absolute_delta": 0.0,
+      "percentage_point_delta": 0.0,
+      "paired_bootstrap_95pct_absolute_delta": [
+        -0.015,
+        0.015
+      ],
+      "exact_mcnemar_p_value": 1.0
+    },
+    "base_to_rlvr": {
+      "gained_tasks": 16,
+      "lost_tasks": 11,
+      "net_tasks": 5,
+      "absolute_delta": 0.025,
+      "percentage_point_delta": 2.5,
+      "paired_bootstrap_95pct_absolute_delta": [
+        -0.025,
+        0.075
+      ],
+      "exact_mcnemar_p_value": 0.44206833839416504
+    }
+  },
+  "development_gate": {
+    "required_base_to_final_absolute_delta": 0.02,
+    "observed_base_to_final_absolute_delta": 0.025,
+    "passed": true
+  },
+  "claim_boundary": "Development-set comparison only. EvalPlus is a separate final guardrail and is not consumed by this report."
+}

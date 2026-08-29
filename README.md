@@ -193,6 +193,7 @@ generation and replay commands.
 | `docs/MILESTONE_11_BASE_SFT_RLVR_CAMPAIGN.md` | Active Base to verified-SFT to RLVR campaign, frozen data, promotion gate, and evidence boundary. |
 | `configs/qwen25_coder_7b_base_sft_rlvr_20260829.yaml` | Exact active campaign data hashes, training settings, topology, and no-regression gates. |
 | `benchmarks/code_rlvr_base_sft_rlvr_2026_08_29/` | Frozen data, LiveCodeBench overlap, and GPU smoke receipts. |
+| `benchmarks/code_rlvr_retention_v2_2026_08_30/` | Three-seed retention-aware SFT/RLVR v2 protocol, GPU receipts, development selection, and failed EvalPlus guardrail. |
 | `scripts/evaluate_lcb_generations.py` | Hidden replay, public selection, behavior-input selection, and variable-candidate handling. |
 | `scripts/regenerate_lcb_final_answers.py` | Second-pass code regeneration with optional public-test feedback. |
 | `src/l20_codeforge/` | Package code for data, envs, evals, rewards, inference, training, and GPU profiling. |

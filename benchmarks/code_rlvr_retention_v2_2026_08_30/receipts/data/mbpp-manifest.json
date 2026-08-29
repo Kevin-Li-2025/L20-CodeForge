@@ -1,0 +1,28 @@
+{
+  "dataset": "google-research/google-research",
+  "revision": "041338718b4e8151372fd63677104c65b73a0a4e",
+  "license": "CC-BY-4.0",
+  "source_url": "https://raw.githubusercontent.com/google-research/google-research/041338718b4e8151372fd63677104c65b73a0a4e/mbpp/mbpp.jsonl",
+  "source": "/tmp/l20-mbpp-retention-v2-check/mbpp-source.jsonl",
+  "source_sha256": "ccf64ceae9c5403bf50a044cb6d505bfd2a2963ee58338ba268fd65beab92a9f",
+  "train_id_range": [
+    601,
+    974
+  ],
+  "validation_id_range": [
+    511,
+    600
+  ],
+  "excluded_test_id_range": [
+    11,
+    510
+  ],
+  "excluded_test_ids_seen": 500,
+  "train_records": 374,
+  "validation_tasks": 90,
+  "train_replay": "/tmp/l20-mbpp-retention-v2-check/train-replay.jsonl",
+  "train_replay_sha256": "d28a300c6c58e7d5facbb4fe608de7ce590732690cab8f773ad4dbe97bdade8b",
+  "validation_retention": "/tmp/l20-mbpp-retention-v2-check/validation-retention.jsonl",
+  "validation_retention_sha256": "1b65edbddea554391b374fc1a42f572c141151904b97d70289226d38e5532a82",
+  "claim_boundary": "Only official MBPP train references enter optimization. Validation tasks are retention development data. MBPP test and MBPP+ are excluded."
+}

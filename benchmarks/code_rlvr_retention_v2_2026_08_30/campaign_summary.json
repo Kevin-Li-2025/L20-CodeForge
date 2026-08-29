@@ -1,0 +1,87 @@
+{
+  "campaign": "retention_aware_verified_sft_rlvr_v2_2026_08_30",
+  "status": "FAIL_EVALPLUS_NO_REGRESSION",
+  "target_achieved": false,
+  "development_gate_passed": true,
+  "evalplus_no_regression_passed": false,
+  "selected_candidate": "seed42",
+  "protocol": {
+    "development": "new frozen rStar 200; temperature=0; greedy n=1",
+    "required_base_to_rlvr_absolute_delta": 0.02,
+    "retention": "official MBPP validation IDs 511-600; temperature=0; greedy n=1",
+    "required_retention_delta": 0,
+    "evalplus": "EvalPlus v0.3.1; HumanEvalPlus v0.1.10 and MbppPlus v0.2.0; greedy n=1",
+    "post_final_tuning_allowed": false
+  },
+  "development": {
+    "base": {
+      "rstar_passed": 76,
+      "rstar_tasks": 200,
+      "mbpp_validation_passed": 64,
+      "mbpp_validation_tasks": 90
+    },
+    "seed42": {
+      "sft_rstar_passed": 82,
+      "sft_mbpp_validation_passed": 63,
+      "rlvr_rstar_passed": 80,
+      "rlvr_mbpp_validation_passed": 64,
+      "rlvr_delta_vs_base_points": 2.0,
+      "rlvr_retention_delta_vs_base_tasks": 0,
+      "eligible": true
+    },
+    "seed43": {
+      "sft_rstar_passed": 75,
+      "sft_mbpp_validation_passed": 62,
+      "rlvr_rstar_passed": 76,
+      "rlvr_mbpp_validation_passed": 62,
+      "rlvr_delta_vs_base_points": 0.0,
+      "rlvr_retention_delta_vs_base_tasks": -2,
+      "eligible": false
+    },
+    "seed44": {
+      "sft_rstar_passed": 81,
+      "sft_mbpp_validation_passed": 60,
+      "rlvr_rstar_passed": 81,
+      "rlvr_mbpp_validation_passed": 61,
+      "rlvr_delta_vs_base_points": 2.5,
+      "rlvr_retention_delta_vs_base_tasks": -3,
+      "eligible": false
+    }
+  },
+  "selected_development_statistics": {
+    "base_to_rlvr_gained_tasks": 20,
+    "base_to_rlvr_lost_tasks": 16,
+    "base_to_rlvr_net_tasks": 4,
+    "paired_bootstrap_95pct_absolute_delta": [-0.04, 0.08],
+    "exact_mcnemar_p_value": 0.617719317029696
+  },
+  "report_only_final": {
+    "rstar": {
+      "passed": 72,
+      "tasks": 200,
+      "accuracy": 0.36,
+      "base_comparator_run": false
+    },
+    "livecodebench_2025_02_01_to_2025_04_30": {
+      "status": "BLOCKED_SOURCE_ARTIFACT_UNAVAILABLE",
+      "reason": "The previously materialized 4.2 GB hidden-test JSONL was not retained on the current GPU storage, and the ParaCloud host could not reach the official Hugging Face dataset endpoint. No public-test proxy is reported as hidden-test evidence."
+    },
+    "evalplus": {
+      "humanevalplus": {
+        "base_passed": 137,
+        "selected_passed": 110,
+        "tasks": 164,
+        "delta_tasks": -27,
+        "no_regression": false
+      },
+      "mbppplus": {
+        "base_passed": 271,
+        "selected_passed": 257,
+        "tasks": 378,
+        "delta_tasks": -14,
+        "no_regression": false
+      }
+    }
+  },
+  "claim_boundary": "The selected RLVR seed met the preregistered development and 90-task retention gates, but failed both repeated EvalPlus guardrails. This campaign does not establish a successful retained general-code model."
+}

@@ -1,0 +1,29 @@
+{
+  "inputs": [
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-0.jsonl",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-1.jsonl",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-2.jsonl",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-3.jsonl"
+  ],
+  "input_sha256": {
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-0.jsonl": "a8fc12305e981d33d85650dd79abc8c95175d7d1ef95ea2a27fbc70d4bec6111",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-1.jsonl": "017f62669995cfabc4cca5ea1c4930792fe33b2d47e3f0f8ec2061b631d8020f",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-2.jsonl": "bb2690b1b36e46cafdbb61c90fca47a5e7b9d10eda40da899d7c140e4af91418",
+    "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/shard-3.jsonl": "51998b123a6e8773c22121ab4181403e0c2ce21101ec73f2a09b04b1f4687cf2"
+  },
+  "output": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/merged.jsonl",
+  "output_sha256": "8569075600b8384db139cb4c4d76bd5e869b52651b3dd5e6ab0aa65c51bc5cdc",
+  "summary": {
+    "tasks": 200,
+    "expected_tasks": 200,
+    "missing_tasks": 0,
+    "samples": 200,
+    "greedy_passes": 81,
+    "greedy_accuracy": 0.405,
+    "pass_at_n_tasks": 81,
+    "pass_at_n": 0.405,
+    "mixed_reward_tasks": 0,
+    "mixed_reward_fraction": 0.0,
+    "mean_pass_fraction": 0.5682116046073845
+  }
+}

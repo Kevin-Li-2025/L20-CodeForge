@@ -1,0 +1,63 @@
+{
+  "scope": "formal retention-aware RLVR runs; parsed from the 100 trainer log rows per seed",
+  "seeds": {
+    "42": {
+      "slurm_job": 1493126,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "logged_steps": 100,
+      "trainer_global_step": 100,
+      "completion_files": 100,
+      "all_finite": true,
+      "nonzero_grad_steps": 100,
+      "nonzero_reward_std_steps": 99,
+      "ranges": {
+        "loss": [-0.01183, 0.02903],
+        "grad_norm": [0.00647, 0.03711],
+        "reward": [0.3138, 1.0],
+        "reward_std": [0.0, 0.4821],
+        "kl": [0.00007565, 0.0002968],
+        "replay_loss": [0.1266, 0.7309]
+      }
+    },
+    "43": {
+      "slurm_job": 1493127,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "logged_steps": 100,
+      "trainer_global_step": 100,
+      "completion_files": 100,
+      "all_finite": true,
+      "nonzero_grad_steps": 100,
+      "nonzero_reward_std_steps": 98,
+      "ranges": {
+        "loss": [-0.01091, 0.02382],
+        "grad_norm": [0.005798, 0.04004],
+        "reward": [0.3474, 1.0],
+        "reward_std": [0.0, 0.4803],
+        "kl": [0.00007023, 0.0002425],
+        "replay_loss": [0.07731, 0.6686]
+      }
+    },
+    "44": {
+      "slurm_job": 1493128,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "logged_steps": 100,
+      "trainer_global_step": 100,
+      "completion_files": 100,
+      "all_finite": true,
+      "nonzero_grad_steps": 100,
+      "nonzero_reward_std_steps": 99,
+      "ranges": {
+        "loss": [-0.01005, 0.02197],
+        "grad_norm": [0.004822, 0.03784],
+        "reward": [0.3758, 1.0],
+        "reward_std": [0.0, 0.4858],
+        "kl": [0.0000656, 0.0002341],
+        "replay_loss": [0.1394, 0.6057]
+      }
+    }
+  },
+  "claim_boundary": "Engineering health receipt only; it does not establish held-out model improvement."
+}

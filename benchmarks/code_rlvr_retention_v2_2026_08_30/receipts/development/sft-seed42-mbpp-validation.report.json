@@ -1,0 +1,22 @@
+{
+  "model_name_or_path": "/ssd/scxi253/l20-codeforge-gpu-campaign/hf-home/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+  "adapter_path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/formal/seed42/sft/final",
+  "tasks_jsonl": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/data/mbpp/validation-retention.jsonl",
+  "tasks_jsonl_sha256": "1b65edbddea554391b374fc1a42f572c141151904b97d70289226d38e5532a82",
+  "output": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/sft-seed42/mbpp-validation.jsonl",
+  "output_sha256": "3b48d033a15fa8a5b90160168b8f60a70a3c9349d1972a97211e47e23ad32d09",
+  "tasks": 90,
+  "expected_tasks": 90,
+  "samples": 90,
+  "greedy_passes": 63,
+  "greedy_accuracy": 0.7,
+  "generated_this_run": 90,
+  "n_samples": 1,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "seed": 42,
+  "shard_index": 0,
+  "shard_count": 1,
+  "elapsed_seconds": 315.396,
+  "claim_boundary": "Retention-development accuracy on official MBPP validation examples only; not MBPP test or MBPP+ evidence."
+}

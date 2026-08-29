@@ -1,0 +1,115 @@
+{
+  "protocol": "greedy n=1 on frozen new rStar development and MBPP official validation; require at least +2.0 target points and no MBPP-validation regression; then maximize target passes, break ties by retention passes and lexical seed name",
+  "base_target": {
+    "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/base/new-dev/merged.jsonl",
+    "sha256": "595e122d2698f3ac7515d8a39cefba8135faaf814aa8d2a8729dac0f1f78b4a1",
+    "tasks": 200,
+    "passed": 76,
+    "greedy_accuracy": 0.38
+  },
+  "base_retention": {
+    "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/base/mbpp-validation.jsonl",
+    "sha256": "6f41bce83fcb170fae1bdc19360d96bf3b9726b5bdfa70161c1e011eadfbfc79",
+    "tasks": 90,
+    "passed": 64,
+    "greedy_accuracy": 0.7111111111111111
+  },
+  "required_absolute_delta": 0.02,
+  "required_target_passes": 80,
+  "candidates": [
+    {
+      "name": "seed42",
+      "target": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed42/new-dev/merged.jsonl",
+        "sha256": "fdc4ea1f65531878940fbf30db58a78030b1ed51a5909ffe38f74e8bd6abf136",
+        "tasks": 200,
+        "passed": 80,
+        "greedy_accuracy": 0.4
+      },
+      "retention": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed42/mbpp-validation.jsonl",
+        "sha256": "8490036397d2b75d6f477420f300cd7e61b2cc89e5ac4e12cff3d3f0682e4961",
+        "tasks": 90,
+        "passed": 64,
+        "greedy_accuracy": 0.7111111111111111
+      },
+      "target_pass_delta_vs_base": 4,
+      "target_absolute_delta_vs_base": 0.02,
+      "retention_pass_delta_vs_base": 0,
+      "target_gate_passed": true,
+      "retention_gate_passed": true,
+      "eligible": true
+    },
+    {
+      "name": "seed43",
+      "target": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed43/new-dev/merged.jsonl",
+        "sha256": "a901517430f4ac764463e5c242566e2f3c20cae0cea68c8070fdf1b7c38fda02",
+        "tasks": 200,
+        "passed": 76,
+        "greedy_accuracy": 0.38
+      },
+      "retention": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed43/mbpp-validation.jsonl",
+        "sha256": "1e5c1a1c60fd5873cf79ea56bb33da30f3028c37366f65c9fcf8524ef06472e9",
+        "tasks": 90,
+        "passed": 62,
+        "greedy_accuracy": 0.6888888888888889
+      },
+      "target_pass_delta_vs_base": 0,
+      "target_absolute_delta_vs_base": 0.0,
+      "retention_pass_delta_vs_base": -2,
+      "target_gate_passed": false,
+      "retention_gate_passed": false,
+      "eligible": false
+    },
+    {
+      "name": "seed44",
+      "target": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/new-dev/merged.jsonl",
+        "sha256": "8569075600b8384db139cb4c4d76bd5e869b52651b3dd5e6ab0aa65c51bc5cdc",
+        "tasks": 200,
+        "passed": 81,
+        "greedy_accuracy": 0.405
+      },
+      "retention": {
+        "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed44/mbpp-validation.jsonl",
+        "sha256": "22efc4fbb175ed1fbf87fbb84ff1e33c7b0392039dcbb5e8f9eebc4c656de013",
+        "tasks": 90,
+        "passed": 61,
+        "greedy_accuracy": 0.6777777777777778
+      },
+      "target_pass_delta_vs_base": 5,
+      "target_absolute_delta_vs_base": 0.025,
+      "retention_pass_delta_vs_base": -3,
+      "target_gate_passed": true,
+      "retention_gate_passed": false,
+      "eligible": false
+    }
+  ],
+  "selected": {
+    "name": "seed42",
+    "target": {
+      "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed42/new-dev/merged.jsonl",
+      "sha256": "fdc4ea1f65531878940fbf30db58a78030b1ed51a5909ffe38f74e8bd6abf136",
+      "tasks": 200,
+      "passed": 80,
+      "greedy_accuracy": 0.4
+    },
+    "retention": {
+      "path": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/eval/rlvr-seed42/mbpp-validation.jsonl",
+      "sha256": "8490036397d2b75d6f477420f300cd7e61b2cc89e5ac4e12cff3d3f0682e4961",
+      "tasks": 90,
+      "passed": 64,
+      "greedy_accuracy": 0.7111111111111111
+    },
+    "target_pass_delta_vs_base": 4,
+    "target_absolute_delta_vs_base": 0.02,
+    "retention_pass_delta_vs_base": 0,
+    "target_gate_passed": true,
+    "retention_gate_passed": true,
+    "eligible": true
+  },
+  "development_gate_passed": true,
+  "claim_boundary": "Development selection only. New rStar final, date-held-out LiveCodeBench, and EvalPlus are not read by this selector."
+}
