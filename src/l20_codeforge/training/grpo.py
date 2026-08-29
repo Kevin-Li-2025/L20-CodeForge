@@ -295,19 +295,15 @@ def _tokenize_replay_messages(
     for messages in rows:
         if not messages or messages[-1].get("role") != "assistant":
             raise ValueError("replay rows must end with an assistant message")
-        full_ids = list(
-            tokenizer.apply_chat_template(
-                messages,
-                tokenize=True,
-                add_generation_prompt=False,
-            )
+        full_ids = _chat_template_token_ids(
+            tokenizer,
+            messages,
+            add_generation_prompt=False,
         )
-        prompt_ids = list(
-            tokenizer.apply_chat_template(
-                messages[:-1],
-                tokenize=True,
-                add_generation_prompt=True,
-            )
+        prompt_ids = _chat_template_token_ids(
+            tokenizer,
+            messages[:-1],
+            add_generation_prompt=True,
         )
         if full_ids[: len(prompt_ids)] != prompt_ids:
             raise ValueError("replay prompt tokens are not a prefix of full chat tokens")
@@ -335,6 +331,25 @@ def _tokenize_replay_messages(
         "replay_attention_mask": torch.tensor(attention_mask, dtype=torch.long),
         "replay_labels": torch.tensor(labels, dtype=torch.long),
     }
+
+
+def _chat_template_token_ids(
+    tokenizer: Any,
+    messages: list[dict[str, str]],
+    *,
+    add_generation_prompt: bool,
+) -> list[int]:
+    """Force token-id list output across Transformers chat-template API versions."""
+
+    token_ids = tokenizer.apply_chat_template(
+        messages,
+        tokenize=True,
+        add_generation_prompt=add_generation_prompt,
+        return_dict=False,
+    )
+    if not isinstance(token_ids, list) or any(not isinstance(value, int) for value in token_ids):
+        raise TypeError("chat template must return a flat token-id list")
+    return token_ids
 
 
 def _load_grpo_rows(path: Path, limit: int | None) -> list[dict[str, Any]]:
