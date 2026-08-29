@@ -76,6 +76,22 @@ def test_code_execution_reward_marks_timeout() -> None:
     assert report.reward <= 0.1
 
 
+def test_parallel_test_workers_preserve_order_and_result() -> None:
+    serial = evaluate_python_completion(
+        "x = int(input())\nprint(x * x)",
+        CASES,
+        CodeExecutionConfig(workers=1),
+    )
+    parallel = evaluate_python_completion(
+        "x = int(input())\nprint(x * x)",
+        CASES,
+        CodeExecutionConfig(workers=2),
+    )
+    assert parallel.behavior_signature == serial.behavior_signature == "PP"
+    assert [result.index for result in parallel.test_results] == [0, 1]
+    assert parallel.reward == serial.reward == 1.0
+
+
 def test_rejects_common_filesystem_and_process_escape_surfaces() -> None:
     assert find_python_safety_violation("import os\nprint(os.getcwd())") == "denied import os"
     assert find_python_safety_violation("open('/tmp/x', 'w')") == "denied call open"

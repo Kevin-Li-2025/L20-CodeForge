@@ -34,5 +34,6 @@ export NCCL_ASYNC_ERROR_HANDLING=1
   --learning-rate "${LEARNING_RATE:-0.0001}" \
   --per-device-train-batch-size 1 \
   --gradient-accumulation-steps 4 \
+  --completion-only-loss \
   --load-in-4bit \
   --seed 42

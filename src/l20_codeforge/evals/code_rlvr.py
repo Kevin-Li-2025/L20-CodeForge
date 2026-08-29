@@ -34,6 +34,7 @@ def generate_code_rollouts(
     shard_index: int = 0,
     shard_count: int = 1,
     timeout_seconds: float = 2.0,
+    execution_workers: int = 1,
     overwrite: bool = False,
 ) -> dict[str, Any]:
     """Generate and execute standalone-code completions for one deterministic shard."""
@@ -97,7 +98,10 @@ def generate_code_rollouts(
         for sample_index in range(n_samples)
         if (str(task["task_id"]), sample_index) not in existing
     ]
-    execution_config = CodeExecutionConfig(timeout_seconds=timeout_seconds)
+    execution_config = CodeExecutionConfig(
+        timeout_seconds=timeout_seconds,
+        workers=execution_workers,
+    )
     started = time.monotonic()
     generated = 0
     with output.open("a", encoding="utf-8") as handle:
@@ -180,6 +184,7 @@ def generate_code_rollouts(
         "shard_index": shard_index,
         "shard_count": shard_count,
         "timeout_seconds": timeout_seconds,
+        "execution_workers": execution_workers,
         "generated_this_run": generated,
         "elapsed_seconds": round(time.monotonic() - started, 3),
         "summary": summary,

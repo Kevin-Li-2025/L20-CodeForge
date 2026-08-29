@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Literal
 
@@ -39,6 +40,7 @@ class CodeExecutionConfig(BaseModel):
     timeout_penalty: float = Field(default=0.2, ge=0)
     runtime_error_penalty: float = Field(default=0.1, ge=0)
     reject_unsafe_code: bool = True
+    workers: int = Field(default=1, ge=1, le=64)
 
 
 class ProcessResult(BaseModel):
@@ -169,16 +171,34 @@ def evaluate_python_completion(
                 elapsed_seconds=time.monotonic() - started,
             )
 
-        results = [
-            _run_test_case(
-                solution=solution,
-                case=case,
-                index=index,
-                workdir=workdir,
-                config=active_config,
-            )
-            for index, case in enumerate(cases)
-        ]
+        indexed_cases = list(enumerate(cases))
+        if active_config.workers == 1:
+            results = [
+                _run_test_case(
+                    solution=solution,
+                    case=case,
+                    index=index,
+                    workdir=workdir,
+                    config=active_config,
+                )
+                for index, case in indexed_cases
+            ]
+        else:
+            with ThreadPoolExecutor(
+                max_workers=min(active_config.workers, len(indexed_cases))
+            ) as executor:
+                results = list(
+                    executor.map(
+                        lambda item: _run_test_case(
+                            solution=solution,
+                            case=item[1],
+                            index=item[0],
+                            workdir=workdir,
+                            config=active_config,
+                        ),
+                        indexed_cases,
+                    )
+                )
 
     passed = sum(result.passed for result in results)
     pass_fraction = passed / len(results)

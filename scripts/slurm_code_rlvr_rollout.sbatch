@@ -41,6 +41,7 @@ for shard in 0 1 2 3; do
     --top-p "${TOP_P}"
     --max-new-tokens "${MAX_NEW_TOKENS}"
     --batch-size "${BATCH_SIZE}"
+    --execution-workers "${EXECUTION_WORKERS:-6}"
     --seed 42
     --shard-index "${shard}"
     --shard-count 4

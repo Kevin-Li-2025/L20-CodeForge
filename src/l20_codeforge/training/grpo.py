@@ -33,6 +33,7 @@ def train_code_grpo(
     loss_type: str = "dr_grpo",
     reward_type: str = "dense",
     timeout_seconds: float = 2.0,
+    execution_workers: int = 6,
     lora_r: int = 16,
     lora_alpha: int = 32,
     lora_dropout: float = 0.05,
@@ -101,7 +102,10 @@ def train_code_grpo(
     reward_base = code_execution_reward if reward_type == "dense" else code_binary_execution_reward
     reward_func = functools.partial(
         reward_base,
-        execution_config={"timeout_seconds": timeout_seconds},
+        execution_config={
+            "timeout_seconds": timeout_seconds,
+            "workers": execution_workers,
+        },
     )
     args = GRPOConfig(
         output_dir=str(output_dir),
@@ -166,6 +170,7 @@ def train_code_grpo(
         "loss_type": loss_type,
         "reward_type": reward_type,
         "timeout_seconds": timeout_seconds,
+        "execution_workers": execution_workers,
         "load_in_4bit": load_in_4bit,
         "bf16": bf16,
         "seed": seed,

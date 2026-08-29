@@ -42,5 +42,6 @@ export NCCL_ASYNC_ERROR_HANDLING=1
   --loss-type dr_grpo \
   --reward-type dense \
   --timeout-seconds 2.0 \
+  --execution-workers 6 \
   --load-in-4bit \
   --seed 42

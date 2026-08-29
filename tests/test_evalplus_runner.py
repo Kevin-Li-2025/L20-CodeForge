@@ -41,6 +41,22 @@ def test_select_evalplus_tasks_respects_explicit_task_ids() -> None:
     assert [task_id for task_id, _ in selected] == ["HumanEval/3", "HumanEval/7"]
 
 
+def test_select_evalplus_tasks_shards_non_contiguous_ids_without_omissions() -> None:
+    tasks = {
+        task_id: {"prompt": task_id}
+        for task_id in ["Mbpp/2", "Mbpp/3", "Mbpp/7", "Mbpp/11", "Mbpp/20"]
+    }
+
+    shards = [
+        select_evalplus_tasks(tasks, shard_index=index, shard_count=3)
+        for index in range(3)
+    ]
+
+    flattened = [task_id for shard in shards for task_id, _ in shard]
+    assert sorted(flattened) == sorted(tasks)
+    assert sum(len(shard) for shard in shards) == len(tasks)
+
+
 def test_strip_markdown_code_fence_prefers_python_block() -> None:
     text = "Here is code:\n```python\ndef f():\n    return 1\n```\n"
 
