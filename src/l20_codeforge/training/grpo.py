@@ -20,6 +20,9 @@ def train_code_grpo(
     output_dir: Path,
     *,
     adapter_path: str | None = None,
+    replay_jsonl: Path | None = None,
+    replay_loss_weight: float = 0.0,
+    replay_max_length: int = 3072,
     max_steps: int = 100,
     max_completion_length: int = 1024,
     limit: int | None = None,
@@ -41,7 +44,7 @@ def train_code_grpo(
     bf16: bool = True,
     seed: int = 42,
 ) -> dict[str, Any]:
-    """Run executable-reward GRPO, optionally warm-starting from an SFT adapter."""
+    """Run executable-reward GRPO with optional retention replay cross-entropy."""
 
     import torch
     from datasets import Dataset
@@ -51,7 +54,15 @@ def train_code_grpo(
 
     if reward_type not in {"dense", "binary"}:
         raise ValueError("reward_type must be 'dense' or 'binary'")
+    if replay_loss_weight < 0:
+        raise ValueError("replay_loss_weight must be non-negative")
+    if replay_loss_weight > 0 and replay_jsonl is None:
+        raise ValueError("replay_jsonl is required when replay_loss_weight is positive")
     rows = _load_grpo_rows(train_jsonl, limit=limit)
+    replay_rows: list[dict[str, Any]] = []
+    if replay_jsonl is not None:
+        replay_rows = _load_replay_rows(replay_jsonl)
+        rows = _attach_replay_rows(rows, replay_rows, seed=seed)
     dataset = Dataset.from_list(rows)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -138,13 +149,16 @@ def train_code_grpo(
         remove_unused_columns=False,
         ddp_find_unused_parameters=False,
     )
-    trainer = GRPOTrainer(
+    trainer_class = _replay_trainer_class(GRPOTrainer)
+    trainer = trainer_class(
         model=model,
         reward_funcs=reward_func,
         args=args,
         train_dataset=dataset,
         processing_class=tokenizer,
         peft_config=peft_config,
+        replay_loss_weight=replay_loss_weight,
+        replay_max_length=replay_max_length,
     )
     train_result = trainer.train()
     trainer.save_model(str(output_dir / "final"))
@@ -154,6 +168,11 @@ def train_code_grpo(
     payload = {
         "model_name_or_path": model_name_or_path,
         "adapter_path": adapter_path,
+        "replay_jsonl": str(replay_jsonl) if replay_jsonl else None,
+        "replay_jsonl_sha256": sha256_file(replay_jsonl) if replay_jsonl else None,
+        "replay_records": len(replay_rows),
+        "replay_loss_weight": replay_loss_weight,
+        "replay_max_length": replay_max_length,
         "train_jsonl": str(train_jsonl),
         "train_jsonl_sha256": sha256_file(train_jsonl),
         "output_dir": str(output_dir),
@@ -190,6 +209,134 @@ def train_code_grpo(
     return payload
 
 
+def _replay_trainer_class(base_class: type[Any]) -> type[Any]:
+    """Create a GRPOTrainer subclass without importing optional train deps at module load."""
+
+    class ReplayGRPOTrainer(base_class):  # type: ignore[misc, valid-type]
+        def __init__(
+            self,
+            *args: Any,
+            replay_loss_weight: float = 0.0,
+            replay_max_length: int = 3072,
+            **kwargs: Any,
+        ) -> None:
+            self.replay_loss_weight = replay_loss_weight
+            self.replay_max_length = replay_max_length
+            super().__init__(*args, **kwargs)
+
+        def _generate_and_score_completions(self, inputs: list[dict[str, Any]]) -> dict[str, Any]:
+            output = super()._generate_and_score_completions(inputs)
+            if self.replay_loss_weight == 0.0:
+                return output
+            messages = [row.get("replay_messages") for row in inputs]
+            if not all(messages):
+                raise ValueError("every GRPO row must carry replay_messages")
+            replay_batch = _tokenize_replay_messages(
+                self.processing_class,
+                messages,
+                max_length=self.replay_max_length,
+            )
+            device = self.accelerator.device
+            output.update({key: value.to(device) for key, value in replay_batch.items()})
+            return output
+
+        def compute_loss(
+            self,
+            model: Any,
+            inputs: dict[str, Any],
+            return_outputs: bool = False,
+            num_items_in_batch: Any = None,
+        ) -> Any:
+            import torch
+
+            loss = super().compute_loss(
+                model,
+                inputs,
+                return_outputs=return_outputs,
+                num_items_in_batch=num_items_in_batch,
+            )
+            if self.replay_loss_weight == 0.0:
+                return loss
+            replay_outputs = model(
+                input_ids=inputs["replay_input_ids"],
+                attention_mask=inputs["replay_attention_mask"],
+                labels=inputs["replay_labels"],
+                use_cache=False,
+            )
+            replay_loss = replay_outputs.loss
+            mode = "train" if model.training else "eval"
+            gathered = self.accelerator.gather(replay_loss.detach()).mean().item()
+            self._metrics[mode]["replay_loss"].append(gathered)
+            weighted = (
+                self.replay_loss_weight
+                * replay_loss
+                / max(1, self.current_gradient_accumulation_steps)
+            )
+            if not torch.isfinite(weighted):
+                raise FloatingPointError("non-finite replay loss")
+            return loss + weighted
+
+    return ReplayGRPOTrainer
+
+
+def _tokenize_replay_messages(
+    tokenizer: Any,
+    rows: list[list[dict[str, str]]],
+    *,
+    max_length: int,
+) -> dict[str, Any]:
+    """Tokenize replay chats with prompt labels masked and deterministic left padding."""
+
+    import torch
+
+    if max_length <= 0:
+        raise ValueError("replay_max_length must be positive")
+    encoded: list[tuple[list[int], int]] = []
+    for messages in rows:
+        if not messages or messages[-1].get("role") != "assistant":
+            raise ValueError("replay rows must end with an assistant message")
+        full_ids = list(
+            tokenizer.apply_chat_template(
+                messages,
+                tokenize=True,
+                add_generation_prompt=False,
+            )
+        )
+        prompt_ids = list(
+            tokenizer.apply_chat_template(
+                messages[:-1],
+                tokenize=True,
+                add_generation_prompt=True,
+            )
+        )
+        if full_ids[: len(prompt_ids)] != prompt_ids:
+            raise ValueError("replay prompt tokens are not a prefix of full chat tokens")
+        overflow = max(0, len(full_ids) - max_length)
+        full_ids = full_ids[overflow:]
+        prompt_length = max(0, len(prompt_ids) - overflow)
+        if prompt_length >= len(full_ids):
+            raise ValueError("replay truncation removed the entire assistant completion")
+        encoded.append((full_ids, prompt_length))
+
+    width = max(len(ids) for ids, _ in encoded)
+    pad_token_id = tokenizer.pad_token_id
+    if pad_token_id is None:
+        raise ValueError("replay tokenizer requires a pad token")
+    input_ids: list[list[int]] = []
+    attention_mask: list[list[int]] = []
+    labels: list[list[int]] = []
+    for ids, prompt_length in encoded:
+        padding = width - len(ids)
+        input_ids.append([pad_token_id] * padding + ids)
+        attention_mask.append([0] * padding + [1] * len(ids))
+        labels.append([-100] * (padding + prompt_length) + ids[prompt_length:])
+    return {
+        "replay_input_ids": torch.tensor(input_ids, dtype=torch.long),
+        "replay_attention_mask": torch.tensor(attention_mask, dtype=torch.long),
+        "replay_labels": torch.tensor(labels, dtype=torch.long),
+    }
+
+
 def _load_grpo_rows(path: Path, limit: int | None) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     with path.open(encoding="utf-8") as handle:
@@ -213,3 +360,42 @@ def _load_grpo_rows(path: Path, limit: int | None) -> list[dict[str, Any]]:
     if not rows:
         raise ValueError(f"no GRPO rows loaded from {path}")
     return rows
+
+
+def _load_replay_rows(path: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            if not line.strip():
+                continue
+            payload = json.loads(line)
+            messages = payload.get("messages")
+            if not messages or messages[-1].get("role") != "assistant":
+                raise ValueError("replay JSONL rows must end with an assistant message")
+            rows.append(payload)
+    if not rows:
+        raise ValueError(f"no replay rows loaded from {path}")
+    return rows
+
+
+def _attach_replay_rows(
+    grpo_rows: list[dict[str, Any]],
+    replay_rows: list[dict[str, Any]],
+    *,
+    seed: int,
+) -> list[dict[str, Any]]:
+    ordered = sorted(
+        replay_rows,
+        key=lambda row: _stable_json_hash({"seed": seed, "messages": row["messages"]}),
+    )
+    return [
+        {**row, "replay_messages": ordered[index % len(ordered)]["messages"]}
+        for index, row in enumerate(grpo_rows)
+    ]
+
+
+def _stable_json_hash(payload: Any) -> str:
+    import hashlib
+
+    encoded = json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()

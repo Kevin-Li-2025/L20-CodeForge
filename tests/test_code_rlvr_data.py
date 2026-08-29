@@ -70,6 +70,51 @@ def test_materialize_rstar_code_rlvr_freezes_disjoint_receipts(tmp_path: Path) -
     assert len(report["dev_sha256"]) == 64
 
 
+def test_holdouts_are_disjoint_without_changing_frozen_train_dev(tmp_path: Path) -> None:
+    rows = [_raw_row(index) for index in range(40)]
+    original = materialize_rstar_code_rlvr(
+        tmp_path / "original",
+        train_tasks=8,
+        dev_tasks=5,
+        seed=11,
+        min_tests=4,
+        max_tests=6,
+        rows=rows,
+    )
+    extended = materialize_rstar_code_rlvr(
+        tmp_path / "extended",
+        train_tasks=8,
+        dev_tasks=5,
+        retention_tasks=4,
+        final_tasks=4,
+        seed=11,
+        min_tests=4,
+        max_tests=6,
+        rows=rows,
+    )
+
+    assert extended["train_task_ids"] == original["train_task_ids"]
+    assert extended["dev_task_ids"] == original["dev_task_ids"]
+    assert extended["train_sha256"] == original["train_sha256"]
+    assert extended["dev_sha256"] == original["dev_sha256"]
+    split_ids = [
+        set(extended[key])
+        for key in (
+            "train_task_ids",
+            "dev_task_ids",
+            "retention_task_ids",
+            "final_task_ids",
+        )
+    ]
+    for index, left in enumerate(split_ids):
+        for right in split_ids[index + 1 :]:
+            assert left.isdisjoint(right)
+    assert extended["retention_tasks"] == 4
+    assert extended["final_tasks"] == 4
+    assert len(extended["retention_sha256"]) == 64
+    assert len(extended["final_sha256"]) == 64
+
+
 def test_prompt_shingle_jaccard_detects_near_duplicate() -> None:
     left = prompt_shingles("Read n integers and print their sum in Python.")
     right = prompt_shingles("Read n integers and print their sum in Python please.")

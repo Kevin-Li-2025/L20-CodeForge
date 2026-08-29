@@ -14,6 +14,11 @@ from l20_codeforge.data.preferences import build_preference_pairs
 from l20_codeforge.data.real_datasets import fetch_hf_real_dataset, list_real_dataset_specs
 from l20_codeforge.data.real_sft import build_real_sft_jsonl
 from l20_codeforge.data.report import write_trajectory_report
+from l20_codeforge.data.retention import (
+    build_lcb_verified_trajectory_sft,
+    compose_retention_sft_mixture,
+    materialize_mbpp_replay,
+)
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
 from l20_codeforge.evals.code_rlvr import (
@@ -31,6 +36,7 @@ from l20_codeforge.evals.evalplus_runner import (
     select_evalplus_by_prompt_doctests,
     select_evalplus_by_public_consensus,
 )
+from l20_codeforge.evals.function_retention import generate_function_retention_rollouts
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
@@ -705,6 +711,8 @@ def build_rstar_code_rlvr_command(
     output_dir: Path,
     train_tasks: int = 800,
     dev_tasks: int = 200,
+    retention_tasks: int = 0,
+    final_tasks: int = 0,
     seed: int = 20260829,
     min_tests: int = 8,
     max_tests: int = 24,
@@ -720,6 +728,8 @@ def build_rstar_code_rlvr_command(
         output_dir,
         train_tasks=train_tasks,
         dev_tasks=dev_tasks,
+        retention_tasks=retention_tasks,
+        final_tasks=final_tasks,
         seed=seed,
         min_tests=min_tests,
         max_tests=max_tests,
@@ -731,6 +741,60 @@ def build_rstar_code_rlvr_command(
         rows_api_batch_size=rows_api_batch_size,
     )
     console.print_json(data=report)
+
+
+@app.command("build-mbpp-retention-replay")
+def build_mbpp_retention_replay_command(output_dir: Path) -> None:
+    """Freeze official MBPP train replay and validation retention tasks."""
+    console.print_json(data=materialize_mbpp_replay(output_dir))
+
+
+@app.command("build-lcb-trajectory-sft")
+def build_lcb_trajectory_sft_command(
+    eval_all_json: Path,
+    output: Path,
+    max_contest_date: str,
+    min_contest_date: str | None = None,
+    max_records: int = 138,
+    seed: int = 20260830,
+) -> None:
+    """Build training-only SFT from historical full-harness-passing L20 outputs."""
+    console.print_json(
+        data=build_lcb_verified_trajectory_sft(
+            eval_all_json,
+            output,
+            max_contest_date=max_contest_date,
+            min_contest_date=min_contest_date,
+            max_records=max_records,
+            seed=seed,
+        )
+    )
+
+
+@app.command("compose-retention-sft")
+def compose_retention_sft_command(
+    target_sft: Path,
+    lcb_replay_sft: Path,
+    mbpp_replay_sft: Path,
+    output: Path,
+    target_records: int = 414,
+    lcb_records: int = 138,
+    mbpp_records: int = 138,
+    seed: int = 20260830,
+) -> None:
+    """Compose a deterministic target/trajectory/function replay SFT mixture."""
+    console.print_json(
+        data=compose_retention_sft_mixture(
+            target_sft,
+            lcb_replay_sft,
+            mbpp_replay_sft,
+            output,
+            target_records=target_records,
+            lcb_records=lcb_records,
+            mbpp_records=mbpp_records,
+            seed=seed,
+        )
+    )
 
 
 @app.command("generate-code-rollouts")
@@ -788,6 +852,49 @@ def merge_code_rollouts_command(
     console.print_json(data=merge_code_rollouts(inputs, output, expected_tasks=expected_tasks))
 
 
+@app.command("generate-function-retention-rollouts")
+def generate_function_retention_rollouts_command(
+    model: str,
+    tasks_jsonl: Path,
+    output: Path,
+    adapter_path: str | None = None,
+    n_samples: int = 1,
+    temperature: float = 0.0,
+    top_p: float = 0.95,
+    max_prompt_length: int = 4096,
+    max_new_tokens: int = 1024,
+    batch_size: int = 2,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    shard_index: int = 0,
+    shard_count: int = 1,
+    timeout_seconds: float = 4.0,
+    overwrite: bool = False,
+) -> None:
+    """Generate and execute official MBPP-validation retention rollouts."""
+    report = generate_function_retention_rollouts(
+        model,
+        tasks_jsonl,
+        output,
+        adapter_path=adapter_path,
+        n_samples=n_samples,
+        temperature=temperature,
+        top_p=top_p,
+        max_prompt_length=max_prompt_length,
+        max_new_tokens=max_new_tokens,
+        batch_size=batch_size,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+        seed=seed,
+        shard_index=shard_index,
+        shard_count=shard_count,
+        timeout_seconds=timeout_seconds,
+        overwrite=overwrite,
+    )
+    console.print_json(data=report)
+
+
 @app.command("build-verified-code-sft")
 def build_verified_code_sft_command(
     rollouts_jsonl: Path,
@@ -830,6 +937,9 @@ def train_code_grpo_command(
     train_jsonl: Path,
     output_dir: Path,
     adapter_path: str | None = None,
+    replay_jsonl: Path | None = None,
+    replay_loss_weight: float = 0.0,
+    replay_max_length: int = 3072,
     max_steps: int = 100,
     max_completion_length: int = 1024,
     limit: int | None = None,
@@ -855,6 +965,9 @@ def train_code_grpo_command(
             train_jsonl,
             output_dir,
             adapter_path=adapter_path,
+            replay_jsonl=replay_jsonl,
+            replay_loss_weight=replay_loss_weight,
+            replay_max_length=replay_max_length,
             max_steps=max_steps,
             max_completion_length=max_completion_length,
             limit=limit,

@@ -24,6 +24,8 @@ def materialize_rstar_code_rlvr(
     *,
     train_tasks: int = 800,
     dev_tasks: int = 200,
+    retention_tasks: int = 0,
+    final_tasks: int = 0,
     seed: int = 20260829,
     min_tests: int = 8,
     max_tests: int = 24,
@@ -48,6 +50,8 @@ def materialize_rstar_code_rlvr(
 
     if train_tasks <= 0 or dev_tasks <= 0:
         raise ValueError("train_tasks and dev_tasks must be positive")
+    if retention_tasks < 0 or final_tasks < 0:
+        raise ValueError("retention_tasks and final_tasks must be non-negative")
     if max_tests < min_tests:
         raise ValueError("max_tests must be at least min_tests")
 
@@ -97,6 +101,7 @@ def materialize_rstar_code_rlvr(
     dev = candidates[:dev_tasks]
     dev_shingles = [prompt_shingles(row["prompt"]) for row in dev]
     train: list[dict[str, Any]] = []
+    remaining: list[dict[str, Any]] = []
     near_duplicates: list[dict[str, Any]] = []
     for task in candidates[dev_tasks:]:
         shingles = prompt_shingles(task["prompt"])
@@ -109,9 +114,10 @@ def materialize_rstar_code_rlvr(
                 {"task_id": task["task_id"], "max_dev_jaccard": round(max_similarity, 6)}
             )
             continue
-        train.append(task)
-        if len(train) >= train_tasks:
-            break
+        if len(train) < train_tasks:
+            train.append(task)
+        else:
+            remaining.append(task)
 
     if len(dev) < dev_tasks or len(train) < train_tasks:
         raise ValueError(
@@ -119,10 +125,29 @@ def materialize_rstar_code_rlvr(
             f"train={len(train)}/{train_tasks}, dev={len(dev)}/{dev_tasks}"
         )
 
+    retention, final, holdout_near_duplicates = _select_disjoint_holdouts(
+        remaining,
+        prior=dev + train,
+        retention_tasks=retention_tasks,
+        final_tasks=final_tasks,
+        near_duplicate_threshold=near_duplicate_threshold,
+    )
+    if len(retention) < retention_tasks or len(final) < final_tasks:
+        raise ValueError(
+            "insufficient holdout tasks after filtering: "
+            f"retention={len(retention)}/{retention_tasks}, final={len(final)}/{final_tasks}"
+        )
+
     train_path = output_dir / "train.jsonl"
     dev_path = output_dir / "dev.jsonl"
     write_jsonl(train_path, train)
     write_jsonl(dev_path, dev)
+    retention_path = output_dir / "retention.jsonl"
+    final_path = output_dir / "final.jsonl"
+    if retention_tasks:
+        write_jsonl(retention_path, retention)
+    if final_tasks:
+        write_jsonl(final_path, final)
 
     manifest = {
         "dataset": RSTAR_DATASET,
@@ -141,6 +166,8 @@ def materialize_rstar_code_rlvr(
         "candidate_tasks": len(candidates),
         "train_tasks": len(train),
         "dev_tasks": len(dev),
+        "retention_tasks": len(retention),
+        "final_tasks": len(final),
         "seed": seed,
         "min_tests": min_tests,
         "max_tests": max_tests,
@@ -149,17 +176,68 @@ def materialize_rstar_code_rlvr(
         "max_prompt_chars": max_prompt_chars,
         "near_duplicate_threshold": near_duplicate_threshold,
         "near_duplicates_removed": near_duplicates,
+        "holdout_near_duplicates_removed": holdout_near_duplicates,
         "rejection_counts": rejection_counts,
         "train_task_ids": [row["task_id"] for row in train],
         "dev_task_ids": [row["task_id"] for row in dev],
+        "retention_task_ids": [row["task_id"] for row in retention],
+        "final_task_ids": [row["task_id"] for row in final],
         "train_jsonl": str(train_path),
         "dev_jsonl": str(dev_path),
         "train_sha256": sha256_file(train_path),
         "dev_sha256": sha256_file(dev_path),
+        "retention_jsonl": str(retention_path) if retention_tasks else None,
+        "final_jsonl": str(final_path) if final_tasks else None,
+        "retention_sha256": sha256_file(retention_path) if retention_tasks else None,
+        "final_sha256": sha256_file(final_path) if final_tasks else None,
     }
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest
+
+
+def _select_disjoint_holdouts(
+    candidates: Sequence[dict[str, Any]],
+    *,
+    prior: Sequence[dict[str, Any]],
+    retention_tasks: int,
+    final_tasks: int,
+    near_duplicate_threshold: float,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    """Select holdouts without changing the historical train/dev assignment."""
+
+    if retention_tasks == 0 and final_tasks == 0:
+        return [], [], []
+    selected_context = [(row["task_id"], prompt_shingles(row["prompt"])) for row in prior]
+    retention: list[dict[str, Any]] = []
+    final: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    for task in candidates:
+        shingles = prompt_shingles(task["prompt"])
+        nearest_id = None
+        max_similarity = 0.0
+        for task_id, existing in selected_context:
+            similarity = jaccard_similarity(shingles, existing)
+            if similarity > max_similarity:
+                max_similarity = similarity
+                nearest_id = task_id
+        if max_similarity >= near_duplicate_threshold:
+            rejected.append(
+                {
+                    "task_id": task["task_id"],
+                    "nearest_task_id": nearest_id,
+                    "max_jaccard": round(max_similarity, 6),
+                }
+            )
+            continue
+        if len(retention) < retention_tasks:
+            retention.append(task)
+        elif len(final) < final_tasks:
+            final.append(task)
+        else:
+            break
+        selected_context.append((task["task_id"], shingles))
+    return retention, final, rejected
 
 
 def discover_dataset_server_parquet_urls(dataset: str, config: str) -> list[str]:
