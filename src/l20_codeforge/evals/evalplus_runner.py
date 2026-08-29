@@ -395,7 +395,7 @@ def run_evalplus_official(
     mini: bool = False,
     i_just_wanna_run: bool = False,
 ) -> EvalPlusOfficialReport:
-    command = ["evalplus.evaluate", dataset, "--samples", str(samples)]
+    command = [sys.executable, "-m", "evalplus.evaluate", dataset, "--samples", str(samples)]
     if base_only:
         command.append("--base-only")
     if parallel is not None:

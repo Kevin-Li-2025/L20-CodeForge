@@ -27,6 +27,7 @@ fi
 mkdir -p "${RUN_ROOT}/logs" "${RUN_ROOT}/tmp/${SLURM_JOB_ID}" "${OUTPUT_DIR}"
 export PYTHONPATH="${PROJECT}/src"
 export HF_HOME="/ssd/scxi253/l20-codeforge-gpu-campaign/hf-home"
+export XDG_CACHE_HOME="${RUN_ROOT}/xdg-cache"
 export TMPDIR="${RUN_ROOT}/tmp/${SLURM_JOB_ID}"
 export TOKENIZERS_PARALLELISM=false
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
