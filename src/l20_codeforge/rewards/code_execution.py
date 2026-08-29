@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import math
 import os
 import re
@@ -37,6 +38,7 @@ class CodeExecutionConfig(BaseModel):
     all_pass_weight: float = Field(default=0.2, ge=0)
     timeout_penalty: float = Field(default=0.2, ge=0)
     runtime_error_penalty: float = Field(default=0.1, ge=0)
+    reject_unsafe_code: bool = True
 
 
 class ProcessResult(BaseModel):
@@ -120,6 +122,26 @@ def evaluate_python_completion(
 
     code = extract_python_code(completion)
     started = time.monotonic()
+    safety_violation = (
+        find_python_safety_violation(code) if active_config.reject_unsafe_code else None
+    )
+    if safety_violation:
+        return CodeExecutionReport(
+            status="compile_error",
+            compiled=False,
+            tests_passed=0,
+            tests_total=len(cases),
+            pass_fraction=0.0,
+            all_passed=False,
+            reward=0.0,
+            behavior_signature="S" + "-" * len(cases),
+            compile_result=ProcessResult(
+                exit_code=126,
+                stderr=f"unsafe code rejected: {safety_violation}",
+            ),
+            extracted_code=code,
+            elapsed_seconds=time.monotonic() - started,
+        )
     with tempfile.TemporaryDirectory(prefix="l20-code-verifier-") as temp_dir:
         workdir = Path(temp_dir)
         solution = workdir / "solution.py"
@@ -195,6 +217,66 @@ def evaluate_python_completion(
         extracted_code=code,
         elapsed_seconds=time.monotonic() - started,
     )
+
+
+_DENIED_IMPORT_ROOTS = {
+    "builtins",
+    "ctypes",
+    "glob",
+    "importlib",
+    "multiprocessing",
+    "os",
+    "pathlib",
+    "resource",
+    "shutil",
+    "signal",
+    "socket",
+    "subprocess",
+    "tempfile",
+}
+_DENIED_CALLS = {
+    "__import__",
+    "breakpoint",
+    "compile",
+    "delattr",
+    "eval",
+    "exec",
+    "getattr",
+    "globals",
+    "help",
+    "locals",
+    "open",
+    "setattr",
+    "vars",
+}
+
+
+def find_python_safety_violation(code: str) -> str | None:
+    """Reject common filesystem/process/network escape surfaces before execution.
+
+    This is defense in depth, not a replacement for a container sandbox.
+    """
+
+    try:
+        tree = ast.parse(code)
+    except SyntaxError:
+        return None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                root = alias.name.split(".", 1)[0]
+                if root in _DENIED_IMPORT_ROOTS:
+                    return f"denied import {root}"
+        elif isinstance(node, ast.ImportFrom):
+            root = (node.module or "").split(".", 1)[0]
+            if root in _DENIED_IMPORT_ROOTS:
+                return f"denied import {root}"
+        elif isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+            if node.func.id in _DENIED_CALLS:
+                return f"denied call {node.func.id}"
+        elif isinstance(node, ast.Attribute) and node.attr.startswith("__"):
+            return f"denied dunder attribute {node.attr}"
+    return None
 
 
 def _run_test_case(
@@ -287,9 +369,10 @@ def _run_limited_process(
 
     stdout = _read_limited(stdout_path, config.max_output_chars)
     stderr = _read_limited(stderr_path, config.max_output_chars)
-    output_limited = any(
-        path.stat().st_size >= config.max_output_chars for path in (stdout_path, stderr_path)
-    ) or process.returncode == -signal.SIGXFSZ
+    output_limited = (
+        any(path.stat().st_size >= config.max_output_chars for path in (stdout_path, stderr_path))
+        or process.returncode == -signal.SIGXFSZ
+    )
     return ProcessResult(
         exit_code=124 if timed_out else int(process.returncode),
         stdout=stdout,

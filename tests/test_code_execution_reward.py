@@ -5,6 +5,7 @@ from l20_codeforge.rewards.code_execution import (
     CodeTestCase,
     evaluate_python_completion,
     extract_python_code,
+    find_python_safety_violation,
 )
 from l20_codeforge.training.reward_functions import (
     code_binary_execution_reward,
@@ -73,6 +74,18 @@ def test_code_execution_reward_marks_timeout() -> None:
     assert report.test_results[0].status == "timeout"
     assert report.behavior_signature == "T"
     assert report.reward <= 0.1
+
+
+def test_rejects_common_filesystem_and_process_escape_surfaces() -> None:
+    assert find_python_safety_violation("import os\nprint(os.getcwd())") == "denied import os"
+    assert find_python_safety_violation("open('/tmp/x', 'w')") == "denied call open"
+    report = evaluate_python_completion(
+        "import subprocess\nsubprocess.run(['echo', 'x'])",
+        [{"input": "", "output": "x"}],
+    )
+    assert report.compiled is False
+    assert report.behavior_signature.startswith("S")
+    assert report.compile_result.exit_code == 126
 
 
 def test_trl_reward_helpers_support_dense_and_binary_ablation() -> None:

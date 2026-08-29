@@ -190,6 +190,9 @@ generation and replay commands.
 | `docs/MILESTONE_9_XCODER_L20_PLUS15_PROBE.md` | X-Coder probe, control slices, positive results, and overfitting checks. |
 | `docs/MILESTONE_10_FAILURE_DRIVEN_RLVR.md` | Verifier-first RLVR decision, audit gates, reward ablation, and four-GPU pilot boundary. |
 | `configs/qwen25_coder_7b_failure_driven_rlvr.yaml` | Pinned Phase-A data/verifier gates and proposed 100-step GRPO pilot. |
+| `docs/MILESTONE_11_BASE_SFT_RLVR_CAMPAIGN.md` | Active Base to verified-SFT to RLVR campaign, frozen data, promotion gate, and evidence boundary. |
+| `configs/qwen25_coder_7b_base_sft_rlvr_20260829.yaml` | Exact active campaign data hashes, training settings, topology, and no-regression gates. |
+| `benchmarks/code_rlvr_base_sft_rlvr_2026_08_29/` | Frozen data, LiveCodeBench overlap, and GPU smoke receipts. |
 | `scripts/evaluate_lcb_generations.py` | Hidden replay, public selection, behavior-input selection, and variable-candidate handling. |
 | `scripts/regenerate_lcb_final_answers.py` | Second-pass code regeneration with optional public-test feedback. |
 | `src/l20_codeforge/` | Package code for data, envs, evals, rewards, inference, training, and GPU profiling. |

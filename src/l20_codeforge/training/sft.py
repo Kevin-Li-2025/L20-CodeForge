@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -59,7 +60,7 @@ def train_real_sft(
             bnb_4bit_quant_type="nf4",
             bnb_4bit_use_double_quant=True,
         )
-        model_kwargs["device_map"] = "auto"
+        model_kwargs["device_map"] = {"": int(os.environ.get("LOCAL_RANK", "0"))}
 
     model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
     model.config.use_cache = False
@@ -93,6 +94,7 @@ def train_real_sft(
         seed=seed,
         dataloader_num_workers=0,
         remove_unused_columns=True,
+        ddp_find_unused_parameters=False,
     )
     trainer = SFTTrainer(
         model=model,

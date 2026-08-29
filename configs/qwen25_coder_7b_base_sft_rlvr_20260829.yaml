@@ -1,0 +1,59 @@
+run:
+  id: qwen25-coder-7b-base-sft-rlvr-20260829
+  state: base_dev_running
+  seed: 42
+  artifact_root: /ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  snapshot: c03e6d358207e414f1eca0bb1891e29f1db0e242
+  quantization: nf4_double_quant_bf16
+
+data:
+  source: microsoft/rStar-Coder
+  config: synthetic_rl_testcase
+  license: CC-BY-4.0
+  source_rows: 1600
+  admitted_rows: 1434
+  train_tasks: 800
+  dev_tasks: 200
+  tests_per_task_max: 24
+  train_sha256: 6cf24bc6da5bd2111c6b4ba730fa679b009ecd5808507cd7484fd903dbc2ec1e
+  dev_sha256: 67c9fb2f5bbba31ae3886f49dbcdc98d7231784c559103e328fa931b3e418bda
+  lcb_release_v6_exact_overlap: 0
+  lcb_release_v6_near_overlap_at_0_85: 0
+
+base:
+  decoding: greedy
+  n: 1
+  max_new_tokens: 1024
+  job_id: 1491788
+  topology: four_independent_single_gpu_shards
+
+verified_sft:
+  source: base_rollouts_that_pass_all_frozen_training_tests
+  rollout_n: 4
+  max_steps: 100
+  learning_rate: 0.0001
+  topology: two_gpu_qlora_ddp
+
+rlvr:
+  initialization: verified_sft_adapter
+  task_selection: mixed_pass_fail_base_rollout_groups
+  reward: dense_execution
+  num_generations: 4
+  max_steps: 100
+  max_completion_length: 1024
+  learning_rate: 0.000001
+  beta: 0.0
+  loss_type: dr_grpo
+  topology: two_gpu_transformers_generation_qlora_ddp
+
+promotion:
+  primary: fresh_dev_greedy_n1
+  minimum_absolute_gain: 0.02
+  minimum_additional_passes_on_200_tasks: 4
+  evalplus_humaneval_plus_regression_allowed: 0.0
+  evalplus_mbpp_plus_regression_allowed: 0.0
+  evalplus_used_for_training_or_checkpoint_selection: false
+  livecodebench_hidden_used_for_model_selection: false

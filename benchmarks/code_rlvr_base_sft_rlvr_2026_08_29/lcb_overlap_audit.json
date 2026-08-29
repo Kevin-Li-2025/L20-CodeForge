@@ -1,0 +1,157 @@
+{
+  "tasks": 1000,
+  "references": 1055,
+  "threshold": 0.85,
+  "exact_matches": [],
+  "near_matches": [],
+  "top_matches": [
+    {
+      "task_id": "synthetic_50378",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.086486
+    },
+    {
+      "task_id": "synthetic_51762",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.05974
+    },
+    {
+      "task_id": "synthetic_51801",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.057221
+    },
+    {
+      "task_id": "synthetic_50712",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.05618
+    },
+    {
+      "task_id": "synthetic_51102",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.055072
+    },
+    {
+      "task_id": "synthetic_51246",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.054286
+    },
+    {
+      "task_id": "synthetic_50616",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.053412
+    },
+    {
+      "task_id": "synthetic_51728",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.04914
+    },
+    {
+      "task_id": "synthetic_51440",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/dev.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.047091
+    },
+    {
+      "task_id": "synthetic_51853",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.046832
+    },
+    {
+      "task_id": "synthetic_50342",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/dev.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.046683
+    },
+    {
+      "task_id": "synthetic_51165",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.046196
+    },
+    {
+      "task_id": "synthetic_50502",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.044503
+    },
+    {
+      "task_id": "synthetic_51235",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1883_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.043178
+    },
+    {
+      "task_id": "synthetic_51016",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "abc306_b",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.043062
+    },
+    {
+      "task_id": "synthetic_51444",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "abc387_a",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.041494
+    },
+    {
+      "task_id": "synthetic_51280",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.041026
+    },
+    {
+      "task_id": "synthetic_51199",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_D",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.040367
+    },
+    {
+      "task_id": "synthetic_50775",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.03937
+    },
+    {
+      "task_id": "synthetic_50410",
+      "task_source": "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl",
+      "reference_id": "1873_B",
+      "reference_source": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json",
+      "five_gram_jaccard": 0.039046
+    }
+  ],
+  "status": "PASS",
+  "task_sha256": {
+    "artifacts/experiments/base_sft_rlvr_20260829/data/train.jsonl": "6cf24bc6da5bd2111c6b4ba730fa679b009ecd5808507cd7484fd903dbc2ec1e",
+    "artifacts/experiments/base_sft_rlvr_20260829/data/dev.jsonl": "67c9fb2f5bbba31ae3886f49dbcdc98d7231784c559103e328fa931b3e418bda"
+  },
+  "reference_sha256": {
+    "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_greedy_generate_only/generations.json": "9d70473c14b20e6d3c514ff64d6f3525f870e5f25d18b55bd0ac83722912d3c5"
+  }
+}
