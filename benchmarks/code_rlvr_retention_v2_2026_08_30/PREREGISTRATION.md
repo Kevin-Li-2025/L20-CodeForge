@@ -1,5 +1,10 @@
 # Retention-aware verified SFT + RLVR v2 preregistration
 
+**Status: `BLOCKED_DATA_FEASIBILITY` before formal training.** See
+`DATA_FEASIBILITY_AND_V2_1.md`. The v2.1 replacement retains the 200-task new
+development split and all model-selection gates, but preregisters a 100-task
+report-only rStar final split.
+
 Frozen before formal model training or any v2 development evaluation.
 
 ## Objective

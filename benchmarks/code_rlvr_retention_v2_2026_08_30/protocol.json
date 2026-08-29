@@ -1,5 +1,5 @@
 {
-  "status": "PREREGISTERED_BEFORE_FORMAL_TRAINING",
+  "status": "BLOCKED_DATA_FEASIBILITY_BEFORE_FORMAL_TRAINING",
   "base_model": {
     "name": "Qwen/Qwen2.5-Coder-7B-Instruct",
     "snapshot": "c03e6d358207e414f1eca0bb1891e29f1db0e242"
