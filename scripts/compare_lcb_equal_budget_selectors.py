@@ -226,7 +226,7 @@ def build_comparison(
         }
         reported_random = selector_summary(ordered_evaluations, indices)
 
-    random_expected = sum(
+    random_expected = math.fsum(
         sum(bool(grade) for grade in record["graded_list"]) / len(record["graded_list"])
         for record in ordered_evaluations
     ) / len(ordered_evaluations)
@@ -273,7 +273,7 @@ def build_comparison(
             "reported_seed": random_seed_to_report,
             "reported_seed_result": reported_random,
             "trials": random_trials,
-            "trial_mean_pass_rate": sum(random_rates) / len(random_rates),
+            "trial_mean_pass_rate": math.fsum(random_rates) / len(random_rates),
             "trial_pass_rate_95_interval": [
                 quantile(random_rates, 0.025),
                 quantile(random_rates, 0.975),
