@@ -62,6 +62,14 @@ records a `PASS` gate over full LiveCodeBench plus EvalPlus HumanEval+/MBPP+.
 
 ## Benchmark Artifact Hashes
 
+The [60-task equal-candidate-pool audit](benchmarks/livecodebench_full_release_v6_2026_05_22/EQUAL_BUDGET_SELECTOR_COMPARISON.md)
+finds public-test and behavior selection both at 21/60, versus first-candidate
+19/60 (paired `p=0.5`). Public selection took 24.008 seconds and behavior
+selection 152.367 seconds in the historical runs, with shared generation of
+1849.462 seconds. This is equal candidate generation, **not equal total compute**;
+behavior adds selection overhead without a pass-count gain on this shard.
+The oracle is only 23/60. This retrospective audit is not a fresh held-out result.
+
 | Artifact | SHA-256 |
 | --- | --- |
 | `benchmarks/generalization_scorecard_2026_05_23/scorecard.json` | `1eb0402378ea25732225b29d7ba367b6111ab3351e54cc7c01fa7646a7a12712` |
@@ -117,6 +125,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev,bench]"
 python -m pytest -q
+python -m l20_codeforge verify-artifacts
 python -m l20_codeforge profile
 python -m l20_codeforge smoke-loop
 python -m l20_codeforge audit-code-verifier \
@@ -130,6 +139,9 @@ python -m l20_codeforge audit-code-verifier \
 ```
 
 The test suite should exit successfully; optional dependency tests may skip.
+`verify-artifacts` should return `"status": "PASS"`; it checks the five pinned
+historical benchmark artifacts listed in `REPRODUCIBILITY.md`. The newer RLVR
+receipt and equal-pool replay tests are separate checks in the test suite.
 
 On an L20 host:
 

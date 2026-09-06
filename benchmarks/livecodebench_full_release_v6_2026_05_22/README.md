@@ -386,6 +386,15 @@ reward model.
 Primary artifacts:
 
 - `analysis_summary.json`: compact score and breakdown.
+- [Equal-budget selector comparison](EQUAL_BUDGET_SELECTOR_COMPARISON.md):
+  first, uniform-random, public-test and behavior-consensus selection rescored
+  on the same 60 tasks and four candidates per task. Public and behavior both
+  score `21/60`, versus first `19/60`; public-vs-first exact paired `p=0.5`.
+  This is not a statistically resolved selector improvement on this shard.
+- `equal_budget_selector_comparison.json`: input hashes, paired tests,
+  uncertainty, historical selection timings and the non-deployable hidden
+  oracle (`23/60`). CLI regeneration verifies both selector reports bind the
+  exact generation-file hash. Full JSON/Markdown replay is tested in CI.
 - `stratified60_n4_public_select_summary.json`: `n=4` public-selection probe.
 - `stratified60_selection_manifest.json`: sampled task IDs and data hash.
 - `qwen25_coder_7b_greedy_generate_only/generations.json`: saved generated code.
