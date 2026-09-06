@@ -1,0 +1,205 @@
+{
+  "status": "complete_posthoc_equal_candidate_budget_comparison",
+  "claim_boundary": "Hidden outcomes score frozen selector decisions only. The oracle is a non-deployable ceiling and no selector is tuned from hidden outcomes in this report.",
+  "budget": {
+    "tasks": 60,
+    "candidates_per_task": 4,
+    "total_candidates": 240,
+    "candidate_pool_identical_for_rescoring": true,
+    "selection_source_hashes_verified": true,
+    "shared_generation_seconds": 1849.462
+  },
+  "fixed_selectors": {
+    "first_candidate": {
+      "passed": 19,
+      "total": 60,
+      "pass_rate": 0.31666666666666665,
+      "wilson_95_ci": [
+        0.21305867552366523,
+        0.44233767026176773
+      ],
+      "by_difficulty": {
+        "easy": {
+          "passed": 14,
+          "total": 20,
+          "pass_rate": 0.7
+        },
+        "hard": {
+          "passed": 0,
+          "total": 20,
+          "pass_rate": 0.0
+        },
+        "medium": {
+          "passed": 5,
+          "total": 20,
+          "pass_rate": 0.25
+        }
+      },
+      "oracle_available_tasks": 23,
+      "selector_success_given_oracle_available": 0.8260869565217391,
+      "missed_available_solutions": 4
+    },
+    "public_tests": {
+      "passed": 21,
+      "total": 60,
+      "pass_rate": 0.35,
+      "wilson_95_ci": [
+        0.24167774406017556,
+        0.47637381158245135
+      ],
+      "by_difficulty": {
+        "easy": {
+          "passed": 14,
+          "total": 20,
+          "pass_rate": 0.7
+        },
+        "hard": {
+          "passed": 2,
+          "total": 20,
+          "pass_rate": 0.1
+        },
+        "medium": {
+          "passed": 5,
+          "total": 20,
+          "pass_rate": 0.25
+        }
+      },
+      "oracle_available_tasks": 23,
+      "selector_success_given_oracle_available": 0.9130434782608695,
+      "missed_available_solutions": 2,
+      "selection_seconds": 24.008,
+      "selection_seconds_per_task": 0.40013333333333334,
+      "selection_overhead_vs_generation": 0.012981072333467786
+    },
+    "behavior_consensus": {
+      "passed": 21,
+      "total": 60,
+      "pass_rate": 0.35,
+      "wilson_95_ci": [
+        0.24167774406017556,
+        0.47637381158245135
+      ],
+      "by_difficulty": {
+        "easy": {
+          "passed": 14,
+          "total": 20,
+          "pass_rate": 0.7
+        },
+        "hard": {
+          "passed": 2,
+          "total": 20,
+          "pass_rate": 0.1
+        },
+        "medium": {
+          "passed": 5,
+          "total": 20,
+          "pass_rate": 0.25
+        }
+      },
+      "oracle_available_tasks": 23,
+      "selector_success_given_oracle_available": 0.9130434782608695,
+      "missed_available_solutions": 2,
+      "selection_seconds": 152.367,
+      "selection_seconds_per_task": 2.53945,
+      "selection_overhead_vs_generation": 0.08238449884344744
+    }
+  },
+  "uniform_random_selector": {
+    "analytical_expected_pass_rate": 0.3,
+    "reported_seed": 42,
+    "reported_seed_result": {
+      "passed": 17,
+      "total": 60,
+      "pass_rate": 0.2833333333333333,
+      "wilson_95_ci": [
+        0.18506828428432714,
+        0.4076728516439118
+      ],
+      "by_difficulty": {
+        "easy": {
+          "passed": 14,
+          "total": 20,
+          "pass_rate": 0.7
+        },
+        "hard": {
+          "passed": 0,
+          "total": 20,
+          "pass_rate": 0.0
+        },
+        "medium": {
+          "passed": 3,
+          "total": 20,
+          "pass_rate": 0.15
+        }
+      }
+    },
+    "trials": 10000,
+    "trial_mean_pass_rate": 0.30033,
+    "trial_pass_rate_95_interval": [
+      0.25,
+      0.35
+    ],
+    "trial_min_pass_rate": 0.21666666666666667,
+    "trial_max_pass_rate": 0.38333333333333336
+  },
+  "hidden_oracle_ceiling": {
+    "passed": 23,
+    "total": 60,
+    "pass_rate": 0.38333333333333336,
+    "deployable_selector": false,
+    "definition": "At least one candidate in the frozen pool passes hidden tests."
+  },
+  "paired_comparisons": [
+    {
+      "left": "public_tests",
+      "right": "first_candidate",
+      "left_only_passes": 2,
+      "right_only_passes": 0,
+      "paired_ties": 58,
+      "two_sided_exact_sign_test_p": 0.5
+    },
+    {
+      "left": "behavior_consensus",
+      "right": "public_tests",
+      "left_only_passes": 0,
+      "right_only_passes": 0,
+      "paired_ties": 60,
+      "two_sided_exact_sign_test_p": 1.0
+    }
+  ],
+  "public_behavior_selection_agreement": {
+    "same_index": 52,
+    "total": 60,
+    "rate": 0.8666666666666667
+  },
+  "inputs": {
+    "generations": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_stratified60_generate_only/generations.json",
+      "sha256": "d2a050f353f2bc465087e6ed15e05693dfb969eb3ad634f53f18677ced8b2cb2"
+    },
+    "hidden_eval": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_hidden_oracle_stratified60_eval/eval_all.json",
+      "sha256": "0ec7ce4657e15b38381dab8edc88180e8d61625b5554dd31df5a029d3b716766"
+    },
+    "public_selection": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_stratified60_eval/public_selection.json",
+      "sha256": "1beb7018d7f84e562aa9ce7197e11c6688676ad096ff092c6f058efdd76f8485"
+    },
+    "behavior_selection": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_behavior_select_stratified60_eval/behavior_selection.json",
+      "sha256": "783a2f7c8d5e93bfae026b1cb2c5259f8b9fd151b6f0926040f475fd909fb497"
+    },
+    "generation_report": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_stratified60_generate_only/report.json",
+      "sha256": "a806a11f2c967854a52f4eee5518f47bbe7b92a3bddae459470b68ed62d7d264"
+    },
+    "public_tests_report": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_public_select_stratified60_eval/report.json",
+      "sha256": "f8a4bdc5159154f3ee63cf6c1c930308850da602353d40026b7f7bdb5d9e66dd"
+    },
+    "behavior_consensus_report": {
+      "path": "benchmarks/livecodebench_full_release_v6_2026_05_22/qwen25_coder_7b_temp08_n4_behavior_select_stratified60_eval/report.json",
+      "sha256": "dbf3a453e60b7d2dfe94cb94f5023d73bff625d90f3d3a38516dfe995fdc6a5c"
+    }
+  }
+}
