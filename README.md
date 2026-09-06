@@ -125,6 +125,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e ".[dev,bench]"
 python -m pytest -q
+python -m l20_codeforge verify-artifacts
 python -m l20_codeforge profile
 python -m l20_codeforge smoke-loop
 python -m l20_codeforge audit-code-verifier \
@@ -138,6 +139,9 @@ python -m l20_codeforge audit-code-verifier \
 ```
 
 The test suite should exit successfully; optional dependency tests may skip.
+`verify-artifacts` should return `"status": "PASS"`; it checks the five pinned
+historical benchmark artifacts listed in `REPRODUCIBILITY.md`. The newer RLVR
+receipt and equal-pool replay tests are separate checks in the test suite.
 
 On an L20 host:
 
