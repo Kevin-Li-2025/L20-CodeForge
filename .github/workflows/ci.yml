@@ -29,6 +29,9 @@ jobs:
       - name: Run tests
         run: python -m pytest -q
 
+      - name: Cross-check frozen RLVR result receipts
+        run: python scripts/verify_rlvr_v2_receipts.py
+
       - name: Build generalization scorecard
         run: |
           python scripts/build_generalization_scorecard.py \

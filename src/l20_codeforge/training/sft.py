@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 from pathlib import Path
 from typing import Any
-
 
 DEFAULT_LORA_TARGETS = [
     "q_proj",
@@ -29,6 +30,7 @@ def train_real_sft(
     lora_r: int = 16,
     lora_alpha: int = 32,
     lora_dropout: float = 0.05,
+    completion_only_loss: bool = False,
     load_in_4bit: bool = False,
     bf16: bool = True,
     seed: int = 42,
@@ -44,7 +46,12 @@ def train_real_sft(
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
-    rows = _load_sft_rows(train_jsonl, tokenizer=tokenizer, limit=limit)
+    rows = _load_sft_rows(
+        train_jsonl,
+        tokenizer=tokenizer,
+        limit=limit,
+        completion_only_loss=completion_only_loss,
+    )
     dataset = Dataset.from_list(rows)
 
     model_kwargs: dict[str, Any] = {
@@ -59,7 +66,7 @@ def train_real_sft(
             bnb_4bit_quant_type="nf4",
             bnb_4bit_use_double_quant=True,
         )
-        model_kwargs["device_map"] = "auto"
+        model_kwargs["device_map"] = {"": int(os.environ.get("LOCAL_RANK", "0"))}
 
     model = AutoModelForCausalLM.from_pretrained(model_name_or_path, **model_kwargs)
     model.config.use_cache = False
@@ -80,6 +87,7 @@ def train_real_sft(
         learning_rate=learning_rate,
         max_length=max_length,
         dataset_text_field="text",
+        completion_only_loss=completion_only_loss,
         packing=False,
         bf16=bf16,
         fp16=not bf16,
@@ -93,6 +101,7 @@ def train_real_sft(
         seed=seed,
         dataloader_num_workers=0,
         remove_unused_columns=True,
+        ddp_find_unused_parameters=False,
     )
     trainer = SFTTrainer(
         model=model,
@@ -108,30 +117,66 @@ def train_real_sft(
     payload = {
         "model_name_or_path": model_name_or_path,
         "train_jsonl": str(train_jsonl),
+        "train_jsonl_sha256": _sha256_file(train_jsonl),
         "output_dir": str(output_dir),
         "records": len(rows),
         "max_steps": max_steps,
         "max_length": max_length,
+        "learning_rate": learning_rate,
+        "per_device_train_batch_size": per_device_train_batch_size,
+        "gradient_accumulation_steps": gradient_accumulation_steps,
+        "lora_r": lora_r,
+        "lora_alpha": lora_alpha,
+        "lora_dropout": lora_dropout,
+        "completion_only_loss": completion_only_loss,
         "load_in_4bit": load_in_4bit,
+        "bf16": bf16,
+        "seed": seed,
+        "torch": torch.__version__,
+        "cuda": torch.version.cuda,
+        "cuda_available": torch.cuda.is_available(),
+        "device_name": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
         "metrics": train_result.metrics,
     }
     (output_dir / "train_report.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return payload
 
 
-def _load_sft_rows(path: Path, tokenizer: Any, limit: int | None) -> list[dict[str, str]]:
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _load_sft_rows(
+    path: Path,
+    tokenizer: Any,
+    limit: int | None,
+    completion_only_loss: bool = False,
+) -> list[dict[str, str]]:
     rows = []
     with path.open(encoding="utf-8") as handle:
         for index, line in enumerate(handle):
             if limit is not None and index >= limit:
                 break
             payload = json.loads(line)
-            text = tokenizer.apply_chat_template(
-                payload["messages"],
-                tokenize=False,
-                add_generation_prompt=False,
+            messages = payload["messages"]
+            full_text = tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=False
             )
-            rows.append({"text": text})
+            if completion_only_loss:
+                if not messages or messages[-1].get("role") != "assistant":
+                    raise ValueError("completion-only SFT rows must end with an assistant message")
+                prompt = tokenizer.apply_chat_template(
+                    messages[:-1], tokenize=False, add_generation_prompt=True
+                )
+                if not full_text.startswith(prompt):
+                    raise ValueError("chat template prompt is not a prefix of the full conversation")
+                rows.append({"prompt": prompt, "completion": full_text[len(prompt) :]})
+            else:
+                rows.append({"text": full_text})
     if not rows:
         raise ValueError(f"no SFT rows loaded from {path}")
     return rows

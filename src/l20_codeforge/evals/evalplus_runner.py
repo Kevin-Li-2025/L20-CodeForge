@@ -25,6 +25,8 @@ class EvalPlusGenerationReport(BaseModel):
     limit: int | None = None
     id_start: int | None = None
     id_end: int | None = None
+    shard_index: int | None = None
+    shard_count: int | None = None
     task_ids: list[str] | None = None
     prompt_style: str = "default"
     temperature: float = 0.0
@@ -74,6 +76,8 @@ def generate_evalplus_samples(
     limit: int | None = None,
     id_start: int | None = None,
     id_end: int | None = None,
+    shard_index: int | None = None,
+    shard_count: int | None = None,
     task_ids: list[str] | None = None,
     prompt_style: str = "default",
     temperature: float = 0.0,
@@ -95,6 +99,8 @@ def generate_evalplus_samples(
         limit=limit,
         id_start=id_start,
         id_end=id_end,
+        shard_index=shard_index,
+        shard_count=shard_count,
         task_ids=task_ids,
     )
     if not tasks:
@@ -202,6 +208,8 @@ def generate_evalplus_samples(
         limit=limit,
         id_start=id_start,
         id_end=id_end,
+        shard_index=shard_index,
+        shard_count=shard_count,
         task_ids=task_ids,
         prompt_style=prompt_style,
         temperature=temperature,
@@ -387,7 +395,7 @@ def run_evalplus_official(
     mini: bool = False,
     i_just_wanna_run: bool = False,
 ) -> EvalPlusOfficialReport:
-    command = ["evalplus.evaluate", dataset, "--samples", str(samples)]
+    command = [sys.executable, "-m", "evalplus.evaluate", dataset, "--samples", str(samples)]
     if base_only:
         command.append("--base-only")
     if parallel is not None:
@@ -899,9 +907,19 @@ def select_evalplus_tasks(
     id_start: int | None = None,
     id_end: int | None = None,
     task_ids: list[str] | None = None,
+    shard_index: int | None = None,
+    shard_count: int | None = None,
 ) -> list[tuple[str, dict[str, Any]]]:
+    if (shard_index is None) != (shard_count is None):
+        raise ValueError("shard_index and shard_count must be set together")
+    if shard_count is not None and shard_count <= 0:
+        raise ValueError("shard_count must be positive")
+    if shard_index is not None and not 0 <= shard_index < shard_count:
+        raise ValueError("shard_index must satisfy 0 <= shard_index < shard_count")
+
     task_id_filter = set(task_ids or [])
     selected: list[tuple[str, dict[str, Any]]] = []
+    eligible_index = 0
     for task_id, task in tasks.items():
         if task_id_filter and task_id not in task_id_filter:
             continue
@@ -910,6 +928,10 @@ def select_evalplus_tasks(
             continue
         if id_end is not None and task_num >= id_end:
             continue
+        if shard_count is not None and eligible_index % shard_count != shard_index:
+            eligible_index += 1
+            continue
+        eligible_index += 1
         selected.append((task_id, task))
         if limit is not None and len(selected) >= limit:
             break

@@ -1,0 +1,22 @@
+{
+  "output": "/ssd/scxi253/l20-codeforge-retention-rlvr-v2-20260830/data/retention-sft-mixture.jsonl",
+  "output_sha256": "ad6257828649580d5be43150e00088791c246bee1aef4f2f5536b6fcf32b53b3",
+  "records": 690,
+  "source_counts": {
+    "rstar_target": 414,
+    "lcb_trajectory_replay": 138,
+    "mbpp_function_replay": 138
+  },
+  "source_fractions": {
+    "rstar_target": 0.6,
+    "lcb_trajectory_replay": 0.2,
+    "mbpp_function_replay": 0.2
+  },
+  "source_sha256": {
+    "rstar_target": "639f5d743da758eeb3747ce9931ecd1837986a2d2dede7cb53973b5ba5c6d26a",
+    "lcb_trajectory_replay": "fb80656893047978e19b6d5c0b280f9e78152253bb8f7b648e574dbc22a9cae5",
+    "mbpp_function_replay": "d28a300c6c58e7d5facbb4fe608de7ce590732690cab8f773ad4dbe97bdade8b"
+  },
+  "seed": 20260830,
+  "claim_boundary": "Optimization mixture only. LCB records are historical training data and MBPP test or EvalPlus records are not included."
+}

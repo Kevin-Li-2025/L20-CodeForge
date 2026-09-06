@@ -1,0 +1,46 @@
+{
+  "status": "RETRACTED_INVALID_INCOMPLETE_1500_ROW_SOURCE",
+  "supersedes": "protocol.json",
+  "supersession_reason": "v2 admitted only 145 of 200 requested report-only final tasks under its unchanged near-duplicate gate",
+  "inherited_protocol": "PREREGISTRATION.md",
+  "inherited_without_change": [
+    "base model and snapshot",
+    "rStar source rows and split seed",
+    "historical train and dev hashes",
+    "new development size of 200",
+    "near-duplicate threshold of 0.85",
+    "SFT mixture and hyperparameters",
+    "three seeds 42 43 44",
+    "GRPO KL and replay hyperparameters",
+    "greedy n=1 development evaluation",
+    "minimum four-pass target improvement",
+    "MBPP-validation no-regression gate",
+    "candidate ordering",
+    "single report-only final audit",
+    "EvalPlus strict no-regression counts",
+    "all prohibited post-hoc tuning actions"
+  ],
+  "single_change": {
+    "field": "data.new_final_tasks",
+    "v2_value": 200,
+    "v2_1_value": 100,
+    "selection_use": false,
+    "model_outputs_observed_before_change": 0
+  },
+  "success_gate": {
+    "new_rstar_development_tasks": 200,
+    "required_pass_delta_vs_base": 4,
+    "required_absolute_delta_vs_base": 0.02,
+    "mbpp_validation_tasks": 90,
+    "mbpp_validation_required_delta_vs_base": 0,
+    "humanevalplus_required_passes": 137,
+    "mbppplus_required_passes": 271
+  },
+  "report_only_final": {
+    "new_rstar_final_tasks": 100,
+    "livecodebench_min_date": "2025-02-01T00:00:00",
+    "livecodebench_max_date": "2025-04-30T23:59:59",
+    "evalplus_audits_allowed": 1,
+    "post_audit_tuning_allowed": false
+  }
+}

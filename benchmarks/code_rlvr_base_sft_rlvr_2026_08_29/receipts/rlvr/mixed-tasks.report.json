@@ -1,0 +1,10 @@
+{
+  "tasks_jsonl": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/data/train.jsonl",
+  "tasks_sha256": "6cf24bc6da5bd2111c6b4ba730fa679b009ecd5808507cd7484fd903dbc2ec1e",
+  "rollouts_jsonl": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/merged.jsonl",
+  "rollouts_sha256": "7038f82076cf44f99bcf464e32af240f18e417c0eb8f8e6ff504faa71a1eea54",
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr/mixed-tasks.jsonl",
+  "output_sha256": "7538cba09e109ea2a83766c3f8499355ee62fc7b4c647ddbb2072e6b04ca72a3",
+  "selected_tasks": 263,
+  "selection": "at least one pass and one failure among matched base rollouts"
+}

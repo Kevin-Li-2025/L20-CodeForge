@@ -1328,9 +1328,10 @@ def transpose(rows: list[list[int]]) -> list[list[int]]:
 ''',
         '''
 from itertools import zip_longest
+from typing import Optional
 
 
-def transpose(rows: list[list[int]]) -> list[list[int | None]]:
+def transpose(rows: list[list[int]]) -> list[list[Optional[int]]]:
     return [list(col) for col in zip_longest(*rows, fillvalue=None)]
 ''',
         '''
@@ -1410,9 +1411,10 @@ if __name__ == "__main__":
         "graph_utils.py",
         '''
 from collections import deque
+from typing import Optional
 
 
-def shortest_path(graph: dict[str, list[str]], start: str, goal: str) -> list[str] | None:
+def shortest_path(graph: dict[str, list[str]], start: str, goal: str) -> Optional[list[str]]:
     queue = deque([(start, [start])])
     seen = set()
     while queue:
@@ -1427,9 +1429,10 @@ def shortest_path(graph: dict[str, list[str]], start: str, goal: str) -> list[st
 ''',
         '''
 from collections import deque
+from typing import Optional
 
 
-def shortest_path(graph: dict[str, list[str]], start: str, goal: str) -> list[str] | None:
+def shortest_path(graph: dict[str, list[str]], start: str, goal: str) -> Optional[list[str]]:
     queue = deque([(start, [start])])
     seen = {start}
     while queue:

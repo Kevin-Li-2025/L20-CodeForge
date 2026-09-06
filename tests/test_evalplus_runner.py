@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 from l20_codeforge.evals.evalplus_runner import (
@@ -12,6 +14,7 @@ from l20_codeforge.evals.evalplus_runner import (
     count_existing_samples,
     parse_evalplus_pass_at_1,
     parse_evalplus_scores,
+    run_evalplus_official,
     run_candidate_on_inputs,
     run_prompt_doctests,
     select_evalplus_tasks,
@@ -39,6 +42,22 @@ def test_select_evalplus_tasks_respects_explicit_task_ids() -> None:
     )
 
     assert [task_id for task_id, _ in selected] == ["HumanEval/3", "HumanEval/7"]
+
+
+def test_select_evalplus_tasks_shards_non_contiguous_ids_without_omissions() -> None:
+    tasks = {
+        task_id: {"prompt": task_id}
+        for task_id in ["Mbpp/2", "Mbpp/3", "Mbpp/7", "Mbpp/11", "Mbpp/20"]
+    }
+
+    shards = [
+        select_evalplus_tasks(tasks, shard_index=index, shard_count=3)
+        for index in range(3)
+    ]
+
+    flattened = [task_id for shard in shards for task_id, _ in shard]
+    assert sorted(flattened) == sorted(tasks)
+    assert sum(len(shard) for shard in shards) == len(tasks)
 
 
 def test_strip_markdown_code_fence_prefers_python_block() -> None:
@@ -123,6 +142,24 @@ pass@10:\t0.951
         "plus_pass@1": 0.848,
         "plus_pass@10": 0.951,
     }
+
+
+def test_run_evalplus_official_uses_the_active_python_environment(
+    tmp_path: Path, monkeypatch
+) -> None:
+    samples = tmp_path / "samples.jsonl"
+    samples.write_text('{"task_id": "HumanEval/0", "solution": "pass"}\n')
+    captured: list[str] = []
+
+    def fake_run(command, **kwargs):
+        captured.extend(command)
+        assert kwargs == {"text": True, "capture_output": True, "check": False}
+        return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    run_evalplus_official("humaneval", samples, tmp_path / "report.json")
+
+    assert captured[:3] == [sys.executable, "-m", "evalplus.evaluate"]
 
 
 def test_select_evalplus_by_base_tests(tmp_path: Path) -> None:

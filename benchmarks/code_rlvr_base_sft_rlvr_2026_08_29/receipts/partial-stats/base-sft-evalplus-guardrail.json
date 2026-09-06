@@ -1,0 +1,53 @@
+{
+  "protocol": "official EvalPlus greedy n=1; Plus means base and extra tests pass",
+  "datasets": {
+    "humaneval": {
+      "expected_tasks": 164,
+      "base": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/base-current/humaneval/humaneval.samples_eval_results.json",
+        "sha256": "133be6f88f22fe16fe6fefebd595273593a3cfcdcaeed4aeb36a2823038c29c3",
+        "base_tests_passed": 146,
+        "plus_passed": 137,
+        "plus_pass_at_1": 0.8353658536585366
+      },
+      "final": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/sft/humaneval/humaneval.samples_eval_results.json",
+        "sha256": "509ab9756805f0ef1d941e8ea861ec93c2a46e821065576f9e71b09ca8cee05f",
+        "base_tests_passed": 142,
+        "plus_passed": 133,
+        "plus_pass_at_1": 0.8109756097560976
+      },
+      "paired_plus_transitions": {
+        "gained_tasks": 1,
+        "lost_tasks": 5,
+        "net_tasks": -4
+      },
+      "no_regression": false
+    },
+    "mbpp": {
+      "expected_tasks": 378,
+      "base": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/base-current/mbpp/mbpp.samples_eval_results.json",
+        "sha256": "7c9babbc2d85bcf573a8e25a21949ebfc5c792364796ba2ab8a2478231c82a50",
+        "base_tests_passed": 312,
+        "plus_passed": 271,
+        "plus_pass_at_1": 0.716931216931217
+      },
+      "final": {
+        "path": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/evalplus/sft/mbpp/mbpp.samples_eval_results.json",
+        "sha256": "82df01943df21ecee5627f72aa4161bb2b88d89989e6d7aa969a6cfcf590b996",
+        "base_tests_passed": 311,
+        "plus_passed": 272,
+        "plus_pass_at_1": 0.7195767195767195
+      },
+      "paired_plus_transitions": {
+        "gained_tasks": 12,
+        "lost_tasks": 11,
+        "net_tasks": 1
+      },
+      "no_regression": true
+    }
+  },
+  "evalplus_no_regression_passed": false,
+  "claim_boundary": "Final guardrail only. These results must not select a training checkpoint or scale."
+}

@@ -9,25 +9,41 @@ from rich.console import Console
 from l20_codeforge.agents.mini_swe import convert_mini_trajectory_file, export_mini_task_records
 from l20_codeforge.context.compiler import ContextCompiler
 from l20_codeforge.data.code_bench_sft import build_mbpp_sft_jsonl
+from l20_codeforge.data.code_rlvr import materialize_rstar_code_rlvr
 from l20_codeforge.data.preferences import build_preference_pairs
 from l20_codeforge.data.real_datasets import fetch_hf_real_dataset, list_real_dataset_specs
 from l20_codeforge.data.real_sft import build_real_sft_jsonl
 from l20_codeforge.data.report import write_trajectory_report
+from l20_codeforge.data.retention import (
+    build_lcb_verified_trajectory_sft,
+    compose_retention_sft_mixture,
+    materialize_mbpp_replay,
+)
 from l20_codeforge.data.sft import build_sft_jsonl
 from l20_codeforge.data.smoke_tasks import write_smoke_tasks
+from l20_codeforge.evals.code_rlvr import (
+    build_verified_sft_from_rollouts,
+    generate_code_rollouts,
+    merge_code_rollouts,
+    select_mixed_reward_tasks,
+)
 from l20_codeforge.evals.eval_card import EvalCard
 from l20_codeforge.evals.evalplus_runner import (
     generate_evalplus_repairs,
     generate_evalplus_samples,
     run_evalplus_official,
     select_evalplus_by_base_tests,
-    select_evalplus_by_public_consensus,
     select_evalplus_by_prompt_doctests,
+    select_evalplus_by_public_consensus,
 )
+from l20_codeforge.evals.function_retention import generate_function_retention_rollouts
 from l20_codeforge.evals.patch_eval import evaluate_patch, load_task
 from l20_codeforge.evals.real_exec import evaluate_real_patch
 from l20_codeforge.evals.sft_eval import evaluate_real_sft_model
+from l20_codeforge.evals.verifier_audit import VerifierAuditGates, audit_verifier_dataset
 from l20_codeforge.gpu.profile import L20Profile
+from l20_codeforge.rewards.code_execution import CodeExecutionConfig
+from l20_codeforge.training.grpo import train_code_grpo
 from l20_codeforge.training.sft import train_real_sft
 from l20_codeforge.utils.paths import ensure_project_dirs
 
@@ -137,8 +153,10 @@ def train_real_sft_command(
     lora_r: int = 16,
     lora_alpha: int = 32,
     lora_dropout: float = 0.05,
+    completion_only_loss: bool = False,
     load_in_4bit: bool = False,
     bf16: bool = True,
+    seed: int = 42,
 ) -> None:
     """Run LoRA/QLoRA SFT on real gold-patch chat data."""
     report = train_real_sft(
@@ -154,8 +172,10 @@ def train_real_sft_command(
         lora_r=lora_r,
         lora_alpha=lora_alpha,
         lora_dropout=lora_dropout,
+        completion_only_loss=completion_only_loss,
         load_in_4bit=load_in_4bit,
         bf16=bf16,
+        seed=seed,
     )
     console.print_json(data=report)
 
@@ -314,6 +334,59 @@ def eval_real_patch_command(
     )
 
 
+@app.command("audit-code-verifier")
+def audit_code_verifier_command(
+    input_jsonl: Path,
+    output: Path = Path("artifacts/verifier/audit.json"),
+    timeout_seconds: float = 2.0,
+    compile_timeout_seconds: float = 5.0,
+    memory_limit_mb: int = 512,
+    max_output_chars: int = 100000,
+    comparison: str = "tokens",
+    min_reference_solutions: int = 1,
+    min_reference_accept_rate: float = 1.0,
+    min_faulty_kill_rate: float = 0.7,
+    max_false_positive_rate: float = 0.05,
+    max_false_negative_rate: float = 0.05,
+    limit: int | None = None,
+    fail_on_gates: bool = False,
+) -> None:
+    """Audit labeled algorithmic-code tests before using them as RL rewards."""
+
+    if comparison not in {"tokens", "exact"}:
+        console.print("[red]comparison must be 'tokens' or 'exact'[/red]")
+        raise typer.Exit(2)
+    report = audit_verifier_dataset(
+        input_path=input_jsonl,
+        output_path=output,
+        execution_config=CodeExecutionConfig(
+            timeout_seconds=timeout_seconds,
+            compile_timeout_seconds=compile_timeout_seconds,
+            memory_limit_mb=memory_limit_mb,
+            max_output_chars=max_output_chars,
+            comparison=comparison,
+        ),
+        gates=VerifierAuditGates(
+            min_reference_accept_rate=min_reference_accept_rate,
+            min_faulty_kill_rate=min_faulty_kill_rate,
+            max_false_positive_rate=max_false_positive_rate,
+            max_false_negative_rate=max_false_negative_rate,
+        ),
+        min_reference_solutions=min_reference_solutions,
+        limit=limit,
+    )
+    console.print_json(
+        data={
+            "status": report["status"],
+            "summary": report["summary"],
+            "gates": report["gates"],
+            "output": str(output),
+        }
+    )
+    if fail_on_gates and report["status"] != "PASS":
+        raise typer.Exit(2)
+
+
 @app.command("generate-evalplus")
 def generate_evalplus_command(
     model: str,
@@ -324,6 +397,8 @@ def generate_evalplus_command(
     limit: int | None = None,
     id_start: int | None = None,
     id_end: int | None = None,
+    shard_index: int | None = None,
+    shard_count: int | None = None,
     task_ids: str | None = None,
     prompt_style: str = "default",
     temperature: float = 0.0,
@@ -346,6 +421,8 @@ def generate_evalplus_command(
             limit=limit,
             id_start=id_start,
             id_end=id_end,
+            shard_index=shard_index,
+            shard_count=shard_count,
             task_ids=parse_csv(task_ids),
             prompt_style=prompt_style,
             temperature=temperature,
@@ -627,6 +704,289 @@ def build_dpo(
         min_reward_gap=min_reward_gap,
     )
     console.print_json(data={"pairs": count, "output": str(output)})
+
+
+@app.command("build-rstar-code-rlvr")
+def build_rstar_code_rlvr_command(
+    output_dir: Path,
+    train_tasks: int = 800,
+    dev_tasks: int = 200,
+    retention_tasks: int = 0,
+    final_tasks: int = 0,
+    seed: int = 20260829,
+    min_tests: int = 8,
+    max_tests: int = 24,
+    max_case_input_chars: int = 131_072,
+    max_case_output_chars: int = 65_536,
+    cache_dir: Path | None = None,
+    use_rows_api: bool = False,
+    rows_api_limit: int = 4000,
+    rows_api_batch_size: int = 20,
+) -> None:
+    """Freeze deterministic rStar executable train/dev data from converted parquet."""
+    report = materialize_rstar_code_rlvr(
+        output_dir,
+        train_tasks=train_tasks,
+        dev_tasks=dev_tasks,
+        retention_tasks=retention_tasks,
+        final_tasks=final_tasks,
+        seed=seed,
+        min_tests=min_tests,
+        max_tests=max_tests,
+        max_case_input_chars=max_case_input_chars,
+        max_case_output_chars=max_case_output_chars,
+        cache_dir=cache_dir,
+        use_rows_api=use_rows_api,
+        rows_api_limit=rows_api_limit,
+        rows_api_batch_size=rows_api_batch_size,
+    )
+    console.print_json(data=report)
+
+
+@app.command("build-mbpp-retention-replay")
+def build_mbpp_retention_replay_command(output_dir: Path) -> None:
+    """Freeze official MBPP train replay and validation retention tasks."""
+    console.print_json(data=materialize_mbpp_replay(output_dir))
+
+
+@app.command("build-lcb-trajectory-sft")
+def build_lcb_trajectory_sft_command(
+    eval_all_json: Path,
+    output: Path,
+    max_contest_date: str,
+    min_contest_date: str | None = None,
+    max_records: int = 138,
+    seed: int = 20260830,
+) -> None:
+    """Build training-only SFT from historical full-harness-passing L20 outputs."""
+    console.print_json(
+        data=build_lcb_verified_trajectory_sft(
+            eval_all_json,
+            output,
+            max_contest_date=max_contest_date,
+            min_contest_date=min_contest_date,
+            max_records=max_records,
+            seed=seed,
+        )
+    )
+
+
+@app.command("compose-retention-sft")
+def compose_retention_sft_command(
+    target_sft: Path,
+    lcb_replay_sft: Path,
+    mbpp_replay_sft: Path,
+    output: Path,
+    target_records: int = 414,
+    lcb_records: int = 138,
+    mbpp_records: int = 138,
+    seed: int = 20260830,
+) -> None:
+    """Compose a deterministic target/trajectory/function replay SFT mixture."""
+    console.print_json(
+        data=compose_retention_sft_mixture(
+            target_sft,
+            lcb_replay_sft,
+            mbpp_replay_sft,
+            output,
+            target_records=target_records,
+            lcb_records=lcb_records,
+            mbpp_records=mbpp_records,
+            seed=seed,
+        )
+    )
+
+
+@app.command("generate-code-rollouts")
+def generate_code_rollouts_command(
+    model: str,
+    tasks_jsonl: Path,
+    output: Path,
+    adapter_path: str | None = None,
+    n_samples: int = 1,
+    temperature: float = 0.0,
+    top_p: float = 0.95,
+    max_prompt_length: int = 6144,
+    max_new_tokens: int = 1536,
+    batch_size: int = 2,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    shard_index: int = 0,
+    shard_count: int = 1,
+    timeout_seconds: float = 2.0,
+    execution_workers: int = 1,
+    overwrite: bool = False,
+) -> None:
+    """Generate and execute code rollouts for one deterministic GPU shard."""
+    report = generate_code_rollouts(
+        model,
+        tasks_jsonl,
+        output,
+        adapter_path=adapter_path,
+        n_samples=n_samples,
+        temperature=temperature,
+        top_p=top_p,
+        max_prompt_length=max_prompt_length,
+        max_new_tokens=max_new_tokens,
+        batch_size=batch_size,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+        seed=seed,
+        shard_index=shard_index,
+        shard_count=shard_count,
+        timeout_seconds=timeout_seconds,
+        execution_workers=execution_workers,
+        overwrite=overwrite,
+    )
+    console.print_json(data=report)
+
+
+@app.command("merge-code-rollouts")
+def merge_code_rollouts_command(
+    output: Path,
+    inputs: list[Path],
+    expected_tasks: int | None = None,
+) -> None:
+    """Merge disjoint rollout shards and write an executable-accuracy report."""
+    console.print_json(data=merge_code_rollouts(inputs, output, expected_tasks=expected_tasks))
+
+
+@app.command("generate-function-retention-rollouts")
+def generate_function_retention_rollouts_command(
+    model: str,
+    tasks_jsonl: Path,
+    output: Path,
+    adapter_path: str | None = None,
+    n_samples: int = 1,
+    temperature: float = 0.0,
+    top_p: float = 0.95,
+    max_prompt_length: int = 4096,
+    max_new_tokens: int = 1024,
+    batch_size: int = 2,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+    shard_index: int = 0,
+    shard_count: int = 1,
+    timeout_seconds: float = 4.0,
+    overwrite: bool = False,
+) -> None:
+    """Generate and execute official MBPP-validation retention rollouts."""
+    report = generate_function_retention_rollouts(
+        model,
+        tasks_jsonl,
+        output,
+        adapter_path=adapter_path,
+        n_samples=n_samples,
+        temperature=temperature,
+        top_p=top_p,
+        max_prompt_length=max_prompt_length,
+        max_new_tokens=max_new_tokens,
+        batch_size=batch_size,
+        load_in_4bit=load_in_4bit,
+        bf16=bf16,
+        seed=seed,
+        shard_index=shard_index,
+        shard_count=shard_count,
+        timeout_seconds=timeout_seconds,
+        overwrite=overwrite,
+    )
+    console.print_json(data=report)
+
+
+@app.command("build-verified-code-sft")
+def build_verified_code_sft_command(
+    rollouts_jsonl: Path,
+    output: Path,
+    min_distinct_passing: int = 1,
+    max_records: int | None = None,
+) -> None:
+    """Build SFT chat records only from all-tests-passed base rollouts."""
+    console.print_json(
+        data=build_verified_sft_from_rollouts(
+            rollouts_jsonl,
+            output,
+            min_distinct_passing=min_distinct_passing,
+            max_records=max_records,
+        )
+    )
+
+
+@app.command("select-mixed-code-rlvr")
+def select_mixed_code_rlvr_command(
+    tasks_jsonl: Path,
+    rollouts_jsonl: Path,
+    output: Path,
+    max_tasks: int | None = None,
+) -> None:
+    """Select RL tasks with both passing and failing base rollouts."""
+    console.print_json(
+        data=select_mixed_reward_tasks(
+            tasks_jsonl,
+            rollouts_jsonl,
+            output,
+            max_tasks=max_tasks,
+        )
+    )
+
+
+@app.command("train-code-grpo")
+def train_code_grpo_command(
+    model: str,
+    train_jsonl: Path,
+    output_dir: Path,
+    adapter_path: str | None = None,
+    replay_jsonl: Path | None = None,
+    replay_loss_weight: float = 0.0,
+    replay_max_length: int = 3072,
+    max_steps: int = 100,
+    max_completion_length: int = 1024,
+    limit: int | None = None,
+    learning_rate: float = 1e-6,
+    per_device_train_batch_size: int = 1,
+    gradient_accumulation_steps: int = 4,
+    num_generations: int = 4,
+    temperature: float = 0.7,
+    top_p: float = 0.95,
+    beta: float = 0.0,
+    loss_type: str = "dr_grpo",
+    reward_type: str = "dense",
+    timeout_seconds: float = 2.0,
+    execution_workers: int = 6,
+    load_in_4bit: bool = True,
+    bf16: bool = True,
+    seed: int = 42,
+) -> None:
+    """Train QLoRA GRPO with frozen stdin/stdout execution rewards."""
+    console.print_json(
+        data=train_code_grpo(
+            model,
+            train_jsonl,
+            output_dir,
+            adapter_path=adapter_path,
+            replay_jsonl=replay_jsonl,
+            replay_loss_weight=replay_loss_weight,
+            replay_max_length=replay_max_length,
+            max_steps=max_steps,
+            max_completion_length=max_completion_length,
+            limit=limit,
+            learning_rate=learning_rate,
+            per_device_train_batch_size=per_device_train_batch_size,
+            gradient_accumulation_steps=gradient_accumulation_steps,
+            num_generations=num_generations,
+            temperature=temperature,
+            top_p=top_p,
+            beta=beta,
+            loss_type=loss_type,
+            reward_type=reward_type,
+            timeout_seconds=timeout_seconds,
+            execution_workers=execution_workers,
+            load_in_4bit=load_in_4bit,
+            bf16=bf16,
+            seed=seed,
+        )
+    )
 
 
 if __name__ == "__main__":

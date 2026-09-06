@@ -1,0 +1,29 @@
+{
+  "inputs": [
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-0.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-1.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-2.jsonl",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-3.jsonl"
+  ],
+  "input_sha256": {
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-0.jsonl": "4dac666bf361f1dde29aa1db6c0e5ab34ef07a5bbf4278708bff6fd7176595bc",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-1.jsonl": "207e621ebcc790cf7652e17a101649635577d2cff79d3ad47e36134c548c1237",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-2.jsonl": "dfdf279a05469195b204e05449197ff2b6a511866ed7fb6b6ca48331e523d431",
+    "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/shard-3.jsonl": "4109e89abad57c28fdad0f3577e3bd8ded42112c2580979087e5a0ff04a6fe90"
+  },
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr-dev-interp-0.25/merged.jsonl",
+  "output_sha256": "7b0609e0bce1d1b506538a89ddc7e936e8562f9f6a3aa5563cbc505272052664",
+  "summary": {
+    "tasks": 200,
+    "expected_tasks": 200,
+    "missing_tasks": 0,
+    "samples": 200,
+    "greedy_passes": 74,
+    "greedy_accuracy": 0.37,
+    "pass_at_n_tasks": 74,
+    "pass_at_n": 0.37,
+    "mixed_reward_tasks": 0,
+    "mixed_reward_fraction": 0.0,
+    "mean_pass_fraction": 0.5221491825168296
+  }
+}

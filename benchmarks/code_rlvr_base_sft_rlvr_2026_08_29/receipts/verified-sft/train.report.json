@@ -1,0 +1,10 @@
+{
+  "rollouts_jsonl": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/base-train800-n4/merged.jsonl",
+  "rollouts_sha256": "7038f82076cf44f99bcf464e32af240f18e417c0eb8f8e6ff504faa71a1eea54",
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/verified-sft/train.jsonl",
+  "output_sha256": "639f5d743da758eeb3747ce9931ecd1837986a2d2dede7cb53973b5ba5c6d26a",
+  "records": 414,
+  "min_distinct_passing": 1,
+  "skipped_insufficient_distinct_passing": 0,
+  "claim_boundary": "Every admitted assistant program passed its frozen executable tests."
+}

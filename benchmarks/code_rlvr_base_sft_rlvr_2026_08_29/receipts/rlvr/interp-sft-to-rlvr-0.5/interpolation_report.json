@@ -1,0 +1,14 @@
+{
+  "start": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/verified-sft/checkpoint/final",
+  "end": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr/checkpoint/final",
+  "output": "/ssd/scxi253/l20-codeforge-base-sft-rlvr-20260829/rlvr/interp-sft-to-rlvr-0.5",
+  "interpolation_fraction": 0.5,
+  "method": "parameter-space linear interpolation from verified SFT to final RLVR",
+  "tensor_count": 392,
+  "changed_tensors_vs_start": 392,
+  "start_weights_sha256": "3c42c79afdacef5f444820502a791988150e5c1da33e2a26864bb73c5f6bd9fa",
+  "end_weights_sha256": "b3d2cf0840899e95ad2395eb3249baf85a67c5e57569e8f94d81611a2a4d31bb",
+  "output_weights_sha256": "4654267178f0f297ba7e94ca67a119d406b7d13bc9256ff04e0ef87c03d0abdb",
+  "adapter_config_sha256": "3fbe3b2bd7671929b144138e8f91d26c9351351e1795a69d24bb971dec2712c0",
+  "claim_boundary": "Deterministic adapter construction only; improvement requires frozen-dev evaluation."
+}

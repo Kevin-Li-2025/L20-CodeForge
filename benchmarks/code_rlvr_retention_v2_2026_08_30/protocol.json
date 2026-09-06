@@ -1,0 +1,90 @@
+{
+  "status": "PREREGISTERED_BEFORE_RUNTIME_SMOKE_OR_FORMAL_TRAINING",
+  "base_model": {
+    "name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "snapshot": "c03e6d358207e414f1eca0bb1891e29f1db0e242"
+  },
+  "seeds": [42, 43, 44],
+  "data": {
+    "rstar_rows": 1600,
+    "rstar_split_seed": 20260829,
+    "historical_train_tasks": 800,
+    "historical_dev_tasks": 200,
+    "new_development_tasks": 200,
+    "new_final_tasks": 200,
+    "near_duplicate_threshold": 0.85,
+    "historical_train_sha256": "6cf24bc6da5bd2111c6b4ba730fa679b009ecd5808507cd7484fd903dbc2ec1e",
+    "historical_dev_sha256": "67c9fb2f5bbba31ae3886f49dbcdc98d7231784c559103e328fa931b3e418bda",
+    "sft_mixture": {
+      "verified_rstar": 414,
+      "verified_historical_lcb": 138,
+      "mbpp_official_train": 138,
+      "seed": 20260830
+    },
+    "lcb_training_max_date": "2024-08-31T23:59:59",
+    "mbpp_revision": "041338718b4e8151372fd63677104c65b73a0a4e",
+    "mbpp_raw_sha256": "ccf64ceae9c5403bf50a044cb6d505bfd2a2963ee58338ba268fd65beab92a9f",
+    "mbpp_train_ids": [601, 974],
+    "mbpp_validation_ids": [511, 600],
+    "mbpp_excluded_test_ids": [11, 510]
+  },
+  "sft": {
+    "max_steps": 150,
+    "max_length": 3072,
+    "learning_rate": 0.0001,
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 4,
+    "gpus": 2,
+    "completion_only_loss": true,
+    "load_in_4bit": true
+  },
+  "grpo": {
+    "max_steps": 100,
+    "max_completion_length": 1024,
+    "learning_rate": 0.000001,
+    "per_device_train_batch_size": 2,
+    "gradient_accumulation_steps": 4,
+    "num_generations": 4,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "beta": 0.01,
+    "loss_type": "dr_grpo",
+    "reward_type": "dense",
+    "replay_source": "mbpp_official_train",
+    "replay_loss_weight": 0.01,
+    "replay_max_length": 3072,
+    "gpus": 2,
+    "load_in_4bit": true
+  },
+  "development_gate": {
+    "target_tasks": 200,
+    "required_absolute_delta_vs_base": 0.02,
+    "required_pass_delta_vs_base": 4,
+    "retention_tasks": 90,
+    "retention_required_delta_vs_base": 0,
+    "selection_order": [
+      "maximum_target_passes",
+      "maximum_retention_passes",
+      "lexically_smallest_seed_name"
+    ]
+  },
+  "final_guardrails": {
+    "new_rstar_final_tasks": 200,
+    "lcb_min_date": "2025-02-01T00:00:00",
+    "lcb_max_date": "2025-04-30T23:59:59",
+    "evalplus": {
+      "version": "0.3.1",
+      "humanevalplus_base_required": 137,
+      "mbppplus_base_required": 271,
+      "claim_boundary": "Repeated guardrail previously consumed by the prior campaign"
+    }
+  },
+  "prohibited": [
+    "model selection on new rStar final",
+    "model selection on date-held-out LiveCodeBench",
+    "model selection on EvalPlus",
+    "post-development adapter interpolation or scaling",
+    "hyperparameter changes after formal development results",
+    "second EvalPlus audit"
+  ]
+}

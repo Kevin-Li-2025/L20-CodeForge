@@ -1,0 +1,70 @@
+{
+  "campaign": "base_verified_sft_rlvr_2026_08_29",
+  "status": "FAIL_EVALPLUS_NO_REGRESSION",
+  "target_achieved": false,
+  "protocol": {
+    "development": "frozen 200 tasks; greedy n=1; temperature=0",
+    "required_base_to_final_absolute_delta": 0.02,
+    "evalplus": "official EvalPlus greedy n=1; Plus requires base and extra tests",
+    "required_evalplus_regression": 0
+  },
+  "stages": {
+    "base": {
+      "dev_passed": 70,
+      "dev_tasks": 200,
+      "dev_accuracy": 0.35
+    },
+    "verified_sft": {
+      "dev_passed": 74,
+      "dev_tasks": 200,
+      "dev_accuracy": 0.37
+    },
+    "rlvr_initial_selected_interp_0.25": {
+      "dev_passed": 74,
+      "dev_tasks": 200,
+      "dev_accuracy": 0.37,
+      "development_gate_passed": true
+    },
+    "rlvr_second_audit_interp_0.75": {
+      "dev_passed": 75,
+      "dev_tasks": 200,
+      "dev_accuracy": 0.375,
+      "development_gate_passed": true
+    }
+  },
+  "evalplus_exact": {
+    "base": {
+      "humaneval_plus_passed": 137,
+      "humaneval_tasks": 164,
+      "mbpp_plus_passed": 271,
+      "mbpp_tasks": 378
+    },
+    "verified_sft": {
+      "humaneval_plus_passed": 133,
+      "humaneval_tasks": 164,
+      "mbpp_plus_passed": 272,
+      "mbpp_tasks": 378
+    },
+    "rlvr_initial_selected_interp_0.25": {
+      "humaneval_plus_passed": 134,
+      "humaneval_tasks": 164,
+      "humaneval_no_regression": false,
+      "mbpp_plus_passed": 272,
+      "mbpp_tasks": 378,
+      "mbpp_no_regression": true,
+      "overall_no_regression": false
+    },
+    "rlvr_second_audit_interp_0.75": {
+      "humaneval_plus_passed": 136,
+      "humaneval_tasks": 164,
+      "humaneval_no_regression": false,
+      "mbpp_plus_passed": 270,
+      "mbpp_tasks": 378,
+      "mbpp_no_regression": false,
+      "overall_no_regression": false
+    }
+  },
+  "guardrail_audits": 2,
+  "guardrail_reuse_warning": "EvalPlus was consumed twice after a failed first audit; do not use it for further tuning in this campaign.",
+  "claim_boundary": "The development improvement gate passed, but the requested joint development-plus-EvalPlus target did not."
+}

@@ -1,0 +1,72 @@
+run:
+  name: qwen25-coder-7b-failure-driven-rlvr
+  seed: 42
+  implementation_status: verifier_audit_ready_grpo_pending
+  artifact_dir: artifacts/failure_driven_rlvr
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  negative_control_adapter: artifacts/checkpoints/swe-gym-500-seed45/final
+  max_prompt_length: 6144
+  max_completion_length: 2048
+
+data:
+  target_train_tasks: 2000
+  target_dev_tasks: 200
+  target_sealed_final_tasks: 300
+  candidates_per_task: 4
+  exact_lcb_exclusion: true
+  near_duplicate_lcb_exclusion: true
+  require_source_and_license_receipt: true
+  require_two_reference_solutions: true
+
+verifier:
+  language: python
+  comparison: tokens
+  timeout_seconds: 2.0
+  compile_timeout_seconds: 5.0
+  memory_limit_mb: 512
+  max_output_chars: 100000
+  gates:
+    min_reference_accept_rate: 1.0
+    min_faulty_candidate_kill_rate: 0.70
+    max_false_positive_rate: 0.05
+    max_false_negative_rate: 0.05
+
+reward_ablation:
+  dense:
+    compile_weight: 0.10
+    pass_fraction_weight: 0.70
+    all_pass_weight: 0.20
+    timeout_penalty: 0.20
+    runtime_error_penalty: 0.10
+  binary:
+    all_tests_passed: 1.0
+    otherwise: 0.0
+  subjective_self_verification_weight: 0.0
+  patch_quality_weight: 0.0
+
+grpo_pilot:
+  topology: 2_train_gpus_plus_2_vllm_server_gpus
+  num_generations: 4
+  beta: 0.0
+  loss_type: dr_grpo
+  learning_rate: 0.000001
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 8
+  max_steps: 100
+  use_vllm: true
+  vllm_mode: server
+  promote_to_500_steps_only_after_reward_audit: true
+
+evaluation:
+  model_selection:
+    - verifier_dev_greedy_n1
+    - control12_public_only
+    - evalplus_humaneval_plus
+    - evalplus_mbpp_plus
+  final_only:
+    - sealed_algorithmic_final_greedy_n1
+    - livecodebench_release_v6_legacy_greedy_n1
+  report_pass_at_4_separately: true
+  hidden_tests_for_model_selection: false

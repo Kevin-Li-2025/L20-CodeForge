@@ -1,0 +1,29 @@
+{
+  "scope": "post-audit analysis of the single frozen selected-seed42 EvalPlus run; no additional generation or execution",
+  "humanevalplus": {
+    "base_plus_passed": 137,
+    "selected_plus_passed": 110,
+    "gained_tasks": 2,
+    "lost_tasks": 29,
+    "net_tasks": -27,
+    "exact_mcnemar_p_value": 4.628673195838928e-07,
+    "base_compile_valid_samples": 164,
+    "selected_compile_valid_samples": 142,
+    "selected_compile_invalid_samples": 22,
+    "lost_tasks_with_compile_invalid_selected_sample": 19,
+    "diagnosis": "Most HumanEval+ losses are associated with bare function-body completions that become invalid when concatenated to the completion-style prompt; ten additional lost tasks compile and fail semantically."
+  },
+  "mbppplus": {
+    "base_plus_passed": 271,
+    "selected_plus_passed": 257,
+    "gained_tasks": 26,
+    "lost_tasks": 40,
+    "net_tasks": -14,
+    "exact_mcnemar_p_value": 0.1088569644097161,
+    "base_compile_valid_samples": 378,
+    "selected_compile_valid_samples": 378,
+    "selected_compile_invalid_samples": 0,
+    "diagnosis": "The MBPP+ regression is semantic rather than a syntax-format failure. Equal aggregate accuracy on the 90-task MBPP validation selector masked substantial task-level churn on MBPP+."
+  },
+  "claim_boundary": "This diagnosis uses already consumed final-guardrail artifacts only. It must not be used to tune, reselection-test, or re-audit this campaign."
+}
