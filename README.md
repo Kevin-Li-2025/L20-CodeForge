@@ -1,9 +1,25 @@
 # L20-CodeForge
 
-[![CI](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/Kevin-Li-2025/L20-CodeForge/actions/workflows/ci.yml)
+[![CI](https://github.com/yinli-systems/L20-CodeForge/actions/workflows/ci.yml/badge.svg)](https://github.com/yinli-systems/L20-CodeForge/actions/workflows/ci.yml)
 
 Single-L20 post-training, verifier-guided inference, and executable benchmark
 infrastructure for code models.
+
+## Latest model-weight result: retention gate failed
+
+The completed three-seed SFT/RLVR campaign is a **negative result**, separate
+from the historical inference-system results below. The selected RLVR seed
+improved rStar development from 76/200 to 80/200 (+2.0 points; paired 95% CI
+[-4.0, +8.0]) and matched MBPP validation at 64/90. It then regressed on both
+reused EvalPlus guardrails: HumanEval+ 137/164 to 110/164 and MBPP+ 271/378 to
+257/378. This does not establish a retained model-quality improvement.
+
+Training used two RTX 4090 GPUs per run, not the original single-L20 setup.
+The date-held-out LiveCodeBench evaluation is blocked by an unavailable source
+artifact; it has no replacement score. See the
+[campaign report and receipts](benchmarks/code_rlvr_retention_v2_2026_08_30/README.md)
+for selection rules, seed-level results, and output-format/semantic failure
+diagnosis. No post-audit tuning is included in this result.
 
 ## Positioning
 
@@ -13,9 +29,9 @@ generation, repair, verifier-guided inference, trajectory data, and reward
 signals for code models.
 
 For serving, kernel, and runtime infrastructure work, use
-[l20-stack](https://github.com/Kevin-Li-2025/l20-stack). For from-scratch
+[single-gpu-inference-lab](https://github.com/yinli-systems/single-gpu-inference-lab). For from-scratch
 pretraining and public checkpoint release artifacts, use
-[l20-edu-135m-pretrain](https://github.com/Kevin-Li-2025/l20-edu-135m-pretrain).
+[l20-edu-135m-pretrain](https://github.com/yinli-systems/l20-edu-135m-pretrain).
 This repository should stay focused on executable coding benchmarks rather than
 becoming a second general L20 infrastructure repo.
 
@@ -113,11 +129,7 @@ python -m l20_codeforge audit-code-verifier \
   --fail-on-gates
 ```
 
-The `python -m pytest -q` line should print:
-
-```text
-143 passed in <time>s
-```
+The test suite should exit successfully; optional dependency tests may skip.
 
 On an L20 host:
 

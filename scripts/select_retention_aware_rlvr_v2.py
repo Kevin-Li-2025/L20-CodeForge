@@ -18,18 +18,25 @@ def sha256_file(path: Path) -> str:
 
 
 def load_greedy_outcomes(path: Path) -> dict[str, bool]:
-    grouped: dict[str, list[dict[str, Any]]] = {}
+    outcomes: dict[str, bool] = {}
     with path.open(encoding="utf-8") as handle:
         for line in handle:
             if line.strip():
                 row = json.loads(line)
-                grouped.setdefault(str(row["task_id"]), []).append(row)
-    if not grouped:
+                task_id = row["task_id"]
+                if not isinstance(task_id, str) or not task_id.strip():
+                    raise ValueError(f"task_id must be a nonempty string in {path}")
+                if task_id in outcomes:
+                    raise ValueError(f"duplicate greedy task {task_id!r} in {path}")
+                sample_index = row.get("sample_index", 0)
+                if type(sample_index) is not int or sample_index != 0:
+                    raise ValueError(f"greedy n=1 requires sample_index=0 in {path}")
+                if type(row["all_passed"]) is not bool:
+                    raise ValueError(f"all_passed must be a JSON boolean in {path}")
+                outcomes[task_id] = row["all_passed"]
+    if not outcomes:
         raise ValueError(f"no rollout outcomes found in {path}")
-    return {
-        task_id: bool(min(rows, key=lambda row: int(row.get("sample_index", 0)))["all_passed"])
-        for task_id, rows in grouped.items()
-    }
+    return outcomes
 
 
 def _score(path: Path, expected_tasks: set[str], label: str) -> dict[str, Any]:
@@ -60,6 +67,8 @@ def build_selection_report(
 ) -> dict[str, Any]:
     if not candidates:
         raise ValueError("at least one RLVR candidate is required")
+    if not math.isfinite(required_absolute_delta) or not 0 <= required_absolute_delta <= 1:
+        raise ValueError("required_absolute_delta must be finite and between 0 and 1")
     base_target_outcomes = load_greedy_outcomes(base_target_path)
     base_retention_outcomes = load_greedy_outcomes(base_retention_path)
     if len(base_target_outcomes) != expected_target_tasks:
@@ -112,7 +121,8 @@ def build_selection_report(
     return {
         "protocol": (
             "greedy n=1 on frozen new rStar development and MBPP official validation; "
-            "require at least +2.0 target points and no MBPP-validation regression; then "
+            f"require at least +{100 * required_absolute_delta:.1f} target points "
+            "and no MBPP-validation regression; then "
             "maximize target passes, break ties by retention passes and lexical seed name"
         ),
         "base_target": base_target,

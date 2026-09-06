@@ -23,8 +23,8 @@ successful retained model.
 The frozen selector chose seed42. Seed44 had the highest RLVR target score but
 was correctly rejected for retention regression. For seed42, RLVR gave back two
 rStar passes relative to SFT while recovering the one lost MBPP-validation task.
-That is evidence that replay affected retention, but not that RLVR improved on
-SFT overall.
+This is an observed retention tradeoff, not a causal replay effect: no matched
+replay-off ablation was run. It does not show that RLVR improved on SFT overall.
 
 The selected Base-to-RLVR dev comparison has 20 gains and 16 losses. Its paired
 bootstrap 95% interval is `[-4.0, +8.0]` points and exact McNemar p is `0.6177`,
@@ -63,11 +63,11 @@ a second generation run.
   so its net 14-task regression is semantic. Equal aggregate performance on the
   90-task selector masked substantial task-level churn on the larger Plus set.
 
-The practical conclusion is that `0.01` MBPP replay CE plus `beta=0.01` SFT-KL
-was strong enough to recover one small retention-set task, but too weak and too
-narrow to preserve broad function-completion behavior. The HumanEval format
-failure also shows that the SFT mixture did not cover completion-style output
-contracts well enough.
+Under `0.01` MBPP replay CE plus `beta=0.01` SFT-KL, one small retention-set
+task was recovered, but broad function-completion behavior was not preserved.
+The HumanEval format failure motivates checking completion-style output
+contracts in a new development-only experiment. Neither replay strength nor
+SFT mixture coverage is isolated causally by this run.
 
 ## Data and training receipts
 
@@ -92,6 +92,12 @@ retention reports, the executable selection report, final rStar report, official
 EvalPlus reports, paired guardrail comparison, and post-audit failure diagnosis.
 
 ## Claim boundary
+
+Run `python scripts/verify_rlvr_v2_receipts.py` from the repository root to
+cross-check the published development counts, linked output hashes, selected
+seed, and failed guardrails. CI runs the same check. A receipt-consistency
+`PASS` means the aggregate reports agree, not that remote raw generations
+were replayed or the model-quality target passed.
 
 EvalPlus had already been consumed by the 2026-08-29 campaign, so it is a
 repeated guardrail rather than a previously untouched test. This v2 campaign

@@ -65,6 +65,7 @@ def test_selects_best_eligible_seed_with_retention_gate(tmp_path: Path) -> None:
     assert report["candidates"][0]["target_gate_passed"] is True
     assert report["candidates"][0]["retention_gate_passed"] is False
     assert "EvalPlus" in report["claim_boundary"]
+    assert "+10.0 target points" in report["protocol"]
 
 
 def test_rejects_retention_task_mismatch(tmp_path: Path) -> None:
@@ -87,3 +88,49 @@ def test_rejects_retention_task_mismatch(tmp_path: Path) -> None:
             expected_retention_tasks=2,
             required_absolute_delta=0.0,
         )
+
+
+@pytest.mark.parametrize("value", ["false", "true", 0, 1, None, [], {}])
+def test_rejects_non_boolean_outcomes(tmp_path: Path, value: object) -> None:
+    path = tmp_path / "rollouts.jsonl"
+    path.write_text(json.dumps({"task_id": "a", "all_passed": value}) + "\n")
+    with pytest.raises(ValueError, match="JSON boolean"):
+        load_selection_module().load_greedy_outcomes(path)
+
+
+@pytest.mark.parametrize("index", [1, -1, "0", False, 0.0])
+def test_rejects_non_greedy_sample_indices(tmp_path: Path, index: object) -> None:
+    path = tmp_path / "rollouts.jsonl"
+    path.write_text(json.dumps({"task_id": "a", "sample_index": index, "all_passed": True}))
+    with pytest.raises(ValueError, match="sample_index=0"):
+        load_selection_module().load_greedy_outcomes(path)
+
+
+def test_rejects_duplicate_greedy_tasks(tmp_path: Path) -> None:
+    path = tmp_path / "rollouts.jsonl"
+    path.write_text('{"task_id":"a","all_passed":true}\n' * 2)
+    with pytest.raises(ValueError, match="duplicate greedy task"):
+        load_selection_module().load_greedy_outcomes(path)
+
+
+@pytest.mark.parametrize("task_id", [None, 3, "", "  "])
+def test_rejects_invalid_task_ids(tmp_path: Path, task_id: object) -> None:
+    path = tmp_path / "rollouts.jsonl"
+    path.write_text(json.dumps({"task_id": task_id, "all_passed": False}))
+    with pytest.raises(ValueError, match="nonempty string"):
+        load_selection_module().load_greedy_outcomes(path)
+
+
+@pytest.mark.parametrize("delta", [float("nan"), float("inf"), -0.1, 1.1])
+def test_rejects_invalid_delta_before_reading_files(tmp_path: Path, delta: float) -> None:
+    path = tmp_path / "missing.jsonl"
+    with pytest.raises(ValueError, match="required_absolute_delta"):
+        load_selection_module().build_selection_report(
+            path, path, {"seed42": (path, path)}, required_absolute_delta=delta
+        )
+
+
+def test_accepts_legacy_single_sample_without_index(tmp_path: Path) -> None:
+    path = tmp_path / "rollouts.jsonl"
+    path.write_text('{"task_id":"a","all_passed":false}\n')
+    assert load_selection_module().load_greedy_outcomes(path) == {"a": False}
